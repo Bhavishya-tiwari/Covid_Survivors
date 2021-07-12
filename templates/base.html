@@ -43,8 +43,10 @@
           <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
         </form> {% endcomment %}
         {% if request.user.is_authenticated %}
-        {{request.user}}
+        
+        <a href="/profile">{{request.user}}</a>
         {% else %}
+        
         <div class="text-end">
           <button type="button" class="btn btn-outline-light me-2"><a href="/login">login</a></button>
           <button type="button" class="btn btn-warning">Sign-up</button>

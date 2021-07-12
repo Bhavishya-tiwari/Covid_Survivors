@@ -17,7 +17,7 @@ def home(request):
 
 
 def CovidUpdates(request):
-    
+
     return render(request, 'home/Covid_Updates.html')
 
 
@@ -29,7 +29,6 @@ def ContactUs(request):
     return render(request, 'home/contact_us.html')
 
 
-# @unauthenticated_user
 def AddHospital(request):
     if request.method == "POST":
         adminid = request.POST['adminid']
@@ -52,7 +51,7 @@ def AddHospital(request):
 # yaha na koi restriction lagana
 def AddHadmin(request):
     if request.method == "POST":
-        
+
         username = request.POST.get('husername')
         name = request.POST.get('hname')
         hemail = request.POST.get('hemail')
@@ -67,7 +66,7 @@ def AddHadmin(request):
             "Name": name,
             "group": "hospitalh",
             "email":   hemail,
-            "Add" : haddress,
+            "Add": haddress,
         }
 
         myuserjson = json.dumps(profileobj)
@@ -180,37 +179,56 @@ def loginemp(request):
 
 # handel login of user
 def loginuser(request):
-    return HttpResponse('dnv')
+    if request.method == "POST":
+        # Get the post parameters
+        patusername = request.POST.get('patusername')
+        patpassword = request.POST.get('patpassword')
+        # print(loginusername)
+        user = authenticate(username=patusername, password=patpassword)
+        # print(user)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Successfully Logged In")
+            return redirect('Donors')
+        else:
+            messages.error(request, "Invalid credentials! Please try again")
+            return redirect("ContactUs")
+    return redirect('loginall')
 
 # login employees can add patients
+
+
 @login_required(login_url='/home')
-@allowed_users(allowed_roles=['admin','Hospital_Employees'])
+@allowed_users(allowed_roles=['admin', 'Hospital_Employees'])
 def addpat(request):
     if request.method == "POST":
         username = request.POST.get('pusername')
         name = request.POST.get('pname')
         pemail = request.POST.get('pemail')
-        pbloodgrp = request.POST.get('pemail')
+        pbloodgrp = request.POST.get('pbloodgrp')
         pdod = request.POST.get('pdod')
         p_age = request.POST.get('p_age')
         pid1 = request.POST.get('pid1')
         pid2 = request.POST.get('pid2')
         if(pid2 != pid2):
             return HttpResponse('password not match')
+        print(pid1)
         myuser = User.objects.create_user(username, pemail, pid1)
         profilejson = request.user.first_name
         profiledict = json.loads(profilejson)
-        
 
         profileobj = {
             "Name": name,
             "group": "Covid_Survivor",
             "email":   pemail,
+            "bloodgrp": pbloodgrp,
+            "dateofdischarge": pdod,
+            "age": p_age,
             "Hospital_name": profiledict["Hospital_name"],
             "Hospital_email": profiledict["Hospital_email"],
             "Hospital_Add": profiledict["Hospital_Add"],
             "Added_by_email": profiledict["email"],
-          
+
         }
 
         myuserjson = json.dumps(profileobj)
@@ -223,8 +241,14 @@ def addpat(request):
         # print(myuser)
         # print(group)
         return redirect('addpat')
+
+    # print(profiledict)
+    return render(request, 'home/Add_patient.html')
+
+
+@login_required(login_url='/home')
+def profile(request):
     profilejson = request.user.first_name
     profiledict = json.loads(profilejson)
-    # print(profiledict)
-    return render(request, 'home/Add_patient.html', {"profile": profiledict})
 
+    return render(request, 'home/profile.html', {"p": profiledict})

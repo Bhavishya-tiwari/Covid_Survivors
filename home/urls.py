@@ -34,6 +34,9 @@ urlpatterns = [
     #by employee afte sign in
     path('addpat', views.addpat, name='addpat'),
 
+    # profile
+    path('profile', views.profile , name='profile'),
+    
 
 
     

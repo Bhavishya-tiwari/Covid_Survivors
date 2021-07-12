@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block body %}
+Profile:-
+
+<div class="container">
+
+{{p.Name}}<br><hr>
+{{p.email}}<br><hr>
+
+{% comment %} only of hospital {% endcomment %}
+{% if p.Add != null %}
+{{p.Add}}<br><hr>
+{% endif %}
+
+
+
+
+
+
+{% comment %} only of emp intersection covid survivor{% endcomment %}
+{% if p.Hospital_name != null %}
+{{p.Hospital_name}}<br><hr>
+{{p.Hospital_email}}<br><hr>
+{{p.Hospital_Add}}<br><hr>
+{% endif %}
+
+{% comment %} only for covid survivor {% endcomment %}
+{% if p.age != null %}
+{{p.bloodgrp}}<br><hr>
+{{p.dateofdischarge}}<br><hr>
+{{p.age}}<br><hr>
+{{p.Added_by_email}}<br><hr>
+{% endif %}
+
+
+
+
+
+
+
+<a href="/logout">logout</a>
+</div>
+
+ {% endblock %}

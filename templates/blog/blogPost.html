@@ -3,5 +3,12 @@
 {% block title %}Blogpost{% endblock title %}
 
 {% block body %}
-Blogpost::    {{slug}}
+Title:- {{post.title}} <br>
+Author:- {{post.author}} <br>
+Time:-{{post.Timestamp}} <br>
+sno:-{{post.sno}} <br>
+Content:- {{post.content}}<br>
+<hr>
+<a href="/blog">bloghome</a>
+
  {% endblock %}

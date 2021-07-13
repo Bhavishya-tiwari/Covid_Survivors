@@ -1,7 +1,43 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Hospiatl{% endblock title %}
+{% block title %}Add Blogs{% endblock title %}
 
 {% block body %}
-abt bh
+blogs add
+<a href="/blog/addblog">Add blog</a>
+<hr>
+
+
+
+{% for post in page_obj %}
+Title:- {{post.title}} <br>
+Author:- {{post.author}} <br>
+Time:-{{post.Timestamp}} <br>
+sno:-{{post.sno}} <br>
+Content:- {{post.content}}<br>
+<a href="/blog/{{post.sno}}">Read more</a> <hr> <hr>
+
+
+{% endfor %}
+
+page number:- {{page_obj.number}} <br>
+
+<div><span>
+{% if page_obj.has_previous %} 
+
+<a href= "?page={{page_obj.previous_page_number}}"> privious page</a>
+{% endif %}
+</span></div>
+{{page_obj.number}}
+<div><span>
+{% if page_obj.has_next %}  <br>
+
+<a href= "?page={{page_obj.next_page_number}}"> Next page</a>
+{% endif %}
+</span></div>
+
+
+
+
+<span > {{page_obj.number}}  </span> </a>
  {% endblock %}

@@ -152,8 +152,6 @@ def handelLogout(request):
 # login page
 
 
-def loginall(request):
-    return render(request, 'home/loginpage.html')
 
 # login for employee
 
@@ -161,15 +159,34 @@ def loginall(request):
 def loginemp(request):
     if request.method == "POST":
         # Get the post parameters
-        empusername = request.POST.get('empusername')
-        emppassword = request.POST.get('emppassword')
+        uusername = request.POST.get('uusername')
+        upassword = request.POST.get('upassword')
         # print(loginusername)
-        user = authenticate(username=empusername, password=emppassword)
-        # print(user)
+        user = authenticate(username=uusername, password=upassword)
+        print(user)
         if user is not None:
-            login(request, user)
-            messages.success(request, "Successfully Logged In")
-            return redirect('addpat')
+            profilejson =user.first_name
+            profiledict = json.loads(profilejson)
+            grp = profiledict["group"]
+            print(grp)
+            if grp == "H_Emp":
+                login(request, user)
+                messages.success(request, "Successfully Logged In")
+                return redirect('addpat')
+
+            elif grp ==  "Covid_Survivor":
+                login(request, user)
+                messages.success(request, "Successfully Logged In")
+                return redirect('Donors')
+            elif grp == "User":
+                login(request,user)
+                messages.success(request, "Successfully Logged In")
+                return redirect('Donors')
+
+            else:
+                return HttpResponse("error occured")
+
+        
         else:
             messages.error(request, "Invalid credentials! Please try again")
             return redirect("ContactUs")
@@ -177,23 +194,7 @@ def loginemp(request):
     return redirect('loginall')
 
 
-# handel login of user
-def loginuser(request):
-    if request.method == "POST":
-        # Get the post parameters
-        patusername = request.POST.get('patusername')
-        patpassword = request.POST.get('patpassword')
-        # print(loginusername)
-        user = authenticate(username=patusername, password=patpassword)
-        # print(user)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Successfully Logged In")
-            return redirect('Donors')
-        else:
-            messages.error(request, "Invalid credentials! Please try again")
-            return redirect("ContactUs")
-    return redirect('loginall')
+
 
 # login employees can add patients
 
@@ -252,3 +253,40 @@ def profile(request):
     profiledict = json.loads(profilejson)
 
     return render(request, 'home/profile.html', {"p": profiledict})
+
+def nusignup(request):
+    if request.method == "POST":
+
+        username = request.POST.get('nuusername')
+        name = request.POST.get('nuname')
+        hemail = request.POST.get('nuemail')
+       
+        hid = request.POST.get('nuid1')
+        hid2 = request.POST.get('nuid2')
+        if(hid2 != hid):
+            return redirect('addhospital')
+        myuser = User.objects.create_user(username, hemail, hid)
+
+        profileobj = {
+            "Name": name,
+            "group": "User",
+            "email":   hemail,
+            
+        }
+        print(hid)
+        print(myuser)
+        myuserjson = json.dumps(profileobj)
+        print(myuserjson)
+        myuser.first_name = myuserjson
+        # myuser.first_name='hospitalh'
+
+        myuser.save()
+        group = Group.objects.get(name='User')
+        myuser.groups.add(group)
+        print(myuser)
+        print(group)
+        return redirect('Donors')
+    return render(request, 'home/nusignup.html')
+
+def loginall(request):
+    return render(request, 'home/loginpage.html')

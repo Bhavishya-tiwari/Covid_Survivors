@@ -27,7 +27,6 @@ urlpatterns = [
 
     # Add employee by hospital head
     path('login', views.loginall, name='login'),
-    path('loginuser', views.loginuser, name='loginuser'),
     path('loginemp', views.loginemp, name='loginemp'),
 
     # Add patients#
@@ -37,6 +36,8 @@ urlpatterns = [
     # profile
     path('profile', views.profile , name='profile'),
     
+    # normal user sign up
+    path('nusignup', views.nusignup, name='nusignup'),
 
 
     

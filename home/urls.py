@@ -7,8 +7,7 @@ urlpatterns = [
     path('donors', views.Donors, name='Donors'),
     path('contactus', views.ContactUs, name='ContactUs'),
 
-    # Add Hospital jaha 2 form hai (hosptal login, admin login)
-    path('addhospital', views.AddHospital, name='AddHospital'),
+    
 
     # Hospital ko signup
     path('addhadmin', views.AddHadmin, name='AddHadmin'),

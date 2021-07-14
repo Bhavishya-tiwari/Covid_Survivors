@@ -17,8 +17,8 @@ def home(request):
 
 
 def CovidUpdates(request):
-
     return render(request, 'home/Covid_Updates.html')
+
 
 
 def Donors(request):
@@ -27,20 +27,11 @@ def Donors(request):
 
 def ContactUs(request):
     u = list(User.objects.filter(first_name__contains="hospitalh"))
-    
     return render(request, 'home/contact_us.html',{"u":u[0]})
+    
 
 
-def AddHospital(request):
-    if request.method == "POST":
-        adminid = request.POST['adminid']
-        adminpassword = request.POST['adminpassword']
 
-        if adminid == 'q@q' and adminpassword == 'q':
-            
-            return render(request, 'home/Add_H_admin.html')
-
-    return render(request, 'home/Add_Hospital.html')
 
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins'])
@@ -78,6 +69,7 @@ def AddHadmin(request):
             "group": "hospitalh",
             "email":   hemail,
             "Add": haddress,
+            "Addedby_Username":request.user.username,
         }
 
         myuserjson = json.dumps(profileobj)
@@ -90,7 +82,7 @@ def AddHadmin(request):
         myuser.groups.add(group)
         # print(myuser)
         # print(group)
-        return redirect('AddHospital')
+        return redirect('Add')
 
 
 @login_required(login_url='/home')
@@ -115,6 +107,7 @@ def AddEmployee(request):
             "Hospital_name": profiledict["Name"],
             "Hospital_email": profiledict["email"],
             "Hospital_Add": profiledict["Add"],
+            "Addedby_Username" : request.user.username,
         }
 
         myuserjson = json.dumps(profileobj)
@@ -250,6 +243,7 @@ def addpat(request):
             "Hospital_email": profiledict["Hospital_email"],
             "Hospital_Add": profiledict["Hospital_Add"],
             "Added_by_email": profiledict["email"],
+            "Addedby_Username": request.user.username,
 
         }
 
@@ -288,7 +282,7 @@ def nusignup(request):
         hid = request.POST.get('nuid1')
         hid2 = request.POST.get('nuid2')
         if(hid2 != hid):
-            return redirect('addhospital')
+            return redirect('Donors')
         myuser = User.objects.create_user(username, hemail, hid)
 
         profileobj = {
@@ -314,3 +308,6 @@ def nusignup(request):
 
 def loginall(request):
     return render(request, 'home/loginpage.html')
+
+
+#Deleting Users

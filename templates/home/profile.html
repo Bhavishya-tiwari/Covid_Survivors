@@ -35,6 +35,20 @@ Profile:-
 {{p.Added_by_email}}<br><hr>
 {% endif %}
 
+{% if p.group == "Website_Admins"  %}
+  <a href="/add">Add Hospital</a> <br>
+{% endif %}
+
+{% if p.group == "hospitalh"  %}
+  <a href="/addemployeee">Add Employee</a> <br>
+{% endif %}
+
+{% if p.group == "H_Emp"  %}
+  <a href="/addpat">Add Patients</a> <br>
+{% endif %}
+
+
+
 
 
 

@@ -42,6 +42,14 @@ def AddHospital(request):
 
     return render(request, 'home/Add_Hospital.html')
 
+@login_required(login_url='/Donors')
+@allowed_users(allowed_roles=['Website_Admins'])
+def Add(request):
+    return render(request, 'home/Add_H_admin.html')
+      
+
+   
+
 
 # @login_required(login_url='')
 # @allowed_users(['Hospital_Heads', 'Website_Admins'])
@@ -86,7 +94,7 @@ def AddHadmin(request):
 
 
 @login_required(login_url='/home')
-@allowed_users(allowed_roles=['admin', 'HospitalHeads'])
+@allowed_users(allowed_roles=[ 'HospitalHeads'])
 def AddEmployee(request):
     if request.method == "POST":
         username = request.POST.get('eusername')
@@ -185,6 +193,16 @@ def loginemp(request):
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('Donors')
+            elif grp =="hospitalh":
+                login(request,user)
+                messages.success(request, "Successfully Logged In")
+                return redirect('AddEmployee')
+            elif grp =="Website_Admins":
+                login(request,user)
+                messages.success(request, "Successfully Logged In")
+                return redirect('Add')
+
+
 
             else:
                 return HttpResponse("error occured")
@@ -203,7 +221,7 @@ def loginemp(request):
 
 
 @login_required(login_url='/home')
-@allowed_users(allowed_roles=['admin', 'Hospital_Employees'])
+@allowed_users(allowed_roles=[ 'Hospital_Employees'])
 def addpat(request):
     if request.method == "POST":
         username = request.POST.get('pusername')

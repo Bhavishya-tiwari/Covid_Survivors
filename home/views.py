@@ -1,4 +1,5 @@
 # from django.db.models.manager import RelatedManager
+from django import http
 from django.shortcuts import render, HttpResponse, redirect
 # from home.models import Contact
 from django.contrib import messages
@@ -22,8 +23,19 @@ def CovidUpdates(request):
 
 
 def Donors(request):
-    return render(request, 'home/Donors.html')
+    users = list(User.objects.filter(first_name__contains="hospitalh"))
+    users_profiles ={}
+    
 
+    # for user in users:
+        
+
+
+
+    
+    
+
+    return render(request, 'home/Donors.html')
 
 def ContactUs(request):
     u = list(User.objects.filter(first_name__contains="hospitalh"))
@@ -50,7 +62,8 @@ def Add(request):
 
 # Adding Hospitals here (Hosital_Heads)
 
-# yaha na koi restriction lagana
+@login_required(login_url='/Donors')
+@allowed_users(allowed_roles=['Website_Admins'])
 def AddHadmin(request):
     if request.method == "POST":
 
@@ -311,3 +324,10 @@ def loginall(request):
 
 
 #Deleting Users
+
+def DelH(request, uH):
+
+    return HttpResponse("delete hospital")
+
+def DelE(request, uH):
+    return HttpResponse("delete Employee")

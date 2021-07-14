@@ -1,7 +1,14 @@
 import json
 
-y = {
-    "group": "Website_Admins"
+y = [
+    {"group": "Website_Admins"},
+    {1 : "dm"}
+]
+
+i ={
+    2 :"djo",
+    1:{3:"three"}
 }
-m = json.dumps(y)
-print(m)
+
+print(y[1][1])
+print(i[1][3])

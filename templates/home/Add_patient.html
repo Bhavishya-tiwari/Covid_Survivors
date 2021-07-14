@@ -8,7 +8,7 @@
 <form action="/addpat" method="POST">
 
   {% csrf_token %} 
-  {{profile.group}}
+  {{G}}
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Patient Username</label>
     <input type="text"  name="pusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

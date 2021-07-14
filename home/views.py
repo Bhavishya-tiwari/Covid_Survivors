@@ -26,7 +26,9 @@ def Donors(request):
 
 
 def ContactUs(request):
-    return render(request, 'home/contact_us.html')
+    u = list(User.objects.filter(first_name__contains="hospitalh"))
+    
+    return render(request, 'home/contact_us.html',{"u":u[0]})
 
 
 def AddHospital(request):
@@ -35,6 +37,7 @@ def AddHospital(request):
         adminpassword = request.POST['adminpassword']
 
         if adminid == 'q@q' and adminpassword == 'q':
+            
             return render(request, 'home/Add_H_admin.html')
 
     return render(request, 'home/Add_Hospital.html')
@@ -168,8 +171,8 @@ def loginemp(request):
             profilejson =user.first_name
             profiledict = json.loads(profilejson)
             grp = profiledict["group"]
-            print(grp)
             if grp == "H_Emp":
+               
                 login(request, user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('addpat')
@@ -244,7 +247,10 @@ def addpat(request):
         return redirect('addpat')
 
     # print(profiledict)
-    return render(request, 'home/Add_patient.html')
+    profilejson =request.user.first_name
+    profiledict = json.loads(profilejson)
+    grp = profiledict["group"]
+    return render(request, 'home/Add_patient.html', {"G":grp})
 
 
 @login_required(login_url='/home')

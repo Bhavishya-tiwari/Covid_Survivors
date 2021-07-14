@@ -22,24 +22,16 @@ def CovidUpdates(request):
 
 
 
+
+
+
 def Donors(request):
-    users = list(User.objects.filter(first_name__contains="hospitalh"))
-    users_profiles ={}
-    
-
-    # for user in users:
-        
-
-
-
-    
-    
-
     return render(request, 'home/Donors.html')
 
+
 def ContactUs(request):
-    u = list(User.objects.filter(first_name__contains="hospitalh"))
-    return render(request, 'home/contact_us.html',{"u":u[0]})
+    return render(request, 'home/contact_us.html')
+
     
 
 
@@ -48,19 +40,20 @@ def ContactUs(request):
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins'])
 def Add(request):
-    return render(request, 'home/Add_H_admin.html')
+    users = list(User.objects.filter(first_name__contains="hospitalh"))
+    userl = []
+    for user in users:
+        profilejson =user.first_name
+        profiledict = json.loads(profilejson)
+        userl.append(profiledict)
+
+    return render(request, 'home/Add_H_admin.html',{"u":users})
       
 
    
 
 
-# @login_required(login_url='')
-# @allowed_users(['Hospital_Heads', 'Website_Admins'])
-# def AddHospital(request):
-#     return render(request,'home/Add_H_admin.html' )
 
-
-# Adding Hospitals here (Hosital_Heads)
 
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins'])
@@ -79,6 +72,7 @@ def AddHadmin(request):
 
         profileobj = {
             "Name": name,
+            "username":username,
             "group": "hospitalh",
             "email":   hemail,
             "Add": haddress,
@@ -86,15 +80,13 @@ def AddHadmin(request):
         }
 
         myuserjson = json.dumps(profileobj)
-        # print(myuserjson)
         myuser.first_name = myuserjson
         # myuser.first_name='hospitalh'
 
         myuser.save()
         group = Group.objects.get(name='HospitalHeads')
         myuser.groups.add(group)
-        # print(myuser)
-        # print(group)
+       
         return redirect('Add')
 
 
@@ -115,6 +107,7 @@ def AddEmployee(request):
 
         profileobj = {
             "Name": name,
+            "username":username,
             "group": "H_Emp",
             "email":   hemail,
             "Hospital_name": profiledict["Name"],
@@ -124,19 +117,16 @@ def AddEmployee(request):
         }
 
         myuserjson = json.dumps(profileobj)
-        # print(myuserjson)
         myuser.first_name = myuserjson
 
         myuser.save()
         group = Group.objects.get(name='Hospital_Employees')
         myuser.groups.add(group)
-        # print(myuser)
-        # print(group)
+      
         return redirect('AddEmployee')
 
     profilejson = request.user.first_name
     profiledict = json.loads(profilejson)
-    # print(profiledict)
     return render(request, 'home/AddEmp.html', {"profile": profiledict})
 
 
@@ -147,9 +137,7 @@ def AddEmp(request):
         # Get the post parameters
         loginusername = request.POST.get('hnamecheck')
         loginpassword = request.POST.get('hidcheck')
-        # print(loginusername)
         user = authenticate(username=loginusername, password=loginpassword)
-        # print(user)
         if user is not None:
             login(request, user)
             messages.success(request, "Successfully Logged In")
@@ -178,9 +166,7 @@ def loginemp(request):
         # Get the post parameters
         uusername = request.POST.get('uusername')
         upassword = request.POST.get('upassword')
-        # print(loginusername)
         user = authenticate(username=uusername, password=upassword)
-        print(user)
         if user is not None:
             profilejson =user.first_name
             profiledict = json.loads(profilejson)
@@ -240,13 +226,13 @@ def addpat(request):
         pid2 = request.POST.get('pid2')
         if(pid2 != pid2):
             return HttpResponse('password not match')
-        print(pid1)
         myuser = User.objects.create_user(username, pemail, pid1)
         profilejson = request.user.first_name
         profiledict = json.loads(profilejson)
 
         profileobj = {
             "Name": name,
+            "username":username,
             "group": "Covid_Survivor",
             "email":   pemail,
             "bloodgrp": pbloodgrp,
@@ -261,17 +247,14 @@ def addpat(request):
         }
 
         myuserjson = json.dumps(profileobj)
-        # print(myuserjson)
         myuser.first_name = myuserjson
 
         myuser.save()
         group = Group.objects.get(name='Covid_Survivors')
         myuser.groups.add(group)
-        # print(myuser)
-        # print(group)
+
         return redirect('addpat')
 
-    # print(profiledict)
     profilejson =request.user.first_name
     profiledict = json.loads(profilejson)
     grp = profiledict["group"]
@@ -300,22 +283,18 @@ def nusignup(request):
 
         profileobj = {
             "Name": name,
+            "username":username,
             "group": "User",
             "email":   hemail,
             
         }
-        print(hid)
-        print(myuser)
         myuserjson = json.dumps(profileobj)
-        print(myuserjson)
         myuser.first_name = myuserjson
         # myuser.first_name='hospitalh'
 
         myuser.save()
         group = Group.objects.get(name='User')
         myuser.groups.add(group)
-        print(myuser)
-        print(group)
         return redirect('Donors')
     return render(request, 'home/nusignup.html')
 

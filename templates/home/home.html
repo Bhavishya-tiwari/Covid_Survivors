@@ -2,7 +2,78 @@
 
 {% block title %} Home{% endblock title %}
 
+{% block css %}
+<style>
+    body {
+        background-color: rgb(253, 238, 238);
+        width: 100vw;
+    }
+
+    .Heading {
+        color: rgb(255, 0, 0);
+        text-align: center;
+        padding: 40px;
+        font-size: 90px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .content {
+
+        font-family: 'Bree Serif', serif;
+        margin: 3px 230px;
+        position: absolute;
+        display: block;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid green;
+        background-color: rgb(224, 223, 223);
+        color: rgb(14, 10, 231);
+    }
+
+    h3 {
+        font-size: 4rem;
+        text-align: center;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .card-header {
+        background-color: rgb(250, 81, 81);
+        font-size: larger;
+    }
+
+    .card-body {
+        background-color: rgb(248, 200, 200);
+        color: white;
+    }
+
+    .card {
+        position: absolute;
+        left: 20%;
+        right: 20%;
+    }
+</style>
+{% endblock css %}
+
 {% block body %}
-abt
- {% endblock body %}
- 
+<div class="Heading">Welcome To Our Website</div>
+
+<div class="card text-center">
+    <div class="card-header">
+        Welcome
+    </div>
+    <div class="card-body">
+        <h3 class="card-title">Find some information about Covid Recovered patients.</h3>
+        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident error ratione
+            doloribus sed dolorum,
+            ipsum cumque reprehenderit dignissimos architecto veniam optio sint aliquam consectetur corrupti vero
+            similique velit. Possimus eum consequatur delectus quia magni.Visit the Covid Updates Section and see
+            latest
+        </p>
+        <a href="#" class="btn btn-primary">Get Started</a>
+    </div>
+</div>
+{% endblock body %}

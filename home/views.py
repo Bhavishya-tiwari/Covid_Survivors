@@ -20,7 +20,10 @@ def home(request):
 
 def CovidUpdates(request):
 
-    return render(request, 'home/Covid_Updates.html')
+        return render(request, 'home/Covid_Updates.html')
+
+        
+
 
 
 
@@ -42,15 +45,18 @@ def ContactUs(request):
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins'])
 def Add(request):
+    userl =[]    
     group = Group.objects.get(name='HospitalHeads')
     users = list(group.user_set.all())
-    userl = []
     for user in users:
-        profilejson =user.first_name
-        profiledict = json.loads(profilejson)
-        userl.append(profiledict)
+        userjson =user.first_name
+        userdict = json.loads(userjson)
+        if (userdict["Addedby_Username"] == request.user.username):
+            userl.append(userdict)
 
     return render(request, 'home/Add_H_admin.html',{"u":userl})
+
+  
       
 
    

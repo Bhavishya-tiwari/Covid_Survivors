@@ -8,7 +8,7 @@
 <form action="/addemployeee" method="POST">
 
   {% csrf_token %} 
-  {{profile.group}}
+ 
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Employee username</label>
     <input type="text"  name="eusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -38,6 +38,16 @@
 </form>
 </div>
 </div>
+{% for uu in u %}
+  {{uu.Name}}
+  {{uu.username}}
+  {{uu.group}}
+  <br>
+  <a href="/delE/{{uu.username}}">delete</a>
+  <hr>
+  {% endfor %}
+
+
 
 
  {% endblock %}

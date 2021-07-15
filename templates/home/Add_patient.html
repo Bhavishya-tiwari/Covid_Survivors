@@ -8,7 +8,7 @@
 <form action="/addpat" method="POST">
 
   {% csrf_token %} 
-  {{G}}
+  
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Patient Username</label>
     <input type="text"  name="pusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -53,6 +53,15 @@
 </form>
 </div>
 </div>
+
+{% for uu in u %}
+  {{uu.Name}}
+  {{uu.username}}
+  {{uu.group}}
+  <br>
+  <a href="/delCS/{{uu.username}}">delete</a>
+  <hr>
+  {% endfor %}
 
 
  {% endblock %}

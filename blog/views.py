@@ -25,8 +25,10 @@ def blogHome(request):
 
 
 def blogPost(request, mysno):
+    userjson =request.user.first_name
+    userdict = json.loads(userjson)
     post = Post.objects.filter(sno=mysno).first()
-    return render(request, "blog/blogPost.html", {"post": post})
+    return render(request, "blog/blogPost.html", {"post": post, "user":userdict})
 
 
 
@@ -41,16 +43,39 @@ def addblog(request):
         # adding data
         title = request.POST.get('Addblogt')
         author = p["Name"]
+        authorUsername=request.user.username
         time = now
         content = request.POST.get('Addblogc')
 
         # saving
-        post = Post(title=title, author=author,
+        post = Post(title=title, author=author,authorUsername=authorUsername,
                     Timestamp=time, content=content)
         post.save()
         # print(Post)
         return redirect('blogHome')
 
     return render(request, 'blog/Addblog.html')
+    
+@login_required(login_url='/home')
+def delblog(request, dsno):
+    post = Post.objects.filter(sno=dsno).first()
+    if(post.authorUsername == request.user.username):
+        try:
+            post.delete()
+            
+        except:
+            print("wrong") 
+        return redirect("blogHome")
+    return HttpResponse("This blog belongs to someone else")
+
+
+
+
+
+    
+
+
+
+    
    
 

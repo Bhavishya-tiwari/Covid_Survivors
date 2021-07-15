@@ -133,10 +133,17 @@ def AddEmployee(request):
         myuser.groups.add(group)
       
         return redirect('AddEmployee')
+    userl =[]    
+    group = Group.objects.get(name='Hospital_Employees')
+    users = list(group.user_set.all())
+    for user in users:
+        userjson =user.first_name
+        userdict = json.loads(userjson)
+        if (userdict["Addedby_Username"] == request.user.username):
+            userl.append(userdict)
 
-    profilejson = request.user.first_name
-    profiledict = json.loads(profilejson)
-    return render(request, 'home/AddEmp.html', {"profile": profiledict})
+  
+    return render(request, 'home/AddEmp.html',{"u":userl})
 
 
 # Added Hospitals can sign in and add employees here
@@ -249,11 +256,17 @@ def addpat(request):
         myuser.groups.add(group)
 
         return redirect('addpat')
+    userl =[]    
+    group = Group.objects.get(name='Covid_Survivors')
+    users = list(group.user_set.all())
+    for user in users:
+        userjson =user.first_name
+        userdict = json.loads(userjson)
+        if (userdict["Addedby_Username"] == request.user.username):
+            userl.append(userdict)
 
-    profilejson =request.user.first_name
-    profiledict = json.loads(profilejson)
-    grp = profiledict["group"]
-    return render(request, 'home/Add_patient.html', {"G":grp})
+  
+    return render(request, 'home/Add_patient.html', {"u":userl})
 
 
 @login_required(login_url='/home')
@@ -317,8 +330,46 @@ def DelH(request, uH):
             return redirect("Add")
 
 
-def DelE(request, uH):
-    return HttpResponse("delete Employee")
+# Deleting employees
+@login_required(login_url='/home')
+@allowed_users(allowed_roles=[ 'HospitalHeads'])
+def DelE(request, uE):
+    group = Group.objects.get(name='Hospital_Employees')
+    users = list(group.user_set.all())
+    Employee = User.objects.get(username=uE)
+    # print(Hospital.first_name)
+    if Employee in users:
+        userjson =Employee.first_name
+        userdict = json.loads(userjson)
+        if(userdict["Addedby_Username"]==request.user.username):
+            try:
+                Employee.delete()
+                messages.sucess(request, "The user is deleted")
+            except:
+                messages.error(request, "The user not found") 
+            return redirect("AddEmployee")
+
+
+
+# Deleting employees
+@login_required(login_url='/home')
+@allowed_users(allowed_roles=[ 'Hospital_Employees'])
+def DelCS(request, uCS):
+    group = Group.objects.get(name='Covid_Survivors')
+    users = list(group.user_set.all())
+    CSur = User.objects.get(username=uCS)
+    # print(Hospital.first_name)
+    if CSur in users:
+        userjson =CSur.first_name
+        userdict = json.loads(userjson)
+        if(userdict["Addedby_Username"]==request.user.username):
+            try:
+                CSur.delete()
+                messages.sucess(request, "The user is deleted")
+            except:
+                messages.error(request, "The user not found") 
+            return redirect("addpat")
+    
 
 
 

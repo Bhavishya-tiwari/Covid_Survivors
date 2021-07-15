@@ -11,4 +11,12 @@ Content:- {{post.content}}<br>
 <hr>
 <a href="/blog">bloghome</a>
 
+{% comment %} {% if post.authorUsernames = user.username %}
+<a href="/blog/delB/{{post.sno}}">Delete</a> <br><br>
+{% endif %} {% endcomment %}
+{% comment %} {{post.authorUsername}} {% endcomment %}
+{% if post.authorUsername == user.username %}
+<a href="/blog/delB/{{post.sno}}">Delete</a> <br><br>
+
+{% endif %}
  {% endblock %}

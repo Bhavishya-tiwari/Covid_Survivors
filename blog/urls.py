@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.blogHome, name='blogHome'),
     path('<int:mysno>', views.blogPost, name='blogPost'),
     path('addblog', views.addblog, name='addblog'),
+    path("delB/<int:dsno>", views.delblog, name='delblog'),
 ]

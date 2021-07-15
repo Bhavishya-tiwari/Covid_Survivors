@@ -306,12 +306,15 @@ def DelH(request, uH):
     Hospital = User.objects.get(username=uH)
     # print(Hospital.first_name)
     if Hospital in users:
-        try:
-            Hospital.delete()
-            messages.sucess(request, "The user is deleted")
-        except:
-            messages.error(request, "The user not found") 
-        return redirect("Add")
+        userjson =Hospital.first_name
+        userdict = json.loads(userjson)
+        if(userdict["Addedby_Username"]==request.user.username):
+            try:
+                Hospital.delete()
+                messages.sucess(request, "The user is deleted")
+            except:
+                messages.error(request, "The user not found") 
+            return redirect("Add")
 
 
 def DelE(request, uH):

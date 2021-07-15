@@ -9,11 +9,15 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <title>{% block title %} {% endblock title %}</title>
   {% block css %} {% endblock css %}
+  
+
+
+
 
 </head>
 
 <body>
-  <header class="p-3 bg-dark text-white" >
+  <header id="j" class="p-3 bg-dark text-white" >
     <div id="navbar" class="container">
       <div id="navbar2" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -54,25 +58,26 @@
     </div>
   </header>
 
-
-      
-
-  {% block body %}
   
-       
-      
+ 
+
+  
+  <div id="body">
+    
+    
+    {% block body %}
+    
+    {% endblock body %} 
+  </div>
   
   
-   {% endblock body %} 
   
 
-  {% block js %}
-
-  <script>
-
-  </script>
-  
+   
+   {% block js %}
    {% endblock js %}
+
+
 
 
  

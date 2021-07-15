@@ -1,4 +1,5 @@
 # from django.db.models.manager import RelatedManager
+# from typing_extensions import Required
 from django import http
 from django.shortcuts import render, HttpResponse, redirect
 # from home.models import Contact
@@ -18,6 +19,7 @@ def home(request):
 
 
 def CovidUpdates(request):
+
     return render(request, 'home/Covid_Updates.html')
 
 
@@ -40,14 +42,15 @@ def ContactUs(request):
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins'])
 def Add(request):
-    users = list(User.objects.filter(first_name__contains="hospitalh"))
+    group = Group.objects.get(name='HospitalHeads')
+    users = list(group.user_set.all())
     userl = []
     for user in users:
         profilejson =user.first_name
         profiledict = json.loads(profilejson)
         userl.append(profiledict)
 
-    return render(request, 'home/Add_H_admin.html',{"u":users})
+    return render(request, 'home/Add_H_admin.html',{"u":userl})
       
 
    
@@ -86,8 +89,8 @@ def AddHadmin(request):
         myuser.save()
         group = Group.objects.get(name='HospitalHeads')
         myuser.groups.add(group)
-       
         return redirect('Add')
+       
 
 
 @login_required(login_url='/home')
@@ -132,21 +135,7 @@ def AddEmployee(request):
 
 # Added Hospitals can sign in and add employees here
 
-def AddEmp(request):
-    if request.method == "POST":
-        # Get the post parameters
-        loginusername = request.POST.get('hnamecheck')
-        loginpassword = request.POST.get('hidcheck')
-        user = authenticate(username=loginusername, password=loginpassword)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Successfully Logged In")
-            return redirect("AddEmployee")
-        else:
-            messages.error(request, "Invalid credentials! Please try again")
-            return redirect("ContactUs")
 
-    return HttpResponse("404- Not found")
 
 
 def handelLogout(request):
@@ -303,10 +292,29 @@ def loginall(request):
 
 
 #Deleting Users
-
+@login_required(login_url='/home')
+@allowed_users(allowed_roles=[ 'Website_Admins'])
 def DelH(request, uH):
+    group = Group.objects.get(name='HospitalHeads')
+    users = list(group.user_set.all())
+    Hospital = User.objects.get(username=uH)
+    # print(Hospital.first_name)
+    if Hospital in users:
+        try:
+            Hospital.delete()
+            messages.sucess(request, "The user is deleted")
+        except:
+            messages.error(request, "The user not found") 
+        return redirect("Add")
 
-    return HttpResponse("delete hospital")
 
 def DelE(request, uH):
     return HttpResponse("delete Employee")
+
+
+
+
+
+
+
+

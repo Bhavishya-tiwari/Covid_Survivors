@@ -67,7 +67,13 @@
     </div>
   </div>
   {% for uu in u %}
-  {{uu}}
+  {{uu.Name}}
+  {{uu.username}}
+  {{uu.group}}
+  <br>
+  <a href="/delH/{{uu.username}}">delete</a>
+  <hr>
+  
   {% endfor %}
 
 

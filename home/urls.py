@@ -14,7 +14,6 @@ urlpatterns = [
     path('addhadmin', views.AddHadmin, name='AddHadmin'),
 
     # Post req to login hospital
-    path('addemployee', views.AddEmp, name='AddEmp'),
 
 
 

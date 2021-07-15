@@ -7,16 +7,18 @@ Title:- {{post.title}} <br>
 Author:- {{post.author}} <br>
 Time:-{{post.Timestamp}} <br>
 sno:-{{post.sno}} <br>
-Content:- {{post.content}}<br>
+Content:- {% autoescape off %}{{post.content|slice:200}}{% endautoescape %}<br>
 <hr>
-<a href="/blog">bloghome</a>
+    <a href="/blog" class="btn btn-warning">Blogs</a>
+
 
 {% comment %} {% if post.authorUsernames = user.username %}
 <a href="/blog/delB/{{post.sno}}">Delete</a> <br><br>
 {% endif %} {% endcomment %}
 {% comment %} {{post.authorUsername}} {% endcomment %}
 {% if post.authorUsername == user.username %}
-<a href="/blog/delB/{{post.sno}}">Delete</a> <br><br>
+    <a href="/blog/delB/{{post.sno}}" class="btn btn-danger">Delete</a>
+
 
 {% endif %}
  {% endblock %}

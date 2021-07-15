@@ -2,43 +2,82 @@
 
 {% block title %}Add Blogs{% endblock title %}
 
+
+  {% block css %} 
+  <style>
+#pagination{
+    margin: auto;
+    width: 200px;
+    zoom: 1.4;
+}
+
+
+  </style>
+  
+  
+  
+  {% endblock css %}
+
+
 {% block body %}
-blogs add
-<a href="/blog/addblog">Add blog</a>
+<a href="/blog/addblog">
+<button type="button" class="btn btn-lg btn-primary" disabled>Share Your Experience</button>
+
+</a>
+
+
+
 <hr>
 
 
 
+<div class="container">
 {% for post in page_obj %}
-Title:- {{post.title}} <br>
-Author:- {{post.author}} <br>
-Time:-{{post.Timestamp}} <br>
-sno:-{{post.sno}} <br>
-Content:- {{post.content}}<br>
-<a href="/blog/{{post.sno}}">Read more</a> <br><br>
+<div class="card my-2">
+  <div class="card-header">
+    {{post.title}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">By {{post.author}} <small>{{post.Timestamp}} </small></h5>
+    <p class="card-text">
+
+    {% autoescape off %}{{post.content|slice:200}}{% endautoescape %}
+    
+    
+    
+      </p>
+    <a href="/blog/{{post.sno}}" class="btn btn-info">Read more</a>
+  </div>
+</div>
+
+
 
 
 
 {% endfor %}
 
-page number:- {{page_obj.number}} <br>
 
-<div><span>
-{% if page_obj.has_previous %} 
 
-<a href= "?page={{page_obj.previous_page_number}}"> privious page</a>
+<div id="pagination">
+<nav aria-label="Page navigation example" >
+  <ul class="pagination">
+{% if page_obj.has_previous %}  
+
+    <li class="page-item">
+      <a class="page-link" href= "?page={{page_obj.previous_page_number}}" aria-label="Next">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
 {% endif %}
-</span></div>
-{{page_obj.number}}
-<div><span>
-{% if page_obj.has_next %}  <br>
+    <li class="page-item"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+{% if page_obj.has_next %}  
 
-<a href= "?page={{page_obj.next_page_number}}"> Next page</a>
+    <li class="page-item">
+      <a class="page-link" href= "?page={{page_obj.next_page_number}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
 {% endif %}
-</span></div>
-
-
-
-
-<span > {{page_obj.number}}  </span> </a>
+    </li>
+  </ul>
+</nav>
+</div></div>
  {% endblock %}

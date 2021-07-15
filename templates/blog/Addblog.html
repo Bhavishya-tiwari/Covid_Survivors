@@ -1,9 +1,32 @@
 {% extends 'base.html' %}
 
 {% block title %}Add Blogs{% endblock title %}
+  {% block Topjs %}
+   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+       <script>
+      tinymce.init({
+        selector: '#exampleFormControlTextarea1',
+        height:656,
+          plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'table emoticons template paste help'
+    ],
+    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+      'bullist numlist outdent indent | link image | print preview media fullpage | ' +
+      'forecolor backcolor emoticons | help',
+    menu: {
+      favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
+    },
+    menubar: 'favs file edit view insert format tools table help',
+    content_css: 'css/content.css'
+      });
+    </script>
+  
+   {% endblock Topjs %}
 
 {% block body %}
-<h1>Add blog</h1>
+<h1>Share Your Experience</h1>
 <div class="container">
 <form action="/blog/addblog" method="POST" >{% csrf_token %}
 <div class="mb-3">
@@ -12,7 +35,7 @@
 </div>
 <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-  <textarea class="form-control" name="Addblogc" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <textarea class="form-control" name="Addblogc" id="exampleFormControlTextarea1" rows="10" columns="20"></textarea>
 </div>
 <button type="submit" class="btn btn-info">Submit</button>
 </form></div>

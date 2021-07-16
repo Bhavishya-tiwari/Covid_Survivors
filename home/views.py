@@ -1,6 +1,7 @@
 # from django.db.models.manager import RelatedManager
 # from typing_extensions import Required
 from django import http
+from django.http import response
 from django.shortcuts import render, HttpResponse, redirect
 # from home.models import Contact
 from django.contrib import messages
@@ -13,6 +14,7 @@ from django.contrib.auth import authenticate,  login, logout
 from django.contrib.auth.decorators import login_required
 import json
 import datetime
+import requests
 
 # Create your views here.
 # User.objects.all().delete()
@@ -35,6 +37,9 @@ def CovidUpdates(request):
 
 
 def Donors(request):
+   
+    
+    
     return render(request, 'home/Donors.html')
 
 
@@ -49,9 +54,12 @@ def ContactUs(request):
         authorUsername=request.user.username
         email = request.POST.get('email')
         c = request.POST.get('comment')
-        Query = Comment(fname=fname, lname=lname,email=email, authorUsername=authorUsername,
-                    Timestamp=now, comment=c)
-        Query.save()
+        if(email != "" or c != ""):
+            Query = Comment(fname=fname, lname=lname,email=email, authorUsername=authorUsername,
+                        Timestamp=now, comment=c)
+            Query.save()
+        else:
+            return redirect("ContactUs")    
 
         return redirect('home')
 

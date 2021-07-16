@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Blogs{% endblock title %}
-
-
+{% block title %}Comments{% endblock title %}
 {% block css %}
 <style>
   #pagination {
@@ -16,47 +14,36 @@
 
 {% endblock css %}
 
-
 {% block body %}
-<a href="/blog/addblog">
-  <button type="button" class="btn btn-lg btn-primary" disabled>Share Your Experience</button>
-
-</a>
-
-
-
-<hr>
-
-
-
 <div class="container">
-  {% for post in page_obj %}
-  <div class="card my-2">
-    <div class="card-header">
-      {{post.title}}
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">By {{post.author}} <small>{{post.Timestamp}} </small></h5>
-      <p class="card-text">
 
-        {% autoescape off %}{{post.content|slice:200}}{% endautoescape %}
-
-
-
-      </p>
-      <a href="/blog/{{post.sno}}" class="btn btn-info">Read more</a>
-    </div>
+{% for post in page_obj %}
+<div class="card my-2">
+  <div class="card-header">
+    {{post.fname}} {{post.lname}}
   </div>
+  <div class="card-body">
+    <h5 class="card-title">By {{post.authorUsername}} <small>{{post.Timestamp}} </small></h5>
+    <h5 class="card-title">email {{post.email}}</h5>
+    <p class="card-text">
+
+    {% autoescape off %}{{post.comment|slice:200}}{% endautoescape %}
+    
+    
+    
+      </p>
+  </div>
+</div>
 
 
 
 
 
-  {% endfor %}
 
 
 
-  <div id="pagination">
+{% endfor %}
+<div id="pagination">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         {% if page_obj.has_previous %}
@@ -79,4 +66,11 @@
     </nav>
   </div>
 </div>
-{% endblock %}
+
+
+
+
+
+
+
+ {% endblock %}

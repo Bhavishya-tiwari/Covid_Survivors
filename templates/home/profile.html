@@ -38,17 +38,45 @@ Added by
 {% endif %}
 
 {% if p.group == "Website_Admins"  %}
-  <a href="/add">Add Hospital</a> <br>
+  <a href="/add">
+   <button type="button" class="btn btn-info">Add Hospital</button>
+  
+  </a> <br>
+    <a href="/commentshow">
+   <button type="button" class="btn btn-warning">Comments</button>
+
+  </a> <br>
+
 {% endif %}
 
 {% if p.group == "hospitalh"  %}
-  <a href="/addemployeee">Add Employee</a> <br>
+  <a href="/addemployeee">
+   <button type="button" class="btn btn-info">Add Employee</button>
+  
+  </a> <br>
+    <a href="/commentshow">
+   <button type="button" class="btn btn-warning my-2">Comments</button>
+
+  </a> <br>
+
+
 {% endif %}
 
 {% if p.group == "H_Emp"  %}
-  <a href="/addpat">Add Patients</a> <br>
+  <a href="/addpat">
+   <button type="button" class="btn btn-info">Add Patients</button>
+  
+  </a> <br>
+  <a href="/commentshow">
+   <button type="button" class="btn btn-warning">Comments</button>
+
+  </a> <br>
+
 {% endif %}
 
+{% comment %} {% if p.group == "H_Emp" or p.group == "hospitalh" if p.group == "Website_Admins" %}
+  <a href="/commentshow">Add Patients</a> <br>
+{% endif %} {% endcomment %}
 
 
 
@@ -57,7 +85,15 @@ Added by
 
 
 
-<a href="/logout">logout</a>
+
+
+
+
+
+<a href="/logout">
+  <button type="button" class="btn btn-danger">Logout</button>
+
+</a>
 </div>
 
  {% endblock %}

@@ -14,3 +14,19 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+class Comment(models.Model):
+    id=models.AutoField(primary_key=True)
+    fname=models.CharField(max_length=50)
+    lname=models.CharField(max_length=50)
+    authorUsername=models.CharField(max_length=50, default="")
+    email=models.CharField(max_length=70)
+    comment=models.TextField()
+    
+    Timestamp=models.CharField(max_length=50)
+
+
+    def __str__(self):
+        return self.fname
+
+

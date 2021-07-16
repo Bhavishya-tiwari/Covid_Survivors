@@ -1,54 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <style>
-      body{
-    background-color: #25274d;
-}
-.contact{
+{% extends 'base.html' %}
+
+
+{% block css %}
+
+<style>
+ 
+
+  .contact {
     padding: 4%;
     height: 400px;
-}
-.col-md-3{
+  }
+
+  .col-md-3 {
     background: rgb(243, 73, 73);
     padding: 4%;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
-}
-.contact-info{
-    margin-top:10%;
-}
-.contact-info img{
+  }
+
+  .contact-info {
+    margin-top: 10%;
+    /* background-color: #25274d; */
+  }
+
+  .contact-info img {
     margin-bottom: 15%;
-}
-.contact-info h2{
+  }
+
+  .contact-info h2 {
     margin-bottom: 10%;
-}
-.col-md-9{
+  }
+
+  .col-md-9 {
     background: #fff;
     padding: 3%;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-}
-.contact-form label{
-    font-weight:600;
-}
-.contact-form button{
+  }
+
+  .contact-form label {
+    font-weight: 600;
+  }
+
+  .contact-form button {
     background: #25274d;
     color: #fff;
     font-weight: 600;
     width: 25%;
-}
-/* .contact-form button:focus{
+  }
+
+  /* .contact-form button:focus{
     box-shadow:none;
 } */
-.button2 {
+  .button2 {
     display: inline-block;
     padding: 7px 27px;
     font-size: 24px;
@@ -62,62 +66,69 @@
     border-radius: 15px;
     box-shadow: 0 9px rgb(224, 131, 131);
   }
-  
-  .button2:hover {background-color: #0d0038}
-  
+
+  .button2:hover {
+    background-color: #0d0038
+  }
+
   .button2:active {
     background-color: #0d0038;
     box-shadow: 0 5px rgb(224, 131, 131);
     transform: translateY(4px);
   }
-    </style>
-</head>
-<body>
-    <div class="container contact">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="contact-info">
-                    <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
-                    <h2>Contact Us</h2>
-                    <h4>We would love to hear from you !</h4>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="contact-form">
-                    <div class="form-group">
-                      <label class="control-label col-sm-2" for="fname">First Name:</label>
-                      <div class="col-sm-10">          
-                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-2" for="lname">Last Name:</label>
-                      <div class="col-sm-10">          
-                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-2" for="email">Email:</label>
-                      <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-2" for="comment">Comment:</label>
-                      <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">        
-                      <div class="col-sm-offset-2 col-sm-10">
-                        <button class="button2">Submit</button>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+</style>
+{% endblock css %}
+
+{% block body %}
+
+
+<div class="container contact">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="contact-info">
+        <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
+        <h2>Contact Us</h2>
+        <h4>We would love to hear from you !</h4>
+      </div>
     </div>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</body>
-</html>
+    <div class="col-md-9">
+      <form action="/contactus" method="POST">
+    {% csrf_token %}
+
+        <div class="contact-form">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="fname">First Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="lname">Last Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" name="lname">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Email:</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="comment">Comment:</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="button2">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

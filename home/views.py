@@ -4,12 +4,16 @@ from django import http
 from django.shortcuts import render, HttpResponse, redirect
 # from home.models import Contact
 from django.contrib import messages
+from django.core.paginator import Paginator
 from blog.models import Post
+from home.models import Comment
 from django.contrib.auth.models import Group, User
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth import authenticate,  login, logout
 from django.contrib.auth.decorators import login_required
 import json
+import datetime
+
 # Create your views here.
 # User.objects.all().delete()
 
@@ -35,7 +39,39 @@ def Donors(request):
 
 
 def ContactUs(request):
+    if request.method == "POST":
+
+        now = datetime.datetime.now()
+
+
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        authorUsername=request.user.username
+        email = request.POST.get('email')
+        c = request.POST.get('comment')
+        Query = Comment(fname=fname, lname=lname,email=email, authorUsername=authorUsername,
+                    Timestamp=now, comment=c)
+        Query.save()
+
+        return redirect('home')
+
+     
+     
     return render(request, 'home/contact_us.html')
+
+@login_required(login_url='/Donors')
+@allowed_users(allowed_roles=['Website_Admins', 'HospitalHeads', 'HospitalHeads'])
+def commentshow(request):
+    # getting posts in order
+    cmn = Comment.objects.all().order_by('id')
+    # print(post)
+
+    # paginator obj created
+    paginator = Paginator(cmn, 2)
+
+    Page_number = request.GET.get('page')
+    Page_obj = paginator.get_page(Page_number)
+    return render(request, 'home/Commentshow.html', {"page_obj": Page_obj})
 
     
 

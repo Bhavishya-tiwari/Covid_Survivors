@@ -41,6 +41,9 @@ urlpatterns = [
     #website admin works
     path('add', views.Add, name='Add'),
 
+    #Blogs visible page
+    path('commentshow', views.commentshow, name='commentshow'),
+
     #deleting section
     path("delH/<str:uH>", views.DelH, name='DelJ'),
     path("delE/<str:uE>", views.DelE, name='DelE'),

@@ -37,7 +37,7 @@ def blogPost(request, mysno):
 
 
 
-@login_required(login_url='/home')
+@login_required(login_url='login')
 def addblog(request):
     if request.method == "POST":
         # ingredients

@@ -1,10 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}Sign up{% endblock title %}
+{% block css %}
+<style>
+  #outer {
+    position: relative;
+    top: 20vh;
+  }
+
+  #inner {
+    width: 40%;
+    margin: auto;
+
+
+
+    background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+
+  }
+
+  .box {
+    padding: 20px;
+
+    top: 20%;
+
+  }
+</style>{% endblock css %}
 
 {% block body %}
-<div id="box">
+<div id="outer">
+<div class="container">
+  <div id="inner">
 <div class="box">
+
 <form action="/nusignup" method="POST">
 
   {% csrf_token %} 
@@ -34,10 +61,13 @@
     <input type="password" class="form-control" id="nuid2" name="nuid2" placeholder="Enter your password again" required>
   </div>
  
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary my-2">Submit</button>
 </form>
-</div>
-</div>
+</div></div>
+</div></div>
+
+
+
 
 
  {% endblock %}

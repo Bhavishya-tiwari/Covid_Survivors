@@ -3,22 +3,29 @@
 {% block title %}Blogpost{% endblock title %}
 
 {% block body %}
-Title:- {{post.title}} <br>
-Author:- {{post.author}} <br>
-Time:-{{post.Timestamp}} <br>
-sno:-{{post.sno}} <br>
-Content:- {% autoescape off %}{{post.content|slice:200}}{% endautoescape %}<br>
-<hr>
-    <a href="/blog" class="btn btn-warning">Blogs</a>
+<div class="container">
+  <div class="card my-2">
+    <div class="card-header">
+      {{post.title}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">By {{post.author}} <small>{{post.Timestamp}} </small></h5>
+      <p class="card-text">
+
+        {% autoescape off %}{{post.content}}{% endautoescape %}
 
 
-{% comment %} {% if post.authorUsernames = user.username %}
-<a href="/blog/delB/{{post.sno}}">Delete</a> <br><br>
-{% endif %} {% endcomment %}
-{% comment %} {{post.authorUsername}} {% endcomment %}
+
+      </p>
+    <a href="/blog" class="btn btn-warning">Back</a>
 {% if post.authorUsername == user.username %}
     <a href="/blog/delB/{{post.sno}}" class="btn btn-danger">Delete</a>
 
 
-{% endif %}
+{% endif %}</div>
+    </div>
+
+
+
+
  {% endblock %}

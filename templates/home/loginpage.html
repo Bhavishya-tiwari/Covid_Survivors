@@ -1,53 +1,58 @@
 {% extends 'base.html' %}
 
 {% block title %}login{% endblock title %}
-     {% block css %}  
-  <style>
-    #outer{
-      position: relative;
-      top: 20vh;
-    }
-    #inner{
-      width: 40%;
-      margin: auto;
-      
-      
-      
-      background-image: linear-gradient( rgb(255, 183, 183), rgb(139, 249, 255)); 
-      
-    }
-    
-    .box{
-      padding: 20px;
-      
-      top: 20%;
-      
-    }
- 
-  </style>{% endblock css %}
+{% block css %}
+<style>
+  #outer {
+    position: relative;
+    top: 20vh;
+  }
+
+  #inner {
+    width: 40%;
+    margin: auto;
+
+
+
+    background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+
+  }
+
+  .box {
+    padding: 20px;
+
+    top: 20%;
+
+  }
+</style>{% endblock css %}
 
 
 {% block body %}
 <div id="outer">
-<div class="container">
-  <div id="inner">
-<div class="box">
-<h2>For Employee</h2>
-<form action="/loginemp" method="POST">
-    {% csrf_token %}
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Username</label>
-    <input type="text" name="uusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="upassword" class="form-control" id="exampleInputPassword1">
-  </div>
+  <div class="container">
+    <div id="inner">
+      <div class="box">
+        <h2>For Employee</h2>
+        <form action="/loginemp" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input type="text" name="uusername" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="upassword" class="form-control" id="exampleInputPassword1">
+          </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div></div>
-</div></div></div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="/reset_password" class="btn btn-warning">Delete</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
- {% endblock %}
+
+{% endblock %}

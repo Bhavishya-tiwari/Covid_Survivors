@@ -68,7 +68,7 @@ def ContactUs(request):
     return render(request, 'home/contact_us.html')
 
 @login_required(login_url='/Donors')
-@allowed_users(allowed_roles=['Website_Admins', 'HospitalHeads', 'HospitalHeads'])
+@allowed_users(allowed_roles=['Website_Admins', 'HospitalHeads', 'Hospital_Employees'])
 def commentshow(request):
     # getting posts in order
     cmn = Comment.objects.all().order_by('id')

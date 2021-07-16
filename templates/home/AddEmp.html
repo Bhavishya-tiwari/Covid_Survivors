@@ -3,6 +3,7 @@
 {% block title %}Add Employee{% endblock title %}
 
 {% block body %}
+<div class="container">
 <div id="box">
 <div class="box">
 <form action="/addemployeee" method="POST">
@@ -34,20 +35,28 @@
     <input type="password" class="form-control" id="pass2" name="epass2" placeholder="Enter your password again" required>
   </div>
  
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-warning my-3">Submit</button>
 </form>
 </div>
 </div>
+
 {% for uu in u %}
-  {{uu.Name}}
-  {{uu.username}}
-  {{uu.group}}
-  <br>
-  <a href="/delE/{{uu.username}}">delete</a>
-  <hr>
+<div class="card my-2">
+  <div class="card-header">
+    {{uu.Name}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{uu.username}}</h5>
+    <a href="/delE/{{uu.username}}" class="btn btn-danger">Delete</a>
+  </div>
+</div>
+ 
+  
+  
+ 
   {% endfor %}
 
-
+</div>
 
 
  {% endblock %}

@@ -12,9 +12,10 @@
     .Heading {
         color: rgb(255, 0, 0);
         text-align: center;
-        padding: 12vh;
+        padding: 9vh;
         font-size: 7vw;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: 'cursive', Times, serif;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
     }
 
     .content {
@@ -32,7 +33,7 @@
     }
 
     h3 {
-        font-size: 4rem;
+        font-size: 7vw;
         text-align: center;
     }
 
@@ -47,13 +48,31 @@
 
     .card-body {
         background-color: rgb(248, 200, 200);
-        color: white;
+        color:red;
     }
 
     .card {
         position: absolute;
         left: 20%;
         right: 20%;
+    }
+    #u{
+        background: linear-gradient(45deg, #ff9c9c,rgb(166, 245, 255),#ffa3a3,rgb(40, 230, 255));
+        animation: bbt 2s ease infinite;
+        background-size: 200% 200%;
+        /* border-radius: 8em; */
+    }
+    @keyframes bbt {
+        
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
     }
 </style>
 {% endblock css %}
@@ -65,8 +84,8 @@
     <div class="card-header">
         Welcome
     </div>
-    <div class="card-body">
-        <h3 class="card-title">Find some information about Covid Recovered patients.</h3>
+    <div id="u" class="card-body">
+        <h3 class="card-title">Covid Survivors</h3>
         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident error ratione
             doloribus sed dolorum,
             ipsum cumque reprehenderit dignissimos architecto veniam optio sint aliquam consectetur corrupti vero

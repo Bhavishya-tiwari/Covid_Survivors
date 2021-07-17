@@ -1,84 +1,107 @@
 {% extends 'base.html' %}
 
 {% block title %}Welcome Admin{% endblock title %}
-     {% block css %}  
-  <style>
-      #box{
-          max-width: 500px;
-         margin: auto;
-      }
-      .box{
-          
+{% block css %}
+<style>
+  #box {
+    max-width: 500px;
+    margin: auto;
+  }
 
-          margin: 10px 10px;
-      }
-  </style>{% endblock css %}
+  .box {
+
+
+    margin: 10px 10px;
+  }
+
+  #outer {
+    position: relative;
+    top: 20vh;
+  }
+
+  #inner {
+    width: 60%;
+    margin: auto;
+
+
+
+    background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+
+  }
+
+  .box {
+    padding: 20px;
+
+    top: 20%;
+
+  }
+</style>{% endblock css %}
 
 
 {% block body %}
 
-<div id="box">
-<div class="box">
-<form action="/addhadmin" method="POST">
-  {% csrf_token %} 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Hopital username</label>
-    <input type="text"  name="husername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Hopital name</label>
-    <input type="text"  name="hname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Hopital email</label>
-    <input type="email"  name="hemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Hopital Address</label>
-    <input type="text"  name="hadd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="form-group">
-    <label for="pass1">Choose a password</label>
-    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password" required>
-  </div>
-  <div class="form-group">
-    <label for="pass2">Confirm Password</label>
-    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
-  </div>
- 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
-</div>
-<div class="container">
+< class="container">
+  <div id="inner">
+    <div class="box">
+      <form action="/addhadmin" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Hopital username</label>
+          <input type="text" name="husername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Hopital name</label>
+          <input type="text" name="hname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Hopital email</label>
+          <input type="email" name="hemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Hopital Address</label>
+          <input type="text" name="hadd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="form-group">
+          <label for="pass1">Choose a password</label>
+          <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="pass2">Confirm Password</label>
+          <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again"
+            required>
+        </div>
 
-  <div class="card">
-    <div class="card-header">
-      Featured
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
   </div>
-  {% for uu in u %}
-  {{uu.Name}}
-  {{uu.username}}
-  {{uu.group}}
-  <br>
-  <a href="/delH/{{uu.username}}">delete</a>
-  <hr>
-  
-  {% endfor %}
+  <div class="container my-2">
+
+    {% for uu in u %}
+    <div class="my-2">
+    <div class="card my-6">
+      <div class="card-header">
+        {{uu.Name}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{uu.username}}</h5>
+        <a href="/delH/{{uu.username}}" class="btn btn-danger">Delete</a>
+      </div>
+    </div></div>
+    
+    
+    {% endfor %}
+  </div>
 
 
- {% endblock %}
- {% block js %}
 
- {% endblock js %}
+
+{% endblock %}
+{% block js %}
+
+{% endblock js %}

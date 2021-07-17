@@ -1,62 +1,96 @@
 {% extends 'base.html' %}
 
 {% block title %}Add Employee{% endblock title %}
+{% block css %}
+<style>
+  #outer {
+    position: relative;
+    top: 10vh;
+  }
+
+  #inner {
+    width: 60%;
+    margin: auto;
+
+
+
+    background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+
+  }
+
+  .box {
+    padding: 20px;
+
+    top: 20%;
+
+  }
+</style>{% endblock css %}
 
 {% block body %}
-<div class="container">
-<div id="box">
-<div class="box">
-<form action="/addemployeee" method="POST">
+<div id="outer">
+  <div class="container">
+    <div id="inner">
+      <div class="box">
+        <form action="/addemployeee" method="POST">
 
-  {% csrf_token %} 
- 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Employee username</label>
-    <input type="text"  name="eusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Employee name</label>
-    <input type="text"  name="ename" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">employee email</label>
-    <input type="email"  name="eemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Employee username</label>
+            <input type="text" name="eusername" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Employee name</label>
+            <input type="text" name="ename" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">employee email</label>
+            <input type="email" name="eemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="pass1">Choose a password</label>
+            <input type="password" class="form-control" id="pass1" name="epass1" placeholder="Choose Your Password"
+              required>
+          </div>
+          <div class="form-group">
+            <label for="pass2">Confirm Password</label>
+            <input type="password" class="form-control" id="pass2" name="epass2" placeholder="Enter your password again"
+              required>
+          </div>
+
+          <button type="submit" class="btn btn-warning my-3">Submit</button>
+        </form>
+
+
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="pass1">Choose a password</label>
-    <input type="password" class="form-control" id="pass1" name="epass1" placeholder="Choose Your Password" required>
+  <div class="container">
+
+    {% for uu in u %}
+
+    <div class="card my-2">
+      <div class="card-header">
+        {{uu.Name}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{uu.username}}</h5>
+        <a href="/delE/{{uu.username}}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+    
+    
+    
+    
+    {% endfor %}
   </div>
-  <div class="form-group">
-    <label for="pass2">Confirm Password</label>
-    <input type="password" class="form-control" id="pass2" name="epass2" placeholder="Enter your password again" required>
-  </div>
- 
-  <button type="submit" class="btn btn-warning my-3">Submit</button>
-</form>
 </div>
-</div>
-
-{% for uu in u %}
-<div class="card my-2">
-  <div class="card-header">
-    {{uu.Name}}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{uu.username}}</h5>
-    <a href="/delE/{{uu.username}}" class="btn btn-danger">Delete</a>
-  </div>
-</div>
- 
-  
-  
- 
-  {% endfor %}
-
-</div>
 
 
- {% endblock %}
+  {% endblock %}

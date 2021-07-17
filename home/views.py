@@ -17,7 +17,7 @@ import datetime
 import requests
 
 # Create your views here.
-# User.objects.all().delete()
+# User.objects.all().delete() 
 def home(request):
     return render(request, 'home/home.html')
 

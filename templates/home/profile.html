@@ -1,19 +1,73 @@
 {% extends 'base.html' %}
 
 {% block title %}Profile{% endblock title %}
+{% block css %}
+<style>
+.container{
+  text-align: left;
+}
+span{
+  color: rgb(255, 0, 0);
+
+  font-weight: 400;
+}
+#span{
+  font-size: xx-large;
+}
+#batch{
+  zoom: 1.5;
+}
+img{
+  width: 6vw;
+}
+.box{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+{% endblock css %}
 
 {% block body %}
-Profile:-
+<span id="span" style="color: brown; text-decoration: underline;">
 
+  Profile-
+</span>
+<div class="box">
+{% if p.group == "Website_Admins"  %}
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/user-settings.svg" alt="Admin">
+<span id="batch"><span class="badge rounded-pill bg-info">Admin</span></span>
+
+
+{% elif p.Add != null %}
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/hospital-clinic.svg" alt="Hospital">
+<span id="batch"><span class="badge rounded-pill bg-info">Hospital</span></span>
+
+  {% elif p.group == "H_Emp"  %}
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/doctor-male.svg" alt="Hospital Employee">
+<span id="batch"><span class="badge rounded-pill bg-info">Employee</span></span>
+
+{% elif p.age != null %}
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/hospital-patient.svg" alt="Covid Survivor">
+<span id="batch"><span class="badge rounded-pill bg-info">Covid Survivor</span></span>
+{% else %}
+  <img src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/young.svg" alt="User">
+<span id="batch"><span class="badge rounded-pill bg-info">User</span></span>
+{% endif %}
+
+
+</div>
 <div class="container">
 
-{{p.Name}}<br><hr>
-{{p.email}}<br><hr>
+<span>Name-</span> {{p.Name}}<br><hr>
+<span>Email-</span>{{p.email}}<br><hr>
 
 {% comment %} only of hospital {% endcomment %}
 {% if p.Add != null %}
-{{p.Add}}<br><hr>
+<span>Address-</span>{{p.Add}}<br><hr>
 {% endif %}
+
 
 
 
@@ -22,19 +76,18 @@ Profile:-
 
 {% comment %} only of emp intersection covid survivor{% endcomment %}
 {% if p.Hospital_name != null %}
-{{p.Hospital_name}}<br><hr>
-{{p.Hospital_email}}<br><hr>
-{{p.Hospital_Add}}<br><hr>
+<span>Hospital Name-</span>{{p.Hospital_name}}<br><hr>
+<span>Hospital Email-</span>{{p.Hospital_email}}<br><hr>
+<span>Hospital Address-</span>{{p.Hospital_Add}}<br><hr>
 {% endif %}
 
 {% comment %} only for covid survivor {% endcomment %}
 {% if p.age != null %}
-{{p.bloodgrp}}<br><hr>
-{{p.dateofdischarge}}<br><hr>
-{{p.age}}<br><hr>
-{{p.Added_by_email}}<br><hr>
-Added by
-{{p.Addedby_Username}}<br><hr>
+<span>Blood group-</span>{{p.bloodgrp}}<br><hr>
+<span>Date of Discharge-</span>{{p.dateofdischarge}}<br><hr>
+<span>Age-</span>{{p.age}}<br><hr>
+<span>For any concern mail-</span>{{p.Added_by_email}}<br><hr>
+
 {% endif %}
 
 {% if p.group == "Website_Admins"  %}
@@ -43,7 +96,7 @@ Added by
   
   </a> <br>
     <a href="/commentshow">
-   <button type="button" class="btn btn-warning my-2">Comments</button>
+   <button type="button" class="btn btn-warning my-2">View Comments</button>
 
   </a> <br>
 
@@ -55,7 +108,7 @@ Added by
   
   </a> <br>
     <a href="/commentshow">
-   <button type="button" class="btn btn-warning my-2">Comments</button>
+   <button type="button" class="btn btn-warning my-2">View Comments</button>
 
   </a> <br>
 
@@ -74,9 +127,6 @@ Added by
 
 {% endif %}
 
-{% comment %} {% if p.group == "H_Emp" or p.group == "hospitalh" if p.group == "Website_Admins" %}
-  <a href="/commentshow">Add Patients</a> <br>
-{% endif %} {% endcomment %}
 
 
 

@@ -18,8 +18,6 @@ import requests
 
 # Create your views here.
 # User.objects.all().delete()
-
-
 def home(request):
     return render(request, 'home/home.html')
 
@@ -28,19 +26,12 @@ def CovidUpdates(request):
 
         return render(request, 'home/Covid_Updates.html')
 
-        
-
-
-
-
-
-
 
 def Donors(request):
+    return render(request, 'home/Donors.html')
    
     
     
-    return render(request, 'home/Donors.html')
 
 
 def ContactUs(request):
@@ -63,9 +54,9 @@ def ContactUs(request):
 
         return redirect('home')
 
-     
-     
     return render(request, 'home/contact_us.html')
+     
+     
 
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins', 'HospitalHeads', 'Hospital_Employees'])
@@ -186,27 +177,23 @@ def AddEmployee(request):
         if (userdict["Addedby_Username"] == request.user.username):
             userl.append(userdict)
 
-  
     return render(request, 'home/AddEmp.html',{"u":userl})
-
-
-# Added Hospitals can sign in and add employees here
-
+  
 
 
 
+
+
+
+# Logout
 def handelLogout(request):
     logout(request)
     messages.success(request, "Successfully logged out")
     return redirect('home')
 
-# login page
 
 
-
-# login for employee
-
-
+# Login
 def loginemp(request):
     if request.method == "POST":
         # Get the post parameters
@@ -416,6 +403,7 @@ def DelCS(request, uCS):
     
 
 
+        
 
 
 

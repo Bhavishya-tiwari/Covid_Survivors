@@ -28,7 +28,14 @@ def CovidUpdates(request):
 
 
 def Donors(request):
-    return render(request, 'home/Donors.html')
+    sqr=[]
+
+    i=0
+    while i < 3:
+        sqr.append(i*i)
+        i += 0.01
+        
+    return render(request, 'home/Donors.html', {"s":sqr})
    
     
     

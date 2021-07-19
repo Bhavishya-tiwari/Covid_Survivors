@@ -65,7 +65,7 @@
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px rgb(224, 131, 131);
-  }
+     }
 
   .button2:hover {
     background-color: #0d0038
@@ -76,14 +76,36 @@
     box-shadow: 0 5px rgb(224, 131, 131);
     transform: translateY(4px);
   }
+  .right1 {
+    
+    position: relative;
+    right: -200px;
+    visibility: hidden;
+    animation: right1 0.3s ease-out 1 0.3s forwards;
+  }
+  @keyframes right1 {
+    0% {opacity: 0;
+      visibility: visible;
+      left: 200px;
+      top: 0px;
+    }
+
+    100% {opacity: 1;
+      /* background: rgb(255, 240, 240); */
+      left: 0px;
+      visibility: inherit;
+      top: 0px;
+    }
+  }
 </style>
+
 {% endblock css %}
 
 
 {% block body %}
 
 
-<div class="container contact">
+<div class="container contact right1">
   <div class="row">
     <div class="col-md-3">
       <div class="contact-info">
@@ -123,7 +145,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-secondary">Submit</button>
+              <button type="submit" class="btn btn-secondary my-2">Submit</button>
             </div>
           </div>
         </div>

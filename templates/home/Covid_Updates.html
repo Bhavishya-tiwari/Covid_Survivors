@@ -31,19 +31,8 @@
 <script>
 
 
-    fetch('https://api.covid19india.org/state_district_wise.json')
-        .then(response => response.json())
-        .then((data) => {
-            show(data);
-        })
-        .catch(error => console.error(error))
-
-
-    var show = function show(d) {
-        d1 = JSON.stringify(d)
-        console.log(d1);
-
-    }
+   
+    
 
 
 

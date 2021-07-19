@@ -2,11 +2,12 @@
 
 {% block title %}Add Blogs{% endblock title %}
   {% block Topjs %}
+
    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
        <script>
       tinymce.init({
         selector: '#exampleFormControlTextarea1',
-        height:656,
+        height:400,
           plugins: [
       'advlist autolink link image lists charmap print preview hr anchor pagebreak',
       'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
@@ -19,16 +20,36 @@
       favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
     },
     menubar: 'favs file edit view insert format tools table help',
-    content_css: 'css/content.css'
       });
     </script>
   
+
    {% endblock Topjs %}
+
+   {% block css %}
+   <style>
+   .fad{visibility:hidden;
+     animation: fad 0.5s 1 0.8s forwards;
+   }
+     @keyframes fad {
+    0% {opacity: 0;
+    visibility: hidden;
+    }
+
+    100% {opacity: 1;
+    visibility:visible;
+    }
+  }
+  .inlin{
+    display: inline-block
+  }
+   </style>
+   {% endblock css %}
 
 {% block body %}
 <h1>Share Your Experience</h1>
 <div class="container">
-<form action="/blog/addblog" method="POST" >{% csrf_token %}
+<form action="/blog/addblog" class="fad" method="POST" >{% csrf_token %}
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Title</label>
   <input type="text" class="form-control" name="Addblogt" id="exampleFormControlInput1" placeholder="Enter title">
@@ -37,6 +58,12 @@
   <label for="exampleFormControlTextarea1" class="form-label">Content</label>
   <textarea class="form-control" name="Addblogc" id="exampleFormControlTextarea1" rows="10" columns="20"></textarea>
 </div>
-<button type="submit" class="btn btn-info">Submit</button>
-</form></div>
+<button type="submit" class="btn btn-info inlin fad">Submit</button>
+<a href="/blog/">
+  <button type="button" class="btn btn-warning inlin fad">Back</button>
+  
+  </a>
+</form>
+</div>
+
  {% endblock %}

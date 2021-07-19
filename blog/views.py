@@ -16,7 +16,7 @@ def blogHome(request):
     # print(post)
 
     # paginator obj created
-    paginator = Paginator(post, 2)
+    paginator = Paginator(post, 4)
 
     Page_number = request.GET.get('page')
     Page_obj = paginator.get_page(Page_number)
@@ -53,11 +53,15 @@ def addblog(request):
         content = request.POST.get('Addblogc')
 
         # saving
-        post = Post(title=title, author=author,authorUsername=authorUsername,
-                    Timestamp=time, content=content)
-        post.save()
-        # print(Post)
-        return redirect('blogHome')
+        if(content != "" or title != ""):
+            post = Post(title=title, author=author,authorUsername=authorUsername,
+                        Timestamp=time, content=content)
+            post.save()
+            # print(Post)
+            return redirect('blogHome')
+        else:
+            return redirect("addblog")
+
 
     return render(request, 'blog/Addblog.html')
     

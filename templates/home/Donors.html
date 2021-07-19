@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 
 {% block title %}Donors{% endblock title %}
+{% block css %}
+<style>
+     #g {
+          height: 2000;
+          width: 1000;
+          border: solid rgb(7, 7, 7) 4px;
+     }
+</style>
+
+
+{% endblock css %}
 
 {% block body %}
 
-   <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<form class="d-flex">
+     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+     <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
- {% endblock %}
+<hr>
+
+{% endblock %}

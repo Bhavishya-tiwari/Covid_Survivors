@@ -10,9 +10,86 @@
     width: 200px;
     zoom: 1.4;
   }
-  #share{
-  margin: 10px;
+
+  #share {
+    margin: 10px;
   }
+
+  .left1 {
+    animation: left1 0.3s ease-out 1 forwards;
+
+  }
+  
+  .right1 {
+    
+    position: relative;
+    right: -200px;
+    visibility: hidden;
+    animation: right1 0.3s ease-out 1 0.2s forwards;
+
+  }
+  .left2 {
+    animation: left1 0.3s ease-out 1 0.5s forwards;
+    right: 200px;
+
+    visibility: hidden;
+
+
+  }
+  
+  .right2 {
+    
+    position: relative;
+    right: -200px;
+    visibility: hidden;
+    animation: right1 0.3s ease-in 1 0.7s forwards;
+
+  }
+
+  @keyframes right1 {
+    0% {opacity: 0;
+      visibility: visible;
+      background: rgb(113, 250, 255);
+      left: 200px;
+      top: 0px;
+    }
+
+    100% {opacity: 1;
+      /* background: rgb(255, 240, 240); */
+      left: 0px;
+      visibility: inherit;
+      top: 0px;
+    }
+  }
+
+  @keyframes left1 {
+    0% {opacity: 0;
+      visibility: visible;
+      background: rgb(113, 250, 255);
+      left: -200px;
+      top: 0px;
+
+    }
+
+    100% {opacity: 1;
+      /* background: rgb(255, 240, 240); */
+      left: 0px;
+      visibility: inherit;
+      top: 0px;
+
+    }
+  }
+  .block{
+    display: block;
+    width: 200px;
+  }
+
+
+
+
+
+
+
 </style>
 
 
@@ -34,7 +111,12 @@
 
 <div class="container">
   {% for post in page_obj %}
-  <div class="card my-2">
+
+
+
+
+
+  <div class="card my-2 cardd {% cycle 'left1' 'right1' 'left2' 'right2' %}">
     <div class="card-header">
       {{post.title}}
     </div>
@@ -47,7 +129,7 @@
 
 
       </p>
-      <a href="/blog/{{post.sno}}" class="btn btn-info">Read more</a>
+      <a href="/blog/{{post.sno}}" class="btn btn-info my-2 block">Read more</a>
     </div>
   </div>
 
@@ -65,14 +147,14 @@
         {% if page_obj.has_previous %}
 
         <li class="page-item">
-          <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Next">
+          <a class="page-link  right2" href="?page={{page_obj.previous_page_number}}" aria-label="Next">
             <span aria-hidden="true">&laquo;</span>
           </a>
           {% endif %}
-        <li class="page-item"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+        <li class="page-item  right2"><a class="page-link" href="#">{{page_obj.number}}</a></li>
         {% if page_obj.has_next %}
 
-        <li class="page-item">
+        <li class="page-item  right2">
           <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>

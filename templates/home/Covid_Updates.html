@@ -1,55 +1,109 @@
 {% extends 'base.html' %}
 
 {% block title %}Covid Updates{% endblock title %}
+{% block links %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+{% endblock links %}
+
+
 {% block css %}
 <style>
+       * {
+              margin: 0;
+              padding: 0;
+       }
 
+       #map {
+              height: 96vh;
+              width: 34vw;
+       }
+
+
+
+       .mapboxgl-popup {
+              max-width: 400px;
+              font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+       }
+
+       .flx {
+              display: flex;
+       }
+
+       .left {
+              width: 65vw;
+              height: 75vh;
+              background-color: rgb(199, 253, 255);
+       }
+
+       .right {
+              height: 75vh;
+              width: 34vw;
+              overflow: hidden;
+           
+
+       }
+    #state{
+           width: 50%;
+       display: inline-block;
+       
+}
+#dist{
+       float: right;
+       width: 27vw;
+     
+    }
+    .democlass{
+           background-color: saddlebrown;
+    }
 </style>
 
 {% endblock css %}
 
 
 {% block body %}
+<div class="flx">
+       <div class="left">
+                     <!-- <select class="form-select m-2" aria-label="Default select example" >
+                            <option selected>Country</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                     </select> -->
+                
+                      <select class="form-select mt-2" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()"  onblur="this.size=0;" id="state" aria-label="Default select example" >
+                            <option selected>State</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                     </select>
+                      <select class="form-select mt-2" id="dist" disabled aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()"  onblur="this.size=0;" id="state" aria-label="Default select example"  >
+                            <option selected>District</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                     </select>
+                   
 
 
-
-
-<div id="cases">
-
+       </div>
+       <div class="right">
+              <div id="map"></div></div>
+       </div>
 
 </div>
-<div id="chat">
-
-
-</div>
+<div id="k">klm</div>
 
 
 
 {% endblock %}
 
+
+
+
+
+
 {% block js %}
-<script>
-
-
-   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</script>
-
+{% load static %}
+<script src="{% static 'static.js' %}"></script>
 {% endblock js %}

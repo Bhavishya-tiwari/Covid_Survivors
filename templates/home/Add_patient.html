@@ -49,11 +49,19 @@
           <input type="email" name="pemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
-        <div class="mb-3">
+        {% comment %} <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Patient Blood group</label>
           <input type="text" name="pbloodgrp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
+        </div> {% endcomment %}
+                      <select name="pbloodgrp" class="form-select change1 mt-2" 
+                     onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+                     id="state" aria-label="Default select example">
+                     <option selected>Blood Group</option>
+                     <option value="1">A positive</option>
+                     <option value="2">Two</option>
+                     <option value="3">Three</option>
+              </select>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Patient Date of Discharge</label>
           <input type="text" name="pdod" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

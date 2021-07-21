@@ -1,0 +1,19 @@
+    // $(document).on('change', 'select', function(e) {
+    //     // console.log($(this).val());
+    //     selectedValues = [].filter
+    //     .call(document.getElementById("state").options, option => option.selected)
+    //     .map(option => option.text);
+    //     document.getElementById("dist").removeAttribute("disabled");
+        
+    //     let districts = data_inc[selectedValues[0]].districtData
+    //     let index = 0
+    //     for(district in districts){
+    //             //   console.log(state);
+    //               options2 = options2 + `<option value="${index}">${district}</option>`
+    //               index++;
+    //             console.log("nj");
+                  
+              
+    //             }
+    //             document.getElementById("dist").innerHTML = options2;
+    //         });

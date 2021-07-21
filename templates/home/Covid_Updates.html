@@ -4,6 +4,7 @@
 {% block links %}
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+
 {% endblock links %}
 
 
@@ -15,8 +16,10 @@
        }
 
        #map {
-              height: 96vh;
+              height:79vh;
               width: 34vw;
+              
+              
        }
 
 
@@ -28,6 +31,8 @@
 
        .flx {
               display: flex;
+              position: relative;
+              top : 7vh;
        }
 
        .left {
@@ -36,66 +41,291 @@
               background-color: rgb(199, 253, 255);
        }
 
-       .right {
+        .right {
               height: 75vh;
               width: 34vw;
               overflow: hidden;
-           
+
+
+       } 
+
+       #state {
+              width: 50%;
+              display: inline-block;
 
        }
-    #state{
-           width: 50%;
-       display: inline-block;
-       
-}
-#dist{
-       float: right;
-       width: 27vw;
-     
-    }
-    .democlass{
-           background-color: saddlebrown;
-    }
+
+       #dist {
+              float: right;
+              width: 27vw;
+
+       }
+
+       .democlass {
+              background-color: saddlebrown;
+       }
 </style>
 
 {% endblock css %}
 
 
 {% block body %}
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+<!-- Promise polyfill script is required -->
+<!-- to use Mapbox GL Geocoder in IE 11. -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
 <div class="flx">
        <div class="left">
-                     <!-- <select class="form-select m-2" aria-label="Default select example" >
+              <!-- <select class="form-select m-2" onchange="myFunction()" id="dist" aria-label="Default select example" >
                             <option selected>Country</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                      </select> -->
-                
-                      <select class="form-select mt-2" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()"  onblur="this.size=0;" id="state" aria-label="Default select example" >
-                            <option selected>State</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                     </select>
-                      <select class="form-select mt-2" id="dist" disabled aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()"  onblur="this.size=0;" id="state" aria-label="Default select example"  >
-                            <option selected>District</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                     </select>
-                   
+              <select class="form-select change1 mt-2" onchange="myFunction()"
+                     onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+                     id="state" aria-label="Default select example">
+                     <option selected>State</option>
+                     <option value="1">One</option>
+                     <option value="2">Two</option>
+                     <option value="3">Three</option>
+              </select>
+              <select class="form-select mt-2" onchange="myFunction1()" id="dist" disabled aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+                     id="state" aria-label="Default select example">
+                     <option>District</option>
+                     <option value="1">One</option>
+                     <option value="2">Two</option>
+                     <option value="3">Three</option>
+              </select>
+            
+
+
 
 
        </div>
-       <div class="right">
-              <div id="map"></div></div>
+    <div class="right">
+              <div id="map"></div>
        </div>
+</div>
 
 </div>
 <div id="k">klm</div>
 
 
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGFycnkxMjM0OTgiLCJhIjoiY2s4OXh1c3BqMGFsZzNvbXA3YmYyaGFhYSJ9.wmVMiMxlSqpzJPsj-UXr3Q';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-79.4512, 43.6568],
+    zoom: 13
+});
 
+// Add the control to the map.
+map.addControl(
+    new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    })
+);
+console.log("Checkin");
+//***********************************Global variables******************************** */
+var data_inc
+var data_map
+
+//*********************************Api section********************************************** 
+fetch('https://api.covid19india.org/data.json')
+    .then(response => response.json())
+    .then(data => {
+    })
+
+fetch('https://corona.lmao.ninja/v2/jhucsse')
+    .then(response => response.json())
+    .then(data => {
+           //  data.forEach(element => {
+                  //         console.log(element.country);
+                  //  });
+                  console.log(typeof(data));
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYmhhdmlzaHlhdDI0IiwiYSI6ImNrcmFlbXV2azRmanAyb3FobWtyYXI2dWwifQ.wfb9sjo6qtn43ZqcEBA9BQ';
+        var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [78.289633, 23.541513],
+ 
+    zoom: 10
+});
+map.addControl(
+new MapboxGeocoder({
+       accessToken: mapboxgl.accessToken,
+       mapboxgl: mapboxgl
+})
+);
+//*******************************************************************************
+
+// document.getElementById('cl').addEventListener('click', () => {
+       //     map.flyTo({
+              //         // These options control the ending camera position: centered at
+              //         // the target, at zoom level 9, and north up.
+              //         center: [-77.038659, 0],
+//         zoom: 9,
+//         bearing: 0,
+
+//         // These options control the flight curve, making it move
+//         // slowly and zoom out almost completely before starting
+//         // to pan.
+//         speed: 2, // make the flying slow
+//         curve: 2, // change the speed at which it zooms out
+
+//         // This can be any easing function: it takes a number between
+//         // 0 and 1 and returns another number between 0 and 1.
+//         easing: function (t) {
+       //             return t;
+//         },
+
+//         // this animation is considered essential with respect to prefers-reduced-motion
+//         essential: true
+//     });
+// })
+
+// filling data
+var map_data_arr = []
+data.forEach(e => {
+       
+       var obj =  {
+              'type': 'Feature',
+              'properties': {
+                                   'description': `  <p>country : ${e.country}</p>
+                                   <p>confirmed : ${e.stats.confirmed}</p>
+                                   <p>deaths : ${e.stats.deaths}</p>
+                                   <p>recovered :${e.stats.recovered} op</p>
+                                   <p>province : ${e.province}</p>`
+                            },
+                            'geometry': {
+                                   'type': 'Point',
+                                   'coordinates': [e.coordinates.longitude, e.coordinates.latitude]
+                            }
+                     }
+                     map_data_arr.push(obj)
+              });
+              
+              //******************************************************************************************************************
+map.on('load', function () {
+       map.addSource('places', {
+              'type': 'geojson',
+              'data': {
+                     'type': 'FeatureCollection',
+            'features': map_data_arr
+       }
+});
+// Add a layer showing the places.
+map.addLayer({
+       'id': 'places',
+        'type': 'circle',
+        'source': 'places',
+        'paint': {
+               'circle-color': '#4264fb',
+            'circle-radius': 6,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#ffffff'
+       }
+});
+
+// Create a popup, but don't add it to the map yet.
+    var popup = new mapboxgl.Popup({
+           closeButton: false,
+           closeOnClick: false
+       });
+       
+       map.on('mouseenter', 'places', function (e) {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+        
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+        
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+              
+              // Populate the popup and set its coordinates
+              // based on the feature found.
+              popup.setLngLat(coordinates).setHTML(description).addTo(map);
+       });
+       
+       map.on('mouseleave', 'places', function () {
+              map.getCanvas().style.cursor = '';
+              popup.remove();
+       });
+});
+data_map=data
+
+})
+
+fetch('https://api.covid19india.org/state_district_wise.json')
+.then(response => response.json())
+    .then(data => {
+        covidUpdate(data)
+    })
+
+//**********************************Functions******************************************
+
+
+var options = "<option selected>State</option>"
+index = 0;
+var covidUpdate = function covidUpdate(data) {
+    data_inc = data
+
+    for (var stat in data) {
+        options = options + `<option value="${index}">${stat}</option>`
+        index++;
+
+    }
+    document.getElementById("state").innerHTML = options;
+
+}
+
+
+var options2 = "<option selected>District</option>"
+var state_selected;
+function myFunction(e) {  // on state selection
+    var selectedValues = [].filter
+        .call(document.getElementById("state").options, option => option.selected)
+        .map(option => option.text);
+
+    state_selected = selectedValues[0]
+
+    document.getElementById("dist").removeAttribute("disabled");
+    let districts = data_inc[selectedValues[0]].districtData
+    let index = 0
+    for (district in districts) {
+        options2 = options2 + `<option value="${index}">${district}</option>`
+        index++;
+    }
+    document.getElementById("dist").innerHTML = options2;
+
+};
+
+
+
+
+
+function myFunction1(e) {
+    selectedValuesd = [].filter
+        .call(document.getElementById("dist").options, option => option.selected)
+        .map(option => option.text);
+    covid_data = data_inc[state_selected]["districtData"][selectedValuesd[0]]
+    console.log(covid_data);
+}
+
+
+</script>
 {% endblock %}
 
 
@@ -105,5 +335,5 @@
 
 {% block js %}
 {% load static %}
-<script src="{% static 'static.js' %}"></script>
+{% comment %} <script src="{% static 'static.js' %}"></script> {% endcomment %}
 {% endblock js %}

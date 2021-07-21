@@ -16,10 +16,10 @@
        }
 
        #map {
-              height:79vh;
+              height: 79vh;
               width: 34vw;
-              
-              
+
+
        }
 
 
@@ -32,22 +32,22 @@
        .flx {
               display: flex;
               position: relative;
-              top : 7vh;
+              top: 7vh;
        }
 
        .left {
               width: 65vw;
               height: 75vh;
-              background-color: rgb(199, 253, 255);
+              background-color: rgb(255, 224, 224);
        }
 
-        .right {
+       .right {
               height: 75vh;
               width: 34vw;
               overflow: hidden;
 
 
-       } 
+       }
 
        #state {
               width: 50%;
@@ -64,6 +64,9 @@
        .democlass {
               background-color: saddlebrown;
        }
+       #r{
+              background-color: red;
+       }
 </style>
 
 {% endblock css %}
@@ -71,7 +74,9 @@
 
 {% block body %}
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+<link rel="stylesheet"
+       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+       type="text/css">
 
 <!-- Promise polyfill script is required -->
 <!-- to use Mapbox GL Geocoder in IE 11. -->
@@ -80,35 +85,39 @@
 
 <div class="flx">
        <div class="left">
-              <!-- <select class="form-select m-2" onchange="myFunction()" id="dist" aria-label="Default select example" >
-                            <option selected>Country</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                     </select> -->
+
+              <select class="form-select change1 mt-2" onchange="myFunction2()"
+                    id="country" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+                     aria-label="Default select example">
+                     <option selected>Country</option>
+
+              </select>
               <select class="form-select change1 mt-2" onchange="myFunction()"
                      onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      id="state" aria-label="Default select example">
                      <option selected>State</option>
-                     <option value="1">One</option>
-                     <option value="2">Two</option>
-                     <option value="3">Three</option>
+
               </select>
-              <select class="form-select mt-2" onchange="myFunction1()" id="dist" disabled aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
-                     id="state" aria-label="Default select example">
+              <select class="form-select mt-2" onchange="myFunction1()" id="dist" disabled
+                     aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}"
+                     onchange="this.blur()" onblur="this.size=0;" id="state" aria-label="Default select example">
                      <option>District</option>
-                     <option value="1">One</option>
-                     <option value="2">Two</option>
-                     <option value="3">Three</option>
+
               </select>
-            
+              <br>
+              <button id="DataShown" type="button" class="btn btn-primary m-2">Search</button>
+              <div id="Data_Box">
+
+              </div>
+
 
 
 
 
        </div>
-    <div class="right">
+       <div class="right">
               <div id="map"></div>
+              <br>
        </div>
 </div>
 
@@ -117,212 +126,311 @@
 
 
 <script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiaGFycnkxMjM0OTgiLCJhIjoiY2s4OXh1c3BqMGFsZzNvbXA3YmYyaGFhYSJ9.wmVMiMxlSqpzJPsj-UXr3Q';
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-79.4512, 43.6568],
-    zoom: 13
-});
 
-// Add the control to the map.
-map.addControl(
-    new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl: mapboxgl
-    })
-);
-console.log("Checkin");
-//***********************************Global variables******************************** */
-var data_inc
-var data_map
 
-//*********************************Api section********************************************** 
-fetch('https://api.covid19india.org/data.json')
-    .then(response => response.json())
-    .then(data => {
-    })
+       //***********************************Global variables******************************** */
+       var data_inc
+       var data_map
+       var covid_data;
+       var state_name;
+       var Country_data;
 
-fetch('https://corona.lmao.ninja/v2/jhucsse')
-    .then(response => response.json())
-    .then(data => {
-           //  data.forEach(element => {
-                  //         console.log(element.country);
-                  //  });
-                  console.log(typeof(data));
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYmhhdmlzaHlhdDI0IiwiYSI6ImNrcmFlbXV2azRmanAyb3FobWtyYXI2dWwifQ.wfb9sjo6qtn43ZqcEBA9BQ';
-        var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [78.289633, 23.541513],
- 
-    zoom: 10
-});
-map.addControl(
-new MapboxGeocoder({
-       accessToken: mapboxgl.accessToken,
-       mapboxgl: mapboxgl
-})
-);
-//*******************************************************************************
+       //*********************************Api section********************************************** 
+       // var map_data_arr2 = []
+       // fetch('https://corona.lmao.ninja/v2/countries?yesterday&sort')
+       //        .then(response => response.json())
+       //        .then(data => {
+       //               data.forEach(e => {
+       //                             // console.log(e);
+       //                             var obj = {
+       //                                    'type': 'Feature',
+       //                             'properties': {
+       //                                    'description': `  <p>country : ${e.country}</p>
+       //                             <p>confirmed : ${e.cases}</p>
+       //                             <p>deaths : ${e.recovered}</p>
+       //                             <p>recovered :${e.deaths} op</p>
+       //                             <p>province : ${e.active}</p> `
+       //                      },
+       //                             'geometry': {
+       //                                    'type': 'Point',
+       //                                    'coordinates': [e.countryInfo.long, e.countryInfo.lat]
+       //                             }
+       //                      }
 
-// document.getElementById('cl').addEventListener('click', () => {
-       //     map.flyTo({
-              //         // These options control the ending camera position: centered at
-              //         // the target, at zoom level 9, and north up.
-              //         center: [-77.038659, 0],
-//         zoom: 9,
-//         bearing: 0,
-
-//         // These options control the flight curve, making it move
-//         // slowly and zoom out almost completely before starting
-//         // to pan.
-//         speed: 2, // make the flying slow
-//         curve: 2, // change the speed at which it zooms out
-
-//         // This can be any easing function: it takes a number between
-//         // 0 and 1 and returns another number between 0 and 1.
-//         easing: function (t) {
-       //             return t;
-//         },
-
-//         // this animation is considered essential with respect to prefers-reduced-motion
-//         essential: true
-//     });
-// })
-
-// filling data
-var map_data_arr = []
-data.forEach(e => {
+       //                      map_data_arr2.push(obj)
+       //               });
+       //               // console.log(map_data_arr2);
+       //                      Country_data = data;
+       //        })
+       fetch('https://api.covid19india.org/data.json')
+              .then(response => response.json())
+              .then(data => {
+              })
        
-       var obj =  {
-              'type': 'Feature',
-              'properties': {
-                                   'description': `  <p>country : ${e.country}</p>
+
+
+       fetch('https://corona.lmao.ninja/v2/jhucsse')
+              .then(response => response.json())
+              .then(data => {
+                     console.log(typeof (data));
+                     mapboxgl.accessToken = 'pk.eyJ1IjoiYmhhdmlzaHlhdDI0IiwiYSI6ImNrcmFlbXV2azRmanAyb3FobWtyYXI2dWwifQ.wfb9sjo6qtn43ZqcEBA9BQ';
+                     var map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/mapbox/streets-v11',
+                            center: [78.289633, 23.541513],
+
+                            zoom: 6
+                     
+                     });
+                     fetch('https://corona.lmao.ninja/v2/countries?yesterday&sort')
+        .then(response => response.json())
+        .then(data => {
+                 // Set countries
+            var cntry ="<option selected>Country</option>"
+                     // console.log(data);
+                     data.forEach(e => {
+                            cntry = cntry + `<option value="${index}" >${e.country}</option>`
+                     });
+            document.getElementById("country").innerHTML = cntry
+            // console.log(rsp.data)
+            data.forEach(e => {
+                latitude = e.countryInfo.lat;
+                longitude = e.countryInfo.long;
+
+                cases = e.deaths;
+                if (cases/100000>255){
+                    color = "rgb(255, 100, 0)";
+                }
+
+                else{
+                    color = `rgb(${cases/1000}, 0, 100)`;
+                }
+
+                // Mark on the map
+                new mapboxgl.Marker({
+                    draggable: false,
+                    color: color
+                }).setLngLat([longitude, latitude])
+                .addTo(map); 
+            });
+          
+
+        })
+
+                     var loc;
+                     document.getElementById("DataShown").addEventListener('click', function () {
+                            document.getElementById("Data_Box").innerHTML = `<b>${covid_data.confirmed}</b>`
+                            // getting location of that state
+                            data_map.forEach(e => {
+                                   if (e.province == state_name) {
+                                          loc = e.coordinates;
+                                          // console.log(loc);
+
+                                   }
+                            });
+
+                            map.flyTo({
+
+                                   center: [loc.longitude, loc.latitude],
+                                   essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                            });
+                     });
+
+
+
+
+                     map.addControl(
+                            new MapboxGeocoder({
+                                   accessToken: mapboxgl.accessToken,
+                                   mapboxgl: mapboxgl
+                            })
+                     );
+                     //*******************************************************************************
+                     // filling data
+                     var map_data_arr = []
+                     data.forEach(e => {
+                            // console.log(e);
+                            var obj = {
+                                   'type': 'Feature',
+                                   'properties': {
+                                          'description': ` <div id="pop"> <p>country : ${e.country}</p>
                                    <p>confirmed : ${e.stats.confirmed}</p>
                                    <p>deaths : ${e.stats.deaths}</p>
                                    <p>recovered :${e.stats.recovered} op</p>
-                                   <p>province : ${e.province}</p>`
-                            },
-                            'geometry': {
-                                   'type': 'Point',
-                                   'coordinates': [e.coordinates.longitude, e.coordinates.latitude]
+                                   <p>province : ${e.province}</p> </div>`
+                                   },
+                                   'geometry': {
+                                          'type': 'Point',
+                                          'coordinates': [e.coordinates.longitude, e.coordinates.latitude]
+                                   }
                             }
-                     }
-                     map_data_arr.push(obj)
-              });
-              
-              //******************************************************************************************************************
-map.on('load', function () {
-       map.addSource('places', {
-              'type': 'geojson',
-              'data': {
-                     'type': 'FeatureCollection',
-            'features': map_data_arr
-       }
-});
-// Add a layer showing the places.
-map.addLayer({
-       'id': 'places',
-        'type': 'circle',
-        'source': 'places',
-        'paint': {
-               'circle-color': '#4264fb',
-            'circle-radius': 6,
-            'circle-stroke-width': 2,
-            'circle-stroke-color': '#ffffff'
-       }
-});
 
-// Create a popup, but don't add it to the map yet.
-    var popup = new mapboxgl.Popup({
-           closeButton: false,
-           closeOnClick: false
-       });
-       
-       map.on('mouseenter', 'places', function (e) {
-        // Change the cursor style as a UI indicator.
-        map.getCanvas().style.cursor = 'pointer';
-        
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.description;
-        
-        // Ensure that if the map is zoomed out such that multiple
-        // copies of the feature are visible, the popup appears
-        // over the copy being pointed to.
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-               coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                            map_data_arr.push(obj)
+                     });
+                     // var map_data_arr2 = []
+                     // fetch('https://corona.lmao.ninja/v2/countries?yesterday&sort')
+                     //        .then(response => response.json())
+                     //        .then(data => {
+                     //               data.forEach(e => {
+                     //                      // console.log(e);
+                     //                     let long = String (e.countryInfo.long)
+                     //                     let lat = String (e.countryInfo.lat)
+
+                     //                      var obj = {
+                     //                             'type': 'Feature',
+                     //                             'properties': {
+                     //                                    'description': ` <div id="r"> <p>country : ${e.country}</p>
+                     //               <p>confirmed : ${e.cases}</p>
+                     //               <p>deaths : ${e.recovered}</p>
+                     //               <p>recovered :${e.deaths} op</p>
+                     //               <p>province : ${e.active}</p></div> `
+                     //                             },
+                     //                             'geometry': {
+                     //                                    'type': 'Point',
+                     //                      'coordinates': [long, lat]
+                                                        
+                     //                             }
+                     //                      }
+
+                     //                      map_data_arr.push(obj)
+                     //               });
+                     //               console.log(map_data_arr);
+                     //               Country_data = data;
+                     //        })
+
+
+                
+                     //******************************************************************************************************************
+                     map.on('load', function () {
+                            map.addSource('places', {
+                                   'type': 'geojson',
+                                   'data': {
+                                          'type': 'FeatureCollection',
+                                          'features':map_data_arr
+                                          // [   {
+                                          //        'type': 'Feature',
+                                          //        'properties': {
+                                          //               'description': `  <>`
+                                          //        },
+                                          //        'geometry': {
+                                          //               'type': 'Point',
+                                          // 'coordinates': [77, 20]
+                                                        
+                                          //        }
+                                          // }]
+                                   }
+                            });
+                            //*********
+
+                            //************
+                            map.addLayer({
+                                   'id': 'places',
+                                   'type': 'circle',
+                                   'source': 'places',
+                                   'paint': {
+
+                                          'circle-color': "rgb(0, 134, 24)",
+                                          'circle-radius': 5,
+                                          'circle-stroke-width': 2,
+                                          'circle-stroke-color': 'white'
+                                   }
+                            });
+
+                            // Create a popup, but don't add it to the map yet.
+                            var popup = new mapboxgl.Popup({
+                                   closeButton: false,
+                                   closeOnClick: false
+                            });
+
+                            map.on('mouseenter', 'places', function (e) {
+                                   // Change the cursor style as a UI indicator.
+                                   map.getCanvas().style.cursor = 'pointer';
+
+                                   var coordinates = e.features[0].geometry.coordinates.slice();
+                                   var description = e.features[0].properties.description;
+
+                                   // Ensure that if the map is zoomed out such that multiple
+                                   // copies of the feature are visible, the popup appears
+                                   // over the copy being pointed to.
+                                   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                                          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                                   }
+
+                                   // Populate the popup and set its coordinates
+                                   // based on the feature found.
+                                   popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                            });
+
+                            map.on('mouseleave', 'places', function () {
+                                   map.getCanvas().style.cursor = '';
+                                   popup.remove();
+                            });
+                     });
+                     data_map = data
+
+
+                     console.log("sdnv");
+                     console.log(data);
+
+              
+              
+              } )
+
+       fetch('https://api.covid19india.org/state_district_wise.json')
+              .then(response => response.json())
+              .then(data => {
+                     covidUpdate(data)
+              })
+
+       //**********************************Functions******************************************
+
+
+       var options = "<option selected>State</option>"
+       index = 0;
+       var covidUpdate = function covidUpdate(data) {
+              data_inc = data
+
+              for (var stat in data) {
+                     options = options + `<option value="${index}">${stat}</option>`
+                     index++;
+
               }
-              
-              // Populate the popup and set its coordinates
-              // based on the feature found.
-              popup.setLngLat(coordinates).setHTML(description).addTo(map);
-       });
-       
-       map.on('mouseleave', 'places', function () {
-              map.getCanvas().style.cursor = '';
-              popup.remove();
-       });
-});
-data_map=data
+              document.getElementById("state").innerHTML = options;
 
-})
-
-fetch('https://api.covid19india.org/state_district_wise.json')
-.then(response => response.json())
-    .then(data => {
-        covidUpdate(data)
-    })
-
-//**********************************Functions******************************************
+       }
 
 
-var options = "<option selected>State</option>"
-index = 0;
-var covidUpdate = function covidUpdate(data) {
-    data_inc = data
+       var state_selected;
+       function myFunction(e) {  // on state selection
+              var options2 = "<option selected>District</option>"
+              var selectedValues = [].filter
+                     .call(document.getElementById("state").options, option => option.selected)
+                     .map(option => option.text);
 
-    for (var stat in data) {
-        options = options + `<option value="${index}">${stat}</option>`
-        index++;
+              state_selected = selectedValues[0]
 
-    }
-    document.getElementById("state").innerHTML = options;
-
-}
-
-
-var options2 = "<option selected>District</option>"
-var state_selected;
-function myFunction(e) {  // on state selection
-    var selectedValues = [].filter
-        .call(document.getElementById("state").options, option => option.selected)
-        .map(option => option.text);
-
-    state_selected = selectedValues[0]
-
-    document.getElementById("dist").removeAttribute("disabled");
-    let districts = data_inc[selectedValues[0]].districtData
-    let index = 0
-    for (district in districts) {
-        options2 = options2 + `<option value="${index}">${district}</option>`
-        index++;
-    }
-    document.getElementById("dist").innerHTML = options2;
-
-};
+              document.getElementById("dist").removeAttribute("disabled");
+              let districts = data_inc[selectedValues[0]].districtData
+              let index = 0
+              for (district in districts) {
+                     options2 = options2 + `<option value="${index}">${district}</option>`
+                     index++;
+              }
+              document.getElementById("dist").innerHTML = options2;
+              state_name = selectedValues[0]
+       };
 
 
 
 
+       function myFunction1(e) {
+              selectedValuesd = [].filter
+                     .call(document.getElementById("dist").options, option => option.selected)
+                     .map(option => option.text);
+              covid_data = data_inc[state_selected]["districtData"][selectedValuesd[0]]
+              dist_name = selectedValuesd[0]
 
-function myFunction1(e) {
-    selectedValuesd = [].filter
-        .call(document.getElementById("dist").options, option => option.selected)
-        .map(option => option.text);
-    covid_data = data_inc[state_selected]["districtData"][selectedValuesd[0]]
-    console.log(covid_data);
-}
+       }
 
 
 </script>
@@ -335,5 +443,6 @@ function myFunction1(e) {
 
 {% block js %}
 {% load static %}
-{% comment %} <script src="{% static 'static.js' %}"></script> {% endcomment %}
+{% comment %}
+<script src="{% static 'static.js' %}"></script> {% endcomment %}
 {% endblock js %}

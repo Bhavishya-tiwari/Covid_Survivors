@@ -28,5 +28,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.fname
+class Message(models.Model):
+    id=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=50)
+    authorUsername=models.CharField(max_length=50, default="")
+    email=models.CharField(max_length=70)
+    message=models.TextField()
+    Timestamp=models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.name + str(self.id)
+
+
 
 

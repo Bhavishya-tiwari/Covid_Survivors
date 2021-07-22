@@ -8,6 +8,8 @@ urlpatterns = [
     path('donors', views.Donors, name='Donors'),
     path('contactus', views.ContactUs, name='ContactUs'),
 
+    # profile
+    path('chatt', views.chat , name='chat'),
     
 
     # Hospital ko signup
@@ -34,6 +36,7 @@ urlpatterns = [
 
     # profile
     path('profile', views.profile , name='profile'),
+
     
     # normal user sign up
     path('nusignup', views.nusignup, name='nusignup'),

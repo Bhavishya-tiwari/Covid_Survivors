@@ -15,14 +15,14 @@
         padding: 9vh;
         font-size: 7vw;
         font-family: 'cursive', Times, serif;
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .content {
 
         font-family: 'Bree Serif', serif;
         margin: 3px 230px;
-        position: absolute;
+        /* position: absolute; */
         display: block;
         flex-direction: column;
         align-items: center;
@@ -48,7 +48,7 @@
 
     .card-body {
         background-color: rgb(248, 200, 200);
-        color:red;
+        color: red;
     }
 
     .card {
@@ -56,24 +56,31 @@
         left: 20%;
         right: 20%;
     }
-    #u{
-        background: linear-gradient(45deg, #ff9c9c,rgb(166, 245, 255),#ffa3a3,rgb(40, 230, 255));
+
+    #u {
+        background: linear-gradient(45deg, #ff9c9c, rgb(166, 245, 255), #ffa3a3, rgb(40, 230, 255));
         animation: bbt 2s ease infinite;
         background-size: 200% 200%;
         /* border-radius: 8em; */
     }
-    @keyframes bbt {
-        
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
+
+   
+    .chat{
+        height: 90vh;
+        width: 70vw;
+        background-color: rgba(40, 74, 75, 0.363);
+        position: relative;
+        top: 50vh;
+        margin: auto;
     }
+    .msgs{
+        height: 80%;
+        width: 100%;
+        background-color: rgb(230, 255, 204);
+    }
+
+ 
+
 </style>
 {% endblock css %}
 
@@ -95,4 +102,34 @@
         <a href="#" class="btn btn-primary">Get Started</a>
     </div>
 </div>
+
+
+
+<section class="chat">
+    <h1>chat</h1>
+    <div class="msgs" id="msgs">
+
+    </div>
+    <form method="post" action="#" id="msg_form">{% csrf_token %}
+        <div class="input-group">
+            <textarea rows="1" class="form-control" aria-label="With textarea" id="msg_send" name="msg_send"></textarea>
+          </div> 
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</section>
+<script type="text/javascript"> 
+    var a = "{{request.user}}";
+ </script>
+
+
 {% endblock body %}
+{% block js %}
+
+{% load static %}
+<script src="{% static 'chat.js' %}"></script>
+{% endblock js %}
+
+
+
+
+

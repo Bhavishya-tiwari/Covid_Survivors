@@ -3,16 +3,6 @@ bg = document.getElementById("bgrp")
 // console.log(bg);
 var bg;
 
-
-
-
-
-
-
-
-
-
-
 $('#Donor_search').submit(function(event) {
     var getValue = document.getElementById('bgrp').selectedOptions[0].value;
     $('#showdata').empty();

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}Blogpost{% endblock title %}
+  {% block links %}
+ <div id="fb-root"></div>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="YhWzS66e"></script>   {% endblock links %}
+
+
 {% block css %}
 <style>
 
@@ -34,6 +40,9 @@
 
 
 {% endif %}</div>
+    </div>
+    <div class="container">
+    <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{post.sno}}" data-width="" data-numposts="3"></div>
     </div>
 
 

@@ -7,7 +7,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
 from blog.models import Post
-from home.models import Comment
+from home.models import Comment,Message
 from django.contrib.auth.models import Group, User
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth import authenticate,  login, logout
@@ -18,36 +18,76 @@ import requests
 
 # Create your views here.
 # User.objects.all().delete() 
+# Message.objects.all().delete()
+
 def home(request):
+    if request.method == "POST":
+        profilejson = request.user.first_name
+        profiledict = json.loads(profilejson)
+        
+        
+        now = datetime.datetime.now()
+        name = profiledict["Name"]
+        username = request.user.username
+        email = request.user.email
+        msg = request.POST.get('msg')
+        Query = Message( authorUsername=username,email=email,name=name,
+                        Timestamp=now, message=msg)
+        if(msg != ""):
+            Query.save()
+            return HttpResponse("done")
+        else:
+            return HttpResponse("error")
     return render(request, 'home/home.html')
 
 
 def CovidUpdates(request):
 
-        return render(request, 'home/Covid_Updates.html')
+    return render(request, 'home/Covid_Updates.html')
+
+
+def chat(request):
+
+    new_list=[]
+    # old_list[-1]=new_list
+    msgs = Message.objects.all().order_by('id')
+    # obj=[{"n":"l"},{"k":"kk"}]
+    for msg in msgs:
+        obj ={"name": msg.name,
+                "msg":msg.message,
+                "un":msg.authorUsername,
+                "time":msg.Timestamp
+        }
+        new_list.append(obj)
+    return HttpResponse(json.dumps(new_list))
+    
+        
+        
+        
+            
+    
+   
+
+
 
 
 def Donors(request):
     if request.method=="POST":
         bg_val = request.POST.get('Blood_grp_val', '')
-        print(bg_val)
         try:
             group = Group.objects.get(name='Covid_Survivors')
             users = list(group.user_set.all())
             CSsend = []
             for user in users:
                 CSdict = json.loads(user.first_name)
-                # print(CSdict)
                
                 if( CSdict["bloodgrp"] == bg_val):
-                    print(CSdict)
                     o = {
                     "name" : CSdict["Name"],
                     "email" : CSdict["email"],
                     "Hospital_name" : CSdict["Hospital_name"],
                     "Hospital_email" : CSdict["Hospital_email"],
                     "Hospital_Add" : CSdict["Hospital_Add"]}
-                    # print(o)
                     CSsend.append(o)
                 else:    
                     print("K")
@@ -101,7 +141,6 @@ def ContactUs(request):
 def commentshow(request):
     # getting posts in order
     cmn = Comment.objects.all().order_by('id')
-    # print(post)
 
     # paginator obj created
     paginator = Paginator(cmn, 2)
@@ -386,7 +425,6 @@ def DelH(request, uH):
     group = Group.objects.get(name='HospitalHeads')
     users = list(group.user_set.all())
     Hospital = User.objects.get(username=uH)
-    # print(Hospital.first_name)
     if Hospital in users:
         userjson =Hospital.first_name
         userdict = json.loads(userjson)
@@ -406,7 +444,6 @@ def DelE(request, uE):
     group = Group.objects.get(name='Hospital_Employees')
     users = list(group.user_set.all())
     Employee = User.objects.get(username=uE)
-    # print(Hospital.first_name)
     if Employee in users:
         userjson =Employee.first_name
         userdict = json.loads(userjson)
@@ -427,7 +464,6 @@ def DelCS(request, uCS):
     group = Group.objects.get(name='Covid_Survivors')
     users = list(group.user_set.all())
     CSur = User.objects.get(username=uCS)
-    # print(Hospital.first_name)
     if CSur in users:
         userjson =CSur.first_name
         userdict = json.loads(userjson)

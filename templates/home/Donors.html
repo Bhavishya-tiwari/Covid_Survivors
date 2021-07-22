@@ -3,23 +3,58 @@
 {% block title %}Donors{% endblock title %}
 {% block css %}
 <style>
-     #g {
-          height: 2000;
-          width: 1000;
-          border: solid rgb(7, 7, 7) 4px;
+     .conta{
+          width: 60vw;
+          margin: auto;
+          vertical-align: center;
      }
+     .showdata{
+          width: 77vw;
+          max-height: 89vh;
+          min-height: 40vh;
+          margin: auto;
+          overflow-y: scroll;
+          position: relative;
+          top: 5vh;
+          background-color: greenyellow;
+     }
+
 </style>
 
 
 {% endblock css %}
 
 {% block body %}
+<div class="conta my-4">
 
-<form class="d-flex">
-     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-     <button class="btn btn-outline-success" type="submit">Search</button>
+     <form method="post" action="#" id="Donor_search">{% csrf_token %}
+          <select name="Donor_search_bg" class="form-select change1 mt-2" 
+          onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+          id="bgrp" aria-label="Default select example">
+          <option selected>Blood Group</option>
+          <option value="1">A +</option>
+          <option value="2">B +</option>
+          <option value="3">AB +</option>
+          <option value="4">O +</option>
+          <option value="5">A -</option>
+          <option value="6">B -</option>
+          <option value="7">Ab -</option>
+          <option value="8">O -</option>
+     </select>
+     <button type="submit" class="btn btn-warning">Search</button>
 </form>
 
-<hr>
+</div>
+<div id="showdata" class="showdata">
+
+
+
+</div>
+
 
 {% endblock %}
+{% block js %}
+
+{% load static %}
+<script src="{% static 'donor.js' %}"></script>
+{% endblock js %}

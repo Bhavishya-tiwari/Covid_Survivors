@@ -151,12 +151,13 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                     'features': map_data_arr
                 }
             });
+            
             map.addLayer({
                 'id': 'places',
                 'type': 'circle',
                 'source': 'places',
                 'paint': {
-                    'circle-color': "rgb(0, 134, 24)",
+                    'circle-color': "blue",
                     'circle-radius': 5,
                     'circle-stroke-width': 2,
                     'circle-stroke-color': 'white'

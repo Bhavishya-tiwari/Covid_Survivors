@@ -28,14 +28,45 @@ def CovidUpdates(request):
 
 
 def Donors(request):
-    sqr=[]
+    if request.method=="POST":
+        bg_val = request.POST.get('Blood_grp_val', '')
+        print(bg_val)
+        try:
+            group = Group.objects.get(name='Covid_Survivors')
+            users = list(group.user_set.all())
+            CSsend = []
+            for user in users:
+                CSdict = json.loads(user.first_name)
+                # print(CSdict)
+               
+                if( CSdict["bloodgrp"] == bg_val):
+                    print(CSdict)
+                    o = {
+                    "name" : CSdict["Name"],
+                    "email" : CSdict["email"],
+                    "Hospital_name" : CSdict["Hospital_name"],
+                    "Hospital_email" : CSdict["Hospital_email"],
+                    "Hospital_Add" : CSdict["Hospital_Add"]}
+                    # print(o)
+                    CSsend.append(o)
+                else:    
+                    print("K")
+            
+            return HttpResponse(json.dumps(CSsend))
+                   
+                    
+        except Exception as e:
+            return HttpResponse('Error Occured')
 
-    i=0
-    while i < 3:
-        sqr.append(i*i)
-        i += 0.01
+                
+
+                
         
-    return render(request, 'home/Donors.html', {"s":sqr})
+
+
+
+        
+    return render(request, 'home/Donors.html')
    
     
     

@@ -4,11 +4,11 @@
 {% block links %}
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
-
 {% endblock links %}
 
-
 {% block css %}
+
+
 <style>
        * {
               margin: 0;
@@ -91,7 +91,13 @@ img{
     }
     .f{
            display: flex;
-           z-index: 9;
+           position: relative;
+           top:4vh;
+           z-index: 7;
+    }
+    #DataShown{
+           margin:auto;
+           width: 100px;
     }
     
 </style>
@@ -110,8 +116,7 @@ type="text/css">
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
-{% load static %}
-  <img src="{% static "imgs/stats.jpg" %}" alt="home" />
+
 <div class="flx">
        <div class="left">
               <div class="f">
@@ -122,7 +127,7 @@ type="text/css">
                      <option selected>Country</option>
 
               </select>
-              <select disabled class="form-select change1 wdth mt-2"style="max-width: 20vw,min-width: 20px; ; onchange="myFunction()"
+              <select disabled class="form-select change1 wdth mt-2"style="max-width: 20vw,min-width: 20px;" onchange="myFunction()"
                      onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      id="state" aria-label="Default select example">
                      <option selected>State</option>
@@ -134,9 +139,9 @@ type="text/css">
                      <option>District</option>
 
               </select>
+              <button id="DataShown" type="button" style="z-index: -4;" class="btn btn-primary m-2">Search</button>
        </div>
               <br>
-              <button id="DataShown" type="button" style="z-index: -4;" class="btn btn-primary m-2">Search</button>
               <div id="Data_Box">
 
               </div>
@@ -172,6 +177,6 @@ type="text/css">
 
 {% block js %}
 
-<!-- {% load static %}
-<script src="{% static 'static.js' %}"></script> -->
+{% load static %}
+<script src="{% static 'static.js' %}"></script>
 {% endblock js %}

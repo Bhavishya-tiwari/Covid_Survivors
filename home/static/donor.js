@@ -18,10 +18,26 @@ $('#Donor_search').submit(function(event) {
             encode: true
         })
         .done(function(data) {
+           var st= ""
             updates = JSON.parse(data);
-            console.log(updates)
-            if (updates.length > 0 & updates != {}) {
-            }
+            // console.log(updates)
+
+            updates.forEach(e => {
+                st = st +  `<div class="card m-3 cd" style="width: 18rem;">
+                <div class="card-body">
+                     <h5 class="card-title">Name : ${e.name}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">Email : ${e.email}</h6>
+                     <p class="card-text">Hospital name: ${e.Hospital_name} <br>
+                     Hospital email : ${e.Hospital_email}<br>
+                     Hospital address : ${e.Hospital_Add}</p>
+    
+                </div>
+           </div>`
+                
+
+                
+            });
+            document.getElementById('showdata').innerHTML=st;
        
         });
     event.preventDefault();

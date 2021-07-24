@@ -8,7 +8,7 @@ var state_name;
 var Country_data;
 var dist_data;
 var selected_country;
-var is_notstate ;
+var is_notstate =false;
 var All_countries
 
 //*********************************Api section********************************************** 
@@ -89,13 +89,15 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
             else if (is_notstate == false) {
         var loc = 0;
+        console.log(is_notstate);
 
                 data_map.forEach(e => {
                     if (e.province == state_selected) {
                         loc = e.coordinates;
+                        console.log(loc);
                     }
                 });
-
+                console.log("state");
 
 
                 map.flyTo({
@@ -106,6 +108,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
             }
             else if (is_notstate) {
         var loc = 0;
+        console.log("ctr");
                 All_countries.forEach(e => {
                     if (e.country == selected_country) {
                         map.flyTo({
@@ -226,10 +229,12 @@ function myFunction2(e) {
                 options = options + `<option value="${index}">${e.province}</option>`
                 index++;
                 is_notstate=false;
+                console.log("yes satte");
             }
             else {
                 document.getElementById("state").setAttribute("disabled", false);
                 is_notstate = true;
+                console.log("no state");
             }
         }
     });

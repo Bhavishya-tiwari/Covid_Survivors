@@ -3,50 +3,69 @@
 {% block title %}Donors{% endblock title %}
 {% block css %}
 <style>
-     .conta{
+     .conta {
           width: 60vw;
           margin: auto;
           vertical-align: center;
      }
-     .showdata{
-          width: 77vw;
-          max-height: 89vh;
-          min-height: 40vh;
+
+     .showdata {
+          max-width: 40vw;
+          min-width: 300px;
+          max-height: 60vh;
+          min-height: 50vh;
           margin: auto;
           overflow-y: scroll;
           position: relative;
           top: 5vh;
-          background-color: greenyellow;
+          /* background-color: rgb(235, 255, 205);
+          
+           */
+           background-color: white;
+           background-image: linear-gradient(rgb(224, 222, 228),rgb(232, 238, 174));
+           /* opacity: ; */
      }
-
+     img{
+      width: 99vw;
+      height: 100vh;
+      position: absolute;
+    
+      z-index: -99999;
+      opacity: 0.3;
+    }
 </style>
 
 
 {% endblock css %}
 
 {% block body %}
+{% load static %}
+  <img src="{% static "imgs/stats.jpg" %}" alt="home" />
 <div class="conta my-4">
 
      <form method="post" action="#" id="Donor_search">{% csrf_token %}
-          <select name="Donor_search_bg" class="form-select change1 mt-2" 
-          onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
-          id="bgrp" aria-label="Default select example">
-          <option selected>Blood Group</option>
-          <option value="1">A +</option>
-          <option value="2">B +</option>
-          <option value="3">AB +</option>
-          <option value="4">O +</option>
-          <option value="5">A -</option>
-          <option value="6">B -</option>
-          <option value="7">Ab -</option>
-          <option value="8">O -</option>
-     </select>
-     <button type="submit" class="btn btn-warning">Search</button>
-</form>
+          <select name="Donor_search_bg" class="form-select change1 mt-2"
+               onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+               id="bgrp" aria-label="Default select example">
+               <option selected>Blood Group</option>
+               <option value="1">A +</option>
+               <option value="2">B +</option>
+               <option value="3">AB +</option>
+               <option value="4">O +</option>
+               <option value="5">A -</option>
+               <option value="6">B -</option>
+               <option value="7">Ab -</option>
+               <option value="8">O -</option>
+          </select>
+          <button type="submit" class="btn btn-warning">Search</button>
+     </form>
 
 </div>
 <div id="showdata" class="showdata">
-
+   
+  
+  
+     
 
 
 </div>

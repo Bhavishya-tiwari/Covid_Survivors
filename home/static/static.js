@@ -8,7 +8,7 @@ var state_name;
 var Country_data;
 var dist_data;
 var selected_country;
-var is_notstate = false;
+var is_notstate ;
 var All_countries
 
 //*********************************Api section********************************************** 
@@ -22,7 +22,6 @@ fetch('https://api.covid19india.org/data.json')
 fetch('https://corona.lmao.ninja/v2/jhucsse')
     .then(response => response.json())
     .then(data => {
-        console.log(typeof (data));
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmhhdmlzaHlhdDI0IiwiYSI6ImNrcmFlbXV2azRmanAyb3FobWtyYXI2dWwifQ.wfb9sjo6qtn43ZqcEBA9BQ';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -66,9 +65,10 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
 
 
-        var loc = 0;
         document.getElementById("DataShown").addEventListener('click', function () {
             if (selected_country == "India") {
+        var loc = 0;
+
                 // getting location of that state
                 data_map.forEach(e => {
                     if (e.province == state_name) {
@@ -88,14 +88,15 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
 
             else if (is_notstate == false) {
+        var loc = 0;
 
                 data_map.forEach(e => {
                     if (e.province == state_selected) {
                         loc = e.coordinates;
-
-
                     }
                 });
+
+
 
                 map.flyTo({
                     center: [loc.longitude, loc.latitude],
@@ -104,6 +105,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
             }
             else if (is_notstate) {
+        var loc = 0;
                 All_countries.forEach(e => {
                     if (e.country == selected_country) {
                         map.flyTo({
@@ -216,7 +218,6 @@ function myFunction2(e) {
     selected_country = selectedValues
     data_map.forEach(e => {
         if (e.country == selectedValues) {
-
             if (e.province != null) {
 
                 if (index == 0) {
@@ -224,6 +225,7 @@ function myFunction2(e) {
                 }
                 options = options + `<option value="${index}">${e.province}</option>`
                 index++;
+                is_notstate=false;
             }
             else {
                 document.getElementById("state").setAttribute("disabled", false);
@@ -241,7 +243,6 @@ function myFunction(e) {  // on state selection
         var selectedValues = [].filter
             .call(document.getElementById("state").options, option => option.selected)
             .map(option => option.text);
-        console.log(selectedValues);
         state_selected = selectedValues[0]
         document.getElementById("dist").removeAttribute("disabled");
         let districts = dist_data[selectedValues[0]].districtData
@@ -258,7 +259,6 @@ function myFunction(e) {  // on state selection
             .call(document.getElementById("state").options, option => option.selected)
             .map(option => option.text);
         document.getElementById("dist").setAttribute("disabled", false);
-        console.log(selectedValues);
         state_selected = selectedValues[0]
     }
 };
@@ -267,7 +267,32 @@ function myFunction1(e) {
     selectedValuesd = [].filter
         .call(document.getElementById("dist").options, option => option.selected)
         .map(option => option.text);
-    console.log(selectedValuesd);
     covid_data = dist_data[state_selected]["districtData"][selectedValuesd[0]]
     dist_name = selectedValuesd[0]
 }
+
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [550, 49, 44, 24, 15];
+var barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    }
+  }
+});
+
+
+

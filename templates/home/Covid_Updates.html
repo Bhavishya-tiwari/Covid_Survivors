@@ -31,21 +31,26 @@
 
        .flx {
               display: flex;
-              position: relative;
-              top: 7vh;
+              /* flex-direction: row; */
+              /* position: relative; */
+              /* top: 7vh; */
        }
 
        .left {
               width: 65vw;
               height: 75vh;
-              background-color: rgb(255, 224, 224);
+              /* display: flex; */
+              /* background-color: rgb(214, 213, 243); */
        }
 
        .right {
               height: 75vh;
-              width: 34vw;
+              /* width: 34vw; */
+              max-width: 34vw;
+              min-width: 300px;
               overflow: hidden;
 
+              background-color: red;
 
        }
 
@@ -55,9 +60,12 @@
 
        }
 
-       #dist {
-              float: right;
-              width: 27vw;
+      
+       .wdth{
+              width: 20vw;
+              display: inline-block;
+              margin: auto;
+              z-index: 3;
 
        }
 
@@ -67,6 +75,25 @@
        #r{
               background-color: red;
        }
+       .mp{
+              width: 60vw;
+              height: 50vh;
+              margin: auto;
+       }
+img{
+      width: 99vw;
+      height: 100vh;
+      position: absolute;
+      top: -6.3vh;
+      left: -6vw;
+      z-index: -99999;
+      opacity: 0.3;
+    }
+    .f{
+           display: flex;
+           z-index: 9;
+    }
+    
 </style>
 
 {% endblock css %}
@@ -75,54 +102,62 @@
 {% block body %}
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet"
-       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
-       type="text/css">
+href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+type="text/css">
 
 <!-- Promise polyfill script is required -->
 <!-- to use Mapbox GL Geocoder in IE 11. -->
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
 
+{% load static %}
+  <img src="{% static "imgs/stats.jpg" %}" alt="home" />
 <div class="flx">
        <div class="left">
+              <div class="f">
 
-              <select class="form-select change1 mt-2" onchange="myFunction2()"
+              <select class="form-select change1  wdth mt-2" style="float: left;" onchange="myFunction2()"
                     id="country" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      aria-label="Default select example">
                      <option selected>Country</option>
 
               </select>
-              <select disabled class="form-select change1 mt-2" onchange="myFunction()"
+              <select disabled class="form-select change1 wdth mt-2"style="max-width: 20vw,min-width: 20px; ; onchange="myFunction()"
                      onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      id="state" aria-label="Default select example">
                      <option selected>State</option>
 
               </select>
-              <select disabled class="form-select mt-2" onchange="myFunction1()" id="dist"
+              <select disabled class="form-select wdth  mt-2" style="width: 20vw;" onchange="myFunction1()" id="dist"
                      aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}"
                      onchange="this.blur()" onblur="this.size=0;" id="state" aria-label="Default select example">
                      <option>District</option>
 
               </select>
+       </div>
               <br>
-              <button id="DataShown" type="button" class="btn btn-primary m-2">Search</button>
+              <button id="DataShown" type="button" style="z-index: -4;" class="btn btn-primary m-2">Search</button>
               <div id="Data_Box">
 
               </div>
-
+              <div class="mp">
+              <div class="dataishere">
+                     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+              </div>
+       </div>
 
 
 
 
        </div>
        <div class="right">
+            
               <div id="map"></div>
               <br>
        </div>
 </div>
 
-</div>
-<div id="k">klm</div>
+
 
 
 <script>
@@ -137,6 +172,6 @@
 
 {% block js %}
 
-{% load static %}
-<script src="{% static 'static.js' %}"></script>
+<!-- {% load static %}
+<script src="{% static 'static.js' %}"></script> -->
 {% endblock js %}

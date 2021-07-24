@@ -29,7 +29,7 @@ def blogPost(request, mysno):
     if request.user.is_authenticated:
         userjson =request.user.first_name
         userdict = json.loads(userjson)
-        return render(request, "blog/blogPost.html", {"post": post, "user":userdict})
+        return render(request, "blog/blogPost.html", {"post": post, "userp":userdict})
     return render(request, "blog/blogPost.html", {"post": post,})
 
   

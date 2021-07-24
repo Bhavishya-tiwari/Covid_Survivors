@@ -34,12 +34,20 @@
 
 
       </p>
+      
     <a href="/blog" class="btn btn-warning">Back</a>
 {% if post.authorUsername == user.username %}
     <a href="/blog/delB/{{post.sno}}" class="btn btn-danger">Delete</a>
 
 
-{% endif %}</div>
+{% elif userp.group == "H_Emp" %}
+    <a href="/blog/delB/{{post.sno}}" class="btn btn-danger">Delete</a>
+
+
+{% endif %}
+
+
+</div>
     </div>
     <div class="container">
     <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{post.sno}}" data-width="" data-numposts="3"></div>

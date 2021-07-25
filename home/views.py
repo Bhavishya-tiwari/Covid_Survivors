@@ -14,7 +14,6 @@ from django.contrib.auth import authenticate,  login, logout
 from django.contrib.auth.decorators import login_required
 import json
 import datetime
-import requests
 
 # Create your views here.
 # User.objects.all().delete() 

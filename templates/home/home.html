@@ -5,7 +5,16 @@
 {% block css %}
 <style>
     body {
-        {% comment %} background-color: rgb(253, 238, 238); {% endcomment %}
+            {
+            % comment %
+        }
+
+        background-color: rgb(253, 238, 238);
+
+            {
+            % endcomment %
+        }
+
         width: 99vw;
     }
 
@@ -21,7 +30,7 @@
     .content {
 
         font-family: 'Bree Serif', serif;
-     
+
         display: block;
         flex-direction: column;
         align-items: center;
@@ -30,7 +39,8 @@
         /* background-color: rgb(224, 223, 223); */
         color: rgb(14, 10, 231);
     }
-    .card-text{
+
+    .card-text {
         /* color: rgb(224, 93, 93); */
     }
 
@@ -68,38 +78,62 @@
         /* border-radius: 8em; */
     }
 
-   
-    .chat{
-        height: 90vh;
-        width: 70vw;
-        background-color: rgba(40, 74, 75, 0.363);
+
+    .chat {
+        height: 60vh;
+        width: 50vw;
+        /* background-color: rgb(79, 161, 90); */
         position: relative;
         top: 60vh;
         margin: auto;
-    }
-    .msgs{
-        height: 80%;
-        width: 100%;
-        background-color: rgb(230, 255, 204);
-    }
-       img{
-      width: 99vw;
-      height: 100vh;
-      position: absolute;
-      z-index: -99999;
-      opacity: 0.3;
+        overflow: scroll;
+        /* overflow-x: ; */
+        /* padding-bottom: vh; */
     }
 
- 
-{% block h %}height:200vh;{% endblock h %}height:200vh;
+    .msgs {
+        height: 80%;
+        width: 100%;cvm,.
+ [poiu4]        /* background-color: rgb(230, 255, 204); */
+    }
+    .user{
+        float: right;
+        background-color: rgb(40, 145, 26);
+    }
+    .other{
+        float: left;
+        background-color: white;
+    }
+  
+
+    img {
+        width: 99vw;
+        height: 100vh;
+        position: absolute;
+        z-index: -99999;
+        opacity: 0.5;
+    }
+
+
+        {
+        % block h %
+    }
+
+    height:200vh;
+
+        {
+        % endblock h %
+    }
+
+    height:200vh;
 </style>
 {% endblock css %}
 
 
 
 {% block body %}
-   {% load static %}
-     <img src="{% static "imgs/hh.jpg" %}" alt="home" />
+{% load static %}
+<img src="{% static "imgs/hh.jpg" %}" alt="home" />
 <div class="Heading">Welcome To Our Website</div>
 
 <div class="card text-center">
@@ -116,7 +150,7 @@
         </p>
         <a href="#" class="btn btn-primary">Get Started</a>
     </div>
-</div> 
+</div>
 
 
 
@@ -127,24 +161,67 @@
     </div>
     <form method="post" action="#" id="msg_form">{% csrf_token %}
         <div class="input-group">
-            <textarea rows="1" class="form-control" aria-label="With textarea" id="msg_send" name="msg_send"></textarea>
-          </div> 
-        <button type="submit" class="btn btn-primary">Send</button>
-    </form>
+            <textarea rows="1" class="form-control ta" aria-label="With textarea" id="msg_send" name="msg_send"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Send</button>
+            </form>
 </section>
-<script type="text/javascript"> 
+<script type="text/javascript">
     var a = "{{request.user}}";
- </script>
+    
+$('#msg_form').submit(function(event) {
+    var msg =  document.getElementById("msg_send").value;
+    // $('#showdata').empty();
+    var formData = {
+        'msg': msg,
+       
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    };
+    $.ajax({
+            type: 'POST',
+            url: '',
+            data: formData,
+            encode: true
+        })
+        .done(function(data) {
+       
+       
+        });
+    event.preventDefault();
+
+});
+var a = "{{request.user}}"
+    console.log(a);
+
+
+var g="";
+setInterval(() => {
+    
+    console.log("working")
+    fetch('/chatt')
+    .then(response => response.json())
+    .then(data => {
+        str = ""
+       data.forEach(e => {
+        if(e.un == a){           
+        str = str + `<p class="user"><small> <b>${e.name}</b> </small> ${e.msg} </p><br><hr>`}
+        else{
+        str = str + `<p class="other"><small> <b>${e.name}</b> </small> ${e.msg} </p><br><hr>`}
+
+        }
+           
+    );
+    document.getElementById('msgs').innerHTML = str
+        
+    })
+},1000);
+
+</script>
 
 
 {% endblock body %}
-{% block js %}
+{% comment %} {% block js %}
 
 {% load static %}
 <script src="{% static 'chat.js' %}"></script>
-{% endblock js %}
-
-
-
-
-
+{% endblock js %} {% endcomment %}

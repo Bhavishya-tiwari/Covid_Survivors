@@ -3,6 +3,7 @@ from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 import json
+from django.contrib import messages
 import datetime
 
 # Post.objects.all().delete()
@@ -20,6 +21,7 @@ def blogHome(request):
 
     Page_number = request.GET.get('page')
     Page_obj = paginator.get_page(Page_number)
+    messages.success(request, "Your message has been successfully sent")
     return render(request, 'blog/blogHome.html', {"page_obj": Page_obj})
 
 

@@ -2,6 +2,7 @@
 $('#msg_form').submit(function(event) {
     var msg =  document.getElementById("msg_send").value;;
     // $('#showdata').empty();
+    console.log("coming");
     var formData = {
         'msg': msg,
        
@@ -18,7 +19,10 @@ $('#msg_form').submit(function(event) {
        
         });
     event.preventDefault();
+
 });
+var a = "{{request.user}}"
+    console.log(a);
 
 
 var g="";

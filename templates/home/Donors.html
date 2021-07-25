@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
 {% block title %}Donors{% endblock title %}
 {% block css %}
 <style>
@@ -18,9 +18,7 @@
           overflow-y: scroll;
           position: relative;
           top: 5vh;
-          /* background-color: rgb(235, 255, 205);
           
-           */
            background-color: white;
            background-image: linear-gradient(rgb(224, 222, 228),rgb(232, 238, 174));
            /* opacity: ; */
@@ -73,7 +71,6 @@
 
 {% endblock %}
 {% block js %}
-
 {% load static %}
 <script src="{% static 'donor.js' %}"></script>
 {% endblock js %}

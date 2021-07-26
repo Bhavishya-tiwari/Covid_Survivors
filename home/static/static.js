@@ -196,6 +196,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
             });
         });
         data_map = data
+        console.log(data);
     })
     fetch('https://api.covid19india.org/state_district_wise.json')
         .then(response => response.json())

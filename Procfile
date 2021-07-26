@@ -1,1 +1,0 @@
-web: waitress-serve --port=$PORT covid_Survivors_IITISOC.wsgi:application

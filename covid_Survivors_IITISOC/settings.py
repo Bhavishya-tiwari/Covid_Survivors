@@ -27,9 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ok--6$1nadmzzoeetop7g0(_+n-w%*x8k#e=!y54#b37xka8__'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['covid-survivorsiitisoc.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -47,7 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-
+  'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -149,3 +148,4 @@ MESSAGE_TAGS = {
     messages.ERROR:'danger'
 }
 django_heroku.settings(locals())
+STATIC_ROOT = BASE_DIR / 'staticfiles'

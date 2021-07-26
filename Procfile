@@ -1,1 +1,1 @@
-web: gunicorn covid_Survivors_IITISOC.wsgi
+web: gunicorn covid_Survivors_IITISOC.wsgi --log-file -

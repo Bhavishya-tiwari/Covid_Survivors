@@ -38,20 +38,20 @@ img{
   Profile-
 </span>
 <div class="box">
-{% if p.group == "Website_Admins"  %}
+{% if p1.G == "Wa"  %}
   <img src="https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/user-settings.svg" alt="Admin">
 <span id="batch"><span class="badge rounded-pill bg-info">Admin</span></span>
 
 
-{% elif p.Add != null %}
+{% elif p1.G == "h" %}
   <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/hospital-clinic.svg" alt="Hospital">
 <span id="batch"><span class="badge rounded-pill bg-info">Hospital</span></span>
 
-  {% elif p.group == "H_Emp"  %}
+  {% elif p1.G == "e"  %}
   <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/doctor-male.svg" alt="Hospital Employee">
 <span id="batch"><span class="badge rounded-pill bg-info">Employee</span></span>
 
-{% elif p.age != null %}
+{% elif p1.n != null %}
   <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/hospital-patient.svg" alt="Covid Survivor">
 <span id="batch"><span class="badge rounded-pill bg-info">Covid Survivor</span></span>
 {% else %}
@@ -63,12 +63,22 @@ img{
 </div>
 <div class="container">
 
-<span>Name-</span> {{p.Name}}<br><hr>
-<span>Email-</span>{{p.email}}<br><hr>
+<span>Name-</span> {{p1.N}}<br><hr>
+<span>Username-</span> {{p1.U}}<br><hr>
+{% if p1.G == "c" %}
+<span>Email-</span>{{p2.E}}<br><hr>
+
+{% else %}
+
+<span>Email-</span>{{p1.E}}<br><hr>
+{% endif %}
+
+
+
 
 {% comment %} only of hospital {% endcomment %}
-{% if p.Add != null %}
-<span>Address-</span>{{p.Add}}<br><hr>
+{% if p1.G == "h" %}
+<span>Address-</span>{{p1.A}}<br><hr>
 {% endif %}
 
 
@@ -78,22 +88,30 @@ img{
 
 
 {% comment %} only of emp intersection covid survivor{% endcomment %}
-{% if p.Hospital_name != null %}
-<span>Hospital Name-</span>{{p.Hospital_name}}<br><hr>
+{% comment %} <span>Hospital Name-</span>{{p.Hospital_name}}<br><hr>
 <span>Hospital Email-</span>{{p.Hospital_email}}<br><hr>
-<span>Hospital Address-</span>{{p.Hospital_Add}}<br><hr>
-{% endif %}
+<span>Hospital Address-</span>{{p.Hospital_Add}}<br><hr> {% endcomment %}
+{% if p1.G == "e" %}
+<span>Hospital-</span>{{p2.X}}<br><hr>
+<span>Hospital Email-</span>{{p2.Y}}<br><hr>
+<span>Hospital Adress-</span>{{p2.Z}}<br><hr>
 
+
+
+
+{% endif %}
 {% comment %} only for covid survivor {% endcomment %}
-{% if p.age != null %}
-<span>Blood group-</span>{{p.bloodgrp}}<br><hr>
-<span>Date of Discharge-</span>{{p.dateofdischarge}}<br><hr>
-<span>Age-</span>{{p.age}}<br><hr>
-<span>For any concern mail-</span>{{p.Added_by_email}}<br><hr>
+{% if p1.G == "c" %}
+
+<span>Blood group-</span>{{p1.B}}<br><hr>
+<span>Date of Discharge-</span>{{p1.D}}<br><hr>
+<span>Age-</span>{{p1.N}}<br><hr>
+<span>Hospital-</span>{{p2.A}}<br><hr>
+<span>For any concern mail-</span>{{p2.Au}}<br><hr>
 
 {% endif %}
 
-{% if p.group == "Website_Admins"  %}
+{% if p1.G == "Wa"  %}
   <a href="/add">
    <button type="button" class="btn btn-info">Add Hospital</button>
   
@@ -105,7 +123,7 @@ img{
 
 {% endif %}
 
-{% if p.group == "hospitalh"  %}
+{% if p1.G == "h"  %}
   <a href="/addemployeee">
    <button type="button" class="btn btn-info">Add Employee</button>
   
@@ -118,7 +136,7 @@ img{
 
 {% endif %}
 
-{% if p.group == "H_Emp"  %}
+{% if p1.G == "e"  %}
   <a href="/addpat">
    <button type="button" class="btn btn-info">Add Patients</button>
   

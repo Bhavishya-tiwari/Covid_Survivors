@@ -4,9 +4,9 @@ from django.contrib.auth.models import Group, User
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE),
+    user = models.OneToOneField(User,null=True, on_delete=models.CASCADE),
     uniqueid = models.AutoField(primary_key=True),
-    Name = models.CharField(max_length=50),
+    Name = models.CharField(max_length=500),
     Hospital = models.CharField(max_length=255),
     Group = models.CharField(max_length=130),
     email = models.TextField(),

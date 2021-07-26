@@ -1,12 +1,12 @@
 import json
 
-y =  {
-    "group": "Website_Admins",
-    }
+# y =  {
+#     "group": "Website_Admins",
+#     }
 
 
-myuserjson = json.dumps(y)
-print(myuserjson)
+# myuserjson = json.dumps(y)
+# print(myuserjson)
 
 # sqr=[]
 
@@ -37,3 +37,7 @@ print(myuserjson)
 # import requests
 # response = requests.get("http://api.open-notify.org/iss-now.json")
 # print(response.status_code)
+
+
+o1 ={"q":"sdv","d":"dv"}
+print(o1+o1)

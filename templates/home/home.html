@@ -201,6 +201,7 @@ setInterval(() => {
     .then(response => response.json())
     .then(data => {
         str = ""
+        console.log("fs")
        data.forEach(e => {
         if(e.un == a){           
         str = str + `<p class="user"><small> <b>${e.name}</b> </small> ${e.msg} </p><br><hr>`}

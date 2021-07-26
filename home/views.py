@@ -27,7 +27,7 @@ def home(request):
         
         
         now = datetime.datetime.now()
-        name = profiledict["Name"]
+        name = profiledict["N"]
         username = request.user.username
         email = request.user.email
         msg = request.POST.get('msg')
@@ -59,6 +59,7 @@ def chat(request):
                 "time":msg.Timestamp
         }
         new_list.append(obj)
+        print(obj)
     return HttpResponse(json.dumps(new_list))
     
         
@@ -80,15 +81,20 @@ def Donors(request):
             CSsend = []
             for user in users:
                 CSdict = json.loads(user.first_name)
+                CSdict2 = json.loads(user.last_name)
+                # print("kd")
                
-                if( CSdict["bloodgrp"] == bg_val):
-                    o = {
-                    "name" : CSdict["Name"],
-                    "email" : CSdict["email"],
-                    "Hospital_name" : CSdict["Hospital_name"],
-                    "Hospital_email" : CSdict["Hospital_email"],
-                    "Hospital_Add" : CSdict["Hospital_Add"]}
-                    CSsend.append(o)
+                if( CSdict["B"] == bg_val):
+                    print("osi")
+                    ob = {
+                    "name" : CSdict["N"],
+                    "email" : CSdict2["E"],
+                    "Hospital_name" : CSdict2["A"],
+                    "Hospital_email" : CSdict2["Y"],
+                    }
+                    CSsend.append(ob)
+                    print(CSdict["N"],CSdict2["E"])
+                    # print(CSdict["N"],CSdict2[])
                 else:    
                     print("K")
             
@@ -163,7 +169,7 @@ def Add(request):
     for user in users:
         userjson =user.first_name
         userdict = json.loads(userjson)
-        if (userdict["Addedby_Username"] == request.user.username):
+        if (userdict["Au"] == request.user.username):
             userl.append(userdict)
 
     return render(request, 'home/Add_H_admin.html',{"u":userl})
@@ -175,7 +181,7 @@ def Add(request):
 
 
 
-
+# done
 @login_required(login_url='/Donors')
 @allowed_users(allowed_roles=['Website_Admins'])
 def AddHadmin(request):
@@ -191,17 +197,15 @@ def AddHadmin(request):
             return redirect('addhospital')
         myuser = User.objects.create_user(username, hemail, hid)
 
-        profileobj = {
-            "Name": name,
-            "username":username,
-            "group": "hospitalh",
-            "email":   hemail,
-            "Add": haddress,
-            "Addedby_Username":request.user.username,
+        profileobj1 = {
+            "N":name,"U":username,"G":"h","E":hemail,"A":haddress,"Au":request.user.username,
         }
+        pro2 = {}
 
-        myuserjson = json.dumps(profileobj)
+        myuserjson = json.dumps(profileobj1)
+        myuserjson2 = json.dumps(pro2)
         myuser.first_name = myuserjson
+        myuser.last_name = myuserjson
         # myuser.first_name='hospitalh'
 
         myuser.save()
@@ -226,19 +230,17 @@ def AddEmployee(request):
         profilejson = request.user.first_name
         profiledict = json.loads(profilejson)
 
-        profileobj = {
-            "Name": name,
-            "username":username,
-            "group": "H_Emp",
-            "email":   hemail,
-            "Hospital_name": profiledict["Name"],
-            "Hospital_email": profiledict["email"],
-            "Hospital_Add": profiledict["Add"],
-            "Addedby_Username" : request.user.username,
+        profileobj1 = {
+            "N": name,"U":username,"G": "e","E":   hemail,
         }
+        pro2 = {
+            "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict["A"],
+            "Au" : request.user.username,}
 
-        myuserjson = json.dumps(profileobj)
+        myuserjson = json.dumps(profileobj1)
+        myuserjson2 = json.dumps(pro2)
         myuser.first_name = myuserjson
+        myuser.last_name = myuserjson2
 
         myuser.save()
         group = Group.objects.get(name='Hospital_Employees')
@@ -250,9 +252,20 @@ def AddEmployee(request):
     users = list(group.user_set.all())
     for user in users:
         userjson =user.first_name
-        userdict = json.loads(userjson)
-        if (userdict["Addedby_Username"] == request.user.username):
+        userjson2 =user.last_name
+        userdict1 = json.loads(userjson)
+        userdict2 = json.loads(userjson2)
+        userdict = {
+            "N":userdict1["N"],"U":userdict1["U"],"E":userdict1["E"],
+            "Au":userdict2["Au"],"G":userdict1["G"],
+        }
+        if (userdict["Au"] == request.user.username):
             userl.append(userdict)
+
+
+
+
+
 
     return render(request, 'home/AddEmp.html',{"u":userl})
   
@@ -280,26 +293,26 @@ def loginemp(request):
         if user is not None:
             profilejson =user.first_name
             profiledict = json.loads(profilejson)
-            grp = profiledict["group"]
-            if grp == "H_Emp":
+            grp = profiledict["G"]
+            if grp == "e":
                
                 login(request, user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('addpat')
 
-            elif grp ==  "Covid_Survivor":
+            elif grp ==  "c":
                 login(request, user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('Donors')
-            elif grp == "User":
+            elif grp == "u":
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('Donors')
-            elif grp =="hospitalh":
+            elif grp =="h":
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('AddEmployee')
-            elif grp =="Website_Admins":
+            elif grp =="Wa":
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('Add')
@@ -338,26 +351,29 @@ def addpat(request):
             return HttpResponse('password not match')
         myuser = User.objects.create_user(username, pemail, pid1)
         profilejson = request.user.first_name
+        profilejson2 = request.user.last_name
         profiledict = json.loads(profilejson)
+        profiledict2 = json.loads(profilejson2)
 
-        profileobj = {
-            "Name": name,
-            "username":username,
-            "group": "Covid_Survivor",
-            "email":   pemail,
-            "bloodgrp": pbloodgrp,
-            "dateofdischarge": pdod,
-            "age": p_age,
-            "Hospital_name": profiledict["Hospital_name"],
-            "Hospital_email": profiledict["Hospital_email"],
-            "Hospital_Add": profiledict["Hospital_Add"],
-            "Added_by_email": profiledict["email"],
-            "Addedby_Username": request.user.username,
-
+        profileobj1 = {
+            "N": name,
+            "U":username,
+            "G": "c",
+            "B": pbloodgrp,
+            "D": pdod,
+            "n": p_age,
         }
+        pro2={
+            "A": profiledict2["X"],
+            "Y": profiledict2["Y"],
+            "Ae": profiledict["E"],
+            "Au": request.user.username,"E":pemail,}
 
-        myuserjson = json.dumps(profileobj)
+
+        myuserjson = json.dumps(profileobj1)
+        myuserjson2 = json.dumps(pro2)
         myuser.first_name = myuserjson
+        myuser.last_name = myuserjson2
 
         myuser.save()
         group = Group.objects.get(name='Covid_Survivors')
@@ -369,8 +385,10 @@ def addpat(request):
     users = list(group.user_set.all())
     for user in users:
         userjson =user.first_name
+        userjson2 =user.last_name
         userdict = json.loads(userjson)
-        if (userdict["Addedby_Username"] == request.user.username):
+        userdict2 = json.loads(userjson2)
+        if (userdict2["Au"] == request.user.username):
             userl.append(userdict)
 
   
@@ -379,10 +397,13 @@ def addpat(request):
 
 @login_required(login_url='/home')
 def profile(request):
-    profilejson = request.user.first_name
-    profiledict = json.loads(profilejson)
+    profilejson1 = request.user.first_name
+    profilejson2 = request.user.last_name
+    profiledict1 = json.loads(profilejson1)
+    profiledict2 = json.loads(profilejson2)
+    return render(request, 'home/profile.html', {"p1":profiledict1,"p2":profiledict2})
 
-    return render(request, 'home/profile.html', {"p": profiledict})
+
 
 def nusignup(request):
     if request.method == "POST":
@@ -398,14 +419,17 @@ def nusignup(request):
         myuser = User.objects.create_user(username, hemail, hid)
 
         profileobj = {
-            "Name": name,
-            "username":username,
-            "group": "User",
-            "email":   hemail,
+            "N": name,
+            "U":username,
+            "G": "u",
+            "E":   hemail,
             
         }
+        pro2 = {}
         myuserjson = json.dumps(profileobj)
+        myuserjson2 = json.dumps(pro2)
         myuser.first_name = myuserjson
+        myuser.last_name = myuserjson2
         # myuser.first_name='hospitalh'
 
         myuser.save()
@@ -428,7 +452,7 @@ def DelH(request, uH):
     if Hospital in users:
         userjson =Hospital.first_name
         userdict = json.loads(userjson)
-        if(userdict["Addedby_Username"]==request.user.username):
+        if(userdict["Au"]==request.user.username):
             try:
                 Hospital.delete()
                 messages.sucess(request, "The user is deleted")
@@ -445,9 +469,9 @@ def DelE(request, uE):
     users = list(group.user_set.all())
     Employee = User.objects.get(username=uE)
     if Employee in users:
-        userjson =Employee.first_name
+        userjson =Employee.last_name
         userdict = json.loads(userjson)
-        if(userdict["Addedby_Username"]==request.user.username):
+        if(userdict["Au"]==request.user.username):
             try:
                 Employee.delete()
                 messages.sucess(request, "The user is deleted")
@@ -465,9 +489,9 @@ def DelCS(request, uCS):
     users = list(group.user_set.all())
     CSur = User.objects.get(username=uCS)
     if CSur in users:
-        userjson =CSur.first_name
+        userjson =CSur.last_name
         userdict = json.loads(userjson)
-        if(userdict["Addedby_Username"]==request.user.username):
+        if(userdict["Au"]==request.user.username):
             try:
                 CSur.delete()
                 messages.sucess(request, "The user is deleted")

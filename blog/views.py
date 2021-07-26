@@ -13,8 +13,8 @@ import datetime
 
 def blogHome(request):
     # getting posts in order
-    post = Post.objects.all().order_by('sno')
     # print(post)
+    post = Post.objects.all().order_by('sno')
 
     # paginator obj created
     paginator = Paginator(post, 4)

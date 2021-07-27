@@ -59,7 +59,7 @@ def chat(request):
                 "time":msg.Timestamp
         }
         new_list.append(obj)
-        print(obj)
+        # print(obj)
     return HttpResponse(json.dumps(new_list))
     
         
@@ -167,10 +167,12 @@ def Add(request):
     group = Group.objects.get(name='HospitalHeads')
     users = list(group.user_set.all())
     for user in users:
-        userjson =user.first_name
+        userjson1 =user.first_name
+        userjson =user.last_name
+        userdict1 = json.loads(userjson1)
         userdict = json.loads(userjson)
         if (userdict["Au"] == request.user.username):
-            userl.append(userdict)
+            userl.append(userdict1)
 
     return render(request, 'home/Add_H_admin.html',{"u":userl})
 
@@ -198,14 +200,14 @@ def AddHadmin(request):
         myuser = User.objects.create_user(username, hemail, hid)
 
         profileobj1 = {
-            "N":name,"U":username,"G":"h","E":hemail,"A":haddress,"Au":request.user.username,
+            "N":name,"U":username,"G":"h","E":hemail,
         }
-        pro2 = {}
+        pro2={    "A":haddress,"Au":request.user.username,}
 
         myuserjson = json.dumps(profileobj1)
         myuserjson2 = json.dumps(pro2)
         myuser.first_name = myuserjson
-        myuser.last_name = myuserjson
+        myuser.last_name = myuserjson2
         # myuser.first_name='hospitalh'
 
         myuser.save()
@@ -228,13 +230,15 @@ def AddEmployee(request):
             return HttpResponse('password not match')
         myuser = User.objects.create_user(username, hemail, hid)
         profilejson = request.user.first_name
+        profilejson2 = request.user.last_name
         profiledict = json.loads(profilejson)
+        profiledict2 = json.loads(profilejson2)
 
         profileobj1 = {
             "N": name,"U":username,"G": "e","E":   hemail,
         }
         pro2 = {
-            "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict["A"],
+            "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict2["A"],
             "Au" : request.user.username,}
 
         myuserjson = json.dumps(profileobj1)
@@ -450,7 +454,7 @@ def DelH(request, uH):
     users = list(group.user_set.all())
     Hospital = User.objects.get(username=uH)
     if Hospital in users:
-        userjson =Hospital.first_name
+        userjson =Hospital.last_name
         userdict = json.loads(userjson)
         if(userdict["Au"]==request.user.username):
             try:

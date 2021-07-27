@@ -29,8 +29,9 @@
       position: absolute;
     
       z-index: -99999;
-      opacity: 0.3;
+      opacity: 0.6;
     }
+
 </style>
 
 
@@ -38,7 +39,7 @@
 
 {% block body %}
 {% load static %}
-  <img src="{% static "imgs/stats.jpg" %}" alt="home" />
+  <img src="{% static "imgs/donor.jpg" %}" alt="home" />
 <div class="conta my-4">
 
      <form method="post" action="#" id="Donor_search">{% csrf_token %}
@@ -59,6 +60,7 @@
      </form>
 
 </div>
+<div class="op" id="datas">
 <div id="showdata" class="showdata">
    
   

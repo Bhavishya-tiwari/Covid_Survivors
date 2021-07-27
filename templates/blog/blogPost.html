@@ -22,6 +22,8 @@
 {% block body %}
 <div class="container">
   <div class="card my-2 animatn">
+ 
+  <img src="media/{{post.blog_img}}" alt="">
     <div class="card-header">
       {{post.title}}
     </div>
@@ -36,11 +38,11 @@
       </p>
       
     <a href="/blog" class="btn btn-warning">Back</a>
-{% if post.authorUsername == user.username %}
+{% if post.authorUsername == userp.U %}
     <a href="/blog/delB/{{post.sno}}" class="btn btn-danger">Delete</a>
 
 
-{% elif userp.group == "H_Emp" %}
+{% elif userp.G == "e" %}
     <a href="/blog/delB/{{post.sno}}" class="btn btn-danger">Delete</a>
 hehehe
 
@@ -49,6 +51,7 @@ hehehe
 
 </div>
     </div>
+<div class="fb-like" data-href="http://127.0.0.1:8000/blog/{{post.sno}}" data-width="" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
     <div class="container">
     <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{post.sno}}" data-width="" data-numposts="3"></div>
     </div>

@@ -38,7 +38,9 @@ $('#Donor_search').submit(function (event) {
 
 
             });
+            document.getElementById('showdata').style.display = "block";
             document.getElementById('showdata').innerHTML = st;
+
 
         });
     event.preventDefault();

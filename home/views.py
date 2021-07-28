@@ -6,7 +6,7 @@ from django.shortcuts import render, HttpResponse, redirect
 # from home.models import Contact
 from django.contrib import messages
 from django.core.paginator import Paginator
-from blog.models import Post
+from blog.models import Post,Report
 from home.models import Comment,Message
 from django.contrib.auth.models import Group, User
 from .decorators import unauthenticated_user, allowed_users
@@ -42,8 +42,51 @@ def home(request):
 
 
 def CovidUpdates(request):
-
     return render(request, 'home/Covid_Updates.html')
+
+def reportedblogs(request):
+    post = Report.objects.all().order_by('rno')
+    li = []
+        # {sno= sno,
+        # reps = [{}, {}, {}]
+
+        # }
+
+    for p in post:
+        # print(p.blog_sno)
+        p_in_l=False 
+        for l in li:
+            if ( p.blog_sno == l["sno"]):
+                p_in_l=True
+                o1 ={ 
+                "name":p.rep_by,
+                "rep" : p.report,
+                "time" : p.Timestamp,
+                
+                    }
+                l["reps"].append(o1)
+
+        if(p_in_l == False):
+            o = {
+            "sno" : p.blog_sno,
+            "title" : p.title,
+            "author":p.author,
+            "reps":[{
+                        "name":p.rep_by,
+                        "rep" : p.report,
+                        "time" : p.Timestamp,
+                                            }]
+                                
+                }
+            li.append(o)
+
+    return render(request, 'home/Blog_r.html', {"r":li})
+
+            
+
+        
+
+
 
 
 def chat(request):

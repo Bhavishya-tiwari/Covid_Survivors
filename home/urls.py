@@ -52,6 +52,7 @@ urlpatterns = [
     path("delH/<str:uH>", views.DelH, name='DelJ'),
     path("delE/<str:uE>", views.DelE, name='DelE'),
     path("delCS/<str:uCS>", views.DelCS, name='DelCS'),
+    path("reportedblogs", views.reportedblogs, name='reportedblogs'),
 
 
 

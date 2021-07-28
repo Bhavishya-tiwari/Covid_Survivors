@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, HttpResponse
-from .models import Post
+from django.urls.conf import path
+from .models import Post, Report
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 import json
@@ -7,6 +8,7 @@ from django.contrib import messages
 import datetime
 
 # Post.objects.all().delete()
+# Report.objects.all().delete()
 
 # Create your views here.
 
@@ -71,15 +73,76 @@ def addblog(request):
     
 @login_required(login_url='/home')
 def delblog(request, dsno):
-    post = Post.objects.filter(sno=dsno).first()
-    if(post.authorUsername == request.user.username):
-        try:
-            post.delete()
+    if request.method == "POST":
+        profilejson = request.user.first_name
+        profiledict = json.loads(profilejson)
+        post = Post.objects.filter(sno=dsno).first()
+        rep = Report.objects.filter(blog_sno=dsno).all()
+
+        if( profiledict["G"]=='e'):
+            try:
+                for r in rep:
+                    r.delete()
+
+                post.delete()
+                    
+                
+            except:
+                print("wrong") 
+            return redirect('reportedblogs')
+        return HttpResponse("This blog belongs to someone else")  
+                
+    else:
+        profilejson = request.user.first_name
+        profiledict = json.loads(profilejson)
+        post = Post.objects.filter(sno=dsno).first()
+        rep = Report.objects.filter(blog_sno=dsno).all()
+
+        from_rep = False
+
+        if(post.authorUsername == request.user.username):
+            try:
+                for r in rep:
+                    r.delete()
+             
+
+                post.delete()
+                    
+                
+            except:
+                print("wrong") 
             
-        except:
-            print("wrong") 
+            return redirect("blogHome")
+          
+                
+        
+        
+        
+        return HttpResponse("This blog belongs to someone else")
+        
+    
+    
+
+
+@login_required(login_url='/home')
+def repblog(request, rsno):
+    post = Post.objects.filter(sno=rsno).first()
+    # print(post)
+    blog_sno=rsno
+    rep_by = request.user.username
+    # author = post.author
+    now = datetime.datetime.now()
+    title = post.title
+    author = post.author
+    reason = request.POST.get('reason')
+
+    if(reason != ""):
+        rep = Report(blog_sno=blog_sno,title = title,author=author, rep_by=rep_by,Timestamp=now, report=reason)
+        rep.save()
         return redirect("blogHome")
-    return HttpResponse("This blog belongs to someone else")
+    return HttpResponse("errorr!!!!!!")
+    
+
 
 
 

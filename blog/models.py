@@ -12,3 +12,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + " by " + self.author
+
+class Report(models.Model):
+    rno=models.AutoField(primary_key=True)
+    blog_sno=models.CharField(max_length=50)
+    title=models.CharField(max_length=255)
+    rep_by=models.CharField(max_length=50)
+    author=models.CharField(max_length=50)
+    Timestamp=models.CharField(max_length=50)
+    report=models.TextField()
+
+    def __str__(self):
+        return " by " + self.author

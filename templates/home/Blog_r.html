@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Reported Blogs{% endblock title %}
+
+{% block css %}
+<style>
+.collapsible {
+  background-color: rgb(9, 10, 80);
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: rgb(21, 5, 70);
+}
+.mar{
+    margin:10px;
+    position: relative;
+    top: 7vh;
+        }
+
+.content {
+  
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: rgb(209, 253, 255);
+}
+.msg{
+    margin:3px;
+}
+</style>
+{% endblock css %}
+
+{% block body %}
+
+<div class="container">
+    {% comment %} {{r}} {% endcomment %}
+
+    {% for rep in r %}
+<div class="mar">
+<button type="button" class="collapsible">{{rep.title}} <b> by</b>  {{rep.author}} <br> reports :- {{rep.reps | length}} </button>
+<div class="content">
+{% for rr in rep.reps %}
+  <div class="msg">
+  <b>{{rr.name}} </b> at <small>{{rr.time | slice:16}} <br> 
+  report : - {{rr.rep}}
+   </small>
+  </div>
+  {% endfor %}
+  <a href="/blog/{{rep.sno}}">
+  <button type="button" class="btn btn-info">Read more</button>
+   
+  
+  </a>
+
+<form action="/blog/delB/{{rep.sno}}" method="POST">
+    {% csrf_token %}
+  <button type="Submit" class="btn btn-danger my-2">delete Blog</button>
+</form>
+  
+
+
+  
+</div></div>
+
+    {% endfor %}
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+{% endblock body %}
+
+

@@ -15,6 +15,14 @@ import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ok--6$1nadmzzoeetop7g0(_+n-w%*x8k#e=!y54#b37xka8__'
+SECRET_KEY =  env('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

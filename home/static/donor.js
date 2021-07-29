@@ -24,7 +24,10 @@ $('#Donor_search').submit(function (event) {
             console.log(data)
 
             updates.forEach(e => {
-                st = st + `<div class="card m-3 cd" style="width: 18rem;">
+                st = st + `
+
+                
+                <div class="card m-3 cd" style="width: 18rem;">
                 <div class="card-body">
                      <h5 class="card-title">Name : ${e.name}</h5>
                      <h6 class="card-subtitle mb-2 text-muted">Email : ${e.email}</h6>
@@ -32,14 +35,15 @@ $('#Donor_search').submit(function (event) {
                      Hospital email : ${e.Hospital_email}<br>
             
     
-                </div>
-           </div>`
+                
+           </div></div>`
 
 
 
             });
-            document.getElementById('showdata').style.display = "block";
-            document.getElementById('showdata').innerHTML = st;
+            document.getElementById('datas').innerHTML = st;
+                
+                document.getElementById('datas').style.display = "block";
 
 
         });

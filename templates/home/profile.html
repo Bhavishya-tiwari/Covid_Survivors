@@ -62,15 +62,22 @@ img{
 
 </div>
 <div class="container">
+{% if gg == "True" %}
+<span>Name-</span> {{fn}}<br><hr>
+<span>Username-</span> {{user}}<br><hr>
+{% comment %} <span>Email-</span> {{em}}<br><hr> {% endcomment %}
+{% endif %}
 
-<span>Name-</span> {{p1.N}}<br><hr>
-<span>Username-</span> {{p1.U}}<br><hr>
+
+
+<span>Name-</span> {{p1.N}} {{fn}} &nbsp; {{ln}}<br><hr>
+<span>Username-</span> {{user}} <br><hr>
+
 {% if p1.G == "c" %}
 <span>Email-</span>{{p2.E}}<br><hr>
 
-{% else %}
-
-<span>Email-</span>{{p1.E}}<br><hr>
+{% else  %}
+<span>Email-</span>{{p1.E}} <br><hr>
 {% endif %}
 
 

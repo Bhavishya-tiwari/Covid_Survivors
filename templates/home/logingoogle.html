@@ -1,0 +1,12 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% block title %}Google login{% endblock title %}
+
+
+{% block body %}
+<a href="{% provider_login_url "google" %}"> Google Connect </a>
+
+
+{% endblock body %}
+

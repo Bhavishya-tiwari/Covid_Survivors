@@ -11,7 +11,7 @@ from home.models import Comment,Message
 from django.contrib.auth.models import Group, User
 from .decorators import unauthenticated_user, allowed_users
 from django.contrib.auth import authenticate,  login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 import json
 import datetime
 import requests
@@ -43,6 +43,9 @@ def home(request):
 
 def CovidUpdates(request):
     return render(request, 'home/Covid_Updates.html')
+
+def loging(request):
+    return render(request, 'home/logingoogle.html')
 
 def reportedblogs(request):
     post = Report.objects.all().order_by('rno')
@@ -334,6 +337,7 @@ def handelLogout(request):
 def loginemp(request):
     if request.method == "POST":
         # Get the post parameters
+        print("svi")
         uusername = request.POST.get('uusername')
         upassword = request.POST.get('upassword')
         user = authenticate(username=uusername, password=upassword)
@@ -444,11 +448,29 @@ def addpat(request):
 
 @login_required(login_url='/home')
 def profile(request):
-    profilejson1 = request.user.first_name
-    profilejson2 = request.user.last_name
-    profiledict1 = json.loads(profilejson1)
-    profiledict2 = json.loads(profilejson2)
-    return render(request, 'home/profile.html', {"p1":profiledict1,"p2":profiledict2})
+    userjson2 =request.user.first_name
+    try:
+        userdict = json.loads(userjson2)
+        profilejson1 = request.user.first_name
+        profilejson2 = request.user.last_name
+        profiledict1 = json.loads(profilejson1)
+        profiledict2 = json.loads(profilejson2)
+        return render(request, 'home/profile.html', {"p1":profiledict1,"p2":profiledict2, "gg":False})
+    except:
+        o = {
+            "fn":userjson2,
+            "ln": request.user.last_name,
+            "em":request.user.email,
+            "gg":True
+        }
+        return render(request, 'home/profile.html', o)
+        # return HttpResponse("mk")
+
+
+    
+    
+  
+
 
 
 

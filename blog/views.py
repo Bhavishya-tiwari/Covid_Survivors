@@ -51,6 +51,7 @@ def addblog(request):
     if request.method == "POST":
         # # ingredients
         profilejson = request.user.first_name
+        
         try:
             p = json.loads(profilejson)
             now = datetime.datetime.now()
@@ -61,18 +62,34 @@ def addblog(request):
             authorUsername=request.user.username
             time = now
             content = request.POST.get('Addblogc')
-            img = request.FILES['imgupload']
-            # print(img)
+            try:
 
-            # saving
-            if(content != "" or title != ""):
-                post = Post(title=title, author=author,authorUsername=authorUsername,
-                            Timestamp=time,blog_img=img, content=content)
-                post.save()
-                # print(Post)
-                return redirect('blogHome')
-            else:
-                return redirect("addblog")
+                img = request.FILES['imgupload']
+                # print(img)
+
+                # saving
+                if(content != "" or title != ""):
+                    post = Post(title=title, author=author,authorUsername=authorUsername,
+                                Timestamp=time,blog_img=img, content=content)
+                    post.save()
+                    # print(Post)
+                    return redirect('blogHome')
+                else:
+                    return redirect("addblog")
+            except:
+                if(content != "" or title != ""):
+                    post = Post(title=title, author=author,authorUsername=authorUsername,
+                                Timestamp=time,blog_img="exampleImage", content=content)
+                    post.save()
+                    # print(Post)
+                    return redirect('blogHome')
+                else:
+                    return redirect("addblog")
+
+
+
+
+
         except:
             now = datetime.datetime.now()
 
@@ -82,18 +99,30 @@ def addblog(request):
             authorUsername=request.user.username
             time = now
             content = request.POST.get('Addblogc')
-            img = request.FILES['imgupload']
-            # print(img)
+            try:
 
-            # saving
-            if(content != "" or title != ""):
-                post = Post(title=title, author=author,authorUsername=authorUsername,
-                            Timestamp=time,blog_img=img, content=content)
-                post.save()
-                # print(Post)
-                return redirect('blogHome')
-            else:
-                return redirect("addblog")
+                img = request.FILES['imgupload']
+                # print(img)
+
+                # saving
+                if(content != "" or title != ""):
+                    post = Post(title=title, author=author,authorUsername=authorUsername,
+                                Timestamp=time,blog_img=img, content=content)
+                    post.save()
+                    # print(Post)
+                    return redirect('blogHome')
+                else:
+                    return redirect("addblog")
+            except:
+                if(content != "" or title != ""):
+                    post = Post(title=title, author=author,authorUsername=authorUsername,
+                                Timestamp=time,blog_img="exampleImage", content=content)
+                    post.save()
+                    # print(Post)
+                    return redirect('blogHome')
+                else:
+                    return redirect("addblog")
+                
         
         
 

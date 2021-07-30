@@ -23,21 +23,40 @@ import requests
 def home(request):
     if request.method == "POST":
         profilejson = request.user.first_name
-        profiledict = json.loads(profilejson)
-        
-        
-        now = datetime.datetime.now()
-        name = profiledict["N"]
-        username = request.user.username
-        email = request.user.email
-        msg = request.POST.get('msg')
-        Query = Message( authorUsername=username,email=email,name=name,
-                        Timestamp=now, message=msg)
-        if(msg != ""):
-            Query.save()
-            return HttpResponse("done")
-        else:
-            return HttpResponse("error")
+        try:
+            profiledict = json.loads(profilejson)
+            
+            
+            now = datetime.datetime.now()
+            name = profiledict["N"]
+            username = request.user.username
+            email = request.user.email
+            msg = request.POST.get('msg')
+            Query = Message( authorUsername=username,email=email,name=name,
+                            Timestamp=now, message=msg)
+                            #   why email vroo
+            if(msg != ""):
+                Query.save()
+                return HttpResponse("done")
+            else:
+                return HttpResponse("error")
+        except:
+            now = datetime.datetime.now()
+            name = profilejson + " " + request.user.last_name
+            username = request.user.username
+            email = "example@email"
+            msg = request.POST.get('msg')
+            Query = Message( authorUsername=username,email=email,name=name,
+                            Timestamp=now, message=msg)
+                            #   why email vroo
+            if(msg != ""):
+                Query.save()
+                return HttpResponse("done")
+            else:
+                return HttpResponse("error")
+
+
+
     return render(request, 'home/home.html')
 
 
@@ -157,7 +176,7 @@ def Donors(request):
 
 
 
-        
+    # print(request.user)
     return render(request, 'home/Donors.html')
    
     
@@ -474,38 +493,38 @@ def profile(request):
 
 
 
-def nusignup(request):
-    if request.method == "POST":
+# def nusignup(request):
+#     if request.method == "POST":
 
-        username = request.POST.get('nuusername')
-        name = request.POST.get('nuname')
-        hemail = request.POST.get('nuemail')
+#         username = request.POST.get('nuusername')
+#         name = request.POST.get('nuname')
+#         hemail = request.POST.get('nuemail')
        
-        hid = request.POST.get('nuid1')
-        hid2 = request.POST.get('nuid2')
-        if(hid2 != hid):
-            return redirect('Donors')
-        myuser = User.objects.create_user(username, hemail, hid)
+#         hid = request.POST.get('nuid1')
+#         hid2 = request.POST.get('nuid2')
+#         if(hid2 != hid):
+#             return redirect('Donors')
+#         myuser = User.objects.create_user(username, hemail, hid)
 
-        profileobj = {
-            "N": name,
-            "U":username,
-            "G": "u",
-            "E":   hemail,
+#         profileobj = {
+#             "N": name,
+#             "U":username,
+#             "G": "u",
+#             "E":   hemail,
             
-        }
-        pro2 = {}
-        myuserjson = json.dumps(profileobj)
-        myuserjson2 = json.dumps(pro2)
-        myuser.first_name = myuserjson
-        myuser.last_name = myuserjson2
-        # myuser.first_name='hospitalh'
+#         }
+#         pro2 = {}
+#         myuserjson = json.dumps(profileobj)
+#         myuserjson2 = json.dumps(pro2)
+#         myuser.first_name = myuserjson
+#         myuser.last_name = myuserjson2
+#         # myuser.first_name='hospitalh'
 
-        myuser.save()
-        group = Group.objects.get(name='User')
-        myuser.groups.add(group)
-        return redirect('Donors')
-    return render(request, 'home/nusignup.html')
+#         myuser.save()
+#         group = Group.objects.get(name='User')
+#         myuser.groups.add(group)
+#         return redirect('Donors')
+#     return render(request, 'home/nusignup.html')
 
 def loginall(request):
     return render(request, 'home/loginpage.html')

@@ -42,7 +42,7 @@ urlpatterns = [
 
     
     # normal user sign up
-    path('nusignup', views.nusignup, name='nusignup'),
+    # path('nusignup', views.nusignup, name='nusignup'),
 
     #website admin works
     path('add', views.Add, name='Add'),

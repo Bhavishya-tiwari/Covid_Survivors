@@ -7,8 +7,8 @@ import json
 from django.contrib import messages
 import datetime
 
-# Post.objects.all().delete()
 # Report.objects.all().delete()
+# Post.objects.all().delete()
 
 # Create your views here.
 
@@ -32,10 +32,15 @@ def blogPost(request, mysno):
     post = Post.objects.filter(sno=mysno).first()
     if request.user.is_authenticated:
         userjson =request.user.first_name
-        userdict = json.loads(userjson)
-        return render(request, "blog/blogPost.html", {"post": post, "userp":userdict})
-    return render(request, "blog/blogPost.html", {"post": post,})
-
+        try:
+            userdict = json.loads(userjson)
+            return render(request, "blog/blogPost.html", {"post": post, "userp":userdict})
+        except:
+            o = {
+                "U":request.user.username
+            }
+            return render(request,"blog/blogPost.html", {"post": post,"userp":o})
+    return render(request, "blog/blogPost.html", {"post": post})
   
 
 
@@ -44,37 +49,65 @@ def blogPost(request, mysno):
 @login_required(login_url='login')
 def addblog(request):
     if request.method == "POST":
-        # ingredients
+        # # ingredients
         profilejson = request.user.first_name
-        p = json.loads(profilejson)
-        now = datetime.datetime.now()
+        try:
+            p = json.loads(profilejson)
+            now = datetime.datetime.now()
 
-        # adding data
-        title = request.POST.get('Addblogt')
-        author = p["N"]
-        authorUsername=request.user.username
-        time = now
-        content = request.POST.get('Addblogc')
-        img = request.FILES['imgupload']
-        print(img)
+            # adding data
+            title = request.POST.get('Addblogt')
+            author = p["N"]
+            authorUsername=request.user.username
+            time = now
+            content = request.POST.get('Addblogc')
+            img = request.FILES['imgupload']
+            # print(img)
 
-        # saving
-        if(content != "" or title != ""):
-            post = Post(title=title, author=author,authorUsername=authorUsername,
-                        Timestamp=time,blog_img=img, content=content)
-            post.save()
-            # print(Post)
-            return redirect('blogHome')
-        else:
-            return redirect("addblog")
+            # saving
+            if(content != "" or title != ""):
+                post = Post(title=title, author=author,authorUsername=authorUsername,
+                            Timestamp=time,blog_img=img, content=content)
+                post.save()
+                # print(Post)
+                return redirect('blogHome')
+            else:
+                return redirect("addblog")
+        except:
+            now = datetime.datetime.now()
 
+            # adding data
+            title = request.POST.get('Addblogt')
+            author = profilejson + " " + request.user.last_name
+            authorUsername=request.user.username
+            time = now
+            content = request.POST.get('Addblogc')
+            img = request.FILES['imgupload']
+            # print(img)
+
+            # saving
+            if(content != "" or title != ""):
+                post = Post(title=title, author=author,authorUsername=authorUsername,
+                            Timestamp=time,blog_img=img, content=content)
+                post.save()
+                # print(Post)
+                return redirect('blogHome')
+            else:
+                return redirect("addblog")
+        
+        
 
     return render(request, 'blog/Addblog.html')
+
+
+
+
     
 @login_required(login_url='/home')
 def delblog(request, dsno):
     if request.method == "POST":
         profilejson = request.user.first_name
+
         profiledict = json.loads(profilejson)
         post = Post.objects.filter(sno=dsno).first()
         rep = Report.objects.filter(blog_sno=dsno).all()
@@ -94,7 +127,7 @@ def delblog(request, dsno):
                 
     else:
         profilejson = request.user.first_name
-        profiledict = json.loads(profilejson)
+        # profiledict = json.loads(profilejson)
         post = Post.objects.filter(sno=dsno).first()
         rep = Report.objects.filter(blog_sno=dsno).all()
 

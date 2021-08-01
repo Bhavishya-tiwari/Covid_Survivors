@@ -164,25 +164,11 @@ def Donors(request):
                     print("K")
             
             return HttpResponse(json.dumps(CSsend))
-                   
-                    
         except Exception as e:
             return HttpResponse('Error Occured')
-
-                
-
-                
-        
-
-
-
     # print(request.user)
     return render(request, 'home/Donors.html')
-   
-    
-    
-
-
+                   
 def ContactUs(request):
     if request.method == "POST":
 
@@ -198,12 +184,31 @@ def ContactUs(request):
             Query = Comment(fname=fname, lname=lname,email=email, authorUsername=authorUsername,
                         Timestamp=now, comment=c)
             Query.save()
-        else:
+
+            messages.success(request, "Thanks for your feedback")
             return redirect("ContactUs")    
-
-        return redirect('home')
-
+        else:
+            messages.error(request, "error occured!!")
+            return redirect("ContactUs")    
     return render(request, 'home/contact_us.html')
+                    
+
+                
+
+                
+        
+
+
+
+   
+    
+    
+
+
+
+
+
+
      
      
 
@@ -278,6 +283,7 @@ def AddHadmin(request):
         myuser.save()
         group = Group.objects.get(name='HospitalHeads')
         myuser.groups.add(group)
+        messages.success(request, "New Hospital Added")
         return redirect('Add')
        
 
@@ -314,7 +320,7 @@ def AddEmployee(request):
         myuser.save()
         group = Group.objects.get(name='Hospital_Employees')
         myuser.groups.add(group)
-      
+        messages.success(request, "New Employee Added")
         return redirect('AddEmployee')
     userl =[]    
     group = Group.objects.get(name='Hospital_Employees')
@@ -395,7 +401,7 @@ def loginemp(request):
         
         else:
             messages.error(request, "Invalid credentials! Please try again")
-            return redirect("ContactUs")
+            return redirect("loginall")
 
     return redirect('loginall')
 
@@ -448,7 +454,7 @@ def addpat(request):
         myuser.save()
         group = Group.objects.get(name='Covid_Survivors')
         myuser.groups.add(group)
-
+        messages.success(request, "Donor Added")
         return redirect('addpat')
     userl =[]    
     group = Group.objects.get(name='Covid_Survivors')
@@ -543,10 +549,12 @@ def DelH(request, uH):
         if(userdict["Au"]==request.user.username):
             try:
                 Hospital.delete()
-                messages.sucess(request, "The user is deleted")
+                messages.success(request, "Hospital Deleted")
+                return redirect("Add")
+
             except:
-                messages.error(request, "The user not found") 
-            return redirect("Add")
+                messages.error(request, "hospital not Found") 
+                return redirect("Add")
 
 
 # Deleting employees
@@ -562,10 +570,12 @@ def DelE(request, uE):
         if(userdict["Au"]==request.user.username):
             try:
                 Employee.delete()
-                messages.sucess(request, "The user is deleted")
+                messages.success(request, "Employee deleted")
+                return redirect("AddEmployee")
+
             except:
-                messages.error(request, "The user not found") 
-            return redirect("AddEmployee")
+                messages.error(request, "Employee not found") 
+                return redirect("AddEmployee")
 
 
 
@@ -582,10 +592,12 @@ def DelCS(request, uCS):
         if(userdict["Au"]==request.user.username):
             try:
                 CSur.delete()
-                messages.sucess(request, "The user is deleted")
+                messages.sucess(request, "Donor deleted")
+                return redirect("addpat")
+
             except:
-                messages.error(request, "The user not found") 
-            return redirect("addpat")
+                messages.error(request, "Donor not found") 
+                return redirect("addpat")
     
 
 

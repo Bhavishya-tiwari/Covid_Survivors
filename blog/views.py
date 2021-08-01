@@ -23,7 +23,7 @@ def blogHome(request):
 
     Page_number = request.GET.get('page')
     Page_obj = paginator.get_page(Page_number)
-    messages.success(request, "Your message has been successfully sent")
+    # messages.success(request, "Your message has been successfully sent")
     return render(request, 'blog/blogHome.html', {"page_obj": Page_obj})
 
 
@@ -73,17 +73,24 @@ def addblog(request):
                                 Timestamp=time,blog_img=img, content=content)
                     post.save()
                     # print(Post)
+                    messages.success(request, "Blog Added")
                     return redirect('blogHome')
                 else:
+                    messages.error(request, "Error occured")
                     return redirect("addblog")
+
             except:
                 if(content != "" or title != ""):
                     post = Post(title=title, author=author,authorUsername=authorUsername,
                                 Timestamp=time,blog_img="exampleImage", content=content)
                     post.save()
                     # print(Post)
+                    messages.success(request, "Blog Added")
+
                     return redirect('blogHome')
                 else:
+                    messages.error(request, "Error occured")
+
                     return redirect("addblog")
 
 
@@ -109,9 +116,13 @@ def addblog(request):
                     post = Post(title=title, author=author,authorUsername=authorUsername,
                                 Timestamp=time,blog_img=img, content=content)
                     post.save()
-                    # print(Post)
+                    
+                    messages.success(request, "Blog Added")
+
                     return redirect('blogHome')
                 else:
+                    messages.error(request, "Error occured")
+                    
                     return redirect("addblog")
             except:
                 if(content != "" or title != ""):
@@ -119,8 +130,12 @@ def addblog(request):
                                 Timestamp=time,blog_img="exampleImage", content=content)
                     post.save()
                     # print(Post)
+                    messages.success(request, "Blog Added")
+
                     return redirect('blogHome')
                 else:
+                    messages.error(request, "Error occured")
+
                     return redirect("addblog")
                 
         
@@ -147,11 +162,12 @@ def delblog(request, dsno):
                     r.delete()
 
                 post.delete()
-                    
+                messages.success(request, "Blog Deleted")    
+                return redirect('reportedblogs')
                 
             except:
                 print("wrong") 
-            return redirect('reportedblogs')
+                return redirect('reportedblogs')
         return HttpResponse("This blog belongs to someone else")  
                 
     else:
@@ -169,12 +185,14 @@ def delblog(request, dsno):
              
 
                 post.delete()
-                    
+                messages.success(request, "Blog Deleted")    
+    
+                return redirect("blogHome")
                 
             except:
                 print("wrong") 
             
-            return redirect("blogHome")
+                return redirect("blogHome")
           
                 
         
@@ -201,8 +219,13 @@ def repblog(request, rsno):
     if(reason != ""):
         rep = Report(blog_sno=blog_sno,title = title,author=author, rep_by=rep_by,Timestamp=now, report=reason)
         rep.save()
+        messages.success(request, "Blog Reported")
         return redirect("blogHome")
-    return HttpResponse("errorr!!!!!!")
+    else:
+        messages.error(request, "Error occured")
+
+        return redirect("blogHome")
+
     
 
 

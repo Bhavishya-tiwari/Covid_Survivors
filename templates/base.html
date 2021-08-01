@@ -181,6 +181,9 @@
 .btn-hover.color-11 {
        background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
 }
+.btn-hover.color-12 {
+       background-image: linear-gradient(to right, #eb3941, #000000, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+}
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -204,6 +207,41 @@
 
 
 
+.danger {
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+      position: absolute;
+      /* width: 50%; */
+      float: right;
+      z-index: 3000;
+    
+    }
+    .success {
+      /* padding-top: 2vh; */
+     
+      padding: 20px;
+      background-color: #00d607;
+      color: white;
+      position: absolute;
+    
+    }
+    
+    .cc {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      min-width: 150px;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
 
 
   </style>
@@ -269,7 +307,7 @@
         </div>
       </div>
     </header>
-   {% comment %} <div class="bg">
+    {% comment %} <div class="bg">
       <button class="btn-hover color-1">BUTTON</button>
       <button class="btn-hover color-2">BUTTON</button>
       <button class="btn-hover color-3">BUTTON</button>
@@ -281,7 +319,8 @@
       <button class="btn-hover color-9">BUTTON</button>
       <button class="btn-hover color-10">BUTTON</button>
       <button class="btn-hover color-11">BUTTON</button>
-  </div> {% endcomment %}
+      <button class="btn-hover alr color-12">BUTTON</button>
+    </div>  {% endcomment %}
   
 
 
@@ -296,8 +335,16 @@
    
 
   </div>
+{% if messages %}
 
+    {% for message in messages %}
+ <div class={{message.tags}}>
+      <span class="cc" onclick="this.parentElement.style.display='none';">&times;</span> 
+      {{ message }}{{message.tags}}
+    </div>
+    {% endfor %}
 
+{% endif %}
 
 
   {% block body %}

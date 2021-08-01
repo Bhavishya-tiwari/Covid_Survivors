@@ -106,7 +106,7 @@
   
 
     img {
-        width: 100vw;
+        width: 99.4vw;
         height: 100vh;
         position: absolute;
         z-index: -99999;
@@ -123,17 +123,29 @@
         {
         % endblock h %
     }
+    
 
     height:200vh;
+    .alr{
+position: sticky; 
+   }
 </style>
 {% endblock css %}
 
 
 
 {% block body %}
+
+ {% comment %} <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+    </div> {% endcomment %}
+
 {% load static %}
 <img src="{% static "imgs/hh.jpg" %}" alt="home" />
+
 <div class="Heading">Welcome To Our Website</div>
+
 
 <div class="card text-center">
     <div class="card-header">
@@ -153,6 +165,7 @@
 
 
 
+
 <section class="chat">
     <h1>chat</h1>
     <div class="msgs" id="msgs">
@@ -165,6 +178,7 @@
             <button type="submit" class="btn btn-primary m-3">Send</button>
             </form>
 </section>
+
 <script type="text/javascript">
     var a = "{{request.user}}";
     

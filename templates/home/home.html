@@ -21,13 +21,16 @@
     .Heading {
         color: rgb(1, 17, 110);
         text-align: center;
-        padding: 9vh;
-        font-size: 7vw;
+        padding: 2vh;
+position: relative;
+top: 3vh;
+font-size: 7vw;
         font-family:Arial, Helvetica, sans-serif;
     }
 
     .content {
-
+        position: relative;
+top: 3vh;
         font-family: 'Bree Serif', serif;
 
         display: block;
@@ -136,10 +139,7 @@ position: sticky;
 
 {% block body %}
 
- {% comment %} <div class="alert">
-      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-      <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-    </div> {% endcomment %}
+
 
 {% load static %}
 <img src="{% static "imgs/hh.jpg" %}" alt="home" />
@@ -147,8 +147,8 @@ position: sticky;
 <div class="Heading">Welcome To Our Website</div>
 
 
-<div class="card text-center">
-    <div class="card-header">
+<div class="card text-center my-4">
+    <div class="card-header ">
         Welcome
     </div>
     <div id="u" class="card-body">
@@ -159,7 +159,8 @@ position: sticky;
             similique velit. Possimus eum consequatur delectus quia magni.Visit the Covid Updates Section and see
             latest
         </p>
-        <a href="#" class="btn btn-primary">Get Started</a>
+      <button class="btn-hover color-7">Get Started</button>
+
     </div>
 </div>
 

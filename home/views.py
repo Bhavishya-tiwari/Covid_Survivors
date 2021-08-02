@@ -1,6 +1,7 @@
 # from django.db.models.manager import RelatedManager
 # from typing_extensions import Required
 from django import http
+from django.db import reset_queries
 from django.http import response
 from django.shortcuts import render, HttpResponse, redirect
 # from home.models import Contact
@@ -22,42 +23,49 @@ import requests
 
 def home(request):
     if request.method == "POST":
-        profilejson = request.user.first_name
-        try:
-            profiledict = json.loads(profilejson)
+        print("svmk")
+        if(request.user.is_authenticated):
+            profilejson = request.user.first_name
+            try:
+                profiledict = json.loads(profilejson)
+                
+                
+                now = datetime.datetime.now()
+                name = profiledict["N"]
+                username = request.user.username
+                email = request.user.email
+                msg = request.POST.get('msg')
+                Query = Message( authorUsername=username,email=email,name=name,
+                                Timestamp=now, message=msg)
+                                #   why email vroo
+                if(msg != ""):
+                    Query.save()
+                    return HttpResponse("done")
+                else:
+                    return HttpResponse("error")
+            except:
+                now = datetime.datetime.now()
+                name = profilejson + " " + request.user.last_name
+                username = request.user.username
+                email = "example@email"
+                msg = request.POST.get('msg')
+                Query = Message( authorUsername=username,email=email,name=name,
+                                Timestamp=now, message=msg)
+                                #   why email vroo
+                if(msg != ""):
+                    Query.save()
+                    return HttpResponse("done")
+                else:
+                    return HttpResponse("error")
+
+        else:
+            print("v")
+            messages.error(request, "Please login to chat")
+            return render(request, 'home/home.html')
             
-            
-            now = datetime.datetime.now()
-            name = profiledict["N"]
-            username = request.user.username
-            email = request.user.email
-            msg = request.POST.get('msg')
-            Query = Message( authorUsername=username,email=email,name=name,
-                            Timestamp=now, message=msg)
-                            #   why email vroo
-            if(msg != ""):
-                Query.save()
-                return HttpResponse("done")
-            else:
-                return HttpResponse("error")
-        except:
-            now = datetime.datetime.now()
-            name = profilejson + " " + request.user.last_name
-            username = request.user.username
-            email = "example@email"
-            msg = request.POST.get('msg')
-            Query = Message( authorUsername=username,email=email,name=name,
-                            Timestamp=now, message=msg)
-                            #   why email vroo
-            if(msg != ""):
-                Query.save()
-                return HttpResponse("done")
-            else:
-                return HttpResponse("error")
+    else:
 
-
-
-    return render(request, 'home/home.html')
+        return render(request, 'home/home.html')
 
 
 def CovidUpdates(request):

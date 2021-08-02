@@ -22,12 +22,26 @@
     padding: 20px;
 
     top: 20%;
+    box-shadow: rgb(12, 2, 66) 3px 7px 7px;
+    color: rgb(10, 3, 71);
 
+  }
+  .bg{
+    background-image: linear-gradient(rgb(255, 124, 163),rgb(0, 255, 242));
+    height: 100vh;
+    width: 100vw;
+    opacity: 0.6;
+    
+  position: absolute;
   }
 </style>{% endblock css %}
 
 
 {% block body %}
+<div class="bg">
+
+
+</div>
 <div id="outer">
   <div class="container">
     <div id="inner">
@@ -41,6 +55,7 @@
               aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
+          
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" name="upassword" class="form-control" id="exampleInputPassword1">
@@ -53,6 +68,8 @@
     </div>
   </div>
 </div>
+
+
 
 
 {% endblock %}

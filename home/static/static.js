@@ -76,6 +76,10 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                     }
                 });
                 document.getElementById("Data_Box").innerHTML = `<b>${covid_data.confirmed}</b>`
+                
+                   
+                
+
                 map.flyTo({
 
                     center: [loc.longitude, loc.latitude],
@@ -111,6 +115,33 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
         console.log("ctr");
                 All_countries.forEach(e => {
                     if (e.country == selected_country) {
+
+                                var xValues = ["Active", "France", "Spain", "USA", "Argentina"];
+                                var yValues = [550, 49, 44, 24, 15];
+                                var barColors = ["red", "green","blue","orange","brown"];
+            
+                                new Chart("myChartC", {
+                                type: "bar",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                    backgroundColor: barColors,
+                                    data: yValues
+                                    }]
+                                },
+                                options: {
+                                    indexAxis: 'y',
+                                    legend: {display: false},
+                                    title: {
+                                    display: true,
+                                    text: "World Wine Production 2018"
+                                    }
+                                }
+                                });
+                                console.log(e);
+                     
+                                document.getElementById('flag').innerHTML = `<img class="flagimg" src="${e.countryInfo.flag}" alt="${e.country}"></img>`
+
                         map.flyTo({
                             center: [e.countryInfo.long, e.countryInfo.lat],
                             essential: true // this animation is considered essential with respect to prefers-reduced-motion
@@ -277,28 +308,6 @@ function myFunction1(e) {
     dist_name = selectedValuesd[0]
 }
 
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [550, 49, 44, 24, 15];
-var barColors = ["red", "green","blue","orange","brown"];
-
-new Chart("myChart", {
-  type: "bar",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    legend: {display: false},
-    title: {
-      display: true,
-      text: "World Wine Production 2018"
-    }
-  }
-});
 
 
 

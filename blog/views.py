@@ -46,102 +46,113 @@ def blogPost(request, mysno):
 
 
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def addblog(request):
     if request.method == "POST":
         # # ingredients
-        profilejson = request.user.first_name
-        
-        try:
-            p = json.loads(profilejson)
-            now = datetime.datetime.now()
-
-            # adding data
-            title = request.POST.get('Addblogt')
-            author = p["N"]
-            authorUsername=request.user.username
-            time = now
-            content = request.POST.get('Addblogc')
+        if(request.user.is_authenticated):
+            profilejson = request.user.first_name
+            
             try:
+                p = json.loads(profilejson)
+                now = datetime.datetime.now()
 
-                img = request.FILES['imgupload']
-                # print(img)
+                # adding data
+                title = request.POST.get('Addblogt')
+                author = p["N"]
+                authorUsername=request.user.username
+                time = now
+                content = request.POST.get('Addblogc')
+                try:
 
-                # saving
-                if(content != "" or title != ""):
-                    post = Post(title=title, author=author,authorUsername=authorUsername,
-                                Timestamp=time,blog_img=img, content=content)
-                    post.save()
-                    # print(Post)
-                    messages.success(request, "Blog Added")
-                    return redirect('blogHome')
-                else:
-                    messages.error(request, "Error occured")
-                    return redirect("addblog")
+                    img = request.FILES['imgupload']
+                    # print(img)
+
+                    # saving
+                    if(content != "" or title != ""):
+                        post = Post(title=title, author=author,authorUsername=authorUsername,
+                                    Timestamp=time,blog_img=img, content=content)
+                        post.save()
+                        # print(Post)
+                        messages.success(request, "Blog Added")
+                        return redirect('blogHome')
+                    else:
+                        messages.error(request, "Error occured")
+                        return redirect("addblog")
+
+                except:
+                    if(content != "" or title != ""):
+                        post = Post(title=title, author=author,authorUsername=authorUsername,
+                                    Timestamp=time,blog_img="exampleImage", content=content)
+                        post.save()
+                        # print(Post)
+                        messages.success(request, "Blog Added")
+
+                        return redirect('blogHome')
+                    else:
+                        messages.error(request, "Error occured")
+
+                        return redirect("addblog")
+
+
+
+
 
             except:
-                if(content != "" or title != ""):
-                    post = Post(title=title, author=author,authorUsername=authorUsername,
-                                Timestamp=time,blog_img="exampleImage", content=content)
-                    post.save()
-                    # print(Post)
-                    messages.success(request, "Blog Added")
+                now = datetime.datetime.now()
 
-                    return redirect('blogHome')
-                else:
-                    messages.error(request, "Error occured")
+                # adding data
+                title = request.POST.get('Addblogt')
+                author = profilejson + " " + request.user.last_name
+                authorUsername=request.user.username
+                time = now
+                content = request.POST.get('Addblogc')
+                try:
 
-                    return redirect("addblog")
+                    img = request.FILES['imgupload']
+                    # print(img)
 
+                    # saving
+                    if(content != "" or title != ""):
+                        post = Post(title=title, author=author,authorUsername=authorUsername,
+                                    Timestamp=time,blog_img=img, content=content)
+                        post.save()
+                        
+                        messages.success(request, "Blog Added")
 
+                        return redirect('blogHome')
+                    else:
+                        messages.error(request, "Error occured")
+                        
+                        return redirect("addblog")
+                except:
+                    if(content != "" or title != ""):
+                        post = Post(title=title, author=author,authorUsername=authorUsername,
+                                    Timestamp=time,blog_img="exampleImage", content=content)
+                        post.save()
+                        # print(Post)
+                        messages.success(request, "Blog Added")
 
+                        return redirect('blogHome')
+                    else:
+                        messages.error(request, "Error occured")
 
-
-        except:
-            now = datetime.datetime.now()
-
-            # adding data
-            title = request.POST.get('Addblogt')
-            author = profilejson + " " + request.user.last_name
-            authorUsername=request.user.username
-            time = now
-            content = request.POST.get('Addblogc')
-            try:
-
-                img = request.FILES['imgupload']
-                # print(img)
-
-                # saving
-                if(content != "" or title != ""):
-                    post = Post(title=title, author=author,authorUsername=authorUsername,
-                                Timestamp=time,blog_img=img, content=content)
-                    post.save()
-                    
-                    messages.success(request, "Blog Added")
-
-                    return redirect('blogHome')
-                else:
-                    messages.error(request, "Error occured")
-                    
-                    return redirect("addblog")
-            except:
-                if(content != "" or title != ""):
-                    post = Post(title=title, author=author,authorUsername=authorUsername,
-                                Timestamp=time,blog_img="exampleImage", content=content)
-                    post.save()
-                    # print(Post)
-                    messages.success(request, "Blog Added")
-
-                    return redirect('blogHome')
-                else:
-                    messages.error(request, "Error occured")
-
-                    return redirect("addblog")
-                
         
-        
+                        return redirect("addblog")
+        else:
+            return HttpResponse("login please")
 
-    return render(request, 'blog/Addblog.html')
+    if(request.user.is_authenticated):
+        return render(request, 'blog/Addblog.html')
+    else:
+        messages.error(request, "Please login to blog")
+        return redirect('blogHome')
+
+          
+                    
+            
+            
+
 
 
 
@@ -204,27 +215,31 @@ def delblog(request, dsno):
     
 
 
-@login_required(login_url='/home')
+# @login_required(login_url='/home')
 def repblog(request, rsno):
     post = Post.objects.filter(sno=rsno).first()
     # print(post)
-    blog_sno=rsno
-    rep_by = request.user.username
-    # author = post.author
-    now = datetime.datetime.now()
-    title = post.title
-    author = post.author
-    reason = request.POST.get('reason')
+    if(request.user.is_authenticated):
+        blog_sno=rsno
+        rep_by = request.user.username
+        # author = post.author
+        now = datetime.datetime.now()
+        title = post.title
+        author = post.author
+        reason = request.POST.get('reason')
 
-    if(reason != ""):
-        rep = Report(blog_sno=blog_sno,title = title,author=author, rep_by=rep_by,Timestamp=now, report=reason)
-        rep.save()
-        messages.success(request, "Blog Reported")
-        return redirect("blogHome")
+        if(reason != ""):
+            rep = Report(blog_sno=blog_sno,title = title,author=author, rep_by=rep_by,Timestamp=now, report=reason)
+            rep.save()
+            messages.success(request, "Blog Reported")
+            return redirect("blogHome")
+        else:
+            messages.error(request, "Error occured")
+
+            return redirect("blogHome")
     else:
-        messages.error(request, "Error occured")
-
-        return redirect("blogHome")
+        messages.error(request, "Please login to Report")
+        return redirect('blogHome')
 
     
 

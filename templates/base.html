@@ -12,7 +12,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   {% block links %} {% endblock links %}
 
   {% block Topjs %} {% endblock Topjs %}
@@ -25,15 +26,15 @@
       margin: 0;
       z-index: 1;
       /* overflow-y: scroll; */
-   
+
     }
 
     #j {
-      
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
+
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
 
       transition: all 2s ease-in-out;
       height: auto;
@@ -51,17 +52,19 @@
         background-image: linear-gradient(rgb(255, 255, 134), rgb(4, 4, 83));
       }
     }
+
     @media only screen and (min-width: 992px) {
-     #x{
-       display: none;
-     }
+      #x {
+        display: none;
+      }
     }
+
     /* #navbar2{
       width: 9vw;
     } */
 
 
- 
+
 
 
     a {
@@ -69,181 +72,264 @@
       color: white;
       font: weight 9px;
     }
-   
- 
-
- .nn{
-   max-height: 12vh;
- }
- .tran{
-   transition: max-height 2s;
-   font-size: 1.1em;
- }
- .oh{
-   background-image: linear-gradient(45deg, red, blue);
-   background-size: 130%;
-   padding: 5px 18px;
-   border-radius: 9px;
-   text-decoration: none;
-   background-position: 0%;
-
- }
- .oh :hover{
-   background-position: 100%;
-
- }
- /*  buttons */
- * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    /* font-size: 1.4em; */
-}
-
-.buttons {
-    margin: 10%;
-    text-align: center;
-    font-family: 'Kalam', cursive;
-  }
-  
-  .btn-hover {
-    min-width: 120px;
-    font-size: 1.4em;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    margin: 12px;
-    /* height: 55px; */
-    padding: 12px 23px;
-    text-align:center;
-    border: none;
-    background-size: 300% 100%;
-
-    border-radius: 50px;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-}
-
-.btn-hover:hover {
-    background-position: 100% 0;
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-}
-
-.btn-hover:focus {
-    outline: none;
-}
-
-.btn-hover.color-1 {
-    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
-    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
-}
-.btn-hover.color-2 {
-    background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
-    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
-}
-.btn-hover.color-3 {
-    background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
-    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
-
-}
-.btn-hover.color-4 {
-    background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
-    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
-}
-.btn-hover.color-5 {
-    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
-    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
-}
-.btn-hover.color-6 {
-    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
-    box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
-}
-.btn-hover.color-7 {
-    background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
-    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
-}
-.btn-hover.color-8 {
-    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
-    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
-}
-.btn-hover.color-9 {
-    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
-    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
-}
-.btn-hover.color-10 {
-        background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
-    box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
-}
-.btn-hover.color-11 {
-       background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
-}
-.btn-hover.color-12 {
-       background-image: linear-gradient(to right, #eb3941, #000000, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
-}
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-/* buttons */
 
 
 
-.danger {
-      padding: 20px;
-      background-color: #f44336;
-      color: white;
-      position: absolute;
-      /* width: 50%; */
-      float: right;
-      z-index: 3000;
-    
+    .nn {
+      max-height: 12vh;
     }
+
+    .tran {
+      transition: max-height 2s;
+      font-size: 1.1em;
+    }
+
+    .oh {
+      background-image: linear-gradient(45deg, red, blue);
+      background-size: 130%;
+      padding: 5px 18px;
+      border-radius: 9px;
+      text-decoration: none;
+      background-position: 0%;
+
+    }
+
+    .oh :hover {
+      background-position: 100%;
+
+    }
+
+    /*  buttons */
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      /* font-size: 1.4em; */
+    }
+
+    .buttons {
+      margin: 10%;
+      text-align: center;
+      font-family: 'Kalam', cursive;
+    }
+
+    .btn-hover {
+      min-width: 120px;
+      font-size: 1.4em;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      margin: 12px;
+      /* height: 55px; */
+      padding: 12px 23px;
+      text-align: center;
+      border: none;
+      background-size: 300% 100%;
+
+      border-radius: 50px;
+      -o-transition: all .4s ease-in-out;
+      -webkit-transition: all .4s ease-in-out;
+      transition: all .4s ease-in-out;
+    }
+
+    .btn-hover:hover {
+      background-position: 100% 0;
+      -o-transition: all .4s ease-in-out;
+      -webkit-transition: all .4s ease-in-out;
+      transition: all .4s ease-in-out;
+    }
+
+    .btn-hover:focus {
+      outline: none;
+    }
+
+    .btn-hover.color-1 {
+      background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+      box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+    }
+
+    .btn-hover.color-2 {
+      background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+      box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+    }
+
+    .btn-hover.color-3 {
+      background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+      box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+
+    }
+
+    .btn-hover.color-4 {
+      background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+      box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
+    }
+
+    .btn-hover.color-5 {
+      background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+      box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+    }
+
+    .btn-hover.color-6 {
+      background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+      box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
+    }
+
+    .btn-hover.color-7 {
+      background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+      box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+    }
+
+    .btn-hover.color-8 {
+      background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+      box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+    }
+
+    .btn-hover.color-9 {
+      background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+      box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+    }
+
+    .btn-hover.color-10 {
+      background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a, #FBB03B);
+      box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+    }
+
+    .btn-hover.color-11 {
+      background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+      box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+    }
+
+    .btn-hover.color-12 {
+      background-image: linear-gradient(to right, #041363, #00ecec, #080747, #a50e15);
+      box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+    }
+
+    .btn-hover.color-22 {
+      background-image: linear-gradient(to right, #2a4eee, #3700ff, #6771ff, #ff00d4);
+      box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+    }
+
+    .btn-hover.color-23 {
+      background-image: linear-gradient(to right, #cfbaf5, #a991ff, #67d4ff, #ff00d4);
+      box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* buttons */
+
+
+
+    .danger {
+      padding: 20px;
+      background-color: #d60000;
+      max-width: 400px;
+      min-width: 300px;
+
+      color: rgb(255, 255, 255);
+      position: absolute;
+      /* display: none; */
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+      visibility: hidden;
+      display: inline-block;
+      top: 11vh;
+      z-index: 300;
+      box-shadow: rgb(113, 1, 1) 3px 5px 7px;
+
+
+      animation: l 4s ease-out -0.2s 1 forwards;
+
+
+    }
+
     .success {
       /* padding-top: 2vh; */
-     
+
       padding: 20px;
       background-color: #00d607;
+      box-shadow: rgb(6, 74, 0) 1px 4px 4px;
+      max-width: 400px;
+      min-width: 300px;
+
       color: white;
       position: absolute;
-    
+      /* display: none; */
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+      visibility: hidden;
+      z-index: 300;
+      top: 11vh;
+
+      animation: l 4s ease-out -0.2s 1;
     }
-    
+
     .cc {
       margin-left: 15px;
-      color: white;
+      color: rgb(255, 255, 255);
       font-weight: bold;
+      z-index: 300;
       float: right;
-      min-width: 150px;
+      min-width: 70px;
+      max-width: 200px;
       font-size: 22px;
       line-height: 20px;
       cursor: pointer;
-      transition: 0.3s;
     }
-    
+
     .closebtn:hover {
       color: black;
     }
 
+    @keyframes l {
+      0% {
+        visibility: visible;
+        display: block;
+        /* background: rgb(255, 255, 255); */
+        left: -350px;
+      }
 
+      14% {
+        display: block;
+
+        visibility: visible;
+        left: 5px;
+      }
+
+      84% {
+        visibility: visible;
+        display: block;
+        left: 5px;
+      }
+
+
+      100% {
+        visibility: visible;
+        display: block;
+        left: -400px;
+      }
+
+
+    }
   </style>
 
 
@@ -255,19 +341,12 @@
 <body>
   <div id="j">
     <header id="i" class="p-3 bg-dark nn tran text-white">
-      <a id="x">X</a>
+      <a id="x"></a>
       <div id="navbar" class="container">
         <div id="navbar2" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-              <use xlink:href="#bootstrap">
-
-              </use>
-            </svg>
-          </a>
 
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" id="List">
-
+              
             <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
             <li id="z"><a href="/covidupdates" class="nav-link px-2 text-white">Covid Updates</a></li>
             <li><a href="/donors" class="nav-link px-2 text-white">Donors</a></li>
@@ -276,7 +355,7 @@
 
 
             <li><a href="/contactus" class="nav-link px-2 text-white">Contact Us</a></li>
-            
+
 
           </ul>
 
@@ -285,29 +364,30 @@
             <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
           </form> {% endcomment %}
           {% if request.user.is_authenticated %}
-          
+
           <a href="/profile">
-      <button class="btn-hover color-3">{{user}}</button></a>
-    
+            <button class="btn-hover color-3">{{user}}</button></a>
+
 
           {% else %}
 
           <div class="text-end">
 
             <button type="button" class="btn btn-info"><a href="/login">login</a></button>
-            {% comment %} <button type="button" class="btn btn-warning"> <a href="/nusignup">Sign-up</a> </button> {% endcomment %}
+            {% comment %} <button type="button" class="btn btn-warning"> <a href="/nusignup">Sign-up</a> </button> {%endcomment %}
             {% load socialaccount %}
-{% providers_media_js %}
+            {% providers_media_js %}
 
 
-<a href="{% provider_login_url "google" %}"> <button type="button" class="btn btn-primary"> Login google </button> </a>
+            <a href="{% provider_login_url " google" %}"> <button type="button" class="btn btn-primary"> Login google
+              </button> </a>
 
           </div>
           {% endif %}
         </div>
       </div>
     </header>
-     <div class="bg">
+    <div class="bg">
       <!-- <button class="btn-hover color-1">BUTTON</button>
       <button class="btn-hover color-2">BUTTON</button>
       <button class="btn-hover color-3">BUTTON</button>
@@ -320,8 +400,7 @@
       <button class="btn-hover color-10">BUTTON</button>
       <button class="btn-hover color-11">BUTTON</button>
       <button class="btn-hover alr color-12">BUTTON</button> -->
-    </div>  
-  
+    </div>
 
 
   </div>
@@ -332,19 +411,19 @@
 
   <div class="bg">
 
-   
+
 
   </div>
-{% if messages %}
+  {% if messages %}
 
-    {% for message in messages %}
- <div class={{message.tags}}>
-      <span class="cc" onclick="this.parentElement.style.display='none';">&times;</span> 
-      {{ message }}{{message.tags}}
-    </div>
-    {% endfor %}
+  {% for message in messages %}
+  <div class={{message.tags}}>
+    <span class="cc" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{ message }}
+  </div>
+  {% endfor %}
 
-{% endif %}
+  {% endif %}
 
 
   {% block body %}
@@ -363,25 +442,25 @@
     var tap = 0;
 
     document.getElementById("x").addEventListener('click', () => {
-      
-     
-      if(tap % 2 !== 0 ){
-      document.getElementById("i").classList.remove("nn")
-      document.getElementById("i").style.maxHeight = "54vh";
-
-        tap = tap + 1;    
-    }
-          else if(tap % 2 ===0){
-      document.getElementById("i").style.maxHeight = "9vh";
 
 
-          tap = tap +1;
+      if (tap % 2 !== 0) {
+        document.getElementById("i").classList.remove("nn")
+        document.getElementById("i").style.maxHeight = "54vh";
 
-        }
+        tap = tap + 1;
+      }
+      else if (tap % 2 === 0) {
+        document.getElementById("i").style.maxHeight = "9vh";
+
+
+        tap = tap + 1;
+
+      }
 
 
 
-      
+
 
 
     })

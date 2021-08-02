@@ -392,25 +392,25 @@ def loginemp(request):
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
                 return redirect('Add')
-
-
-
             else:
                 return HttpResponse("error occured")
+        else:
+            messages.error(request, "Invalid credentials!")
+            return redirect("login")
+    return redirect('login')
 
         
-        else:
-            messages.error(request, "Invalid credentials! Please try again")
-            return redirect("loginall")
 
-    return redirect('loginall')
+
+
+
+
+
 
 
 
 
 # login employees can add patients
-
-
 @login_required(login_url='/home')
 @allowed_users(allowed_roles=[ 'Hospital_Employees'])
 def addpat(request):

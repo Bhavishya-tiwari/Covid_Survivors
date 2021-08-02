@@ -39,5 +39,32 @@ import json
 # print(response.status_code)
 
 
-o1 ={"q":"sdv","d":"dv"}
-print(o1+o1)
+# o1 ={"q":"sdv","d":"dv"}
+# print(o1+o1)
+
+
+def passv(x):
+    x = str(x)
+    l = False
+    ngap =True
+    if(len(x)<8 and len(x)>5):
+        l = True
+    if(" " in x):
+        ngap=False
+    
+    
+    if(l == True and ngap == True):
+        o = {
+            "status":"v",
+            "p":x
+        }
+        return o
+    else:
+        o = {"status":"n"}
+        return o
+
+
+
+print(passv("sdomcomcolk "))
+
+

@@ -10,14 +10,14 @@
     width: 200px;
     zoom: 1.4;
   }
-
+  
   #share {
     margin: 10px;
   }
-
+  
   .left1 {
     animation: left1 0.3s ease-out 1 forwards;
-
+    
   }
   
   .right1 {
@@ -26,8 +26,9 @@
     right: -200px;
     visibility: hidden;
     animation: right1 0.3s ease-out 1 0.2s forwards;
-
+    
   }
+
   .left2 {
     animation: left1 0.3s ease-out 1 0.5s forwards;
     right: 200px;
@@ -83,7 +84,12 @@
     display: block;
     width: 200px;
   }
-
+  .Shareblg{
+    position: -webkit-sticky;
+position: sticky;
+top: 70vh;
+left: 90vw;
+} 
 
 
 
@@ -99,7 +105,7 @@
 
 {% block body %}
 <a href="/blog/addblog">
-  <button type="button" id="share" class="btn btn-lg btn-primary">Share Your Experience</button>
+  <button type="button" id="share" class="btn btn-lg Shareblg btn-primary">Share Your Experience</button>
 
 </a>
 
@@ -109,14 +115,14 @@
 
 
 
-<div class="container">
+<div class="container" style="width: 66vw;">
   {% for post in page_obj %}
 
 
 
 
 
-  <div class="card my-2 cardd {% cycle 'left1' 'right1' 'left2' 'right2' %}">
+  <div class="card my-2 ccc cardd {% cycle 'left1' 'right1' 'left2' 'right2' %}">
     <div class="card-header">
       {{post.title}}
     </div>
@@ -167,5 +173,12 @@
       </ul>
     </nav>
   </div>
+  <div class="bl">
+
+
+  </div>
+
+
+
 </div>
 {% endblock %}

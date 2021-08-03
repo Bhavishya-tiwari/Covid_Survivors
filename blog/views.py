@@ -6,11 +6,14 @@ from django.core.paginator import Paginator
 import json
 from django.contrib import messages
 import datetime
+import os
+
 
 # Report.objects.all().delete()
 # Post.objects.all().delete()
 
 # Create your views here.
+
 
 
 def blogHome(request):
@@ -30,6 +33,8 @@ def blogHome(request):
 
 def blogPost(request, mysno):
     post = Post.objects.filter(sno=mysno).first()
+    
+
     if request.user.is_authenticated:
         userjson =request.user.first_name
         try:
@@ -160,6 +165,7 @@ def addblog(request):
     
 @login_required(login_url='/home')
 def delblog(request, dsno):
+
     if request.method == "POST":
         profilejson = request.user.first_name
 
@@ -169,13 +175,21 @@ def delblog(request, dsno):
 
         if( profiledict["G"]=='e'):
             try:
+
                 for r in rep:
                     r.delete()
 
+                url ="./med/" +  str(post.blog_img)
+                
+                if os.path.exists(url):
+                    os.remove(url)
+                    print("deleted")
+                else:
+                    print("The file does not exist")
                 post.delete()
+                
                 messages.success(request, "Blog Deleted")    
                 return redirect('reportedblogs')
-                
             except:
                 print("wrong") 
                 return redirect('reportedblogs')
@@ -195,6 +209,13 @@ def delblog(request, dsno):
                     r.delete()
              
 
+                
+                url ="./med/" +  str(post.blog_img)
+                if os.path.exists(url):
+                    os.remove(url)
+                    print("deleted")
+                else:
+                    print("The file does not exist")
                 post.delete()
                 messages.success(request, "Blog Deleted")    
     

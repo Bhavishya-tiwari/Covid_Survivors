@@ -21,6 +21,15 @@ import requests
 # User.objects.all().delete() 
 # Message.objects.all().delete()
 
+def v(p):
+    if(len(p)>5):
+        if(" " in p):
+            return False
+        else:
+            return True
+    else:
+        return False
+
 def home(request):
     if request.method == "POST":
         print("svmk")
@@ -284,15 +293,20 @@ def AddHadmin(request):
 
         myuserjson = json.dumps(profileobj1)
         myuserjson2 = json.dumps(pro2)
-        myuser.first_name = myuserjson
-        myuser.last_name = myuserjson2
-        # myuser.first_name='hospitalh'
+        if(v(username) and v(hid)):
+            myuser.first_name = myuserjson
+            myuser.last_name = myuserjson2
+            # myuser.first_name='hospitalh'
 
-        myuser.save()
-        group = Group.objects.get(name='HospitalHeads')
-        myuser.groups.add(group)
-        messages.success(request, "New Hospital Added")
-        return redirect('Add')
+            myuser.save()
+            group = Group.objects.get(name='HospitalHeads')
+            myuser.groups.add(group)
+            messages.success(request, "New Hospital Added")
+            return redirect('Add')
+        else:
+            messages.error(request, "Password/Username invalid")
+            return redirect('Add')
+
        
 
 
@@ -322,14 +336,19 @@ def AddEmployee(request):
 
         myuserjson = json.dumps(profileobj1)
         myuserjson2 = json.dumps(pro2)
-        myuser.first_name = myuserjson
-        myuser.last_name = myuserjson2
+        if(v(username) and v(hid)):
+        
+            myuser.first_name = myuserjson
+            myuser.last_name = myuserjson2
 
-        myuser.save()
-        group = Group.objects.get(name='Hospital_Employees')
-        myuser.groups.add(group)
-        messages.success(request, "New Employee Added")
-        return redirect('AddEmployee')
+            myuser.save()
+            group = Group.objects.get(name='Hospital_Employees')
+            myuser.groups.add(group)
+            messages.success(request, "New Employee Added")
+            return redirect('AddEmployee')
+        else:
+            messages.error(request, "Password/Username invalid")
+            return redirect('AddEmployee')
     userl =[]    
     group = Group.objects.get(name='Hospital_Employees')
     users = list(group.user_set.all())
@@ -378,6 +397,7 @@ def loginemp(request):
             profilejson =user.first_name
             profiledict = json.loads(profilejson)
             grp = profiledict["G"]
+            print(grp)
             if grp == "e":
                
                 login(request, user)
@@ -456,14 +476,20 @@ def addpat(request):
 
         myuserjson = json.dumps(profileobj1)
         myuserjson2 = json.dumps(pro2)
-        myuser.first_name = myuserjson
-        myuser.last_name = myuserjson2
+        if(v(username) and v(pid1)):
 
-        myuser.save()
-        group = Group.objects.get(name='Covid_Survivors')
-        myuser.groups.add(group)
-        messages.success(request, "Donor Added")
-        return redirect('addpat')
+            myuser.first_name = myuserjson
+            myuser.last_name = myuserjson2
+
+            myuser.save()
+            group = Group.objects.get(name='Covid_Survivors')
+            myuser.groups.add(group)
+            messages.success(request, "Donor Added")
+            return redirect('addpat')
+        else:
+            messages.error(request, "Password/Username invalid")
+            return redirect('addpat')
+
     userl =[]    
     group = Group.objects.get(name='Covid_Survivors')
     users = list(group.user_set.all())

@@ -14,101 +14,82 @@
               margin: 0;
               padding: 0;
        }
-       
+
        #map {
               height: 85vh;
               width: 34vw;
-              
-              
+
+
        }
-       
-       
-       
+
+
+
        .mapboxgl-popup {
               max-width: 400px;
               font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
        }
-       
-       .flx {
-              display: flex;
-           
-       }
-  
 
-       .left {
-              width: 65vw;
-              height: 80vh;
-              /* display: flex; */
-              /* background-color: rgb(156, 153, 233); */
-       }
 
-       .right {
-              height: 80vh;
-              /* width: 34vw; */
-              max-width: 34vw;
-              min-width: 300px;
-              overflow: hidden;
 
-       background-color: red;
 
-       }
 
-       #state {
-              width: 50%;
-              display: inline-block;
 
-       }
 
-      
-       .wdth{
-              width: 20vw;
-              display: inline-block;
+
+       #DataShown {
               margin: auto;
-              z-index: 3;
+              width: 100px;
+       }
+
+       .flagimg {
+              width: 10vw;
+              height: 10vh;
+              position: absolute;
+              top: 20vh;
+              left: 10vw;
+              z-index: 8998;
+              opacity: 1;
 
        }
 
-       .democlass {
-              background-color: saddlebrown;
+       #gl {
+              /* grid-area: showdata; */
+
        }
-       #r{
-              background-color: red;
+
+       #gr {
+              /* grid-area: mapp; */
+
+
        }
-       .mp{
-              width: 60vw;
-              height: 50vh;
+
+       #gridd {
+              display: grid;
+              grid-template-columns: 1.7fr 1fr;
+              grid-gap: 2px;
+
+
+       }
+
+       #gridd>div {
+              /* background-color:rgb(12, 12, 86) ; */
+              background-image: linear-gradient(rgb(195, 248, 238), rgb(231, 160, 247));
+
+       }
+      #gl > select{
+              width: 25%;
+              /* background-color: rgb(235, 236, 255); */
               margin: auto;
+              color: rgb(0, 0, 52);
+              display: inline-block;
+              position: relative;
        }
-img{
-      width: 99vw;
-      height: 100vh;
-      position: absolute;
-      top: -6.3vh;
-      left: -6vw;
-      z-index: -99999;
-      opacity: 0.3;
-    }
-    .f{
-           display: flex;
-           position: relative;
-           top:4vh;
-           z-index: 7;
-    }
-    #DataShown{
-           margin:auto;
-           width: 100px;
-    }
-    .flagimg{
-           width: 10vw;
-           height:10vh ;
-           position: absolute;
-           top: 20vh;
-           left: 10vw;
-           z-index: 8998;
-           opacity: 1;
-
-    }
-
+       #gl > button{
+              /* position: relative;
+              left: -3vw; */
+              margin: auto;
+              margin: 5px 9px;
+       }
     
 </style>
 
@@ -118,77 +99,80 @@ img{
 {% block body %}
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet"
-href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
-type="text/css">
+       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+       type="text/css">
 
 <!-- Promise polyfill script is required -->
 <!-- to use Mapbox GL Geocoder in IE 11. -->
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<div id="gridd">
 
-
-<div class="flx">
-       <div id="o">
-              
-       </div>
-       <div class="left">
+       <div id="gl">
               <div id="flag">
               </div>
-              <div class="f">
-
-              <select class="form-select change1  wdth mt-2" style="float: left;" onchange="myFunction2()"
-                    id="country" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
+              <select class="form-select change1  wdth mt-2" onchange="myFunction2()" id="country"
+                     onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      aria-label="Default select example">
                      <option selected>Country</option>
-
+       
               </select>
-              <select disabled class="form-select change1 wdth mt-2"style="max-width: 20vw,min-width: 20px;" onchange="myFunction()"
-                     onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
-                     id="state" aria-label="Default select example">
+              <select disabled class="form-select change1 wdth mt-2"
+                     onchange="myFunction()" onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()"
+                     onblur="this.size=0;" id="state" aria-label="Default select example">
                      <option selected>State</option>
-
+       
               </select>
-              <select disabled class="form-select wdth  mt-2" style="width: 20vw;" onchange="myFunction1()" id="dist"
+              <select disabled class="form-select wdth  mt-2" onchange="myFunction1()" id="dist"
                      aria-label="Default select example" onmousedown="if(this.options.length>5){this.size=5;}"
                      onchange="this.blur()" onblur="this.size=0;" id="state" aria-label="Default select example">
                      <option>District</option>
-
+       
               </select>
-              <button id="DataShown" type="button" style="z-index: -4;" class="btn btn-primary m-2">Search</button>
-       </div>
-              <br>
-              <div id="Data_Box">
-
-              </div>
-              <div class="mp">
-                     <div class="dataishere">
+              <button id="DataShown" type="button" style="z-index: -4; float:right;" class="btn-hover color-10">Search</button>
+       
+       
                      <canvas id="myChartC" style="width:100%;max-width:600px"></canvas>
-              </div>
-       </div>
-
 
 
 
        </div>
-       <div class="right">
-            
+       <div id="gr">
+
               <div id="map"></div>
+
               <br>
        </div>
+
 </div>
 
 
 
 
-<script>
-       
-</script>
+
+
+
+
+
+
+
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}
-
-
-
-
-
 
 {% block js %}
 

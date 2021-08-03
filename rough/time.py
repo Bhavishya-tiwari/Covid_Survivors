@@ -43,28 +43,28 @@ import json
 # print(o1+o1)
 
 
-def passv(x):
-    x = str(x)
-    l = False
-    ngap =True
-    if(len(x)<8 and len(x)>5):
-        l = True
-    if(" " in x):
-        ngap=False
+# def passv(x):
+#     x = str(x)
+#     l = False
+#     ngap =True
+#     if(len(x)<8 and len(x)>5):
+#         l = True
+#     if(" " in x):
+#         ngap=False
     
     
-    if(l == True and ngap == True):
-        o = {
-            "status":"v",
-            "p":x
-        }
-        return o
-    else:
-        o = {"status":"n"}
-        return o
+#     if(l == True and ngap == True):
+#         o = {
+#             "status":"v",
+#             "p":x
+#         }
+#         return o
+#     else:
+#         o = {"status":"n"}
+#         return o
 
 
 
-print(passv("sdomcomcolk "))
+# print(passv("sdomcomcolk "))
 
 

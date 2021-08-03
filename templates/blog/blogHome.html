@@ -10,23 +10,23 @@
     width: 200px;
     zoom: 1.4;
   }
-  
+
   #share {
     margin: 10px;
   }
-  
+
   .left1 {
     animation: left1 0.3s ease-out 1 forwards;
-    
+
   }
-  
+
   .right1 {
-    
+
     position: relative;
     right: -200px;
     visibility: hidden;
     animation: right1 0.3s ease-out 1 0.2s forwards;
-    
+
   }
 
   .left2 {
@@ -37,9 +37,9 @@
 
 
   }
-  
+
   .right2 {
-    
+
     position: relative;
     right: -200px;
     visibility: hidden;
@@ -48,14 +48,16 @@
   }
 
   @keyframes right1 {
-    0% {opacity: 0;
+    0% {
+      opacity: 0;
       visibility: visible;
       background: rgb(113, 250, 255);
       left: 200px;
       top: 0px;
     }
 
-    100% {opacity: 1;
+    100% {
+      opacity: 1;
       /* background: rgb(255, 240, 240); */
       left: 0px;
       visibility: inherit;
@@ -64,7 +66,8 @@
   }
 
   @keyframes left1 {
-    0% {opacity: 0;
+    0% {
+      opacity: 0;
       visibility: visible;
       background: rgb(113, 250, 255);
       left: -200px;
@@ -72,7 +75,8 @@
 
     }
 
-    100% {opacity: 1;
+    100% {
+      opacity: 1;
       /* background: rgb(255, 240, 240); */
       left: 0px;
       visibility: inherit;
@@ -80,22 +84,60 @@
 
     }
   }
-  .block{
+
+  .block {
     display: block;
     width: 200px;
   }
-  .Shareblg{
+
+  .Shareblg {
     position: -webkit-sticky;
-position: sticky;
-top: 70vh;
-left: 90vw;
-} 
+    position: sticky;
+    top: 20vh;
+    left: 90vw;
+  }
+
+  img {
+    width: 99.4vw;
+    height: 100vh;
+    position: absolute;
+
+    z-index: -99999;
+    opacity: 0.8;
+  }
 
 
+    {
+    % block h %
+  }
 
+  height:200vh;
 
+    {
+    % endblock h %
+  }
 
+  #title {
+    color: rgb(255, 255, 255);
+    font-size: 1.1em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
+  }
+
+  #author {
+    color: rgb(255, 81, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  #time {
+    font-size: 0.6em;
+    font-family: 'Times New Roman', Times, serif;
+    color: gray;
+  }
+  .butto{
+    display: block;
+min-width: 70px;
+max-width: 110px;  }
 </style>
 
 
@@ -104,18 +146,20 @@ left: 90vw;
 
 
 {% block body %}
+{% load static %}
+<img src="{% static "imgs/bhh.jpg" %}" alt="home" />
 <a href="/blog/addblog">
-  <button type="button" id="share" class="btn btn-lg Shareblg btn-primary">Share Your Experience</button>
+  <button type="button" id="share" class="btn-hover butto color-1 Shareblg">Share Your Experience <span>&#9998</span> </button>
 
 </a>
 
 
 
-<hr>
 
 
 
-<div class="container" style="width: 66vw;">
+
+<div class="container" style="max-width: 1200px; opacity: 0.95;">
   {% for post in page_obj %}
 
 
@@ -123,33 +167,34 @@ left: 90vw;
 
 
   <div class="card my-2 ccc cardd {% cycle 'left1' 'right1' 'left2' 'right2' %}">
-    <div class="card-header">
-      {{post.title}}
+    <div class="card-header" style="background-color: rgb(9, 2, 66); margin: 0;">
+      <span id="title"> {{post.title}}</span>
     </div>
     <div class="card-body">
-      <h5 class="card-title">By {{post.author}} <small>{{post.Timestamp}} </small></h5>
+
+      <h5 class="card-title">By <span id="author">{{post.author}}</span> <span id="time">{{post.Timestamp |slice:"0:11"}} :: <b>{{post.Timestamp | slice:"11:16"}} </b> </span></h5>
       <p class="card-text">
+      <div>
+        {% autoescape off %}{{post.content|slice:300}}{% endautoescape %}
+        <!-- <br> -->
 
-        {% autoescape off %}{{post.content|slice:200}}{% endautoescape %}
 
-
-
+      </div>
       </p>
-      <a href="/blog/{{post.sno}}" class="btn btn-info my-2 block">Read more</a>
     </div>
+    <a href="/blog/{{post.sno}}" class="btn-hover butto color-7" style="padding:9px 13px ;">Read more</a>
   </div>
 
-{{message.tags}}
 
 
 
 
   {% endfor %}
 
-    
 
 
 
+  <br>
 
   <div id="pagination">
     <nav aria-label="Page navigation example">

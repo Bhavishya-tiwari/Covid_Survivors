@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% block title %}Donors{% endblock title %}
+{% block css %}
+<style>
+
+.container{
+    margin-top: 10px;
+   /* border: solid 2px rgb(1, 17, 110); */
+    /* margin: auto; */
+    max-width: 600px !important;
+    box-shadow: rgb(0 0 0) 0px 2px 15px -4px;
+    padding-left: 0;
+    padding-right: 0;
+    font-family: 'Baloo Thambi 2', cursive;
+    font-size: large;
+    background-color: white;  
+   
+}
+@media only screen and (max-width: 360px) {
+  .completebox{
+    height: 550px;  
+  }
+  }
+  @media only screen and (min-width: 498px) {
+    .completebox{
+        height: 600px; 
+    }
+    }
+    @media only screen and (max-width: 320px) {
+        .completebox{
+          height: 480px;  
+        }
+        }
+
+
+.heading{
+   
+    width: 100%;
+    height: 10%;
+    border-bottom: none;
+    display: inline-block;
+    background-color: rgb(1, 17, 110);
+    display: flex;
+    top: 0;
+}
+.livechat{
+    margin-block-start: auto;
+    margin-block-end: auto;
+    margin-left: 18px;
+    padding: auto;
+    color: white;
+    margin-left: 35px;
+   
+    font-weight: bold;
+    font-size: x-large;
+   
+}
+
+.chatlogo{
+    width: 40px;
+    height: 50px;
+}
+.chatlogo img{
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.completebox{
+    overflow-y: scroll;
+    padding-bottom: 30pxs;
+    border-radius: 5px;   
+  
+}
+.chats{
+    padding: 30px 4px 0px 13px;
+}
+
+.receivedmsg{
+    overflow: hidden;
+    display: inline-block;
+    padding: 0 0 0 0px;
+    vertical-align: top;
+    width: 100%;
+    margin-top: 5px;
+}
+.receivedmsginbox{
+    width: 90%;
+}
+.timereceived{
+    color: rgb(77, 74, 74);
+    display: block;
+    font-size: 13px;
+    margin-bottom: 15px;
+    
+}
+.receivedmsginbox p{
+    color: rgb(0, 0, 0);
+    background-color: rgb(234, 250, 209);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 15px;
+    margin: 0;
+    width: 100%;
+}
+
+.sendedmsg{
+    display: inline-block;
+    text-align: left;
+    padding: 0 0 0 0;
+    vertical-align: top;
+    overflow:hidden;
+    margin: -10px 8px
+    
+}
+.sendedmsginbox p{
+    background: rgb(216, 225, 250);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 15px ;
+}
+.sendedmsginbox{
+    float: right;
+    width: 90%;
+}
+.timesended{
+    color: rgb(94, 92, 92);
+    display: block;
+    font-size: 13px;
+    float: right;
+    margin: -18px 0 15px 0;
+
+}
+.sendoption{
+    margin: 0;
+    height: 100%;
+    bottom: 0;
+    z-index: 1; 
+    background-color: rgb(1, 17, 110) ; 
+    
+}
+.sendoption div {
+    display: contents;
+}
+
+.writemsg textarea{
+    margin: 5px 10px 5px 5px; 
+    max-width: 500px;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 15px;   
+}
+input[type="text"] {
+    border-radius: 2px 0 0 2px;
+  
+    width: calc(95% - 47px);
+    margin: 5px;
+    padding: 6px 4px;
+    font-size: small;
+    
+    outline: none;
+} 
+    
+
+.newsendlogo img{
+    float: right;
+    width: 36px;
+    height: 49px;
+    margin: -3px 4px 2px 2px;
+    
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+}
+
+</style>
+
+{% endblock css %}
+{% block body %}
+<div class="total">
+    <div class="container">
+        <div class="heading "> 
+            <div class="chatlogo">
+                <img src="chatlogo2.png" alt="">
+            </div>
+            <div class="livechat">
+                Live Chat
+            </div>
+        </div>
+        <div class='scroll scroll--grey'>
+            <div class='inner'></div>
+        <div class="completebox">
+            <div class="chats">
+                <div class="recandsend">      
+                        <div class="receivedmsg">
+                            <div class="receivedmsginbox">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                            <span class="timereceived">3:07 AM ,29jul</span>
+                            </div>
+                        </div>                 
+                    <div class="sendedmsg">
+  
+                            <div class="sendedmsginbox">
+                            <p>Hi! I m Monal... Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                            <span class="timesended">3:07 AM ,29jul</span>
+                            </div>  
+                    </div> 
+                   
+                       <div class="receivedmsg">
+                            <div class="receivedmsginbox">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                            <span class="timereceived">3:07 AM ,29jul</span>
+                            </div>
+                        </div>
+                    
+                        <div class="receivedmsg">
+                            <div class="receivedmsginbox">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                            <span class="timereceived">3:07 AM ,29jul</span>
+                            </div>
+                        </div>
+                   
+                    <div class="sendedmsg">
+  
+                        <div class="sendedmsginbox">
+                        <p>Hi! I m Monal... Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                        <span class="timesended">3:07 AM ,29jul</span>
+                        </div>  
+                     </div> 
+                     <div class="sendedmsg">
+  
+                        <div class="sendedmsginbox">
+                        <p>Hi! I m Monal... Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                        <span class="timesended">3:07 AM ,29jul</span>
+                        </div>  
+                     </div>  
+                     <div class="sendedmsg">
+  
+                        <div class="sendedmsginbox">
+                        <p>Hi! I m Monal... Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, nesciunt. Eaque in, earum maxime hic fugit officia aliquam ipsa vero?</p>
+                        <span class="timesended">3:07 AM ,29jul</span>
+                        </div>  
+                     </div>   
+            
+                </div>
+            </div>
+        </div> 
+</div> 
+    <div class="sendoption">
+       <div class="writemsg">
+        <input type="text" class="writemsg" placeholder="Write message..." >
+       </div>
+       <div class="newsendlogo">
+           <img src="newsendlogo.png" alt="Send">
+       </div>        
+    </div>    
+    </div> 
+</div>   
+
+{% endblock %}

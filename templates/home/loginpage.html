@@ -3,7 +3,7 @@
 {% block title %}login{% endblock title %}
 {% block css %}
 <style>
-  #outer {
+  /* #outer {
     position: relative;
     top: 20vh;
   }
@@ -33,12 +33,197 @@
     opacity: 0.6;
     
   position: absolute;
+  } */
+
+  /* ----------logincss start-monal------------------ */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0%;
   }
+  *:focus {
+    outline: none;
+} 
+
+.loginpg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.userandemp{
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+  margin: 50px 0;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+  height: 100vh;
+  font-size: 1.2em;
+}
+
+h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  display:inline-block;
+  margin:16px 7px 9px 8px; 
+  color: rgb(1, 17, 110);
+  border-bottom: 2px solid #5fbae9;
+  font-weight: bolder;
+}
+
+.loginbox-emp {
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  margin: 20px 0;
+  width: 90%;
+  max-width: 420px;
+  box-shadow:rgb(0 0 0 / 51%) 0px 2px 15px -4px;
+  text-align: center;
+  height: inherit;
+}
+
+.forget a {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  color: rgb(1, 17, 110);
+  transition: all 0.5s;
+  padding: 25px;
+  text-align: center;
+  display: block;
+  border-radius: 0 0 10px 10px;
+  text-decoration: none;
+}
+
+.empsubmit {
+  background-color: rgb(1, 17, 110);
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+  cursor: pointer;
+}
+
+ .empsubmit:hover {
+  background-color: rgb(1, 21, 136);
+}
+
+input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+ 
+  border-radius: 5px 5px 5px 5px;
+}
+
+
+input[type=text]:placeholder {
+  color: #cccccc;
+}
+
+.forget a:hover {
+  color: #f75555;
+  
+}
+.space{
+  margin: 0;
+}
+
+
+.icon img {
+    height: 74px;
+    width: 79px;
+}
+.google{
+    display: flex;
+   
+    border: none;
+   
+    padding: 0px 1px 0px 32px;
+    border: solid 3px rgb(1, 17, 110) ;
+    text-decoration: none;
+   
+    text-transform: uppercase;
+    font-size: 13px;
+    
+   
+    border-radius: 5px 5px 5px 5px;
+    margin: 41px 20px 40px 20px;
+   
+    cursor: pointer;
+}
+.google img{
+  display: inline;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+.google input{
+  display: inline;
+  background: transparent;
+  font-weight: bolder;
+  padding: 7px;
+  margin: 10px;
+  font-size: medium;
+}
+.user-icon img{
+  height: 145px;
+  width: 159px;
+} 
+.usersubmit{
+  background-color: rgb(255, 255, 255);
+  border: none;
+  color: rgb(1, 17, 110);
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  border-radius: 5px ;
+  margin: 5px 20px 40px 20px;
+  cursor: pointer;
+}
+.usersubmit:hover{
+  color: #f75555;
+}
+
+@media only screen and (max-width: 947px) {
+  .userandemp{
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+  } 
+  input.usersubmit{
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
+
+    /* ----------logincss end-monal------------------ */
 </style>{% endblock css %}
 
 
 {% block body %}
-<div class="bg">
+<!-- <div class="bg">
 
 
 </div>
@@ -68,8 +253,59 @@
     </div>
   </div>
 </div>
+ -->
+   <!-- ----------loginhtml start-monal------------------  -->
+   {% load static %}
+  
+   <div class="loginpg ">
+    <div class="userandemp">
+      <div class="loginbox-emp space">
 
+        <h2> LOGIN</h2>
+        <br>
+        <h2> FOR: ADMIN, EMPLOYEE OR PATIENT</h2>
 
+        <div class="icon">
+          
+          <img src="{% static "imgs/employee4.png" %}" alt="home" />
+        </div>
 
+        <form>
+          <input type="text" placeholder="Username">
+          <input type="text" placeholder="Password">
+          <input type="submit" class="empsubmit" value="Log In">
+        </form>
+
+        <div class="forget">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+      </div>
+      <!-- ----------------------------------------- -->
+      <div class="loginbox-emp space">
+        <h2> LOGIN</h2>
+        <br>
+        <h2> FOR : USER</h2>
+
+        <div class="user-icon">
+          
+          <img src="{% static "imgs/user2.png" %}" alt="home" />
+        </div>
+
+        <form>
+          <div class="google">
+            <div>
+             
+              <img src="{% static "imgs/google.png" %}" alt="home" />
+            </div>
+
+            <input type="submit" class="usersubmit" value="LogIn with Google">
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <!-- ----------loginhtml end-monal------------------  -->
 
 {% endblock %}

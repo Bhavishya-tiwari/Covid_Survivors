@@ -8,14 +8,34 @@ var state_name;
 var Country_data;
 var dist_data;
 var selected_country;
-var is_notstate =false;
+var state_selected;
+var dist_name;
+var is_notstate = false;
 var All_countries
+var vaccD
 
 //*********************************Api section********************************************** 
+
+
 
 fetch('https://api.covid19india.org/data.json')
     .then(response => response.json())
     .then(data => {
+
+        let latestCases = data.cases_time_series[(data.cases_time_series).length - 1]
+        let V = data.tested[(data.tested).length - 1]
+
+
+        vaccD = {
+            "dc": latestCases.dailyconfirmed,
+            "dd": latestCases.dailydeceased,
+            "dr": latestCases.dailyrecovered,
+            "v": V.totalindividualsvaccinated,
+            "tc": latestCases.totalconfirmed,
+            "td": latestCases.totaldeceased,
+            "tr": latestCases.totalrecovered,
+
+        }
     })
 
 
@@ -32,7 +52,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
 
 
-            fetch('https://corona.lmao.ninja/v2/countries?yesterday&sort')
+        fetch('https://corona.lmao.ninja/v2/countries?yesterday&sort')
             .then(response => response.json())
             .then(data => {
                 let index = 0;
@@ -58,185 +78,304 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                         color: color
                     }).setLngLat([longitude, latitude])
                         .addTo(map);
-                    });
-                    All_countries = data
-                })
+                });
+                All_countries = data
+            })
 
 
 
 
         document.getElementById("DataShown").addEventListener('click', function () {
             if (selected_country == "India") {
-        var loc = 0;
+                var loc = 0;
 
                 // getting location of that state
                 data_map.forEach(e => {
                     if (e.province == state_name) {
                         loc = e.coordinates;
+                        var c = e.stats.confirmed
+                        var xValues = ["Confirmed", "Deaths", "Recovered"];
+                        var yValues = [c, e.stats.deaths, e.stats.recovered];
+                        var barColors = ["Yellow", "red", "green"];
+
+                        new Chart("myChartCS", {
+                            type: "bar",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    backgroundColor: barColors,
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                indexAxis: 'y',
+                                legend: { display: false },
+                                title: {
+                                    display: true,
+                                    text: e.province
+                                }
+                            }
+                        });
                     }
                 });
-                document.getElementById("Data_Box").innerHTML = `<b>${covid_data.confirmed}</b>`
-                
-                   
-                
+                let district_full_data = dist_data[state_selected]["districtData"][dist_name]
+                var xValues = ["Confirmed", "Deaths", "Recovered", "Active"];
+                var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
+                var barColors = ["Yellow", "red", "green", "pink"];
 
-                map.flyTo({
-
-                    center: [loc.longitude, loc.latitude],
-                    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                new Chart("myChartSD", {
+                    type: "bar",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            backgroundColor: barColors,
+                            data: yValues
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: dist_name
+                        }
+                    }
                 });
-            }
+      
+
+
+
+
+
+
+
+
+
+        map.flyTo({
+
+            center: [loc.longitude, loc.latitude],
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    }
 
 
 
 
 
             else if (is_notstate == false) {
-        var loc = 0;
-        console.log(is_notstate);
 
-                data_map.forEach(e => {
-                    if (e.province == state_selected) {
-                        loc = e.coordinates;
-                        console.log(loc);
+
+    var loc = 0;
+
+
+
+    All_countries.forEach(e => {
+        if (e.country == selected_country) {
+
+            var xValues = ["Active", "Cases", "Deaths", "Recovered"];
+            var yValues = [e.active, e.cases, e.deaths, e.recovered];
+            var barColors = ["yellow", "purple", "red", "green"];
+
+            new Chart("myChartCS", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: e.country
                     }
-                });
-                console.log("state");
+                }
+            });
+        }
+    })
 
 
-                map.flyTo({
-                    center: [loc.longitude, loc.latitude],
-                    essential: true // this animation is considered essential with respect to prefers-reduced-motion
-                });
+    data_map.forEach(e => {
+        if (e.province == state_selected) {
+            loc = e.coordinates;
 
-            }
-            else if (is_notstate) {
-        var loc = 0;
-        console.log("ctr");
-                All_countries.forEach(e => {
-                    if (e.country == selected_country) {
 
-                                var xValues = ["Active", "France", "Spain", "USA", "Argentina"];
-                                var yValues = [550, 49, 44, 24, 15];
-                                var barColors = ["red", "green","blue","orange","brown"];
-            
-                                new Chart("myChartC", {
-                                type: "bar",
-                                data: {
-                                    labels: xValues,
-                                    datasets: [{
-                                    backgroundColor: barColors,
-                                    data: yValues
-                                    }]
-                                },
-                                options: {
-                                    indexAxis: 'y',
-                                    legend: {display: false},
-                                    title: {
-                                    display: true,
-                                    text: "World Wine Production 2018"
-                                    }
-                                }
-                                });
-                                console.log(e);
-                     
-                                document.getElementById('flag').innerHTML = `<img class="flagimg" src="${e.countryInfo.flag}" alt="${e.country}"></img>`
+            var c = e.stats.confirmed
+            var xValues = ["Confirmed", "Deaths", "Recovered"];
+            var yValues = [c, e.stats.deaths, e.stats.recovered];
+            var barColors = ["Yellow", "red", "green"];
 
-                        map.flyTo({
-                            center: [e.countryInfo.long, e.countryInfo.lat],
-                            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-                        });
+            new Chart("myChartSD", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: e.province
                     }
-                });
-            }
+                }
+            });
+
+
+
+        }
+    });
+
+
+
+
+
+
+    map.flyTo({
+        center: [loc.longitude, loc.latitude],
+        essential: true // this animation is considered essential with respect to prefers-reduced-motion
+    });
+
+
+
+
+}
+else if (is_notstate) {
+    var loc = 0;
+    All_countries.forEach(e => {
+        if (e.country == selected_country) {
+            $('#myChartSD').remove();
+
+            var xValues = ["Active", "Cases", "Deaths", "Recovered"];
+            var yValues = [e.active, e.cases, e.deaths, e.recovered];
+            var barColors = ["Yellow", "purple", "red", "green"];
+
+            new Chart("myChartCS", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: e.country
+                    }
+                }
+            });
+
+            $('#SD').append('<canvas id="myChartSD" style="width:100%;max-width:600px"></canvas>');
+
+
+
+
+            document.getElementById('flag').innerHTML = `<img class="flagimg" src="${e.countryInfo.flag}" alt="${e.country}"></img>`
+
+            map.flyTo({
+                center: [e.countryInfo.long, e.countryInfo.lat],
+                essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            });
+        }
+    });
+}
         });
-        
-        map.addControl(
-            new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl
-            })
-        );
 
-        //*******************************************************************************
-        // filling data
-        var map_data_arr = []
-        data.forEach(e => {
-            var obj = {
-                'type': 'Feature',
-                'properties': {
-                    'description': ` <div id="pop"> <p>country : ${e.country}</p>
+map.addControl(
+    new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    })
+);
+
+//*******************************************************************************
+// filling data
+var map_data_arr = []
+data.forEach(e => {
+    var obj = {
+        'type': 'Feature',
+        'properties': {
+            'description': ` <div id="pop"> <p>country : ${e.country}</p>
                                    <p>confirmed : ${e.stats.confirmed}</p>
                                    <p>deaths : ${e.stats.deaths}</p>
                                    <p>recovered :${e.stats.recovered} op</p>
                                    <p>province : ${e.province}</p> </div>`
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [e.coordinates.longitude, e.coordinates.latitude]
-                }
-            }
-            map_data_arr.push(obj)
-        });
-        //******************************************************************************************************************
-        map.on('load', function () {
-            map.addSource('places', {
-                'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': map_data_arr
-                }
-            });
-            
-            map.addLayer({
-                'id': 'places',
-                'type': 'circle',
-                'source': 'places',
-                'paint': {
-                    'circle-color': "blue",
-                    'circle-radius': 5,
-                    'circle-stroke-width': 2,
-                    'circle-stroke-color': 'white'
-                }
-            });
-            // Create a popup, but don't add it to the map yet.
-            var popup = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: false
-            });
+        },
+        'geometry': {
+            'type': 'Point',
+            'coordinates': [e.coordinates.longitude, e.coordinates.latitude]
+        }
+    }
+    map_data_arr.push(obj)
+});
+//******************************************************************************************************************
+map.on('load', function () {
+    map.addSource('places', {
+        'type': 'geojson',
+        'data': {
+            'type': 'FeatureCollection',
+            'features': map_data_arr
+        }
+    });
 
-            map.on('mouseenter', 'places', function (e) {
-                map.getCanvas().style.cursor = 'pointer';
+    map.addLayer({
+        'id': 'places',
+        'type': 'circle',
+        'source': 'places',
+        'paint': {
+            'circle-color': "red",
+            'circle-radius': 5,
+            'circle-stroke-width': 2,
+            'circle-stroke-color': 'white'
+        }
+    });
+    // Create a popup, but don't add it to the map yet.
+    var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
 
-                var coordinates = e.features[0].geometry.coordinates.slice();
-                var description = e.features[0].properties.description;
+    map.on('mouseenter', 'places', function (e) {
+        map.getCanvas().style.cursor = 'pointer';
 
-           
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
 
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                popup.setLngLat(coordinates).setHTML(description).addTo(map);
-            });
 
-            map.on('mouseleave', 'places', function () {
-                map.getCanvas().style.cursor = '';
-                popup.remove();
-            });
-        });
-        data_map = data
-        console.log(data);
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    });
+
+    map.on('mouseleave', 'places', function () {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+});
+data_map = data
     })
-    fetch('https://api.covid19india.org/state_district_wise.json')
-        .then(response => response.json())
-        .then(data => {
-            dist_data = data
-        })
+fetch('https://api.covid19india.org/state_district_wise.json')
+    .then(response => response.json())
+    .then(data => {
+        dist_data = data
+    })
 
 
-      
+
 
 
 
@@ -260,20 +399,19 @@ function myFunction2(e) {
                 }
                 options = options + `<option value="${index}">${e.province}</option>`
                 index++;
-                is_notstate=false;
-                console.log("yes satte");
+                is_notstate = false;
             }
             else {
                 document.getElementById("state").setAttribute("disabled", false);
+                document.getElementById("dist").setAttribute("disabled", false);
+
                 is_notstate = true;
-                console.log("no state");
             }
         }
     });
     document.getElementById("state").innerHTML = options;
 }
 
-var state_selected;
 function myFunction(e) {  // on state selection
     if (selected_country == "India") {
         var options2 = "<option selected>District</option>"
@@ -309,5 +447,82 @@ function myFunction1(e) {
 }
 
 
+// *******************Vaccinated Data***************************************
 
+var widthhh;
+function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+
+
+var iii = 0;
+window.addEventListener('scroll', function () {
+   
+    if (iii == 0) {
+        if(widthhh<800){
+            if (window.pageYOffset > 720) {
+
+                animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 3 / 4), parseInt(vaccD.dc), 4000);
+                animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 3 / 4), parseInt(vaccD.dd), 4000);
+                animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 3 / 4), parseInt(vaccD.dr), 4000);
+                animateValue(document.getElementById('vv'), parseInt(vaccD.v * 3 / 4), parseInt(vaccD.v), 4000);
+                animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 3 / 4), parseInt(vaccD.tc), 4000);
+                animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 3 / 4), parseInt(vaccD.td), 4000);
+                animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 3 / 4), parseInt(vaccD.tr), 4000);
+    
+    
+                iii = 2;
+
+        }}
+        if(widthhh<383){
+            if (window.pageYOffset >496 ) {
+
+                animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 3 / 4), parseInt(vaccD.dc), 4000);
+                animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 3 / 4), parseInt(vaccD.dd), 4000);
+                animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 3 / 4), parseInt(vaccD.dr), 4000);
+                animateValue(document.getElementById('vv'), parseInt(vaccD.v * 3 / 4), parseInt(vaccD.v), 4000);
+                animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 3 / 4), parseInt(vaccD.tc), 4000);
+                animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 3 / 4), parseInt(vaccD.td), 4000);
+                animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 3 / 4), parseInt(vaccD.tr), 4000);
+    
+    
+                iii = 2;
+
+        }}
+        else{
+        if (window.pageYOffset > 220) {
+
+            animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 3 / 4), parseInt(vaccD.dc), 4000);
+            animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 3 / 4), parseInt(vaccD.dd), 4000);
+            animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 3 / 4), parseInt(vaccD.dr), 4000);
+            animateValue(document.getElementById('vv'), parseInt(vaccD.v * 3 / 4), parseInt(vaccD.v), 4000);
+            animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 3 / 4), parseInt(vaccD.tc), 4000);
+            animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 3 / 4), parseInt(vaccD.td), 4000);
+            animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 3 / 4), parseInt(vaccD.tr), 4000);
+
+
+            iii = 2;
+        }}
+    }
+
+
+});
+
+widthhh =  screen.width
+
+window.addEventListener('resize',()=>{
+
+  widthhh =  screen.width
+
+})
 

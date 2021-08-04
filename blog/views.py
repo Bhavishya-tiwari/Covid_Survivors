@@ -197,34 +197,66 @@ def delblog(request, dsno):
                 
     else:
         profilejson = request.user.first_name
-        # profiledict = json.loads(profilejson)
-        post = Post.objects.filter(sno=dsno).first()
-        rep = Report.objects.filter(blog_sno=dsno).all()
+        try:
 
-        from_rep = False
+            profiledict = json.loads(profilejson)
+            post = Post.objects.filter(sno=dsno).first()
+            rep = Report.objects.filter(blog_sno=dsno).all()
 
-        if(post.authorUsername == request.user.username):
-            try:
-                for r in rep:
-                    r.delete()
-             
+            from_rep = False
 
+            if(profiledict["G"]=='e'):
+                try:
+                    for r in rep:
+                        r.delete()
                 
-                url ="./med/" +  str(post.blog_img)
-                if os.path.exists(url):
-                    os.remove(url)
-                    print("deleted")
-                else:
-                    print("The file does not exist")
-                post.delete()
-                messages.success(request, "Blog Deleted")    
-    
-                return redirect("blogHome")
+
+                    
+                    url ="./med/" +  str(post.blog_img)
+                    if os.path.exists(url):
+                        os.remove(url)
+                        print("deleted")
+                    else:
+                        print("The file does not exist")
+                    post.delete()
+                    messages.success(request, "Blog Deleted")    
+        
+                    return redirect("blogHome")
+                    
+                except:
+                    print("wrong") 
                 
-            except:
-                print("wrong") 
+                    return redirect("blogHome")
+        except:
+            post = Post.objects.filter(sno=dsno).first()
+            rep = Report.objects.filter(blog_sno=dsno).all()
+
+            from_rep = False
+
+            if(post.authorUsername == request.user.username):
+                try:
+                    for r in rep:
+                        r.delete()
+                
+
+                    
+                    url ="./med/" +  str(post.blog_img)
+                    if os.path.exists(url):
+                        os.remove(url)
+                        print("deleted")
+                    else:
+                        print("The file does not exist")
+                    post.delete()
+                    messages.success(request, "Blog Deleted")    
+        
+                    return redirect("blogHome")
+                    
+                except:
+                    print("wrong") 
+                
+                    return redirect("blogHome")
+
             
-                return redirect("blogHome")
           
                 
         

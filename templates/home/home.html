@@ -16,6 +16,7 @@
         }
 
         width: 99vw;
+        overflow-x: hidden; /* Hide horizontal scrollbar */
     }
 
     .Heading {
@@ -108,7 +109,7 @@ top: 3vh;
   
 
     img {
-        width: 99.4vw;
+        width: 99.9vw;
         height: 100vh;
         position: absolute;
         z-index: -99999;
@@ -131,6 +132,31 @@ top: 3vh;
     .alr{
 position: sticky; 
    }
+@media only screen and (max-width: 886px) {
+.wid{
+    width: 94vw;
+    position: static;
+    top: 15vh;
+        
+        margin: auto;
+
+}
+img {
+        width: auto;
+        height: 100vh;
+        position: absolute;
+        left: -90vh;
+        z-index: -99999;
+        opacity: 0.8;
+    }
+    .Heading{
+position: relative;
+top: 1vh;    }
+
+
+
+
+}
 </style>
 {% endblock css %}
 
@@ -146,7 +172,7 @@ position: sticky;
 <div class="Heading">Welcome To Our Website</div>
 
 
-<div class="card text-center my-4">
+<div class="card text-center wid my-4">
     <div class="card-header ">
         Welcome
     </div>

@@ -89,12 +89,19 @@
     display: block;
     width: 200px;
   }
+  .ccc{
+    transition: all 0.6s;
+  }
+  .ccc:hover{
+    box-shadow: rgb(0, 23, 91) 5px 5px 5px;
+  }
 
   .Shareblg {
     position: -webkit-sticky;
     position: sticky;
     top: 20vh;
     left: 90vw;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   img {
@@ -134,10 +141,12 @@
     font-family: 'Times New Roman', Times, serif;
     color: gray;
   }
-  .butto{
+
+  .butto {
     display: block;
-min-width: 70px;
-max-width: 110px;  }
+    min-width: 70px;
+    max-width: 110px;
+  }
 </style>
 
 
@@ -148,8 +157,10 @@ max-width: 110px;  }
 {% block body %}
 {% load static %}
 <img src="{% static "imgs/bhh.jpg" %}" alt="home" />
+
 <a href="/blog/addblog">
-  <button type="button" id="share" class="btn-hover butto color-1 Shareblg">Share Your Experience <span>&#9998</span> </button>
+  <button type="button" id="share" class="btn-hover butto color-1 Shareblg">Share Your Experience <span>&#9998</span>
+  </button>
 
 </a>
 
@@ -172,24 +183,23 @@ max-width: 110px;  }
     </div>
     <div class="card-body">
 
-      <h5 class="card-title">By <span id="author">{{post.author}}</span> <span id="time">{{post.Timestamp |slice:"0:11"}} :: <b>{{post.Timestamp | slice:"11:16"}} </b> </span></h5>
+      <h5 class="card-title">By <span id="author">{{post.author}}</span> <span id="time">{{post.Timestamp|slice:"0:11"}} :: <b>{{post.Timestamp | slice:"11:16"}} </b> </span></h5>
       <p class="card-text">
-      <div>
         {% autoescape off %}{{post.content|slice:300}}{% endautoescape %}
         <!-- <br> -->
 
 
-      </div>
       </p>
     </div>
     <a href="/blog/{{post.sno}}" class="btn-hover butto color-7" style="padding:9px 13px ;">Read more</a>
   </div>
-
-
-
-
-
+  
+  
+  
+  
+  
   {% endfor %}
+</div>
 
 
 
@@ -225,5 +235,4 @@ max-width: 110px;  }
 
 
 
-</div>
 {% endblock %}

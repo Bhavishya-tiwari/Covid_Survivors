@@ -96,7 +96,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                         var c = e.stats.confirmed
                         var xValues = ["Confirmed", "Deaths", "Recovered"];
                         var yValues = [c, e.stats.deaths, e.stats.recovered];
-                        var barColors = ["Yellow", "red", "green"];
+                        var barColors = ["white", "red", "blue"];
 
                         new Chart("myChartCS", {
                             type: "bar",
@@ -121,7 +121,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                 let district_full_data = dist_data[state_selected]["districtData"][dist_name]
                 var xValues = ["Confirmed", "Deaths", "Recovered", "Active"];
                 var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
-                var barColors = ["Yellow", "red", "green", "pink"];
+                var barColors = ["white", "red", "blue", "pink"];
 
                 new Chart("myChartSD", {
                     type: "bar",
@@ -171,10 +171,11 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
     All_countries.forEach(e => {
         if (e.country == selected_country) {
+            document.getElementById('flag').innerHTML = `<img class="flagimg" src="${e.countryInfo.flag}" alt="${e.country}"></img>`
 
             var xValues = ["Active", "Cases", "Deaths", "Recovered"];
             var yValues = [e.active, e.cases, e.deaths, e.recovered];
-            var barColors = ["yellow", "purple", "red", "green"];
+            var barColors = ["white", "purple", "red", "blue"];
 
             new Chart("myChartCS", {
                 type: "bar",
@@ -206,7 +207,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
             var c = e.stats.confirmed
             var xValues = ["Confirmed", "Deaths", "Recovered"];
             var yValues = [c, e.stats.deaths, e.stats.recovered];
-            var barColors = ["Yellow", "red", "green"];
+            var barColors = ["white", "red", "blue"];
 
             new Chart("myChartSD", {
                 type: "bar",
@@ -254,7 +255,7 @@ else if (is_notstate) {
 
             var xValues = ["Active", "Cases", "Deaths", "Recovered"];
             var yValues = [e.active, e.cases, e.deaths, e.recovered];
-            var barColors = ["Yellow", "purple", "red", "green"];
+            var barColors = ["white", "purple", "red", "blue"];
 
             new Chart("myChartCS", {
                 type: "bar",

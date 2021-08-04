@@ -132,9 +132,27 @@ input[type=text] {
  
   border-radius: 5px 5px 5px 5px;
 }
+input[type=password] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 15px 32px;
+  
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #f6f6f6;
+ 
+  border-radius: 5px 5px 5px 5px;
+}
 
 
 input[type=text]:placeholder {
+  color: #cccccc;
+}
+input[type=password]:placeholder {
   color: #cccccc;
 }
 
@@ -154,7 +172,7 @@ input[type=text]:placeholder {
 .google{
     display: flex;
    
-    border: none;
+    /* border: none; */
    
     padding: 0px 1px 0px 32px;
     border: solid 3px rgb(1, 17, 110) ;
@@ -162,6 +180,8 @@ input[type=text]:placeholder {
    
     text-transform: uppercase;
     font-size: 13px;
+    /* justify-content: center; */
+    
     
    
     border-radius: 5px 5px 5px 5px;
@@ -173,11 +193,15 @@ input[type=text]:placeholder {
   display: inline;
   width: 40px;
   height: 40px;
+  position: relative;
+  left: 50%;
   margin: 5px;
 }
-.google input{
+.google a{
   display: inline;
   background: transparent;
+  position: relative;
+  left: 7%;
   font-weight: bolder;
   padding: 7px;
   margin: 10px;
@@ -270,14 +294,15 @@ input[type=text]:placeholder {
           <img src="{% static "imgs/employee4.png" %}" alt="home" />
         </div>
 
-        <form>
-          <input type="text" placeholder="Username">
-          <input type="text" placeholder="Password">
+        <form action="/loginemp" method="POST">
+          {% csrf_token %}
+          <input type="text" name="uusername" id="exampleInputEmail1" placeholder="Username">
+          <input type="password" name="upassword" id="exampleInputPassword1" placeholder="Password">
           <input type="submit" class="empsubmit" value="Log In">
         </form>
 
         <div class="forget">
-          <a class="underlineHover" href="#">Forgot Password?</a>
+          <a class="underlineHover" href="/reset_password">Forgot Password?</a>
         </div>
       </div>
       <!-- ----------------------------------------- -->
@@ -297,8 +322,10 @@ input[type=text]:placeholder {
              
               <img src="{% static "imgs/google.png" %}" alt="home" />
             </div>
+             {% load socialaccount %}
+            {% providers_media_js %}
 
-            <input type="submit" class="usersubmit" value="LogIn with Google">
+            <a   href="{% provider_login_url "google" %}" class="usersubmit">LogIn with Google</a>
           </div>
 
         </form>

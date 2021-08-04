@@ -84,6 +84,7 @@ top: 3vh;
     .chat {
         height: 60vh;
         width: 50vw;
+        display:none;
         /* background-color: rgb(79, 161, 90); */
         position: relative;
         top: 60vh;
@@ -142,7 +143,7 @@ position: sticky;
 
 }
 img {
-        width: auto;
+        width: 100vw;
         height: 100vh;
         position: absolute;
         left: -90vh;
@@ -178,11 +179,7 @@ top: 1vh;    }
     </div>
     <div id="u" class="card-body">
         <h3 class="card-title">Covid Survivors</h3>
-        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident error ratione
-            doloribus sed dolorum,
-            ipsum cumque reprehenderit dignissimos architecto veniam optio sint aliquam consectetur corrupti vero
-            similique velit. Possimus eum consequatur delectus quia magni.Visit the Covid Updates Section and see
-            latest
+        <p class="card-text" style="font-family: 'Times New Roman'; font-size: 1.2em;color: rgb(5, 0, 76);" >A platform where details(age, address, blood group, contact no. of the covid+ patients who have been recovered will be registered with authentication so that it can be used later by the needy. Providing an open chat option for others to take advice and help keeping patients mentally healthy.
         </p>
       <button class="btn-hover color-7">Get Started</button>
 
@@ -192,20 +189,9 @@ top: 1vh;    }
 
 
 
-<section class="chat">
-    <h1>chat</h1>
-    <div class="msgs" id="msgs">
 
-    </div>
-    <form method="post" action="#" id="msg_form">{% csrf_token %}
-        <div class="input-group">
-            <textarea rows="1" class="form-control ta" aria-label="With textarea" id="msg_send" name="msg_send"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary m-3">Send</button>
-            </form>
-</section>
 
-<script type="text/javascript">
+{% comment %} <script type="text/javascript">
     var a = "{{request.user}}";
     
 $('#msg_form').submit(function(event) {
@@ -233,7 +219,7 @@ var a = "{{request.user}}"
     {% comment %} console.log(a); {% endcomment %}
 
 
-var g="";
+{% comment %} var g="";
 setInterval(() => {
     
     console.log("working")
@@ -256,12 +242,12 @@ setInterval(() => {
     })
 },1000);
 
-</script>
+</script> {% endcomment %}
 
 
-{% endblock body %}
+{% endblock body %} 
 {% comment %} {% block js %}
 
 {% load static %}
 <script src="{% static 'chat.js' %}"></script>
-{% endblock js %} {% endcomment %}
+{% endblock js %}  {% endcomment %}

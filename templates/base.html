@@ -288,6 +288,9 @@
 
       animation: l 4s ease-out -0.2s 1;
     }
+    .n{
+      max-height:7vh ;
+    }
 
     .cc {
       margin-left: 15px;
@@ -326,6 +329,7 @@
         display: block;
         left: 5px;
       }
+      
 
 
       100% {
@@ -400,14 +404,8 @@
 
           <div class="text-end">
 
-            <button type="button" class="btn btn-info"><a href="/login">login</a></button>
-            {% comment %} <button type="button" class="btn btn-warning"> <a href="/nusignup">Sign-up</a> </button> {%endcomment %}
-            {% load socialaccount %}
-            {% providers_media_js %}
-
-
-            <a href="{% provider_login_url "google" %}"> <button type="button" class="btn btn-primary"> Login google
-              </button> </a>
+            <button type="button" class="btn-hover color-9"><a href="/login">login</a></button>
+          
 
           </div>
           {% endif %}
@@ -465,46 +463,25 @@
   {% endblock js %}
 
   <script>
-
-    var tap = 0;
-
     document.getElementById("x").addEventListener('click', () => {
-
-    document.getElementById('togg').classList.toggle('rotated');
-
-
-
-      if (tap % 2 !== 0) {
-        document.getElementById("i").classList.remove("nn")
-        document.getElementById("i").style.maxHeight = "54vh";
-
-        tap = tap + 1;
-      }
-      else if (tap % 2 === 0) {
-        document.getElementById("i").style.maxHeight = "7vh";
-
-
-
-        tap = tap + 1;
-
-      }
-
-
-
-
-
-
-    })
-
-
-
-
-
+      document.getElementById('togg').classList.toggle('rotated');
+    document.getElementById("i").classList.toggle('n');
+  })
 
   </script>
 
 
 
+
+
+
+
+
+
+    
+    
+    
+    
 
 </body>
 

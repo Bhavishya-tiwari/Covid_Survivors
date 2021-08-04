@@ -31,50 +31,9 @@ def v(p):
         return False
 
 def home(request):
-    if request.method == "POST":
-        print("svmk")
-        if(request.user.is_authenticated):
-            profilejson = request.user.first_name
-            try:
-                profiledict = json.loads(profilejson)
-                
-                
-                now = datetime.datetime.now()
-                name = profiledict["N"]
-                username = request.user.username
-                email = request.user.email
-                msg = request.POST.get('msg')
-                Query = Message( authorUsername=username,email=email,name=name,
-                                Timestamp=now, message=msg)
-                                #   why email vroo
-                if(msg != ""):
-                    Query.save()
-                    return HttpResponse("done")
-                else:
-                    return HttpResponse("error")
-            except:
-                now = datetime.datetime.now()
-                name = profilejson + " " + request.user.last_name
-                username = request.user.username
-                email = "example@email"
-                msg = request.POST.get('msg')
-                Query = Message( authorUsername=username,email=email,name=name,
-                                Timestamp=now, message=msg)
-                                #   why email vroo
-                if(msg != ""):
-                    Query.save()
-                    return HttpResponse("done")
-                else:
-                    return HttpResponse("error")
+   
+    return render(request, 'home/home.html')
 
-        else:
-            print("v")
-            messages.error(request, "Please login to chat")
-            return render(request, 'home/home.html')
-            
-    else:
-
-        return render(request, 'home/home.html')
 
 
 def CovidUpdates(request):
@@ -211,7 +170,51 @@ def ContactUs(request):
 
 
 def livechat(request):
-    return render(request,'home/livechat.html' )
+    if request.method == "POST":
+        print("svmk")
+        if(request.user.is_authenticated):
+            profilejson = request.user.first_name
+            try:
+                profiledict = json.loads(profilejson)
+                
+                
+                now = datetime.datetime.now()
+                name = profiledict["N"]
+                username = request.user.username
+                email = request.user.email
+                msg = request.POST.get('msg')
+                Query = Message( authorUsername=username,email=email,name=name,
+                                Timestamp=now, message=msg)
+                                #   why email vroo
+                if(msg != ""):
+                    Query.save()
+                    
+                    return HttpResponse("done")
+                else:
+                    return HttpResponse("error")
+            except:
+                now = datetime.datetime.now()
+                name = profilejson + " " + request.user.last_name
+                username = request.user.username
+                email = "example@email"
+                msg = request.POST.get('msg')
+                Query = Message( authorUsername=username,email=email,name=name,
+                                Timestamp=now, message=msg)
+                print(Query)
+                                #   why email vroo
+                if(msg != ""):
+                    Query.save()
+                    return HttpResponse("done")
+                else:
+                    return HttpResponse("error")
+
+        else:
+            print("v")
+            messages.error(request, "Please login to chat")
+            return render(request, 'home/home.html')
+            
+    else:
+        return render(request,'home/livechat.html' )
                     
 
                 

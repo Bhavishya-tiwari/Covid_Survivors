@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}Donors{% endblock title %}
+{% block title %}Live Chat{% endblock title %}
 {% block css %}
 <style>
 
-.container{
-    margin-top: 10px;
-   /* border: solid 2px rgb(1, 17, 110); */
-    /* margin: auto; */
-    max-width: 600px !important;
+.container-monal{
+    
+   border: solid 2px rgb(1, 17, 110);
+    margin: 10px auto;
+    
+    max-width: 550px !important;
     box-shadow: rgb(0 0 0) 0px 2px 15px -4px;
     padding-left: 0;
     padding-right: 0;
@@ -18,17 +19,17 @@
 }
 @media only screen and (max-width: 360px) {
   .completebox{
-    height: 550px;  
+    height: 480px;  
   }
   }
   @media only screen and (min-width: 498px) {
     .completebox{
-        height: 600px; 
+        height: 540px; 
     }
     }
     @media only screen and (max-width: 320px) {
         .completebox{
-          height: 480px;  
+          height: 420px;  
         }
         }
 
@@ -180,11 +181,13 @@ input[type="text"] {
 
 {% endblock css %}
 {% block body %}
-<div class="total">
-    <div class="container">
+{% load static %}
+<div class="total-monal">
+    <div class="container-monal">
         <div class="heading "> 
             <div class="chatlogo">
-                <img src="chatlogo2.png" alt="">
+             
+                <img src="{% static "imgs/chatlogo2.png" %}" alt="home" />
             </div>
             <div class="livechat">
                 Live Chat
@@ -254,7 +257,8 @@ input[type="text"] {
         <input type="text" class="writemsg" placeholder="Write message..." >
        </div>
        <div class="newsendlogo">
-           <img src="newsendlogo.png" alt="Send">
+           
+           <img src="{% static "imgs/newsendlogo.png" %}" alt="home" />
        </div>        
     </div>    
     </div> 

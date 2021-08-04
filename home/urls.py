@@ -24,6 +24,8 @@ urlpatterns = [
     # Adding employee by login as hospital
     path('addemployeee', views.AddEmployee, name='AddEmployee'),
 
+    path('livechat', views.livechat, name='livechat'),
+
     path('logout', views.handelLogout, name='logout'),
     
 

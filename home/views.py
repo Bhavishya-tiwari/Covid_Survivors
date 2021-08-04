@@ -208,6 +208,10 @@ def ContactUs(request):
             messages.error(request, "error occured!!")
             return redirect("ContactUs")    
     return render(request, 'home/contact_us.html')
+
+
+def livechat(request):
+    return render(request,'home/livechat.html' )
                     
 
                 

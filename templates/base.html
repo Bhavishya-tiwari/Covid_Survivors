@@ -366,6 +366,9 @@
 }
 .total-monal{
     width: 100vw;
+    position: relative;
+    /* top: 2vh; */
+
     border: solid 2px black;
     background: #292929!important;
     overflow-x: none;
@@ -382,6 +385,7 @@
     height: 23px;
     width: 26px;
     margin: 12px 0 -6px 0px;
+    display: inline-block;
 }
 .middlesection-mm{
 display: flex;
@@ -400,10 +404,12 @@ display: flex;
 }
 .middlesection-ul li{
     transition: all 0.5s;
-}
-.middlesection-ul li a{
+  }
+  .middlesection-ul li a{
+  display: inline-block;
     color: rgb(172, 170, 170);
     transition: all 0.5s;
+
 }
 .fourthmiddle-mm img{
     width: 162px;
@@ -512,7 +518,7 @@ display: flex;
   
 }
 
-@media screen and (min-width: 672px){
+@media screen and (min-width: 889px){
     .middlesection-mm{
         display: flex;
         justify-content: space-evenly;
@@ -669,7 +675,7 @@ display: flex;
                     <h4><span>Quick Links</span></h4>
                     <ul class="middlesection-ul">
                         <li><img src="{% static "imgs/bullet3.png" %}" class="bulleticon-mm" alt="">
-                            <a href="https://madad-covid.in/" class="middlesectionlink" target="_blank">MADAD-IITI</a></li>
+                           <a href="https://madad-covid.in/" class="middlesectionlink" target="_blank">MADAD-IITI</a></li>
                         <li><img src="{% static "imgs/bullet3.png" %}" class="bulleticon-mm" alt="">
                             <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019?gclid=Cj0KCQjwsqmEBhDiARIsANV8H3Z9S2QOOEpwE5kNxleFkJ0lr57jaTgfQk7WJOBPfwKZ-XJP8ZJib-4aAqSgEALw_wcB" class="middlesectionlink" target="_blank">WHO</a></li>
                         <li><img src="{% static "imgs/bullet3.png" %}" class="bulleticon-mm" alt="">

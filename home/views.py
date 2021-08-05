@@ -453,6 +453,8 @@ def addpat(request):
         username = request.POST.get('pusername')
         name = request.POST.get('pname')
         pemail = request.POST.get('pemail')
+        DorCS = request.POST.get('DorCS')
+        print(DorCS)
         pbloodgrp = request.POST.get('pbloodgrp')
         pdod = request.POST.get('pdod')
         p_age = request.POST.get('p_age')

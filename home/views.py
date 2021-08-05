@@ -467,6 +467,11 @@ def addpat(request):
         profilejson2 = request.user.last_name
         profiledict = json.loads(profilejson)
         profiledict2 = json.loads(profilejson2)
+        DoC = 0
+        if(DorCS == "on"):
+            DoC = "CS"
+        else:
+            DoC="BD"
 
         profileobj1 = {
             "N": name,
@@ -475,6 +480,8 @@ def addpat(request):
             "B": pbloodgrp,
             "D": pdod,
             "n": p_age,
+            "T":DoC,
+
         }
         pro2={
             "A": profiledict2["X"],

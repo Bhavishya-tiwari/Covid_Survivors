@@ -86,9 +86,23 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
 
         document.getElementById("DataShown").addEventListener('click', function () {
-            if (selected_country == "India") {
-                var loc = 0;
+            $('#CS').remove(); // this is my <canvas> element
+            $('#SD').remove(); // this is my <canvas> element
+            $('#ff').append(` <div id="CS">
 
+                            
+            <canvas id="myChartCS" style="width:100%;max-width:600px"></canvas>
+     </div>
+     <div id="SD">
+
+            
+            <canvas id="myChartSD" style="width:100%;max-width:600px"></canvas>
+     </div>`);
+            if (selected_country == "India") {
+
+                
+                var loc = 0;
+                
                 // getting location of that state
                 data_map.forEach(e => {
                     if (e.province == state_name) {
@@ -122,7 +136,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                 var xValues = ["Confirmed", "Deaths", "Recovered", "Active"];
                 var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
                 var barColors = ["white", "red", "blue", "pink"];
-
+                
                 new Chart("myChartSD", {
                     type: "bar",
                     data: {
@@ -163,6 +177,10 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
 
             else if (is_notstate == false) {
+
+
+
+
 
 
     var loc = 0;
@@ -251,7 +269,6 @@ else if (is_notstate) {
     var loc = 0;
     All_countries.forEach(e => {
         if (e.country == selected_country) {
-            $('#myChartSD').remove();
 
             var xValues = ["Active", "Cases", "Deaths", "Recovered"];
             var yValues = [e.active, e.cases, e.deaths, e.recovered];
@@ -276,7 +293,6 @@ else if (is_notstate) {
                 }
             });
 
-            $('#SD').append('<canvas id="myChartSD" style="width:100%;max-width:600px"></canvas>');
 
 
 

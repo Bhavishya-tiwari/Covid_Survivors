@@ -3,159 +3,291 @@
 {% block title %}Profile{% endblock title %}
 {% block css %}
 <style>
-.container{
-  text-align: left;
-}
-span{
-  color: rgb(75, 61, 201);
-
-  font-weight: 400;
-}
-#span{
-  font-size: xx-large;
-}
-#batch{
-  zoom: 1.5;
-}
-img{
-  width: 6vw;
-}
-.box{
+  
+          .cards-list {
+  z-index: 0;
+  width: 100%;
   display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
-/* .container{
+
+.card {
+  margin: 30px auto;
+  width: 300px;
+  height: 400px;
+  border-radius: 20px;
+box-shadow: 5px 5px 15px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+  position: relative;
+          left: 4%;
+}
+
+.card .card_image {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+}
+
+.card .card_image img {
+  width: inherit;
+  height: 380px;
+  border-radius: 40px;
+  object-fit: cover;
+  filter: contrast(1.3);
+}
+
+.card .card_title {
+  text-align: center;
+  /* border-radius: 0px 0px 40px 40px; */
+  width: 100.7%;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: -80px;
+  margin-left: 0;
+  margin-right: 0;
+  /* color: black; */
+  background-color: rgb(2, 2, 72);
+  height: 40px;
+  position: relative;
+  top: 20px;
+}
+
+.card:hover {
+  transform: scale(1.05,1.05);
+  box-shadow: 5px 5px 20px 10px rgba(0,0,0,0.25), 
+    -5px -5px 20px 10px rgba(0,0,0,0.22);
+}
+
+.title-white {
   color: white;
-} */
+}
+
+.title-black {
+  color: black;
+}
+
+@media all and (max-width: 500px) {
+  .card-list {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}
+
+
+  .b{
+    /* background-color: cyan; */
+    height: 63vh;
+    /* width: 80vw; */
+    /* min-width: 600px; */
+    max-width: 1400px;
+    margin: auto;
+position: relative;
+top: 11vh;
+display: grid;
+grid-template-columns: 1fr 2.5fr;
+
+  }
+#pphoto{
+/* background-color: rgb(255, 255, 255); */
+}
+#content{
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  /* min-width: 500px; */
+  top: 5%;
+
+}
+#content:hover{
+}
+.hed{
+  width: 100%;
+  height: 15%;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+  background-color: rgb(8, 0, 64);
+  display: flex;
+  font-size: 2em;
+  color: white;
+  justify-content: center;
+  /* align-items: center; */
+
+}
+.hed p{
+  margin-top: 1%;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* background-color: #2196F3; */
+  padding: 3px;
+}
+.grid-item {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.326) 0px 3px 3px;
+  padding: 20px;
+  font-size: 30px;
+  /* text-align: center; */
+}
+
+@media only screen and (max-width: 1432px) {
+        .card{
+          
+          transform: scale(0.9,0.9);
+        }
+        #content{
+          transform: scale(0.9,0.9);
+
+  
+
+}
+
+        
+ 
+    }
+
+@media only screen and (max-width: 1154px) {
+
+
+
+
+}
+
+
+    .title{
+  font-family: 'Times New Roman', Times, serif;
+      font-weight: bold;
+      color: rgb(0, 6, 68);
+      text-decoration: underline;
+      display: inline-block;
+    }
+
+#foot{
+  width: 100vw;
+  height: 20vh;
+  /* background-color: lawngreen; */
+}
+
+@media only screen and (max-width: 992px) {
+
+ .title, .entity{
+   font-size: 0.7em;
+ }
+
+     
+  
+
+
+    }
+
+@media only screen and (max-width: 872px) {
+
+.b{
+  display: block;
+}
+.card {
+  margin: auto;
+  width: 200px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 20px;
+box-shadow: 5px 5px 15px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+  transform: scale(0.9,0.9);
+  position: relative;
+    left: -6px;
+          top: -9vh;
+}
+
+.card .card_image img {
+  width: inherit;
+  height: 350px;
+  position: relative;
+    left: -6px;
+          top: -9vh;
+
+  
+  border-radius: 40px;
+  object-fit: cover;
+  filter: contrast(1.3);
+}
+
+
+#pphoto{
+  height: 30vh;
+}
+}
+@media only screen and (max-width: 658px) {
+
+  .grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  /* background-color: #2196F3; */
+  padding: 3px;
+}
+.grid-item {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.326) 0px 3px 3px;
+  padding: 20px;
+  font-size: 30px;
+  /* text-align: center; */
+}
+#content{
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  /* min-width: 500px; */
+  top: -10%;
+
+}
+
+
+}
+
+.entity{
+  
+}
+
+
 </style>
 {% endblock css %}
 
 {% block body %}
-<span id="span" style="color: brown; text-decoration: underline;">
+{% load static %}
+<div class="b">
+<div id="pphoto">
+  <div class="cards-list">
+  
+    <div class="card 1">
 
-  Profile-
-</span>
-<div class="box">
-{% if p1.G == "Wa"  %}
-  <img src="https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/user-settings.svg" alt="Admin">
-<span id="batch"><span class="badge rounded-pill bg-info">Admin</span></span>
+      <div class="card_image">  <img src="{% static "imgs/hs.jpg" %}" alt="home" /> </div>
+      <div class="card_title title-white">
+        <p>Card Title</p>
+      </div>
+    </div>
+    </div>
+</div>
+<div id="content">
+  <div class="hed"><p>Profile</p></div>
+  <div class="grid-container">
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>  
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>  
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>
+    <div class="grid-item"> <h3 class="title">Name </h3> <span>&#9755;</span> <span class="entity">hehehe</span> </div>
+  </div>
 
-
-{% elif p1.G == "h" %}
-  <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/hospital-clinic.svg" alt="Hospital">
-<span id="batch"><span class="badge rounded-pill bg-info">Hospital</span></span>
-
-  {% elif p1.G == "e"  %}
-  <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/doctor-male.svg" alt="Hospital Employee">
-<span id="batch"><span class="badge rounded-pill bg-info">Employee</span></span>
-
-{% elif p1.n != null %}
-  <img src="https://uxwing.com/wp-content/themes/uxwing/download/15-healthcare-and-medical/hospital-patient.svg" alt="Covid Survivor">
-<span id="batch"><span class="badge rounded-pill bg-info">Covid Survivor</span></span>
-{% else %}
-  <img src="https://uxwing.com/wp-content/themes/uxwing/download/12-people-gesture/young.svg" alt="User">
-<span id="batch"><span class="badge rounded-pill bg-info">User</span></span>
-{% endif %}
+</div>
 
 
 </div>
-<div class="container">
-{% if gg == "True" %}
-<span>Name-</span> {{fn}}<br><hr>
-<span>Username-</span> {{user}}<br><hr>
-{% comment %} <span>Email-</span> {{em}}<br><hr> {% endcomment %}
-{% endif %}
-
-
-
-<span>Name-</span> {{p1.N}} {{fn}} &nbsp; {{ln}}<br><hr>
-<span>Username-</span> {{user}} <br><hr>
-
-{% if p1.G == "c" %}
-<span>Email-</span>{{p2.E}}<br><hr>
-
-{% else  %}
-<span>Email-</span>{{p1.E}} <br><hr>
-{% endif %}
-
-
-
-
-{% comment %} only of hospital {% endcomment %}
-{% if p1.G == "h" %}
-<span>Address-</span>{{p2.A}}<br><hr>
-{% endif %}
-
-
-
-
-
-
-
-{% comment %} only of emp intersection covid survivor{% endcomment %}
-{% comment %} <span>Hospital Name-</span>{{p.Hospital_name}}<br><hr>
-<span>Hospital Email-</span>{{p.Hospital_email}}<br><hr>
-<span>Hospital Address-</span>{{p.Hospital_Add}}<br><hr> {% endcomment %}
-{% if p1.G == "e" %}
-<span>Hospital-</span>{{p2.X}}<br><hr>
-<span>Hospital Email-</span>{{p2.Y}}<br><hr>
-<span>Hospital Adress-</span>{{p2.Z}}<br><hr>
-
-
-
-
-{% endif %}
-{% comment %} only for covid survivor {% endcomment %}
-{% if p1.G == "c" %}
-
-<span>Blood group-</span>{{p1.B}}<br><hr>
-<span>Date of Discharge-</span>{{p1.D}}<br><hr>
-<span>Age-</span>{{p1.N}}<br><hr>
-<span>Hospital-</span>{{p2.A}}<br><hr>
-<span>For any concern mail-</span>{{p2.Au}}<br><hr>
-
-{% endif %}
-
-{% if p1.G == "Wa"  %}
-  <a href="/add">
-   <button type="button" class="btn btn-info">Add Hospital</button>
-  
-  </a> <br>
-    <a href="/commentshow">
-   <button type="button" class="btn btn-warning my-2">View Comments</button>
-
-  </a> <br>
-
-{% endif %}
-
-{% if p1.G == "h"  %}
-  <a href="/addemployeee">
-   <button type="button" class="btn btn-info">Add Employee</button>
-  
-  </a> <br>
-    <a href="/commentshow">
-   <button type="button" class="btn btn-warning my-2">View Comments</button>
-
-  </a> <br>
-
-
-{% endif %}
-
-{% if p1.G == "e"  %}
-  <a href="/addpat">
-   <button type="button" class="btn btn-info">Add Patients</button>
-  <a href="/reportedblogs">
-   <button type="button" class="btn btn-primary">Reported Blogs</button>
-  
-  </a> <br>
-  <a href="/commentshow">
-   <button type="button" class="btn btn-warning my-2">Comments</button>
-
-  </a> <br>
-
-{% endif %}
 
 
 
@@ -170,10 +302,18 @@ img{
 
 
 
-<a href="/logout">
-  <button type="button" class="btn btn-danger">Logout</button>
 
-</a>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
  {% endblock %}

@@ -132,7 +132,11 @@ align-items: center;
 }
 .box:hover{
   box-shadow: rgb(0, 0, 0) 4px 7px 7px;
-
+ transform: scale(1.05, 1.05);
+ z-index: 34092;
+ box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+ {% comment %} transform:skewY(5deg); {% endcomment %}
 }
 #dc{
        background-color: #0088ff;
@@ -153,7 +157,8 @@ align-items: center;
        background-color: rgb(221, 8, 218);
 }
 #v{
-       background-color: #00e400;
+       /* background-color: #00e400; */
+       background-image: linear-gradient(45deg, rgb(110, 255, 245),rgb(79, 88, 255));
 }
 .box b{
        font-family: 'Times New Roman', Times, serif;

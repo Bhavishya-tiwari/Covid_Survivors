@@ -289,7 +289,7 @@
       animation: l 4s ease-out -0.2s 1;
     }
     .n{
-      max-height:7vh ;
+      max-height:7.5vh ;
     }
 
     .cc {
@@ -463,9 +463,36 @@
   {% endblock js %}
 
   <script>
+    
+    widthhh =  screen.width
+    window.addEventListener('resize',()=>{
+    
+      widthhh =  screen.width
+      if(widthhh>960){
+    document.getElementById("i").style.maxHeight="54vh";
+  }
+  else{
+    document.getElementById("i").style.maxHeight="";
+
+  }
+
+
+
+})
+
+    
+
+
+
+
+
     document.getElementById("x").addEventListener('click', () => {
+
       document.getElementById('togg').classList.toggle('rotated');
     document.getElementById("i").classList.toggle('n');
+
+
+
   })
 
   </script>

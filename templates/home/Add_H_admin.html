@@ -20,92 +20,457 @@
   }
 
   #inner {
-    width: 60%;
+    width: 70%;
     margin: auto;
 
 
 
+      {
+      % comment %
+    }
+
     background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+
+      {
+      % endcomment %
+    }
 
   }
 
   .box {
+    margin: 50px;
     padding: 20px;
-
-    top: 20%;
+    background-color: rgb(238, 238, 238);
+    box-shadow: 0px 2px 18px -4px rgba(0, 0, 0, 0.75);
 
   }
-</style>{% endblock css %}
+
+    {% comment %}
+
+  //////////////////////////////// Design of form //////////////////////////////////////// {% endcomment %}
+  .body,
+  .body::before,
+  .body::after {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arima Madurai', cursive;
+    max-width: 1500px;
+
+      {
+      % comment %
+    }
+
+    margin: auto auto;
+
+      {
+      % endcomment %
+    }
+
+    background-color: rgb(162, 187, 255);
+    overflow-x: hidden;
+  }
+
+  h1 {
+    margin: 4rem;
+    text-align: center;
+    font-family: 'Arima Madurai', cursive;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+  }
+
+  .lv_container {
+    margin: 0 10%;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: gray;
+    z-index: -1;
+    transition: .2s ease-in;
+  }
+
+  .focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: blue;
+    transition: .3s ease-out;
+  }
+
+  .form-control:focus~label {
+    top: -1.5rem;
+    font-size: .8rem;
+    color: #000;
+  }
+
+
+  .form-control:focus~.focus-border {
+    width: 100%;
+  }
+
+  .form-control:focus~label,
+  .has-content.form-control~label {
+    top: -1.5rem;
+  }
+
+  .form-control {
+    font-size: 1.2rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid gray;
+
+  }
+
+  .form-control:focus {
+    outline: none;
+    background: transparent;
+    border: none;
+
+  }
+
+  .form-control.valid-content~.focus-border {
+    width: 100%;
+    background: rgb(12, 92, 12);
+  }
+
+  .form-control.valid-content~label {
+    color: rgb(0, 161, 13);
+  }
+
+  .form-control.invalid-content~.focus-border {
+    width: 100%;
+    background: rgb(177, 0, 0);
+  }
+
+  .form-control.invalid-content~label {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+  }
+
+  .form-control:-webkit-autofill {
+    animation-name: autofill;
+    animation-fill-mode: both;
+  }
+
+  @keyframes autofill {
+    to {
+      color: #000;
+      background: transparent;
+    }
+  }
+
+  .break {
+    color: white;
+    border: 2px solid white;
+    opacity: 1.0;
+    margin: 80px;
+    width: 100%%;
+  }
+
+  .nxt_topic {
+    margin: 4rem;
+    text-align: center;
+    font-family: 'Arima Madurai', cursive;
+    color: white;
+    font-weight: bolder;
+    font-size: 40px;
+  }
+
+  .block {
+    /* border: 8px solid rgb(118, 104, 240); */
+    box-shadow: 5px 5px 20px 5px rgba(255, 255, 255, 0.25),
+      -5px -5px 20px 5px rgba(255, 255, 255, 0.26);
+    border-radius: 10px;
+    overflow-y: scroll;
+    height: 630px;
+    margin: 60px;
+
+      {
+      % comment %
+    }
+
+    margin-bottom: 50px;
+
+      {
+      % endcomment %
+    }
+
+    background-image: radial-gradient(rgb(231, 230, 230), rgb(235, 237, 243), rgb(239, 239, 255));
+  }
+
+  .card {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  @media only screen and (min-width: 300px) and (max-width:800px) {
+
+    #inner {
+      width: 100%;
+      margin: auto;
+      font-size: 15px;
+
+
+        {
+        % comment %
+      }
+
+      background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+
+        {
+        % endcomment %
+      }
+
+    }
+
+  }
+
+
+
+    {% comment %}
+
+  ///////////////////////// CSS for card /////////////////////////////////////////////// {% endcomment %}
+
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+  .lv-card {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1 {
+    text-align: center;
+    color: #4181ee;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: columnl;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .lv-card {
+    max-width: 300px;
+    min-height: 250px;
+    background-image: radial-gradient(rgb(150, 168, 250), rgb(119, 159, 247), rgb(112, 112, 243));
+    padding: 30px;
+    box-sizing: border-box;
+    color: #FFF;
+    margin: 20px;
+    box-shadow: 0px 2px 18px -4px rgba(0, 0, 0, 0.75);
+  }
+
+  /* .lv-card:nth-child(2) {
+            background: #4181ee;
+        }
+
+        .lv-card:last-child {
+            background: #673ab7;
+        } */
+
+  .lv-card-title {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+  }
+
+  .lv-card-content {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+
+  .lv-card-btn {
+    all: unset;
+    display: block;
+    margin-left: auto;
+    border: 2px solid #FFF;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 10px;
+    font-weight: 600;
+    transition: all 0.5s;
+    cursor: pointer;
+    letter-spacing: 1.2px;
+  }
+
+  .lv-card-btn:hover {
+    color: #b2a9ff;
+    background: #FFF;
+  }
+
+  /* .lv-card:nth-child(2) .lv-card-btn:hover {
+            color: #4181ee;
+            background: #FFF;
+        }
+
+        .lv-card:last-child .lv-card-btn:hover {
+            color: #673ab7;
+            background: #FFF;
+        } */
+
+
+  .btn {
+    margin: auto;
+    width: 100%;
+  }
+
+    {% comment %}
+
+  //////////////////////////////// CSS of card/////////////////////////////////////////////////// {% endcomment %}
+</style>
+{% endblock css %}
 
 
 {% block body %}
-
+<div class="body">
   <div id="inner">
     <div class="box">
+      <h1>Add an hospital</h1>
       <form action="/addhadmin" method="POST">
         {% csrf_token %}
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Hopital username</label>
+        <div class="lv_container">
           <input type="text" name="husername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Hospital's Username</label>
+          <span class="focus-border"></span>
+          {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Hopital name</label>
+
+        <div class="lv_container">
           <input type="text" name="hname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Hospital's Name</label>
+          <span class="focus-border"></span>
+          {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Hopital email</label>
+
+        <div class="lv_container">
           <input type="email" name="hemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1" class="form-label">Hopital's Email ID</label>
+          <span class="focus-border"></span>
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Hopital Address</label>
+
+        <div class="lv_container">
           <input type="text" name="hadd" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Hopital's Address</label>
+          <span class="focus-border"></span>
+          {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {%endcomment %}
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+
+
+
+
+        {% comment %}
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        {% endcomment %}
+        {% comment %} <div class="lv_container">
+          <input type="Number" name="phonenumber" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp">
+          <label for="exampleInputEmail1" class="form-label">Hopital's Phone number</label>
+          <span class="focus-border"></span>
+          <div id="emailHelp" class="form-text">Format: 123-456-7890</div>
+        </div> {% endcomment %}
+
+
+
+        {% comment %}
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        {% endcomment %}
+
+
+
+
+
+
+        <div class="lv_container">
           <input type="Number" name="phonenumber" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="form-group">
-          <label for="pass1">Choose a password</label>
-          <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password"
-            required>
-        </div>
-        <div class="form-group">
-          <label for="pass2">Confirm Password</label>
-          <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again"
-            required>
+          <label for="exampleInputEmail1" class="form-label">Phone number</label>
+          <span class="focus-border"></span>
+          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+        <div class="lv_container">
+          <div class="form-group">
+            <input type="password" class="form-control" id="pass1" name="pass1" required>
+            <label for="pass1">Choose a password</label>
+          </div>
+        </div>
+    
+
+    <div class="lv_container">
+      <div class="form-group">
+        <input type="password" class="form-control" id="pass2" name="pass2" required>
+        <label for="pass2">Confirm chosen password</label>
+      </div>
     </div>
-  </div>
-  <div class="container my-2">
 
-    {% for uu in u %}
-    <div class="my-2">
-    <div class="card my-6">
-      <div class="card-header">
-        {{uu.N}}
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{uu.U}}</h5>
-        <a href="/delH/{{uu.U}}" class="btn btn-danger">Delete</a>
-      </div>
-    </div></div>
-    
-    
-    {% endfor %}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+<hr class="break">
+
+<div class="nxt_topic">
+  Hospitals Added
+</div>
+<div class="block">
+
+  {% for uu in u %}
+
+  <div class="lv-card">
+    <h3 class="card-title">
+      {{uu.N}}
+    </h3>
+    <p class="card-content">
+    <h5 class="card-title">{{uu.U}}</h5>
+    </p>
+    <a href="/delH/{{uu.U}}" class="lv-card-btn">Delete</a>
   </div>
 
+
+
+  {% endfor %}
+</div>
+
+</div>
 
 
 
 {% endblock %}
 {% block js %}
 
+{% comment %} ///////////////////////////////// JS for the FORM ///////////////////////////////////////////// {%endcomment %}
+
+<script>
+  const inputs = document.querySelectorAll('input');
+  const span = document.querySelectorAll('.focus-border');
+
+  inputs.forEach(input => {
+    input.addEventListener("change", function (e) {
+      event.target.value !== '' ? input.classList.add('has-content') : input.classList.remove('has-content')
+    })
+  })
+
+  inputs.forEach(input => {
+    input.addEventListener("blur", function (e) {
+      if (event.target.value !== '') {
+        input.classList.add('valid-content');
+        input.classList.remove('invalid-content')
+      }
+      else {
+        input.classList.add('invalid-content');
+        input.classList.remove('valid-content')
+      }
+    })
+  })
+
+</script>
 {% endblock js %}

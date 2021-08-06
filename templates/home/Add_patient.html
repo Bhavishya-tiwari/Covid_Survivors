@@ -1,141 +1,529 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Employee{% endblock title %}
+{% block title %}Add Patient{% endblock title %}
 {% block css %}
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@500&display=swap');
+
   #outer {
     position: relative;
     top: 20vh;
   }
 
   #inner {
-    width: 60%;
+    width: 70%;
     margin: auto;
 
 
 
-    background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255));
+    {% comment %} background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255)); {% endcomment %}
 
   }
 
   .box {
+    margin: 50px;
     padding: 20px;
-
-    top: 20%;
-
+  background-color: rgb(238, 238, 238);
+  box-shadow: 0px 2px 18px -4px rgba(0, 0, 0, 0.75);
   }
-  .onoffswitch {
-    position: relative; width: 155px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+
+
+  {% comment %} //////////////////////////////// On-off switch ////////////////////////////////////{% endcomment %}
+
+  .onoffswitch { 
+    position: relative; 
+    left: -40px;
+    padding: 1px;
+    width: 152px;-webkit-user-select:none;  -moz-user-select:none;  -ms-user-select: none;
 }
+
 .onoffswitch-checkbox {
     display: none;
 }
+
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    display: block; 
+    overflow: hidden; 
+    cursor: pointer;
+    border: 2px solid #999999; 
+    border-radius: 20px;
 }
+
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block; 
+    width: 200%; 
+    margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
+
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    display: block; 
+    float: left; 
+    width: 50%; 
+    height: 30px; 
+    padding: 0; 
+    line-height: 30px;
+    font-size: 12px; 
+    color: white; 
+    font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
     box-sizing: border-box;
 }
+
 .onoffswitch-inner:before {
-    content: "Covid Recovered";
+    content: "Covid Recover";
     padding-left: 10px;
     background-color: rgb(0, 42, 255); color: #FFFFFF;
 }
+
 .onoffswitch-inner:after {
     content: "Blood Donor";
     padding-right: 10px;
     background-color: rgb(238, 0, 255); color: #FFFFFF;
     text-align: right;
 }
+
 .onoffswitch-switch {
-    display: block; width: 46px; margin: 2px;
+    display: block; 
+    width: 46px;
+    margin: 0px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 101px;
     border: 2px solid #999999; border-radius: 20px;
     transition: all 0.3s ease-in 0s; 
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
-</style>{% endblock css %}
+
+{% comment %} //////////////////////////////// On-off switch ////////////////////////////////////////{% endcomment %}
+
+
+
+{% comment %} //////////////////////////////// Design of form //////////////////////////////////////// {% endcomment %}
+.body, .body::before, .body::after {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arima Madurai', cursive;
+  max-width: 1500px;
+  {% comment %} margin: auto auto; {% endcomment %}
+  background-color: rgb(162, 187, 255);
+  overflow-x: hidden;
+}
+    {% comment %} *, *::before, *::after {
+  margin: 0;
+  padding: 0;
+} {% endcomment %}
+
+{% comment %} body { 
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+} {% endcomment %}
+
+
+h1 {
+       margin: 4rem;
+       text-align: center;
+       font-family: 'Arima Madurai', cursive;
+       color: rgb(0, 0, 0);
+       font-weight: bolder;
+        }
+
+{% comment %} .lv_heading {
+  margin: 4rem;
+  text-align: center;
+} {% endcomment %}
+
+.lv_container {
+  margin: 0 10%;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+ {% comment %} form {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+}  {% endcomment %}
+
+
+label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: gray;
+  z-index: -1;
+  transition: .2s ease-in;
+}
+
+.for_date {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  color: gray;
+  z-index: -1;
+  transition: .2s ease-in;
+}
+.focus-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: blue;
+  transition: .3s ease-out;
+}
+
+.form-control:focus ~ label {
+  top: -1.5rem;
+  font-size: .8rem;
+  color: #000;
+}
+
+
+.form-control:focus ~ .focus-border {
+  width: 100%;
+}
+
+.form-control:focus ~ label, .has-content.form-control ~ label {
+  top: -1.5rem;
+}
+
+.form-control {
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid gray;
+  
+}
+
+.form-control:focus {
+  outline: none;
+  background: transparent;
+  border: none;
+
+}
+.form-control.valid-content ~ .focus-border {
+  width: 100%;
+  background: rgb(12, 92, 12);
+}
+
+.form-control.valid-content ~ label {
+  color: rgb(0, 161, 13);
+}
+
+.form-control.invalid-content ~ .focus-border {
+  width: 100%;
+  background: rgb(177, 0, 0);
+}
+
+.form-control.invalid-content ~ label {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+.form-control:-webkit-autofill {
+  animation-name: autofill;
+  animation-fill-mode: both;
+}
+
+
+
+
+
+.for_date:focus ~ label, .has-content.for_date ~ label {
+  top: -1.5rem;
+}
+
+.for_date {
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  {% comment %} border-bottom: 1px solid gray; {% endcomment %}
+  
+}
+
+.for_date:focus {
+  outline: none;
+  background: transparent;
+  border: none;
+
+}
+.for_date.valid-content ~ .focus-border {
+  width: 100%;
+  background: rgb(12, 92, 12);
+}
+
+.for_date.valid-content ~ label {
+  color: rgb(0, 161, 13);
+}
+
+.for_date.invalid-content ~ .focus-border {
+  width: 100%;
+  background: rgb(177, 0, 0);
+}
+
+.for_date.invalid-content ~ label {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+}
+
+.for_date:-webkit-autofill {
+  animation-name: autofill;
+  animation-fill-mode: both;
+}
+
+@keyframes autofill {
+  to {
+      color: #000;
+      background: transparent;
+  }
+}
+
+
+.break {
+  color: white;
+  border: 2px solid white;
+  opacity: 1.0;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  width: 100%%;
+}
+.nxt_topic {
+       margin: 4rem;
+       text-align: center;
+       font-family: 'Arima Madurai', cursive;
+       color: white;
+       font-weight: bolder;
+       font-size: 40px;
+}
+
+.block {
+  /* border: 8px solid rgb(118, 104, 240); */
+  box-shadow: 5px 5px 20px 5px rgba(255, 255, 255, 0.25),
+      -5px -5px 20px 5px rgba(255, 255, 255, 0.26);
+  border-radius: 10px;
+  overflow-y: scroll;
+  height: 630px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-image: radial-gradient(rgb(231, 230, 230), rgb(235, 237, 243), rgb(239, 239, 255));
+}
+
+.card {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+@media only screen and (min-width: 300px) and (max-width:800px) {
+  
+  #inner {
+    width: 100%;
+    margin: auto;
+    font-size: 15px;
+
+
+    {% comment %} background-image: linear-gradient(rgb(255, 183, 183), rgb(139, 249, 255)); {% endcomment %}
+
+  }
+  
+}
+
+
+{% comment %} ///////////////////////// CSS for card /////////////////////////////////////////////// {% endcomment %}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+        .lv-card {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4181ee;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction:columnl;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .lv-card {
+            max-width: 300px;
+            min-height: 250px;
+            background-image: radial-gradient(rgb(150, 168, 250), rgb(119, 159, 247), rgb(112, 112, 243));
+            padding: 30px;
+            box-sizing: border-box;
+            color: #FFF;
+            margin: 20px;
+            box-shadow: 0px 2px 18px -4px rgba(0, 0, 0, 0.75);
+        }
+
+        /* .lv-card:nth-child(2) {
+            background: #4181ee;
+        }
+
+        .lv-card:last-child {
+            background: #673ab7;
+        } */
+
+        .lv-card-title {
+            margin-top: 0;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+        }
+
+        .lv-card-content {
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        .lv-card-btn {
+            all: unset;
+            display: block;
+            margin-left: auto;
+            border: 2px solid #FFF;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 10px;
+            font-weight: 600;
+            transition: all 0.5s;
+            cursor: pointer;
+            letter-spacing: 1.2px;
+        }
+
+        .lv-card-btn:hover {
+            color: #b2a9ff;
+            background: #FFF;
+        }
+
+        /* .lv-card:nth-child(2) .lv-card-btn:hover {
+            color: #4181ee;
+            background: #FFF;
+        }
+
+        .lv-card:last-child .lv-card-btn:hover {
+            color: #673ab7;
+            background: #FFF;
+        } */
+
+
+        .btn {
+          margin: auto;
+          width: 100%;
+        }
+  {% comment %} //////////////////////////////// CSS of card/////////////////////////////////////////////////// {% endcomment %}
+
+</style>
+{% endblock css %}
+
 
 {% block body %}
-<div class="container">
-  <div id="inner">
-    <div class="box">
+<div class="body">
+
+  <div class="container">
+    <div id="inner">
+      <div class="box">
+      <h1>Add a patient</h1>
       <form action="/addpat" method="POST">
 
         {% csrf_token %}
 
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Patient Username</label>
+        <div class="lv_container">
           <input type="text" name="pusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Patient's Username</label>
+          <span class="focus-border"></span>
+          {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Patient name</label>
+
+        <div class="lv_container">
           <input type="text" name="pname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Patient's Name</label>
+          <span class="focus-border"></span>
+          {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Patient email</label>
+
+        <div class="lv_container">
           <input type="email" name="pemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Patient's Email ID</label>
+          <span class="focus-border"></span>
+          <div id="emailHelp" class="form-text">We will never share your email with anyone else.</div>
         </div>
-        <div class="onoffswitch">
-    <input type="checkbox" name="DorCS" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-    <label class="onoffswitch-label" for="myonoffswitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
-</div>
-        {% comment %} <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Patient Blood group</label>
-          <input type="text" name="pbloodgrp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+       <div class="lv_container">
+        <div class="lv_container">
+          <div class="onoffswitch">
+            <input type="checkbox" name="DorCS" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+             <label class="onoffswitch-label" for="myonoffswitch">
+               <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+                <span class="focus-border"></span>
+              </label>
+          </div>
+         </div> 
+        {% comment %} 
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div> {% endcomment %}
-                      <select name="pbloodgrp" class="form-select change1 mt-2" 
+        {% endcomment %}
+          {% comment %} <input type="text" name="pbloodgrp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> {% endcomment %}
+            
+                     <label for="exampleInputEmail1" class="form-label heading"></label>
+                      <select name="pbloodgrp" class="form-select change1 form-control" 
                      onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      id="state" aria-label="Default select example">
-                     <option selected>Blood Group</option>
+                     <option selected class="opt_selec">Blood Group</option>
                      <option value="1">A +</option>
                      <option value="2">B +</option>
                      <option value="3">AB +</option>
                      <option value="4">O +</option>
                      <option value="5">A -</option>
                      <option value="6">B -</option>
-                     <option value="7">Ab -</option>
+                     <option value="7">AB -</option>
                      <option value="8">O -</option>
               </select>
+            
+       </div>
+     
+
+        <div class="lv_container">
+         <input type="date" id="birthday" name="pdod" class="form-control">
+        <label class="for_date" for="birthday">Date of discharge</label>
+        </div>
    
+
+        <div class="lv_container">
         <label for="birthday">Date Of Discharge</label>
   <input type="date" id="birthday" name="pdod" class="form-control">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Patient Age</label>
           <input type="text" name="p_age" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="exampleInputEmail1" class="form-label">Patient's Age</label>
+          <span class="focus-border"></span>
+          {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
 
+        <div class="lv_container">
         <div class="form-group">
+          <input type="password" class="form-control" id="pid1" name="pid1" required>
           <label for="pass1">Choose a password</label>
-          <input type="password" class="form-control" id="pid1" name="pid1" placeholder="Choose Your Password" required>
+          <span class="focus-border"></span>
         </div>
+        </div>
+
+        <div class="lv_container">
         <div class="form-group">
-          <label for="pass2">Confirm Password</label>
-          <input type="password" class="form-control" id="pid2" name="pid2" placeholder="Enter your password again"
-            required>
+          <input type="password" class="form-control" id="pid2" name="pid2" required>
+          <label for="pass2">Confirm chosen password</label>
+            <span class="focus-border"></span>
+        </div>
         </div>
 
         <button type="submit" class="btn btn-primary my-3">Submit</button>
@@ -143,27 +531,71 @@
     </div>
   </div>
 
+<hr class="break">
 
+  <div class="nxt_topic">
+  Patients Added
+  </div>
+
+  <div class="block">
   {% for uu in u %}
-  <div class="card my-2">
+  
+  {% comment %} <div class="card my-4">
     <div class="card-header">
-      {{uu.N}}
+      
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{uu.U}}</h5>
-      <a href="/delCS/{{uu.U}}" class="btn btn-danger">Delete</a>
+      
+      
     </div>
-  </div>
+  </div> {% endcomment %}
+
+  <div class="lv-card">
+            <h3 class="card-title">{{uu.N}}</h3>
+            <p class="card-content"><h5 class="card-title">{{uu.U}}</h5></p>
+            <a href="/delCS/{{uu.U}}" class="lv-card-btn">Delete</a>
+        </div>
 
 
 
 
   {% endfor %}
+  </div>
 
 </div>
 </div>
 </div>
 </div>
+</div>
 
+
+
+
+{% comment %} ///////////////////////////////// JS for the FORM ///////////////////////////////////////////// {% endcomment %}
+
+<script>
+    const inputs = document.querySelectorAll('input');
+const span = document.querySelectorAll('.focus-border');
+
+inputs.forEach(input => {
+	input.addEventListener("change", function(e){
+		event.target.value !== '' ? input.classList.add('has-content') : input.classList.remove('has-content')
+	})
+})
+
+inputs.forEach(input => {
+	input.addEventListener("blur", function(e){
+		if (event.target.value !== '') {
+			input.classList.add('valid-content');
+			input.classList.remove('invalid-content')
+		}
+		else {
+			input.classList.add('invalid-content');
+			input.classList.remove('valid-content')
+		}
+	})
+})
+
+</script>
 
 {% endblock %}

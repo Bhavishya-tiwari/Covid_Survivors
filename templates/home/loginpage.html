@@ -45,8 +45,10 @@
     outline: none;
 } 
 
+
+
 .loginpg {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -55,16 +57,21 @@
   display: flex;
   width: 90%;
   justify-content: space-evenly;
-  margin: 50px 0;
+  margin: 50px auto;
+  /* margin-bottom: 100px; */
 }
 
-body {
-    font-family: 'Times New Roman', Times, serif;
+ol, ul {
+  /* margin-top: 10px; */
+    padding-left: 0.5rem;
+}
+.loginpg {
+     font-family: 'Times New Roman', Times, serif;
   height: 100vh;
-  font-size: 1.2em;
+  font-size: 1.2em; 
 }
 
-h2 {
+.loginbox-emp h2 {
   text-align: center;
   font-size: 16px;
   font-weight: 600;
@@ -241,6 +248,34 @@ input[type=password]:placeholder {
   }
 }
 
+.total-monal{
+    width: 100vw;
+    position: relative;
+    
+    
+
+    border: solid 2px black;
+    background: #292929!important;
+    overflow-x: none;
+}
+
+.total-monal{
+    width: 100vw;
+    position: relative;
+    
+    top: 35vh;
+
+    border: solid 2px black;
+    background: #292929!important;
+    overflow-x: none;
+}
+/* @media only screen and (max-width: 886px) {
+    .total-monal{
+
+        top: 20vh;
+    }
+
+} */
 
     /* ----------logincss end-monal------------------ */
 </style>{% endblock css %}
@@ -327,6 +362,7 @@ input[type=password]:placeholder {
 
             <a   href="{% provider_login_url "google" %}" class="usersubmit">LogIn with Google</a>
           </div>
+          
 
         </form>
       </div>

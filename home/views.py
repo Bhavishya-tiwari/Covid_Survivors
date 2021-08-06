@@ -1,5 +1,6 @@
 # from django.db.models.manager import RelatedManager
 # from typing_extensions import Required
+from os import pipe
 from django import http
 from django.db import reset_queries
 from django.http import response
@@ -39,6 +40,83 @@ def home(request):
 def CovidUpdates(request):
     return render(request, 'home/Covid_Updates.html')
 
+def setappointment(request, HuN):
+    group = Group.objects.get(name='HospitalHeads')
+    users = list(group.user_set.all())
+    Hospital = User.objects.get(username=HuN)
+    hospitalusername= Hospital.username
+
+    username = hospitalusername
+    name = request.user.first_name+ " " + request.user.last_name
+    email = "Appointment@hospital"
+    msg ="Emp will send msg from here"
+    now = request.user.username
+    Query = Message( authorUsername=username,email=email,name=name,
+                                Timestamp=now, message=msg)
+    Query.save()
+                
+    
+    return HttpResponse("Appointments Set")
+
+
+@allowed_users(allowed_roles=['Hospital_Employees'])
+def setappointmentpage(request):
+    empprofjson = request.user.last_name
+    empprofobj = json.loads(empprofjson)
+    hospitalusername= empprofobj["Au"]
+    msgs = Message.objects.all()
+    Appointments = []
+    for Appointment in msgs:
+        if(Appointment.email == "Appointment@hospital" and Appointment.message == "Emp will send msg from here"):
+            o={
+                "Appby":Appointment.Timestamp,
+                "Appbyname":Appointment.name,
+            }
+            Appointments.append(o)
+
+
+    
+    return render(request, 'home/giveappointments.html', {"App":Appointments})
+
+def appointmentdatesetted(request, DuN):
+    if request.method=="POST":
+        Appointmentdatee = request.POST.get('AppointmentDate')
+
+        msgs = Message.objects.filter(Timestamp = DuN).first()
+        msgs.message = str(Appointmentdatee)
+        msgs.save()
+        return redirect('setappointmentpage')
+                
+
+        
+
+        
+
+
+
+    
+    
+
+    
+    
+    
+    
+
+
+
+
+
+
+    
+
+    
+    
+    
+
+
+
+
+
 def loging(request):
     return render(request, 'home/logingoogle.html')
 
@@ -51,7 +129,6 @@ def reportedblogs(request):
         # }
 
     for p in post:
-        # print(p.blog_sno)
         p_in_l=False 
         for l in li:
             if ( p.blog_sno == l["sno"]):
@@ -94,13 +171,15 @@ def chat(request):
     msgs = Message.objects.all().order_by('id')
     # obj=[{"n":"l"},{"k":"kk"}]
     for msg in msgs:
-        obj ={"name": msg.name,
-                "msg":msg.message,
-                "un":msg.authorUsername,
-                "time":msg.Timestamp
-        }
-        new_list.append(obj)
-        # print(obj)
+        
+        if(msg.email == "example@email"):
+            obj ={"name": msg.name,
+                    "msg":msg.message,
+                    "un":msg.authorUsername,
+                    "time":msg.Timestamp
+            }
+
+            new_list.append(obj)
     return HttpResponse(json.dumps(new_list))
     
         
@@ -117,33 +196,54 @@ def Donors(request):
     if request.method=="POST":
         bg_val = request.POST.get('Blood_grp_val', '')
         try:
-            group = Group.objects.get(name='Covid_Survivors')
+            group = Group.objects.get(name='HospitalHeads')
             users = list(group.user_set.all())
             CSsend = []
             for user in users:
                 CSdict = json.loads(user.first_name)
                 CSdict2 = json.loads(user.last_name)
-                # print("kd")
-               
-                if( CSdict["B"] == bg_val):
-                    print("osi")
-                    ob = {
-                    "name" : CSdict["N"],
-                    "email" : CSdict2["E"],
-                    "Hospital_name" : CSdict2["A"],
-                    "Hospital_email" : CSdict2["Y"],
+                if bg_val in CSdict2["BA"]:
+                    o = {
+                        "Name":CSdict["N"],
+                        "Email":CSdict["E"],
+                        "Add":CSdict2["A"],
+                        "Phone":CSdict2["P"]
                     }
-                    CSsend.append(ob)
-                    print(CSdict["N"],CSdict2["E"])
-                    # print(CSdict["N"],CSdict2[])
-                else:    
-                    print("K")
-            
+                    CSsend.append(o)
+                
             return HttpResponse(json.dumps(CSsend))
         except Exception as e:
             return HttpResponse('Error Occured')
-    # print(request.user)
-    return render(request, 'home/Donors.html')
+    userl =[]    
+    group = Group.objects.get(name='HospitalHeads')
+    hospitals = list(group.user_set.all())
+    for h in hospitals:
+        userjson1 =h.first_name
+        userjson =h.last_name
+        userdict1 = json.loads(userjson1)
+        userdict = json.loads(userjson)
+        o = {
+            "un":h.username,
+            "n":userdict1["N"],
+            "em":userdict1["E"],
+            "Add":userdict["A"]
+        }
+        userl.append(o)
+
+    
+
+    return render(request, 'home/Donors.html', {"Hospitals" : userl})
+                
+                    
+                
+
+                    
+
+                
+                
+               
+                
+            
                    
 def ContactUs(request):
     if request.method == "POST":
@@ -171,7 +271,6 @@ def ContactUs(request):
 
 def livechat(request):
     if request.method == "POST":
-        print("svmk")
         if(request.user.is_authenticated):
             profilejson = request.user.first_name
             try:
@@ -181,8 +280,10 @@ def livechat(request):
                 now = datetime.datetime.now()
                 name = profiledict["N"]
                 username = request.user.username
-                email = request.user.email
+                email = "example@email"
                 msg = request.POST.get('msg')
+              
+
                 Query = Message( authorUsername=username,email=email,name=name,
                                 Timestamp=now, message=msg)
                                 #   why email vroo
@@ -198,9 +299,11 @@ def livechat(request):
                 username = request.user.username
                 email = "example@email"
                 msg = request.POST.get('msg')
+              
+
                 Query = Message( authorUsername=username,email=email,name=name,
                                 Timestamp=now, message=msg)
-                print(Query)
+                
                                 #   why email vroo
                 if(msg != ""):
                     Query.save()
@@ -209,7 +312,6 @@ def livechat(request):
                     return HttpResponse("error")
 
         else:
-            print("v")
             messages.error(request, "Please login to chat")
             return render(request, 'home/home.html')
             
@@ -260,6 +362,7 @@ def Add(request):
     userl =[]    
     group = Group.objects.get(name='HospitalHeads')
     users = list(group.user_set.all())
+    users = list(group.user_set.all())
     for user in users:
         userjson1 =user.first_name
         userjson =user.last_name
@@ -287,6 +390,7 @@ def AddHadmin(request):
         name = request.POST.get('hname')
         hemail = request.POST.get('hemail')
         haddress = request.POST.get('hadd')
+        PhoneNumber = request.POST.get('phonenumber')
         hid = request.POST.get('pass1')
         hid2 = request.POST.get('pass2')
         if(hid2 != hid):
@@ -296,7 +400,8 @@ def AddHadmin(request):
         profileobj1 = {
             "N":name,"U":username,"G":"h","E":hemail,
         }
-        pro2={    "A":haddress,"Au":request.user.username,}
+        pro2={"A":haddress,"Au":request.user.username,"BA":"Na",
+        "P":PhoneNumber}
 
         myuserjson = json.dumps(profileobj1)
         myuserjson2 = json.dumps(pro2)
@@ -396,7 +501,6 @@ def handelLogout(request):
 def loginemp(request):
     if request.method == "POST":
         # Get the post parameters
-        print("svi")
         uusername = request.POST.get('uusername')
         upassword = request.POST.get('upassword')
         user = authenticate(username=uusername, password=upassword)
@@ -404,7 +508,6 @@ def loginemp(request):
             profilejson =user.first_name
             profiledict = json.loads(profilejson)
             grp = profiledict["G"]
-            print(grp)
             if grp == "e":
                
                 login(request, user)
@@ -454,7 +557,6 @@ def addpat(request):
         name = request.POST.get('pname')
         pemail = request.POST.get('pemail')
         DorCS = request.POST.get('DorCS')
-        print(DorCS)
         pbloodgrp = request.POST.get('pbloodgrp')
         pdod = request.POST.get('pdod')
         p_age = request.POST.get('p_age')
@@ -523,6 +625,30 @@ def addpat(request):
 
 @login_required(login_url='/home')
 def profile(request):
+    if request.method == "POST":
+        
+        blood =request.POST.getlist('bloodstatus')
+        objjson = request.user.last_name
+        objjson1 = request.user.first_name
+        obj = json.loads(objjson)
+        obj1 = json.loads(objjson1)
+        if(obj1["G"] == "h"):
+            obj["BA"] = blood
+            objj = json.dumps(obj)
+            request.user.last_name = objj
+            request.user.save()
+            
+            # request.user.save()
+            
+            return redirect('profile')
+        else:
+            return HttpResponse("error")
+
+
+
+
+
+
     userjson2 =request.user.first_name
     try:
         userdict = json.loads(userjson2)
@@ -536,7 +662,7 @@ def profile(request):
             "fn":userjson2,
             "ln": request.user.last_name,
             "em":request.user.email,
-            "gg":True
+            "gg":"T",
         }
         return render(request, 'home/profile.html', o)
         # return HttpResponse("mk")

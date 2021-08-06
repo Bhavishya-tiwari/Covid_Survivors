@@ -41,6 +41,9 @@ urlpatterns = [
 
     # profile
     path('profile', views.profile , name='profile'),
+    path('setappointment/<str:HuN>', views.setappointment , name='setappointment'),
+    path('appointmentdatesetted/<str:DuN>', views.appointmentdatesetted , name='appointmentdatesetted'),
+    path('setappointmentpage', views.setappointmentpage , name='setappointmentpage'),
 
     
     # normal user sign up

@@ -29,10 +29,10 @@ $('#Donor_search').submit(function (event) {
                 
                 <div class="card m-3 cd" style="width: 18rem;">
                 <div class="card-body">
-                     <h5 class="card-title">Name : ${e.name}</h5>
-                     <h6 class="card-subtitle mb-2 text-muted">Email : ${e.email}</h6>
-                     <h6 class="card-text">Hospital name: ${e.Hospital_name} <br>
-                     Hospital email : ${e.Hospital_email}<br>
+                     <h5 class="card-title">Name : ${e.Name}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted">Email : ${e.Email}</h6>
+                     <h6 class="card-text">Hospital name: ${e.Add} <br>
+                     Hospital email : ${e.Phone}<br>
             
     
                 
@@ -41,9 +41,10 @@ $('#Donor_search').submit(function (event) {
 
 
             });
-            document.getElementById('datas').innerHTML = st;
+            
+            // document.getElementById('datas').innerHTML = st;
                 
-                document.getElementById('datas').style.display = "block";
+            //     document.getElementById('datas').style.display = "block";
 
 
         });

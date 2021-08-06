@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} Give Appointments{% endblock title %}
+
+{% block css %}
+<style>
+    
+    
+    .total-monal{
+        
+        top: 70vh;
+    }
+    
+    
+    @media only screen and (max-width: 886px) {
+        .total-monal{
+            
+            top: 20vh;
+        }
+        
+    }
+    
+    </style>
+
+{% endblock css %}
+{% block body %}
+
+
+{% for a in App %}
+<div class="card m-4" style="width: 18rem; ">
+     <div class="card-body">
+       <h5 class="card-title">Name :- {{a.Appbyname}}</h5>
+       <br>
+
+     <form method="post" action="/appointmentdatesetted/{{a.Appby}}" id="Give_AppointmentDate">{% csrf_token %}
+
+       <label for="birthday">Appointment Date</label>
+  <input type="date" id="AppointmentDate" class="form-control" name="AppointmentDate">
+
+       <button type="submit" class="btn btn-warning my-3">Set Appointment</button>
+
+  </form>
+
+      
+       
+     </div>
+   </div>
+
+</div>
+{% endfor %}
+
+
+
+{% endblock body %}

@@ -50,6 +50,19 @@
      top: 10vh;
 }
     
+.total-monal{
+
+top: 70vh;
+}
+
+
+        @media only screen and (max-width: 886px) {
+    .total-monal{
+
+        top: 20vh;
+    }
+
+}
 
 
 </style>
@@ -67,27 +80,52 @@
           <select name="Donor_search_bg" class="form-select change1 mt-2"
                onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                id="bgrp" aria-label="Default select example">
-               <option selected>Blood Group</option>
                <option value="1">A +</option>
-               <option value="2">B +</option>
-               <option value="3">AB +</option>
-               <option value="4">O +</option>
-               <option value="5">A -</option>
-               <option value="6">B -</option>
-               <option value="7">Ab -</option>
-               <option value="8">O -</option>
+                <option value="2">B +</option>
+                <option value="3">AB +</option>
+                <option value="4">O +</option>
+                <option value="5">A -</option>
+                <option value="6">B -</option>
+                <option value="7">Ab -</option>
+                <option value="8">O -</option>
+
+                <option value="9">A +  (Plasma)</option>
+                <option value="10">B + (Plasma)</option>
+                <option value="11">AB + (Plasma)</option>
+                <option value="12">O + (Plasma)</option>
+                <option value="13">A - (Plasma)</option>
+                <option value="14">B - (Plasma)</option>
+                <option value="15">Ab - (Plasma)</option>
+                <option value="16">O - (Plasma)</option>
           </select>
       <button type="submit" id="bt" class="btn-hover color-11">Search</button>
 
      </form>
 
+<br><br><br><br>
+
+
+{% for h in Hospitals %}
+<div class="card" style="width: 18rem; ">
+     <div class="card-body">
+       <h5 class="card-title">Hospital name :- {{h.n}}</h5>
+       <p class="card-text">Address :- {{h.Add}}</p>
+       <p class="card-text">Email :- {{h.em}}</p>
+       
+       <a href="/setappointment/{{h.un}}" class="btn btn-primary">set appointment</a>
+     </div>
+   </div>
+
 </div>
+{% endfor %}
+
+
+
 <div class="op showdata" id="datas">
      
 </div>
   
      
-
 
 
 

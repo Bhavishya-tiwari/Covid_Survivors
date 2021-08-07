@@ -706,25 +706,77 @@ def addpat(request):
 @login_required(login_url='/home')
 def profile(request):
     if request.method == "POST":
-        bl = request.POST.get('choice')
-        print(bl)
-        return HttpResponse("mk")
-        # blood =request.POST.getlist('bloodstatus')
-        # objjson = request.user.last_name
-        # objjson1 = request.user.first_name
-        # obj = json.loads(objjson)
-        # obj1 = json.loads(objjson1)
-        # if(obj1["G"] == "h"):
-        #     obj["BA"] = blood
-        #     objj = json.dumps(obj)
-        #     request.user.last_name = objj
-        #     request.user.save()
+        Ap = request.POST.get('A+')
+        Bp = request.POST.get('B+')
+        ABp = request.POST.get('AB+')
+        Op = request.POST.get('O+')
+        An = request.POST.get('A-')
+        Bn = request.POST.get('B-')
+        ABn = request.POST.get('AB-')
+        On = request.POST.get('O-')
+        App = request.POST.get('A+(P)')
+        Bpp = request.POST.get('B+(P)')
+        ABpp = request.POST.get('AB+(P)')
+        Opp = request.POST.get('O+(P)')
+        Anp = request.POST.get('A-(P)')
+        Bnp = request.POST.get('B-(P)')
+        ABnp = request.POST.get('AB-(P)')
+        Onp = request.POST.get('O-(P)')
+        bldlist = []
+        if(Ap == "on"):
+            bldlist.append("1")
+        if(Bp == "on"):
+            bldlist.append("2")
+        if(ABp == "on"):
+            bldlist.append("3")
+        if(Op == "on"):
+            bldlist.append("4")
+        if(An == "on"):
+            bldlist.append("5")
+        if(Bn == "on"):
+            bldlist.append("6")
+        if(ABn == "on"):
+            bldlist.append("7")
+        if(On == "on"):
+            bldlist.append("8")
+        if(App == "on"):
+            bldlist.append("9")
+        if(Bpp == "on"):
+            bldlist.append("10")
+        if(ABpp == "on"):
+            bldlist.append("11")
+        if(Opp == "on"):
+            bldlist.append("12")
+        if(Anp == "on"):
+            bldlist.append("13")
+        if(Bnp == "on"):
+            bldlist.append("14")
+        if(ABnp == "on"):
+            bldlist.append("15")
+        if(Onp == "on"):
+            bldlist.append("16")
+
+        print(bldlist)
+       
+
+
+        # print(bl)
+        blood =bldlist
+        objjson = request.user.last_name
+        objjson1 = request.user.first_name
+        obj = json.loads(objjson)
+        obj1 = json.loads(objjson1)
+        if(obj1["G"] == "h"):
+            obj["BA"] = blood
+            objj = json.dumps(obj)
+            request.user.last_name = objj
+            request.user.save()
             
-        #     # request.user.save()
-            
-        #     return redirect('profile')
-        # else:
-        #     return HttpResponse("error")
+            request.user.save()
+            messages.success(request, "Data Updated")
+            return redirect('profile')
+        else:
+            return HttpResponse("error")
 
 
 

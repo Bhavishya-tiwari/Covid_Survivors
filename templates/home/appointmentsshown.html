@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+    .total-monal{
+
+top: 70vh;
+}
+</style>
+
+{% endblock css %}
+
+{% block body %}
+
+
+
+{% for a in App %}
+<div class="m-4" style="color: rgb(255, 0, 0);">
+    
+ Name :  {{a.Appbyname}}
+ <br>
+ Date : {{a.Date}}
+
+<a href="/blooddonated/{{a.Appby}}">
+
+    <button type="button" class="btn btn-primary">Done</button>
+</a>
+</div>
+    {% endfor %}
+
+{% for d in Donorz %}
+<div class="m-4" style="color: rgb(34, 255, 0);">
+    
+ Name :  {{a.Appbyname}}
+ <br>
+ Date : {{a.DonatedOnDate}}
+ <br>
+ Done 
+
+
+</div>
+    {% endfor %}
+
+{% endblock body %}

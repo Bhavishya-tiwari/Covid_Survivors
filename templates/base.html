@@ -586,10 +586,14 @@ display: flex;
 
           <a href="/profile">
             {% if user.first_name|length < 20 %}
-            <button class="btn-hover color-3">{{user.first_name}}</button></a>
+            <button class="custom-btn btn-12"><span>Profile</span><span>{{user.first_name}}</span></button>
+          </a>
+
             {% else %}
-            <button class="btn-hover color-3">{{user.username}}</button></a>
+            <button class="custom-btn btn-12"><span>Profile</span><span>{{user.username}}</span></button>
+          </a>
             
+
 
             {% endif %}
 

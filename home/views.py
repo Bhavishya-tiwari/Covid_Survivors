@@ -40,23 +40,60 @@ def home(request):
 def CovidUpdates(request):
     return render(request, 'home/Covid_Updates.html')
 
-def setappointment(request, HuN):
-    group = Group.objects.get(name='HospitalHeads')
-    users = list(group.user_set.all())
-    Hospital = User.objects.get(username=HuN)
-    hospitalusername= Hospital.username
 
-    username = hospitalusername
-    name = request.user.first_name+ " " + request.user.last_name
-    email = "Appointment@hospital"
-    msg ="Emp will send msg from here"
-    now = request.user.username
-    Query = Message( authorUsername=username,email=email,name=name,
-                                Timestamp=now, message=msg)
-    Query.save()
-                
-    
-    return HttpResponse("Appointments Set")
+def setappointment(request, HuN):
+    if(request.user.is_authenticated):
+
+        group = Group.objects.get(name='HospitalHeads')
+        users = list(group.user_set.all())
+        Hospital = User.objects.get(username=HuN)
+        hospitalusername= Hospital.username
+
+        clear = False
+        username = hospitalusername
+
+        msgs = Message.objects.filter(email = "Appointment@hospital").all()
+        byuser = []
+
+        for m in msgs:
+            if(m.Timestamp == request.user.username):
+                byuser.append(m)
+        if(byuser == []):
+            clear =True
+        
+        for a in byuser:
+            ms = a.message
+            if("BloodDonated" in ms):
+                clear =True
+            else:
+                clear=False
+                break
+
+
+            
+
+            
+
+        
+        name = request.user.first_name+ " " + request.user.last_name
+        email = "Appointment@hospital"
+        msg ="Emp will send msg from here"
+        now = request.user.username
+        if(clear):
+            Query = Message( authorUsername=username,email=email,name=name,
+                                        Timestamp=now, message=msg)
+            Query.save()
+                        
+            messages.success(request, "Appointment request sent")
+            return redirect('Donors')
+        else:
+            messages.error(request, "Your Appointment is already set")
+            return redirect('Donors')
+
+    else:
+        messages.error(request, "Please login for appointment")
+        return redirect('login')
+
 
 
 @allowed_users(allowed_roles=['Hospital_Employees'])
@@ -75,20 +112,63 @@ def setappointmentpage(request):
             Appointments.append(o)
 
 
-    
+  
     return render(request, 'home/giveappointments.html', {"App":Appointments})
 
 def appointmentdatesetted(request, DuN):
     if request.method=="POST":
         Appointmentdatee = request.POST.get('AppointmentDate')
+        # print(Appointmentdatee)
 
-        msgs = Message.objects.filter(Timestamp = DuN).first()
-        msgs.message = str(Appointmentdatee)
+        msgs = Message.objects.filter(Timestamp = DuN).last()
+        print(msgs)
+        st =  "AppSeted" +  str(Appointmentdatee)
+        msgs.message = st
         msgs.save()
         return redirect('setappointmentpage')
                 
 
+@allowed_users(allowed_roles=['Hospital_Employees'])
+def appointmentsshown(request):
+    empprofjson = request.user.last_name
+    empprofobj = json.loads(empprofjson)
+    hospitalusername= empprofobj["Au"]
+    msgs = Message.objects.all()
+    Appointments = []
+    Donorz = []
+    for Appointment in msgs:
+        if(msgs !=""):
+            if(Appointment.email == "Appointment@hospital" and "AppSeted" in Appointment.message ):
+                o={
+                    "Appby":Appointment.Timestamp,
+                    "Appbyname":Appointment.name,
+                    "Date" : Appointment.message[8:]
+                }
+                Appointments.append(o)
+                
+            if(Appointment.email == "Appointment@hospital" and "BloodDonated" in Appointment.message ):
+                o={
+                    "Appby":Appointment.Timestamp,
+                    "Appbyname":Appointment.name,
+                    "DonatedOnDate" : Appointment.message[12:]
+                }
+                Donorz.append(o)
+    print(Appointments)
+
+    return render(request, 'home/appointmentsshown.html', {"App":Appointments,"Donorz":Donorz })
+
         
+@allowed_users(allowed_roles=['Hospital_Employees'])
+def blooddonated(request, DonorUsername):
+    now = datetime.datetime.now()
+
+
+    msgs = Message.objects.filter(Timestamp = DonorUsername).last()
+    st =  "BloodDonated" +  str(now)
+    msgs.message = st
+    msgs.save()
+    return redirect('appointmentsshown')
+
 
         
 
@@ -626,23 +706,25 @@ def addpat(request):
 @login_required(login_url='/home')
 def profile(request):
     if request.method == "POST":
-        
-        blood =request.POST.getlist('bloodstatus')
-        objjson = request.user.last_name
-        objjson1 = request.user.first_name
-        obj = json.loads(objjson)
-        obj1 = json.loads(objjson1)
-        if(obj1["G"] == "h"):
-            obj["BA"] = blood
-            objj = json.dumps(obj)
-            request.user.last_name = objj
-            request.user.save()
+        bl = request.POST.get('choice')
+        print(bl)
+        return HttpResponse("mk")
+        # blood =request.POST.getlist('bloodstatus')
+        # objjson = request.user.last_name
+        # objjson1 = request.user.first_name
+        # obj = json.loads(objjson)
+        # obj1 = json.loads(objjson1)
+        # if(obj1["G"] == "h"):
+        #     obj["BA"] = blood
+        #     objj = json.dumps(obj)
+        #     request.user.last_name = objj
+        #     request.user.save()
             
-            # request.user.save()
+        #     # request.user.save()
             
-            return redirect('profile')
-        else:
-            return HttpResponse("error")
+        #     return redirect('profile')
+        # else:
+        #     return HttpResponse("error")
 
 
 
@@ -658,12 +740,36 @@ def profile(request):
         profiledict2 = json.loads(profilejson2)
         return render(request, 'home/profile.html', {"p1":profiledict1,"p2":profiledict2, "gg":False})
     except:
+        msgs = Message.objects.filter(Timestamp = request.user.username).last()
+        print(msgs)
+
+        if(msgs != None):
+            if("AppSeted" in msgs.message or "BloodDonated" in msgs.message):
+                hospitaln = json.loads(User.objects.filter(username = msgs.authorUsername)[0].first_name)["N"]
+                st =msgs.message
+                hn = hospitaln
+            else:
+                st = "N"
+                hn = "NN"
+                hn = "NN"
+        else:
+            st = "N"
+            hn = "NN"
+            hn = "NN"
+
+
+
+
         o = {
             "fn":userjson2,
             "ln": request.user.last_name,
             "em":request.user.email,
             "gg":"T",
+            "status": st,
+            "hname":hn
+
         }
+        print(o)
         return render(request, 'home/profile.html', o)
         # return HttpResponse("mk")
 

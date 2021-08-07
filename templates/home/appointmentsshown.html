@@ -1,10 +1,119 @@
 {% extends 'base.html' %}
 {% block css %}
 <style>
-    .total-monal{
+    /* .total-monal{
 
 top: 70vh;
-}
+} */
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+        .block {
+            /* border: 8px solid rgb(118, 104, 240); */
+            box-shadow: 5px 5px 20px 5px rgba(255, 255, 255, 0.25),
+                -5px -5px 20px 5px rgba(255, 255, 255, 0.26);
+            border-radius: 10px;
+            overflow-y: scroll;
+            height: 350px;
+            margin: 60px;
+            /* margin-bottom: 50px;  */
+            background-image: radial-gradient(rgb(231, 229, 229), rgb(231, 247, 255));
+        }
+
+        .lv-card {
+            font-family: 'Merriweather';
+        }
+
+        h1 {
+            text-align: center;
+            color: #4181ee;
+            font-family: 'Merriweather';
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .lv-card {
+            max-width: 500px;
+            min-height: 200px;
+            background-image: radial-gradient(#60efbc, #58d5c9);
+            padding: 30px;
+            box-sizing: border-box;
+            color: #FFF;
+            margin: 20px;
+            box-shadow: 0px 2px 18px -4px rgba(0, 0, 0, 0.75);
+        }
+
+        /* .lv-card:nth-child(2) {
+            background: #4181ee;
+        }
+
+        .lv-card:last-child {
+            background: #673ab7;
+        } */
+
+        .lv-card-title {
+            margin-top: 0;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Merriweather';
+            letter-spacing: 1.2px;
+        }
+
+        .lv-card-content {
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+            font-family: 'Merriweather';
+        }
+
+        .lv-card-btn {
+            all: unset;
+            display: block;
+            margin-left: auto;
+            border: 2px solid #FFF;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 10px;
+            font-weight: 600;
+            transition: all 0.5s;
+            cursor: pointer;
+            letter-spacing: 1.2px;
+        }
+
+        .lv-card-btn:hover {
+            color: rgb(105, 216, 173);
+            background: #FFF;
+        }
+
+        /* .lv-card:nth-child(2) .lv-card-btn:hover {
+            color: #4181ee;
+            background: #FFF;
+        }
+
+        .lv-card:last-child .lv-card-btn:hover {
+            color: #673ab7;
+            background: #FFF;
+        } */
+
+
+        .btn {
+            margin: auto;
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 500px) {
+            .block {
+                width: 100vw;
+                margin: 0;
+            }
+        }
 </style>
 
 {% endblock css %}
@@ -13,31 +122,60 @@ top: 70vh;
 
 
 
-{% for a in App %}
-<div class="m-4" style="color: rgb(255, 0, 0);">
-    
- Name :  {{a.Appbyname}}
- <br>
- Date : {{a.Date}}
+<div class="form">
+    <h1>Pending Appointments </h1>
+    <div class="section" id="block1">
+        <div class="block">
 
-<a href="/blooddonated/{{a.Appby}}">
+            <div class="lv-card">
+                <h3 class="card-title">
+                    Patient's Name: Name
+                </h3>
+                <p class="card-content">
+                <h5 class="card-title">Appointment Date</h5>
+                </p>
+                <a href="#" class="lv-card-btn">Mark as done</button></a>
+            </div>
+            
+            <div class="lv-card">
+                <h3 class="card-title">
+                    Patient's Name: Name
+                </h3>
+                <p class="card-content">
+                <h5 class="card-title">Appointment Date</h5>
+                </p>
+                <a href="#" class="lv-card-btn">Mark as done</button></a>
+            </div>
 
-    <button type="button" class="btn btn-primary">Done</button>
-</a>
+        </div>
+    </div>
+    <h1>Appointments Cleared </h1>
+    <div class="section" id="block2">
+        <div class="block">
+            <div class="lv-card">
+                <h3 class="card-title">
+                    Patient's Name: Name
+                </h3>
+                <p class="card-content">
+                <h5 class="card-title">Appointment Done</h5>
+                </p>
+                <a href="#" class="lv-card-btn">Done</a>
+            </div>
+            
+            <div class="lv-card">
+                <h3 class="card-title">
+                    Patient's Name: Name
+                </h3>
+                <p class="card-content">
+                <h5 class="card-title">Appointment Done</h5>
+                </p>
+                <a href="#" class="lv-card-btn">Done</a>
+            </div>
+
+        </div>
+    </div>
 </div>
-    {% endfor %}
-
-{% for d in Donorz %}
-<div class="m-4" style="color: rgb(34, 255, 0);">
-    
- Name :  {{a.Appbyname}}
- <br>
- Date : {{a.DonatedOnDate}}
- <br>
- Done 
 
 
-</div>
-    {% endfor %}
 
 {% endblock body %}

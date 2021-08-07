@@ -1,5 +1,6 @@
 body {
-    background: #e0e5ec;
+    /* background: #e0e5ec; */
+    background:radial-gradient(#a1c4fd ,#c2e9fb);
   }
   h1 {
     position: relative;
@@ -415,7 +416,7 @@ body {
   /* 8 */
   .btn-8 {
     background-color: #f0ecfc;
-  background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
+  background-image: linear-gradient(315deg, #d3b1ff 0%, #c797eb 74%);
     line-height: 42px;
     padding: 0;
     border: none;
@@ -777,7 +778,11 @@ body {
   /* 16 */
   .btn-16 {
     border: none;
-    color: #000;
+    height: 50px;
+    width: 65px;
+    padding: 5px;
+    color: rgb(111, 0, 0);
+    background-color: rgb(227, 255, 252);
   }
   .btn-16:after {
     position: absolute;
@@ -797,11 +802,14 @@ body {
   }
   .btn-16:hover {
     color: #000;
+    color: red;
+
   }
   .btn-16:hover:after {
     left: auto;
     right: 0;
     width: 100%;
+    color: red;
   }
   .btn-16:active {
     top: 2px;

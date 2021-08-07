@@ -456,7 +456,6 @@ label {
           <input type="email" name="pemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <label for="exampleInputEmail1" class="form-label">Patient's Email ID</label>
           <span class="focus-border"></span>
-          <div id="emailHelp" class="form-text">We will never share your email with anyone else.</div>
         </div>
 
        <div class="lv_container">
@@ -500,17 +499,15 @@ label {
    
 
         <div class="lv_container">
-        <label for="birthday">Date Of Discharge</label>
-  <input type="date" id="birthday" name="pdod" class="form-control">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Patient Age</label>
+          {% comment %} <label for="exampleInputEmail1" class="form-label">Patient Age</label> {% endcomment %}
           <input type="text" name="p_age" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <label for="exampleInputEmail1" class="form-label">Patient's Age</label>
           <span class="focus-border"></span>
           {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
 
-        <div class="lv_container">
+        <div class="lv_container my-4">
         <div class="form-group">
           <input type="password" class="form-control" id="pid1" name="pid1" required>
           <label for="pass1">Choose a password</label>
@@ -553,6 +550,7 @@ label {
   <div class="lv-card">
             <h3 class="card-title">{{uu.N}}</h3>
             <p class="card-content"><h5 class="card-title">{{uu.U}}</h5></p>
+            <p class="card-content"><h5 class="card-title">{{uu.E}}</h5></p>
             <a href="/delCS/{{uu.U}}" class="lv-card-btn">Delete</a>
         </div>
 

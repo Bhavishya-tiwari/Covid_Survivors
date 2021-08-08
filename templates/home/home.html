@@ -4,6 +4,10 @@
 
 {% block css %}
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@1,500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@600&family=STIX+Two+Text:ital,wght@1,500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@600&family=Raleway:wght@300&family=STIX+Two+Text:ital,wght@1,500&display=swap');
+
     body {
             {
             % comment %
@@ -22,11 +26,11 @@
     .Heading {
         color: rgb(1, 17, 110);
         text-align: center;
-        padding: 2vh;
-position: relative;
-top: 7vh;
-font-size: 7vw;
-        font-family:Arial, Helvetica, sans-serif;
+        padding: 8vh;
+        position: relative;
+        top: 6vh;
+        font-size: 1.2rem;
+        font-family: 'STIX Two Text', serif;
     }
 
     .content {
@@ -49,6 +53,8 @@ top: 3vh;
     h3 {
         font-size: 7vw;
         text-align: center;
+        font-family: 'Hahmlet', serif;
+font-family: 'STIX Two Text', serif;
     }
 
     p {
@@ -59,12 +65,15 @@ top: 3vh;
         background-color: rgb(8, 0, 83);
         font-size: larger;
         color: white;
+        font-family: 'Hahmlet', serif;
+
 
     }
 
     .card-body {
         background-color: transparent;
         color: rgb(18, 12, 95);
+        
     }
   
 
@@ -176,7 +185,10 @@ top: 1vh;    }
     }
 
 }
-
+.scale {
+    scale: 1.1;
+    font-size: 0.8em;
+}
 </style>
 {% endblock css %}
 
@@ -189,7 +201,8 @@ top: 1vh;    }
 {% load static %}
 <!-- <img id="bg" src="{% static "imgs/hh.jpg" %}" alt="home" /> -->
 
-<div class="Heading">Welcome To Our Website</div>
+<div class="Heading">“You may not always have a comfortable life. And you will not always be able to solve all the world’s problems all at once. But don’t ever underestimate the impact you can have, because history has shown us that courage can be contagious, and hope can take on a life of its own.” — <strong>Michelle Obama</strong></div>
+
 
 
 <div class="card text-center wid my-4">
@@ -198,9 +211,21 @@ top: 1vh;    }
     </div>
     <div id="u" class="card-body">
         <h3 class="card-title">Covid Survivors</h3>
-        <p class="card-text" style="font-family: 'Times New Roman'; font-size: 1.2em;color: rgb(5, 0, 76);" >A platform where details(age, address, blood group, contact no. of the covid+ patients who have been recovered will be registered with authentication so that it can be used later by the needy. Providing an open chat option for others to take advice and help keeping patients mentally healthy.
+        <p class="card-text" style="font-family: 'Hahmlet', serif;
+        font-family: 'Raleway', sans-serif;
+        font-family: 'STIX Two Text', serif; font-size: 1.2em;color: rgb(5, 0, 76);" >
+        <!-- A platform where details(age, address, blood group, contact no.) of the covid+ patients who have been recovered will be registered with authentication so that it can be used later by the needy. Providing an open chat option for others to take advice and help keeping patients mentally healthy. -->
+
+        A platform to store details of people who got recovered fom covid. 
+        A staff member ? 
+         Get authenticated and register genuine data of the covid recovered patients, so that no unauthentic data is provided in the database. 
+         Just a visitor or normal user ? 
+         Write a blog or chat with people, have some interaction and get some advices and stay healthy.
         </p>
-      <button class="btn-hover color-7">Get Started</button>
+      {% comment %} <button class="btn-hover color-7">Get Started</button> {% endcomment %}
+      <a href="getstarted">
+      <button class="custom-btn btn-1 scale">Get Started</button>
+      </a> 
 
     </div>
 </div>

@@ -1,0 +1,395 @@
+{% extends 'base.html' %}
+
+{% block title %} Get Started {% endblock title %}
+
+{% block links %}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+
+{% endblock links %}
+
+{% block css %}
+<style>
+    .body {
+        overflow-x: hidden;
+    }
+
+    .clv {
+        margin: auto;
+    }
+
+    /* ////// Design of main title //// */
+    .display {
+        color: #100670;
+        margin: 10px;
+        padding: 40px;
+        font-size: 4rem;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    #below-heading {
+        height: 1px;
+        margin: 6vw;
+        border: 2px solid red;
+        opacity: 0.5;
+    }
+
+
+    /* ///// Design of each box ///// */
+    .roles {
+        border: 2px solid rgb(8, 0, 83);
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+        color: rgb(8, 0, 83);
+        margin: 10vw;
+        padding: 4em;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 20px;
+    }
+
+    hr {
+        background-color: rgb(0, 14, 138);
+        border: 1px solid rgb(13, 6, 122);
+        opacity: 1.0;
+
+    }
+
+    .card-header {
+        color: white;
+        background-color: rgb(8, 0, 83);
+    }
+
+    /* ///// Design of each button - STARTS ///// */
+    .btn {
+        background-color: rgb(178, 195, 250);
+        border: 2px solid blue;
+        height: 50px;
+        width: 150px;
+        margin: 30px;
+        border-radius: 10px;
+        position: relative;
+        left: 70px;
+    }
+
+    .buttons {
+        margin: 20px;
+        text-align: center;
+        font-family: 'Kalam', cursive;
+    }
+
+    .btn-hover {
+        min-width: 120px;
+        font-size: 1.4em;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        margin: 12px;
+        /* height: 55px; */
+        padding: 12px 23px;
+        text-align: center;
+        border: none;
+        background-size: 300% 100%;
+
+        border-radius: 50px;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
+
+    .btn-hover:hover {
+        background-position: 100% 0;
+        -o-transition: all .4s ease-in-out;
+        -webkit-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
+
+    .btn-hover:focus {
+        outline: none;
+    }
+
+    .btn:hover {
+        background-color: rgb(100, 146, 247);
+    }
+
+    .btn-hover.color-3 {
+        background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+        box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+
+    }
+
+    .flex_lv {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 80vw;
+        margin: auto;
+        justify-content: space-evenly;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        font-family: 'STIX Two Text', serif;
+        text-align: center;
+    }
+
+    /* .btn_lv {
+        display: grid;
+        grid-auto-flow: row;
+    } */
+
+    /* ////// Design of each button - ENDS /////// */
+
+
+    /* ///// Design of Go_To_Top Button //////// */
+    #Go_Up {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+        display: none;
+        border: none;
+        background: none;
+    }
+
+    .up_button {
+        width: 50px;
+        height: 50px;
+        fill: #100670;
+    }
+    /* ///////////////////////////////////////////////// */
+
+    @media only screen and (max-width: 1500px) {
+        .body {
+        overflow-x: hidden;
+        }
+    }
+    @media only screen and (max-width: 990px) {
+        .display {
+            margin: 2px;
+            padding: 20px;
+        }
+        .roles {
+            padding: 50px;
+        }
+    }
+    @media only screen and (max-width: 490px) {
+        .roles {
+            padding-top: 40px;
+            padding-left: 10px;
+            padding-right:10px;
+            padding-bottom: 10px;
+        }
+        .card-header {
+            font-size: 14px;
+        }
+        .card-text {
+            font-size: 14px;;
+        }
+    }
+
+    .display-2 {
+        size: 1.2rem;
+    }
+    @media only screen and (max-width: 1000px) {
+        #Go_Up {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        display: none;
+        border: none;
+        background: none;
+      }
+    }
+</style>
+
+{% endblock css %}
+
+
+
+{% block body %}
+
+<div class="body">
+<!-- ///////////////////////////// Main Title ///////////////////////////////// -->
+<div class="clv my-5 text-center">
+    <h1 class="display">Get Started</h1>
+</div>
+
+<!-- ///////////////////////////// Buttons below heading //////////////////////////-->
+<div class="flex_lv">
+    <button class="btn_lv buttons btn-hover color-3"><a href="#Covid Updates"> Covid Updates </a></button>
+    <button class="btn_lv buttons btn-hover color-3"><a href="#Hospital"> Donor </a></button>
+    <button class="btn_lv buttons btn-hover color-3"><a href="#Employee"> Blog </a></button>
+    <button class="btn_lv buttons btn-hover color-3"><a href="#CovidSurvivor"> Chat Box </a></button>
+    <button class="btn_lv buttons btn-hover color-3"><a href="#User"> Contact Us </a></button>
+
+</div>
+
+<hr id="below-heading">
+
+<!-- ////////////////////// Displaying each block - STARTS ///////////////////////// -->
+<div class="clv h-50 my-5" data-aos="fade-left">
+    <div class="card roles" id="Covid Updates">
+        <div class="card-header">
+            Covid Updates
+        </div>
+        <div class="card-body">
+            <!-- <h5 class="card-title">Level 1 </h5> -->
+            <hr>
+            <p class="card-text"> One can get the updates regarding covid statistics of a place in this section of our website.
+                 This section of the website has a wealth of information, including daily confirmed cases, daily deaths,
+                daily recovered patients, the overall number of confirmed cases, and the total number of fatalities in
+                a country, state, or district. With the assistance of a graph, this information is shown on the screen.
+                This page has a unique feature in that it displays all of the aforementioned information as well as
+                the geographical location of the desired site on a map.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="clv h-50 my-5" data-aos="fade-right">
+    <div class="card roles" id="Hospital">
+        <div class="card-header">
+            Donor
+        </div>
+        <div class="card-body">
+            {% comment %} <h5 class="card-title">Level 2 </h5> {% endcomment %}
+            <hr>
+            <p class="card-text"> To utilise this feature, the user must first log in. <br>
+                The Donor section of the Covid Survivors website is one of the most essential areas. <br>
+                People who need blood are known as blood receivers. They must choose their blood group from the
+                alternatives offered, and they will be sent to a list of hospitals that have blood available from both
+                covid recovered patients and healthy persons. <br>
+                <strong> Blood recipients </strong> can use the contact information given to contact the appropriate hospital based on
+                their needs. <br> <strong> Blood donors </strong>  may search for local hospitals and make an appointment to donate blood.
+                After booking the appointment, he/she must check the profile page for confirmation.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="clv h-50 my-5" data-aos="fade-left">
+    <div class="card roles">
+        <div class="card-header" id="Employee">
+            Blog
+        </div>
+        <div class="card-body">
+            {% comment %} <h5 class="card-title">Level : 3 </h5> {% endcomment %}
+            <hr>
+            <p class="card-text"> The user may read the blogs, but they must login to offer their unique perspective. This gives the
+            user a place to vent and express their opinions on themes like covid rehabilitation, mental health
+            concerns during the lockdown, and new lifestyles like online schooling and work from home.
+            If a user finds the blog to be offensive in any manner, there is also a report button.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="clv h-50 my-5" data-aos="fade-right">
+    <div class="card roles" id="CovidSurvivor">
+        <div class="card-header">
+            Chat Box
+        </div>
+        <div class="card-body">
+            {% comment %} <h5 class="card-title">Level : 4 </h5> {% endcomment %}
+            <hr>
+            <p class="card-text"> Users who have signed in can utilise the website's open chat feature to seek advise and assist in
+            keeping patients psychologically healthy. <br>
+            It essentially gives a user interface for interacting with other people, aids in understanding other
+            people's circumstances, and inspires them to solve this tough issue.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="clv h-50 my-5" data-aos="fade-left">
+    <div class="card roles" id="User">
+        <div class="card-header">
+            Contact us
+        </div>
+        <div class="card-body">
+            {% comment %} <h5 class="card-title">Level : 5 </h5> {% endcomment %}
+            <hr>
+            <p class="card-text">If you have any questions, you may approach the administrator. <br>
+             The user must fill out the needed information, following which the administration will contact them. <br>
+             The user can also report any errors or disinformation if it is supplied, such as when it shows
+             contributors are available when they are not. <br>
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="guide">
+    
+</div>
+
+<!-- ///////////////////////////////// Displaying each block - ENDS ///////////////////////// -->
+
+
+<!-- //////////////////////////////// Code for Go_to_top button ///////////////////////////// -->
+
+<button id="Go_Up"><i class="bi bi-chevron-double-up"></i>
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="blue" class="bi bi-chevron-double-up up_button"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z" />
+        <path fill-rule="evenodd"
+            d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+    </svg>
+</button>
+</div>
+
+
+
+
+<!-- ////////////////////////////////////// Java Script ///////////////////////////////////////////////////// -->
+
+
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 300,
+        duration: 1000,
+    });
+
+
+    // //////////////////////////////////////////////////////////////////////
+
+    var upbutton = document.getElementById('Go_Up');
+
+    window.onscroll = function () {
+        if (window.pageYOffset >= 1000) {
+            upbutton.style.display = 'block';
+        }
+        else {
+            upbutton.style.display = 'none';
+        }
+    };
+
+    upbutton.onclick = function () {
+        window.scrollTo(0, 0);
+    }
+
+</script>
+
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -39,6 +39,8 @@ def home(request):
 
 def CovidUpdates(request):
     return render(request, 'home/Covid_Updates.html')
+def getstarted(request):
+    return render(request, 'home/getstarted.html')
 
 
 def setappointment(request, HuN):

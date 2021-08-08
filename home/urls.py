@@ -34,6 +34,7 @@ urlpatterns = [
     path('loginemp', views.loginemp, name='loginemp'),
 
     path('logingoogle', views.loging, name='loging'),
+    path('getstarted', views.getstarted, name='getstarted'),
 
     # Add patients#
     #by employee afte sign in

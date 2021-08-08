@@ -2,7 +2,7 @@
 
 ## A portal where the data of the covid+ patients who have been retrieved (age, address, blood group, contact number) will be registered with authentication and made available to the needy in the future. Providing an open chat option for people to seek advise and assist in the mental health of patients.
 
-![Alt text](/home.png?raw=true "Title")
+![Alt text](https://raw.githubusercontent.com/Bhavishya-tiwari/Web1_Covid-Survivors/master/home/static/home.png?raw=true "Title")
 ---
 ## `CHAT BOX`
  <font size="12"> 

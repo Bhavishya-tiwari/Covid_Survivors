@@ -629,24 +629,24 @@ def loginemp(request):
                
                 login(request, user)
                 messages.success(request, "Successfully Logged In")
-                return redirect('addpat')
+                return redirect('home')
 
             elif grp ==  "c":
                 login(request, user)
                 messages.success(request, "Successfully Logged In")
-                return redirect('Donors')
+                return redirect('home')
             elif grp == "u":
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
-                return redirect('Donors')
+                return redirect('home')
             elif grp =="h":
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
-                return redirect('AddEmployee')
+                return redirect('home')
             elif grp =="Wa":
                 login(request,user)
                 messages.success(request, "Successfully Logged In")
-                return redirect('Add')
+                return redirect('home')
             else:
                 return HttpResponse("error occured")
         else:
@@ -840,10 +840,8 @@ def profile(request):
             else:
                 st = "N"
                 hn = "NN"
-                hn = "NN"
         else:
             st = "N"
-            hn = "NN"
             hn = "NN"
 
 

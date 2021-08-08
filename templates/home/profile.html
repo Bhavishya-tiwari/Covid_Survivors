@@ -294,12 +294,14 @@ label {
 {% endif %}
               {% if p1.G == "h"  %}
               {% endif %}
+{% if gg != "T" %}
               <div class="card mt-3" style="height: 50vh;">
                 <ul class="list-group list-group-flush">
                   <div class="d-flex flex-column align-items-center text-center">
+{% endif %}
+    {% if p1.G == "e" %}
                    
           
-    {% if p1.G == "e" %}
   <h4 class="mt-4">Hey {{p1.N}}, Welcome to our website... </h4>
  <a href="/getstarted">
        <button class="custom-btn btn-5"><span>Get started</span></button>
@@ -341,6 +343,8 @@ label {
 </form>
 </div>
   {% endif %}
+
+  else
 
                   
                     

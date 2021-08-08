@@ -30,6 +30,11 @@ def v(p):
             return True
     else:
         return False
+def l(p):
+    if(len(p)<1):
+        return False
+    else:
+        return True
 
 def home(request):
    
@@ -48,18 +53,22 @@ def setappointment(request, HuN):
         users = list(group.user_set.all())
         Hospital = User.objects.get(username=HuN)
         hospitalusername= Hospital.username
+       
 
         clear = False
         username = hospitalusername
+        
 
         msgs = Message.objects.filter(email = "Appointment@hospital").all()
         byuser = []
-
+        # print(msgs)
         for m in msgs:
+        
             if(m.Timestamp == request.user.username):
                 byuser.append(m)
         if(byuser == []):
             clear =True
+        
         
         for a in byuser:
             ms = a.message
@@ -68,29 +77,42 @@ def setappointment(request, HuN):
             else:
                 clear=False
                 break
-        if( json.loads(request.user.first_name)["G"] == "Wa" or json.loads(request.user.first_name)["G"] == "h" or json.loads(request.user.first_name)["G"] == "e"):
-            messages.error(request, "contact Hospital")
-            return redirect('Donors')
-
-            
-
-            
-
+        print(clear)
         
-        name = request.user.first_name+ " " + request.user.last_name
-        email = "Appointment@hospital"
-        msg ="Emp will send msg from here"
-        now = request.user.username
-        if(clear):
-            Query = Message( authorUsername=username,email=email,name=name,
-                                        Timestamp=now, message=msg)
-            Query.save()
-                        
-            messages.success(request, "Appointment request sent")
-            return redirect('Donors')
-        else:
-            messages.error(request, "Your Appointment is already set")
-            return redirect('Donors')
+        projson = request.user.first_name
+        try:
+            prodict = json.loads(projson)
+            if( prodict["G"] == "Wa" or prodict["G"] == "h" or prodict["G"] == "e" or prodict["G"] == "c"):
+                messages.error(request, "contact Hospital")
+                return redirect('Donors')
+            else:
+                messages.error(request, "contact Hospital/Employee")
+                return redirect('Donors')
+
+        except:
+            name = request.user.first_name+ " " + request.user.last_name
+            email = "Appointment@hospital"
+            msg ="Emp will send msg from here"
+            now = request.user.username
+            if(clear):
+                Query = Message( authorUsername=username,email=email,name=name,
+                                            Timestamp=now, message=msg)
+                Query.save()
+                            
+                messages.success(request, "Appointment request sent")
+                return redirect('Donors')
+            else:
+                messages.error(request, "Your Appointment is already set")
+                return redirect('Donors')
+            
+
+                
+
+                
+
+            
+            
+
 
     else:
         messages.error(request, "Please login for appointment")
@@ -468,38 +490,44 @@ def Add(request):
 @allowed_users(allowed_roles=['Website_Admins'])
 def AddHadmin(request):
     if request.method == "POST":
+        try:
 
-        username = request.POST.get('husername')
-        name = request.POST.get('hname')
-        hemail = request.POST.get('hemail')
-        haddress = request.POST.get('hadd')
-        PhoneNumber = request.POST.get('phonenumber')
-        hid = request.POST.get('pass1')
-        hid2 = request.POST.get('pass2')
-        if(hid2 != hid):
-            return redirect('addhospital')
-        myuser = User.objects.create_user(username, hemail, hid)
+            username = request.POST.get('husername')
+            name = request.POST.get('hname')
+            hemail = request.POST.get('hemail')
+            haddress = request.POST.get('hadd')
+            PhoneNumber = request.POST.get('phonenumber')
+            hid = request.POST.get('pass1')
+            hid2 = request.POST.get('pass2')
 
-        profileobj1 = {
-            "N":name,"U":username,"G":"h","E":hemail,
-        }
-        pro2={"A":haddress,"Au":request.user.username,"BA":"Na",
-        "P":PhoneNumber}
+            if(hid2 != hid):
+                messages.error(request,"Password did not match")
+                return redirect('addhospital')
+            myuser = User.objects.create_user(username, hemail, hid)
 
-        myuserjson = json.dumps(profileobj1)
-        myuserjson2 = json.dumps(pro2)
-        if(v(username) and v(hid)):
-            myuser.first_name = myuserjson
-            myuser.last_name = myuserjson2
-            # myuser.first_name='hospitalh'
+            profileobj1 = {
+                "N":name,"U":username,"G":"h","E":hemail,
+            }
+            pro2={"A":haddress,"Au":request.user.username,"BA":"Na",
+            "P":PhoneNumber}
 
-            myuser.save()
-            group = Group.objects.get(name='HospitalHeads')
-            myuser.groups.add(group)
-            messages.success(request, "New Hospital Added")
-            return redirect('Add')
-        else:
-            messages.error(request, "Password/Username invalid")
+            myuserjson = json.dumps(profileobj1)
+            myuserjson2 = json.dumps(pro2)
+            if(v(username) and v(hid) and l(name) and l(hemail) and l(haddress) and l(PhoneNumber) ):
+                myuser.first_name = myuserjson
+                myuser.last_name = myuserjson2
+                # myuser.first_name='hospitalh'
+
+                myuser.save()
+                group = Group.objects.get(name='HospitalHeads')
+                myuser.groups.add(group)
+                messages.success(request, "New Hospital Added")
+                return redirect('Add')
+            else:
+                messages.error(request, "Enter Proper Data")
+                return redirect('Add')
+        except:
+            messages.error(request, "Enter Proper Data")
             return redirect('Add')
 
        
@@ -509,41 +537,47 @@ def AddHadmin(request):
 @allowed_users(allowed_roles=[ 'HospitalHeads'])
 def AddEmployee(request):
     if request.method == "POST":
-        username = request.POST.get('eusername')
-        name = request.POST.get('ename')
-        hemail = request.POST.get('eemail')
-        hid = request.POST.get('epass1')
-        hid2 = request.POST.get('epass2')
-        if(hid2 != hid):
-            return HttpResponse('password not match')
-        myuser = User.objects.create_user(username, hemail, hid)
-        profilejson = request.user.first_name
-        profilejson2 = request.user.last_name
-        profiledict = json.loads(profilejson)
-        profiledict2 = json.loads(profilejson2)
+        try:
+            username = request.POST.get('eusername')
+            name = request.POST.get('ename')
+            hemail = request.POST.get('eemail')
+            hid = request.POST.get('epass1')
+            hid2 = request.POST.get('epass2')
+            if(hid2 != hid):
+                return HttpResponse('password not match')
+            myuser = User.objects.create_user(username, hemail, hid)
+            profilejson = request.user.first_name
+            profilejson2 = request.user.last_name
+            profiledict = json.loads(profilejson)
+            profiledict2 = json.loads(profilejson2)
+            
 
-        profileobj1 = {
-            "N": name,"U":username,"G": "e","E":   hemail,
-        }
-        pro2 = {
-            "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict2["A"],
-            "Au" : request.user.username,}
+            profileobj1 = {
+                "N": name,"U":username,"G": "e","E":   hemail,
+            }
+            pro2 = {
+                "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict2["A"],
+                "Au" : request.user.username,}
 
-        myuserjson = json.dumps(profileobj1)
-        myuserjson2 = json.dumps(pro2)
-        if(v(username) and v(hid)):
-        
-            myuser.first_name = myuserjson
-            myuser.last_name = myuserjson2
+            myuserjson = json.dumps(profileobj1)
+            myuserjson2 = json.dumps(pro2)
+            if(v(username) and v(hid) and l(hemail)):
+            
+                myuser.first_name = myuserjson
+                myuser.last_name = myuserjson2
 
-            myuser.save()
-            group = Group.objects.get(name='Hospital_Employees')
-            myuser.groups.add(group)
-            messages.success(request, "New Employee Added")
+                myuser.save()
+                group = Group.objects.get(name='Hospital_Employees')
+                myuser.groups.add(group)
+                messages.success(request, "New Employee Added")
+                return redirect('AddEmployee')
+            else:
+                messages.error(request, "Password/Username invalid")
+                return redirect('AddEmployee')
+        except:
+            messages.error(request, "Enter Proper data")
             return redirect('AddEmployee')
-        else:
-            messages.error(request, "Password/Username invalid")
-            return redirect('AddEmployee')
+
     userl =[]    
     group = Group.objects.get(name='Hospital_Employees')
     users = list(group.user_set.all())
@@ -677,7 +711,7 @@ def addpat(request):
 
         myuserjson = json.dumps(profileobj1)
         myuserjson2 = json.dumps(pro2)
-        if(v(username) and v(pid1)):
+        if(v(username) and v(pid1) and l(name) and l(pemail) and l(pbloodgrp) and l(pdod) and l(p_age)):
 
             myuser.first_name = myuserjson
             myuser.last_name = myuserjson2

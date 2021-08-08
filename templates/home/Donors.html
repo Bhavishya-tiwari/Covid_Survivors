@@ -741,9 +741,9 @@ body {
 /* Fading animation */
 .fade {
   -webkit-animation-name: fade;
-  -webkit-animation-duration: 3s;
+  -webkit-animation-duration: 6s;
   animation-name: fade;
-  animation-duration: 3s;
+  animation-duration: 6s;
 }
 
 @-webkit-keyframes fade {
@@ -752,7 +752,7 @@ body {
 }
 
 @keyframes fade {
-  from {opacity: 0} 
+  from {opacity: 0.4} 
   to {opacity: 1}
 }
 
@@ -1008,10 +1008,11 @@ body {
       
     
   
-    {% for h in BDs %}
+    {% for hh in BDs %}
      <div class="card card-1 ccc ">
         <h2 style="text-align: center; color: white; font-weight: bolder;">Blood Donor</h2>
-        <h2 class="card__title">{{h.N}}</h2>
+        <h2 class="card__title">{{hh.N}}</h2>
+        
         <p class="card__apply">
           <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
         </p>
@@ -1100,7 +1101,7 @@ function showSlides() {
   }
   slides[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 3050); // Change image every 2 seconds
+  setTimeout(showSlides, 7000); // Change image every 2 seconds
 }
 </script>
 

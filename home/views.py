@@ -339,15 +339,30 @@ def Donors(request):
         }
         userl.append(o)
     BDs =[]
+    d =[]
+    a =[1,1,1,1,1]
     for p in patients:
         usred = json.loads(p.first_name)
         if(usred["T"] == "BD" ):
             BDs.append(usred)
+     
+    for i in a:
+        for b in BDs:
+                d.append(b)
+
+    # print(d)
+
+
+    
+    
+
+    
+    
     
 
     
 
-    return render(request, 'home/Donors.html', {"Hospitals" : userl, "BDs":BDs})
+    return render(request, 'home/Donors.html', {"Hospitals" : userl, "BDs":d})
                 
                     
                 

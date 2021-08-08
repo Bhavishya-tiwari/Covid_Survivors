@@ -193,7 +193,8 @@ def blooddonated(request, DonorUsername):
     st =  "BloodDonated" +  str(now)
     msgs.message = st
     msgs.save()
-    return redirect('appointmentsshown')
+    messages.success(request,"fill Donors Data")
+    return redirect('addpat')
 
 
         
@@ -747,8 +748,12 @@ def addpat(request):
             myuser.save()
             group = Group.objects.get(name='Covid_Survivors')
             myuser.groups.add(group)
-            messages.success(request, "Donor Added")
-            return redirect('addpat')
+            if(DoC == "BD"):
+                messages.success(request, "Donor Added")
+                return redirect('addpat')
+            elif(DoC == "CS"):
+                messages.success(request, "Donor Added")
+                return redirect('Covid Survivor Added')
         else:
             messages.error(request, "Password/Username invalid")
             return redirect('addpat')

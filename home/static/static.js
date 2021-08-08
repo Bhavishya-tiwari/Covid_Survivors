@@ -24,18 +24,24 @@ fetch('https://api.covid19india.org/data.json')
 
         let latestCases = data.cases_time_series[(data.cases_time_series).length - 1]
         let V = data.tested[(data.tested).length - 1]
-
+        if(V.totalindividualsvaccinated != ""){
+            vv = V.totalindividualsvaccinated
+        }
+        else{
+            vv = V.totalindividualsregistered
+        }
 
         vaccD = {
             "dc": latestCases.dailyconfirmed,
             "dd": latestCases.dailydeceased,
             "dr": latestCases.dailyrecovered,
-            "v": V.totalindividualsvaccinated,
+            "v": vv,
             "tc": latestCases.totalconfirmed,
             "td": latestCases.totaldeceased,
             "tr": latestCases.totalrecovered,
 
         }
+        console.log(V)
     })
 
 
@@ -322,11 +328,11 @@ data.forEach(e => {
     var obj = {
         'type': 'Feature',
         'properties': {
-            'description': ` <div id="pop"> <p>country : ${e.country}</p>
-                                   <p>confirmed : ${e.stats.confirmed}</p>
-                                   <p>deaths : ${e.stats.deaths}</p>
-                                   <p>recovered :${e.stats.recovered}</p>
-                                   <p>province : ${e.province}</p> </div>`
+            'description': ` <div id="pop"> <p><span style="color:blue";>Country </span>: ${e.country}</p>
+                                   <p><span style="color:orange";>Confirmed </span>: ${e.stats.confirmed}</p>
+                                   <p><span style="color:red";>Deaths </span> : ${e.stats.deaths}</p>
+                                   <p><span style="color:green";>Recovered </span>:${e.stats.recovered}</p>
+                                   <p><span style="color:purple";>province </span> : ${e.province}</p> </div>`
         },
         'geometry': {
             'type': 'Point',
@@ -465,6 +471,7 @@ function myFunction1(e) {
 
 
 // *******************Vaccinated Data***************************************
+console.log(vaccD);
 
 var widthhh;
 function animateValue(obj, start, end, duration) {
@@ -489,13 +496,13 @@ window.addEventListener('scroll', function () {
         if(widthhh<800){
             if (window.pageYOffset > 720) {
 
-                animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 3 / 4), parseInt(vaccD.dc), 4000);
-                animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 3 / 4), parseInt(vaccD.dd), 4000);
-                animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 3 / 4), parseInt(vaccD.dr), 4000);
-                animateValue(document.getElementById('vv'), parseInt(vaccD.v * 3 / 4), parseInt(vaccD.v), 4000);
-                animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 3 / 4), parseInt(vaccD.tc), 4000);
-                animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 3 / 4), parseInt(vaccD.td), 4000);
-                animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 3 / 4), parseInt(vaccD.tr), 4000);
+                animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 8/10), parseInt(vaccD.dc), 4000);
+                animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 8/10), parseInt(vaccD.dd), 4000);
+                animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 8/10), parseInt(vaccD.dr), 4000);
+                animateValue(document.getElementById('vv'), parseInt(vaccD.v * 8/10), parseInt(vaccD.v), 4000);
+                animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 8/10), parseInt(vaccD.tc), 4000);
+                animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 8/10), parseInt(vaccD.td), 4000);
+                animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 8/10), parseInt(vaccD.tr), 4000);
     
     
                 iii = 2;
@@ -504,35 +511,35 @@ window.addEventListener('scroll', function () {
         if(widthhh<383){
             if (window.pageYOffset >496 ) {
 
-                animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 3 / 4), parseInt(vaccD.dc), 4000);
-                animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 3 / 4), parseInt(vaccD.dd), 4000);
-                animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 3 / 4), parseInt(vaccD.dr), 4000);
-                animateValue(document.getElementById('vv'), parseInt(vaccD.v * 3 / 4), parseInt(vaccD.v), 4000);
-                animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 3 / 4), parseInt(vaccD.tc), 4000);
-                animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 3 / 4), parseInt(vaccD.td), 4000);
-                animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 3 / 4), parseInt(vaccD.tr), 4000);
+                animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 8/10), parseInt(vaccD.dc), 4000);
+                animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 8/10), parseInt(vaccD.dd), 4000);
+                animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 8/10), parseInt(vaccD.dr), 4000);
+                animateValue(document.getElementById('vv'), parseInt(vaccD.v * 8/10), parseInt(vaccD.v), 4000);
+                animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 8/10), parseInt(vaccD.tc), 4000);
+                animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 8/10), parseInt(vaccD.td), 4000);
+                animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 8/10), parseInt(vaccD.tr), 4000);
     
     
                 iii = 2;
+
 
         }}
         else{
         if (window.pageYOffset > 220) {
 
-            animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 3 / 4), parseInt(vaccD.dc), 4000);
-            animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 3 / 4), parseInt(vaccD.dd), 4000);
-            animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 3 / 4), parseInt(vaccD.dr), 4000);
-            animateValue(document.getElementById('vv'), parseInt(vaccD.v * 3 / 4), parseInt(vaccD.v), 4000);
-            animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 3 / 4), parseInt(vaccD.tc), 4000);
-            animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 3 / 4), parseInt(vaccD.td), 4000);
-            animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 3 / 4), parseInt(vaccD.tr), 4000);
-
+            animateValue(document.getElementById('dcc'), parseInt(vaccD.dc * 8/10), parseInt(vaccD.dc), 4000);
+            animateValue(document.getElementById('ddd'), parseInt(vaccD.dd * 8/10), parseInt(vaccD.dd), 4000);
+            animateValue(document.getElementById('drr'), parseInt(vaccD.dr * 8/10), parseInt(vaccD.dr), 4000);
+            animateValue(document.getElementById('vv'), parseInt(vaccD.v * 8/10), parseInt(vaccD.v), 4000);
+            animateValue(document.getElementById('tcc'), parseInt(vaccD.tc * 8/10), parseInt(vaccD.tc), 4000);
+            animateValue(document.getElementById('tdd'), parseInt(vaccD.td * 8/10), parseInt(vaccD.td), 4000);
+            animateValue(document.getElementById('trr'), parseInt(vaccD.tr * 8/10), parseInt(vaccD.tr), 4000);
 
             iii = 2;
         }}
     }
-
-
+    
+    
 });
 
 widthhh =  screen.width

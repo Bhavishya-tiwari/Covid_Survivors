@@ -772,12 +772,12 @@ transform: scale(0.8,0.8);
 }
 
 @-webkit-keyframes fade {
-  from {opacity: 0} 
+  from {opacity: 0.7} 
   to {opacity: 1}
 }
 
 @keyframes fade {
-  from {opacity: 0.5} 
+  from {opacity: 0.7} 
   to {opacity: 1}
 }
 
@@ -918,14 +918,14 @@ transform: scale(0.8,0.8);
 
                   <div class="cards">
 {% for h in Hospitals %}
-                    <div class="card card-1">
+                    <div class="card card-1" style="color: white;">
                       <div class="card__icon"><i class="fas fa-bol"></i></div>
                       <p class="card__exit"><i class="fas fa-time"></i></p>
-                      <h4> Hospital Name:  {{h.n}}</h4>
-                      <p>Address:  {{h.Add}}</p>
+                      <h2 style="color: white;"> {{h.n|upper}}</h2>
+                      <p style="color: white;">Address:  {{h.Add}}</p>
                       
-                      <p>Contact no.: {{h.P}}</p>
-                      <p>Email:  {{h.em}}</p>
+                      <p style="color: white;"> Contact no.: {{h.P}}</p>
+                      <p style="color: white;">Email:  {{h.em}}</p>
                       <p class="card__apply">
                       </p>
                       <a class="card__link"href="/setappointment/{{h.un}}" >Make Appointment <i class="fas fa-arrow-right"></i></a>
@@ -947,6 +947,7 @@ transform: scale(0.8,0.8);
            <h1 class="heading__title" style="color: rgb(185, 11, 11);">NEED BLOOD?</h1>
            <p class="heading__credits" style="font-size:larger;"><a class="heading__link" target="_blank" href="https://dribbble.com/sl">
            </a>Choose your blood group and contact the hospital listed below for more information.</p>
+          <small> (P) means Blood for Plasma Treatment</small>
        
          </div>
        </div>
@@ -1035,12 +1036,12 @@ transform: scale(0.8,0.8);
     
   
     {% for hh in BDs %}
-     <div class="card card-1 ccc ">
-        <h2 style="text-align: center; color: white; font-weight: bolder;">Blood Donor</h2>
+     <div class="card card-1 ccc " style="background-image: radial-gradient(#434343 , #000000);">
+        <h2 style="text-align: center; color: rgb(255, 0, 0); font-weight: bolder;">Blood Donor  </h2>
         <h2 class="card__title">{{hh.N}}</h2>
         
         <p class="card__apply">
-          <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
+          <!-- <a class="card__link" href="#"> <i class="fas fa-arrow-right"></i></a> -->
         </p>
       </div>
   

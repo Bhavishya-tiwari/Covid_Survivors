@@ -3,13 +3,7 @@
 {% block title %} Get Started {% endblock title %}
 
 {% block links %}
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+
 
 {% endblock links %}
 
@@ -21,6 +15,7 @@
 
     .clv {
         margin: auto;
+        
     }
 
     /* ////// Design of main title //// */
@@ -30,6 +25,7 @@
         padding: 40px;
         font-size: 4rem;
         font-family: 'Times New Roman', Times, serif;
+        
     }
 
     #below-heading {
@@ -50,6 +46,7 @@
         padding: 4em;
         font-family: 'Times New Roman', Times, serif;
         font-size: 20px;
+        
     }
 
     hr {
@@ -62,12 +59,13 @@
     .card-header {
         color: white;
         background-color: rgb(8, 0, 83);
+        
     }
 
     /* ///// Design of each button - STARTS ///// */
     .btn {
         background-color: rgb(178, 195, 250);
-        border: 2px solid blue;
+        border: 2px solid rgb(3, 3, 90);
         height: 50px;
         width: 150px;
         margin: 30px;
@@ -135,7 +133,7 @@
     a {
         color: white;
         text-decoration: none;
-        font-family: 'STIX Two Text', serif;
+        /* font-family: 'STIX Two Text', serif; */
         text-align: center;
     }
 
@@ -178,6 +176,13 @@
             padding: 50px;
         }
     }
+    .card-header {
+            font-weight: bolder;
+        }
+    .card-text {
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
     @media only screen and (max-width: 490px) {
         .roles {
             padding-top: 40px;
@@ -189,7 +194,7 @@
             font-size: 14px;
         }
         .card-text {
-            font-size: 14px;;
+            font-size: 14px;
         }
     }
 
@@ -206,6 +211,15 @@
         background: none;
       }
     }
+    .buttons{
+        /* font-family: 'Times New Roman', Times, serif; */
+    }
+  
+    .bg-dark {
+    background-color: #000000!important;
+
+    max-height: 54vh;
+}
 </style>
 
 {% endblock css %}
@@ -222,11 +236,11 @@
 
 <!-- ///////////////////////////// Buttons below heading //////////////////////////-->
 <div class="flex_lv">
-    <button class="btn_lv buttons btn-hover color-3"><a href="#Covid Updates"> Covid Updates </a></button>
-    <button class="btn_lv buttons btn-hover color-3"><a href="#Hospital"> Donor </a></button>
-    <button class="btn_lv buttons btn-hover color-3"><a href="#Employee"> Blog </a></button>
-    <button class="btn_lv buttons btn-hover color-3"><a href="#CovidSurvivor"> Chat Box </a></button>
-    <button class="btn_lv buttons btn-hover color-3"><a href="#User"> Contact Us </a></button>
+    <a href="#Covid Updates">   <button class="btn_lv buttons btn-hover color-3">Covid Updates </button></a>
+    <a href="#Hospital">  <button class="btn_lv buttons btn-hover color-3"> Donor </button></a>
+    <a href="#Employee">  <button class="btn_lv buttons btn-hover color-3"> Blog </button></a>
+    <a href="#CovidSurvivor">  <button class="btn_lv buttons btn-hover color-3"> Chat Box </button></a>
+    <a href="#User">  <button class="btn_lv buttons btn-hover color-3">Contact Us </button></a>
 
 </div>
 

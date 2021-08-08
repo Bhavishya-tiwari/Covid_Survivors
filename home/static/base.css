@@ -1,6 +1,6 @@
 body {
     /* background: #e0e5ec; */
-    background:radial-gradient(#a1c4fd ,#c2e9fb);
+    background-image:   radial-gradient(#f5f7fa , #c3cfe2);
   }
   h1 {
     position: relative;

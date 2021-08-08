@@ -68,7 +68,9 @@ def setappointment(request, HuN):
             else:
                 clear=False
                 break
-
+        if( json.loads(request.user.first_name)["G"] == "Wa" or json.loads(request.user.first_name)["G"] == "h" or json.loads(request.user.first_name)["G"] == "e"):
+            messages.error(request, "contact Hospital")
+            return redirect('Donors')
 
             
 
@@ -153,7 +155,7 @@ def appointmentsshown(request):
                     "DonatedOnDate" : Appointment.message[12:]
                 }
                 Donorz.append(o)
-    print(Appointments)
+    print(Donorz)
 
     return render(request, 'home/appointmentsshown.html', {"App":Appointments,"Donorz":Donorz })
 
@@ -306,7 +308,8 @@ def Donors(request):
             "un":h.username,
             "n":userdict1["N"],
             "em":userdict1["E"],
-            "Add":userdict["A"]
+            "Add":userdict["A"],
+            "P":userdict["P"]
         }
         userl.append(o)
 

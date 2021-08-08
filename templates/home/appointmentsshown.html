@@ -127,50 +127,43 @@ top: 70vh;
     <div class="section" id="block1">
         <div class="block">
 
+
+{% for a in App %}
+
             <div class="lv-card">
                 <h3 class="card-title">
-                    Patient's Name: Name
+                    Patient's Name: {{a.Appbyname}}
                 </h3>
                 <p class="card-content">
-                <h5 class="card-title">Appointment Date</h5>
+                <h5 class="card-title">Appointment Date:  {{a.Date}}</h5>
                 </p>
-                <a href="#" class="lv-card-btn">Mark as done</button></a>
+                <a href="/blooddonated/{{a.Appby}}" class="lv-card-btn">Blood Donated</button></a>
             </div>
+    {% endfor %}
             
-            <div class="lv-card">
-                <h3 class="card-title">
-                    Patient's Name: Name
-                </h3>
-                <p class="card-content">
-                <h5 class="card-title">Appointment Date</h5>
-                </p>
-                <a href="#" class="lv-card-btn">Mark as done</button></a>
-            </div>
+           
 
         </div>
     </div>
+
+
+
     <h1>Appointments Cleared </h1>
     <div class="section" id="block2">
         <div class="block">
-            <div class="lv-card">
-                <h3 class="card-title">
-                    Patient's Name: Name
-                </h3>
-                <p class="card-content">
-                <h5 class="card-title">Appointment Done</h5>
-                </p>
-                <a href="#" class="lv-card-btn">Done</a>
-            </div>
+          
+{% for d in Donorz %}
             
             <div class="lv-card">
                 <h3 class="card-title">
-                    Patient's Name: Name
+                    Patient's Name: <span style="color: rgb(86, 71, 255); font-weight: bold;">{{d.Appbyname}}</span> 
                 </h3>
                 <p class="card-content">
-                <h5 class="card-title">Appointment Done</h5>
+                <h5 class="card-title">Date: <span style="color: black; font-weight: bold;"> {{d.DonatedOnDate | slice:"0:10"}} </span></h5>
                 </p>
-                <a href="#" class="lv-card-btn">Done</a>
+               
             </div>
+    {% endfor %}
 
         </div>
     </div>

@@ -537,7 +537,17 @@ input[type=text]:placeholder {
     }
 }
 
+.total-monal{
 
+top: 30vh;
+}
+@media only screen and (max-width: 768px) {
+.total-monal{
+
+top: 65vh;
+}
+
+}
 
 </style>
 
@@ -662,129 +672,27 @@ input[type=text]:placeholder {
    
          </a></p>
        </div>
-       <div class="cards">
-         <div class="card card-1">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-          <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-2">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-3">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-4">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-5">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-1">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-1">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-1">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-4">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-4">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-         <div class="card card-4">
-           <div class="card__icon"><i class="fas fa-bolt"></i></div>
-           <p class="card__exit"><i class="fas fa-times"></i></p>
-           <h4> Hospital Name: Meditrina</h4>
-           <p>Address: Bardi,Nagpur, Maharashtra</p>
-           
-           <p>Contact no.: 9098773422</p>
-           <p class="card__apply">
-             <a class="card__link" href="#">Make Appointment <i class="fas fa-arrow-right"></i></a>
-           </p>
-         </div>
-       </div>
+
+                  <div class="cards">
+{% for h in Hospitals %}
+                    <div class="card card-1">
+                      <div class="card__icon"><i class="fas fa-bolt"></i></div>
+                      <p class="card__exit"><i class="fas fa-times"></i></p>
+                      <h4> Hospital Name:  {{h.n}}</h4>
+                      <p>Address:  {{h.Add}}</p>
+                      
+                      <p>Contact no.: {{h.P}}</p>
+                      <p>Email:  {{h.em}}</p>
+                      <p class="card__apply">
+                        <a class="card__link"href="/setappointment/{{h.un}}" >Make Appointment <i class="fas fa-arrow-right"></i></a>
+                      </p>
+                    </div>
+{% endfor %}
+                  </div>
+
+      
+                  
+
      </div>
      <hr>
          </div>
@@ -796,50 +704,55 @@ input[type=text]:placeholder {
            <h1 class="heading__title" style="color: rgb(185, 11, 11);">NEED BLOOD?</h1>
            <p class="heading__credits" style="font-size:larger;"><a class="heading__link" target="_blank" href="https://dribbble.com/sl">
            </a>Choose your blood group and contact the hospital listed below for more information.</p>
-           <div class="circleicon">
-           <div class="recovered-circle circleicon">
-           <p> <img id="bgg" src="{% static "imgs/bluedot.png" %}" style="color: rgb(13, 13, 131);" alt="..." /> Blood of covid recovered patient</p></div>
-           <div class="nerverpositive circleicon">
-           <p> <img id="bgg" src="{% static "imgs/greendot.png" %}" style="color: green;" alt="..." /> Blood of people who were never covid positive</p>
-         </div>
-         <div class="notavailable circleicon">
-           <p> <img id="bgg" src="{% static "imgs/reddot.png" %}" style="color: red;" alt="..." /> Not available</p>
-         </div>
+       
          </div>
        </div>
          <div class="searchblood-container">
-           <div class="selectblood">
-         <select class="form-select selectblood" aria-label="Default select example">
-           <option selected>Select Blood Group</option>
-           <option value="1">One</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
-           <option value="1">One</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
-           <option value="1">One</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
-           <option value="2">Two</option>
-           <option value="3">Three</option>
+           <div class="selectblood"  style="margin: auto;">
+     <form method="post" action="#" id="Donor_search">{% csrf_token %}
+
+         <select  name="Donor_search_bg"
+              
+               id="bgrp" class="form-select selectblood" aria-label="Default select example">
+           {% comment %} <option selected>Select Blood Group</option> {% endcomment %}
+          <option value="1">A +</option>
+                <option value="2">B +</option>
+                <option value="3">AB +</option>
+                <option value="4">O +</option>
+                <option value="5">A -</option>
+                <option value="6">B -</option>
+                <option value="7">AB -</option>
+                <option value="8">O -</option>
+
+                <option value="9">A +  (Plasma)</option>
+                <option value="10">B + (Plasma)</option>
+                <option value="11">AB + (Plasma)</option>
+                <option value="12">O + (Plasma)</option>
+                <option value="13">A - (Plasma)</option>
+                <option value="14">B - (Plasma)</option>
+                <option value="15">AB - (Plasma)</option>
+                <option value="16">O - (Plasma)</option>
          </select>
+
+                   <button  type="submit" id="bt" class="custom-btn btn-3 my-4" style="width: 100%; margin: auto;"><span>Search</span></button>
+               
+
        </div>
+       
          <div class="donorsearchicon">
-           <button>Search</button>
+           
          </div>
        </div>
+     </form>
          <!-- ---------------searchbarend---------- -->
         
-   <div class="table-wrapper">
-       <table class="fl-table">
+   <div id="DataShown" class="table-wrapper">
+        <!-- <table class="fl-table">
            <thead>
            <tr>
                <th class="head-table" >Hospital</th>
                <th class="head-table">Address</th>
                <th class="head-table">Contact no.</th>
-               <!-- <th class="head-table">Email id</th> -->
                <th class="head-table">Status</th>
            </tr>
            </thead>
@@ -849,73 +762,10 @@ input[type=text]:placeholder {
                <td>Content 1 Content 1 Content 1 Content 1 Content 1 Content 1 Content 1</td>
                <td>Content 1</td>
                <td>Content 1</td>
-               <!-- <td>Content 1</td> -->
-           </tr>
-           <tr>
-               <td>Content 2</td>
-               <td>Content 2</td>
-               <td>Content 2</td>
-               <td>Content 2</td>
+           </tr> 
           
-           </tr>
-           <tr>
-               <td>Content 3</td>
-               <td>Content 3</td>
-               <td>Content 3</td>
-               <td>Content 3</td>
-              
-           </tr>
-           <tr>
-               <td>Content 4</td>
-               <td>Content 4</td>
-               <td>Content 4</td>
-               <td>Content 4</td>
-              
-           </tr>
-           <tr>
-               <td>Content 5</td>
-               <td>Content 5</td>
-               <td>Content 5</td>
-               <td>Content 5</td>
-              
-           </tr>
-           <tr>
-               <td>Content 6</td>
-               <td>Content 6</td>
-               <td>Content 6</td>
-               <td>Content 6</td>
-               
-           </tr>
-           <tr>
-               <td>Content 7</td>
-               <td>Content 7</td>
-               <td>Content 7</td>
-               <td>Content 7</td>
-               
-           </tr>
-           <tr>
-               <td>Content 8</td>
-               <td>Content 8</td>
-               <td>Content 8</td>
-               <td>Content 8</td>
-               
-           </tr>
-           <tr>
-               <td>Content 9</td>
-               <td>Content 9</td>
-               <td>Content 9</td>
-               <td>Content 9</td>
-              
-           </tr>
-           <tr>
-               <td>Content 10</td>
-               <td>Content 10</td>
-               <td>Content 10</td>
-               <td>Content 10</td>
-             
-           </tr>
            <tbody>
-       </table>
+       </table>  -->
    </div>
    </div>
    

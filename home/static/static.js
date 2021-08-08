@@ -133,7 +133,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                     }
                 });
                 let district_full_data = dist_data[state_selected]["districtData"][dist_name]
-                var xValues = ["Confirmed", "Deaths", "Recovered", "Active"];
+                var xValues = [`Confirmed (${district_full_data.confirmed})`, "Deaths", "Recovered", "Active"];
                 var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
                 var barColors = ["white", "red", "blue", "pink"];
                 

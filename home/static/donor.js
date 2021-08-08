@@ -25,26 +25,30 @@ $('#Donor_search').submit(function (event) {
 
             updates.forEach(e => {
                 st = st + `
-
-                
-                <div class="card m-3 cd" style="width: 18rem;">
-                <div class="card-body">
-                     <h5 class="card-title">Name : ${e.Name}</h5>
-                     <h6 class="card-subtitle mb-2 text-muted">Email : ${e.Email}</h6>
-                     <h6 class="card-text">Hospital name: ${e.Add} <br>
-                     Hospital email : ${e.Phone}<br>
-            
-    
-                
-           </div></div>`
+                                <tr>
+                                    <td>${e.Name}</td>
+                                    <td>${e.Add}</td>
+                                    <td>${e.Phone}</td>
+                                    <td>Available</td>
+                                </tr> `
 
 
 
             });
-            
-            // document.getElementById('datas').innerHTML = st;
+
+            newstr = `<table class="fl-table">
+            <thead>
+            <tr>
+                <th class="head-table" >Hospital</th>
+                <th class="head-table">Address</th>
+                <th class="head-table">Contact no.</th>
+                <th class="head-table">Status</th>
+            </tr>
+            </thead>
+            <tbody>` + st + `  <tbody>
+            </table>`
+            document.getElementById('DataShown').innerHTML = newstr;
                 
-            //     document.getElementById('datas').style.display = "block";
 
 
         });

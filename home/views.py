@@ -321,6 +321,10 @@ def Donors(request):
     userl =[]    
     group = Group.objects.get(name='HospitalHeads')
     hospitals = list(group.user_set.all())
+
+    group = Group.objects.get(name='Covid_Survivors')
+    patients = list(group.user_set.all())
+
     for h in hospitals:
         userjson1 =h.first_name
         userjson =h.last_name
@@ -334,10 +338,16 @@ def Donors(request):
             "P":userdict["P"]
         }
         userl.append(o)
+    BDs =[]
+    for p in patients:
+        usred = json.loads(p.first_name)
+        if(usred["T"] == "BD" ):
+            BDs.append(usred)
+    
 
     
 
-    return render(request, 'home/Donors.html', {"Hospitals" : userl})
+    return render(request, 'home/Donors.html', {"Hospitals" : userl, "BDs":BDs})
                 
                     
                 

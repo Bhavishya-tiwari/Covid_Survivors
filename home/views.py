@@ -404,6 +404,7 @@ def ContactUs(request):
 def livechat(request):
     if request.method == "POST":
         if(request.user.is_authenticated):
+            print("smfoimmmmmmmmmmmmmmm")
             profilejson = request.user.first_name
             try:
                 profiledict = json.loads(profilejson)
@@ -439,13 +440,13 @@ def livechat(request):
                                 #   why email vroo
                 if(msg != ""):
                     Query.save()
-                    return HttpResponse("done")
+                    return HttpResponse("Messege sent")
                 else:
-                    return HttpResponse("error")
+                    return HttpResponse("Messege not valid")
 
         else:
-            messages.error(request, "Please login to chat")
-            return render(request, 'home/home.html')
+            print("sfvoisvism")
+            return HttpResponse("Pleae Login To Chat")
             
     else:
         return render(request,'home/livechat.html' )

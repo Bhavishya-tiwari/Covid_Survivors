@@ -325,7 +325,7 @@ data.forEach(e => {
             'description': ` <div id="pop"> <p>country : ${e.country}</p>
                                    <p>confirmed : ${e.stats.confirmed}</p>
                                    <p>deaths : ${e.stats.deaths}</p>
-                                   <p>recovered :${e.stats.recovered} op</p>
+                                   <p>recovered :${e.stats.recovered}</p>
                                    <p>province : ${e.province}</p> </div>`
         },
         'geometry': {

@@ -90,9 +90,11 @@
 
     .receivedmsg {
         overflow: hidden;
+        float: left;
         display: inline-block;
         padding: 0 0 0 0px;
         vertical-align: top;
+        text-align: left;
         width: 100%;
         margin-top: 5px;
     }
@@ -122,6 +124,7 @@
 
     .sendedmsg {
         display: inline-block;
+        float: right;
         text-align: left;
         padding: 0 0 0 0;
         vertical-align: top;
@@ -191,7 +194,11 @@
 
         outline: none;
     }
-
+.msd{
+    justify-content: left;
+    
+   
+}
 
     .newsendlogo img {
         float: right;
@@ -212,6 +219,7 @@
         font-size: 0.9em;
         font-weight: bold;
         color: rgb(0, 0, 68);
+        float: left;
     }
 
     .names {
@@ -229,6 +237,7 @@
 {% endblock css %}
 {% block body %}
 {% load static %}
+<div id="c"></div>
 <div class="total-monal-chat">
     <div class="container-monal">
         <div class="heading ">
@@ -302,7 +311,22 @@
             encode: true
         })
             .done(function (data) {
-         document.getElementById("msg_send").value = ""
+                            console.log(data)
+                            document.getElementById('msg_send').value = ""
+                            if(data == "Messege sent"){
+                                document.getElementById('c').innerHTML = ` <div class="success">
+        <span class="cc" onclick="this.parentElement.style.display='none';">&times;</span>
+        ${data}
+      </div>`
+
+                            }
+                            else{
+
+                                document.getElementById('c').innerHTML = ` <div class="danger">
+        <span class="cc" onclick="this.parentElement.style.display='none';">&times;</span>
+        ${data}
+      </div>`
+                            }
 
             });
         event.preventDefault();
@@ -329,7 +353,7 @@
 
                         str = str +`<div class="sendedmsg">
                             <div class="sendedmsginbox">
-                                    <p> <span class="names">${e.name}</span> <br> ${e.msg} </p>
+                                    <p> <span class="names">${e.name}</span> <br> <span class="msd">${e.msg}</span> </p>
                                     <span class="timesended">${e.time.slice(0,16)}</span>
                                     </div>
                                     </div>`
@@ -343,7 +367,7 @@
                         str = str +  `  <div class="receivedmsg">
                                         <div class="receivedmsginbox">
 
-                                            <p> <span class="name">${e.name}</span> <br> ${e.msg} 
+                                            <p> <span class="name">${e.name}</span> <br> <span class="msd">${e.msg}</span> 
                                             </p>
                                             <span class="timereceived">${e.time.slice(0,16)}</span>
                                         </div>

@@ -132,6 +132,7 @@ body {
   margin: auto;
   transition: all 0.3s;
 }
+
 #status:hover{
   transform: scale(0.98,0.98)
 }
@@ -183,6 +184,8 @@ label {
 .hiddenCB input[type="checkbox"]:checked+label:hover{
   background: rgba(0, 128, 128, 0, .7);
 }
+
+
 
 </style>
 {% endblock css %}
@@ -270,38 +273,17 @@ label {
                 </div>
               </div>
               {% if gg == "T"  %}
-              <div class="card mt-3" >
-                <ul class="list-group list-group-flush">
-                  <div class="d-flex flex-column align-items-center text-center">
-                    {% load static %}
-                    <br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br>
-                      <!-- <source media="(min-width: )" srcset=""> -->
-                     
-                    <a href="/donors">
-                      <div class="ccard">
-                        <div class="ccontent">
-                          <div class="front" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: 2.6em; color: white; background: radial-gradient(#f3ced5, #fa99b2);">
-                            Donate Blood 
-                          </div>
-                          <div class="back" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: white; background: radial-gradient(#1fe4f5, #3fbafe);">
-                            Click!
-                          </div>
-                        </div>
-                      </div>
-     </a>
+             
   
 {% endif %}
               {% if p1.G == "h"  %}
               {% endif %}
-{% if gg != "T" %}
-              <div class="card mt-3" style="height: 50vh;">
+     <div class="card mt-3" >
                 <ul class="list-group list-group-flush">
                   <div class="d-flex flex-column align-items-center text-center">
-{% endif %}
-    {% if p1.G == "e" %}
-                   
+
           
+    {% if p1.G == "e" %}
   <h4 class="mt-4">Hey {{p1.N}}, Welcome to our website... </h4>
  <a href="/getstarted">
        <button class="custom-btn btn-5"><span>Get started</span></button>
@@ -310,6 +292,7 @@ label {
 
   </a>
   {% endif %}
+  
 
   {% if p1.G == "h" %}
   
@@ -344,7 +327,27 @@ label {
 </div>
   {% endif %}
 
-  else
+    {% if gg == "T" %}
+    
+                    {% load static %}
+                    <br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br>
+                      <!-- <source media="(min-width: )" srcset=""> -->
+                     
+                    <a href="/donors">
+                      <div class="ccard">
+                        <div class="ccontent">
+                          <div class="front" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;font-size: 2.6em; color: white; background: radial-gradient(#f3ced5, #fa99b2);">
+                            Donate Blood 
+                          </div>
+                          <div class="back" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: white; background: radial-gradient(#1fe4f5, #3fbafe);">
+                            Click!
+                          </div>
+                        </div>
+                      </div>
+     </a>
+
+  {% endif %}
 
                   
                     
@@ -363,9 +366,9 @@ label {
                     <div class="col-sm-9 text-secondary">
                       {{user}}
                     </div>
-                    {% else %}
+                    {% comment %} {% else %} {% endcomment %}
                     <div class="col-sm-9 text-secondary">
-                      {{user}} 
+                      {% comment %} {{user}}  {% endcomment %}
                     </div>
 
 {% endif %} 
@@ -400,28 +403,8 @@ label {
                   <hr>
 {% endif %}
 {% if gg == "T" %}
-<div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">&nbsp;</h6>
-                    </div>
-
-                    <div class="col-sm-9 text-secondary">
-                    &nbsp;
-                    </div>
-
-                  </div>
-
-
-<div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0"></h6>
-                    </div>
-
-                    <div class="col-sm-9 text-secondary">
-                     {{p2.A}}
-                    </div>
-
-                  </div>
+{% comment %} <div class="row"> {% endcomment %}
+         
                   {% endif %}
               
 
@@ -672,7 +655,7 @@ label {
                     </div>
                   </div>
                 </div>
-                {% if status != "N" %}
+                {% comment %} {% if status != "N" %} {% endcomment %}
                 
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
@@ -728,6 +711,9 @@ label {
 
 
                  
+               {% if "gg" == "T" %}
+               sfmk
+               {% endif %}
                {% if p1.G == "h" %}
                <h4>Available Blood Groups</h4>
                
@@ -804,7 +790,7 @@ label {
                   </div>
                 </div>
               </div>
-                {% endif %}
+                {% comment %} {% endif %} {% endcomment %}
 
 
 

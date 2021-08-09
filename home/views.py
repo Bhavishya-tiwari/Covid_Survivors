@@ -670,41 +670,47 @@ def handelLogout(request):
 # Login
 def loginemp(request):
     if request.method == "POST":
-        # Get the post parameters
-        uusername = request.POST.get('uusername')
-        upassword = request.POST.get('upassword')
-        user = authenticate(username=uusername, password=upassword)
-        if user is not None:
-            profilejson =user.first_name
-            profiledict = json.loads(profilejson)
-            grp = profiledict["G"]
-            if grp == "e":
-               
-                login(request, user)
-                messages.success(request, "Successfully Logged In")
-                return redirect('home')
+        try:
 
-            elif grp ==  "c":
-                login(request, user)
-                messages.success(request, "Successfully Logged In")
-                return redirect('home')
-            elif grp == "u":
-                login(request,user)
-                messages.success(request, "Successfully Logged In")
-                return redirect('home')
-            elif grp =="h":
-                login(request,user)
-                messages.success(request, "Successfully Logged In")
-                return redirect('home')
-            elif grp =="Wa":
-                login(request,user)
-                messages.success(request, "Successfully Logged In")
-                return redirect('home')
+            # Get the post parameters
+            uusername = request.POST.get('uusername')
+            upassword = request.POST.get('upassword')
+            user = authenticate(username=uusername, password=upassword)
+            if user is not None:
+                profilejson =user.first_name
+                profiledict = json.loads(profilejson)
+                grp = profiledict["G"]
+                if grp == "e":
+                
+                    login(request, user)
+                    messages.success(request, "Successfully Logged In")
+                    return redirect('home')
+
+                elif grp ==  "c":
+                    login(request, user)
+                    messages.success(request, "Successfully Logged In")
+                    return redirect('home')
+                elif grp == "u":
+                    login(request,user)
+                    messages.success(request, "Successfully Logged In")
+                    return redirect('home')
+                elif grp =="h":
+                    login(request,user)
+                    messages.success(request, "Successfully Logged In")
+                    return redirect('home')
+                elif grp =="Wa":
+                    login(request,user)
+                    messages.success(request, "Successfully Logged In")
+                    return redirect('home')
+                else:
+                    messages.error("error occured")
+                    return redirect('login')
             else:
-                return HttpResponse("error occured")
-        else:
-            messages.error(request, "Invalid credentials!")
-            return redirect("login")
+                messages.error(request, "Invalid credentials!")
+                return redirect("login")
+        except:
+            messages.error(request,"Invalid Credentials")
+            return redirect('login')
     return redirect('login')
 
         

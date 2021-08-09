@@ -21,6 +21,7 @@ import requests
 # Create your views here.
 # User.objects.all().delete() 
 # Message.objects.all().delete()
+# Comment.objects.all().delete()
 
 def v(p):
     if(len(p)>5):
@@ -481,7 +482,7 @@ def commentshow(request):
     cmn = Comment.objects.all().order_by('id')
 
     # paginator obj created
-    paginator = Paginator(cmn, 2)
+    paginator = Paginator(cmn, 4)
 
     Page_number = request.GET.get('page')
     Page_obj = paginator.get_page(Page_number)

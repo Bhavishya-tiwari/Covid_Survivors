@@ -8,6 +8,53 @@
     width: 200px;
     zoom: 1.4;
   }
+
+  /*  */
+     /* #outer-thnq {
+           position: relative;
+           top: 11vh;
+           margin-bottom: 50vh;
+         } */
+       
+         #inner-thnq {
+            /* max-width: 333px; */
+           /* margin: 0 auto; */
+           box-shadow:rgb(0 0 0 / 51%) 0px 2px 15px -4px;
+           background: #fff;
+       
+         }
+         .box-thnq span{
+           text-align: Left;
+           
+           /* border-bottom: 2px solid #5fbae9 ; */
+          
+         }
+         .box-thnq h3{
+           display: flex;
+           /* justify-content: center; */
+           font-weight:bolder;
+           color:rgb(201, 75, 53) ;
+           
+         }
+         .box-thnq {
+           padding: 20px;
+       
+           top: 20%;
+       
+         }
+         .quote img{
+           
+    width: 44px;
+    height: 40px;
+    margin: 2px 12px 2px 2px;
+    
+
+         }
+         .quote{
+             /* display: flex; */
+         }
+
+
 </style>
 
 
@@ -15,25 +62,32 @@
 {% endblock css %}
 
 {% block body %}
-<div class="container">
+<div class="container my-4">
 
 {% for post in page_obj %}
-<div class="card my-2">
-  <div class="card-header">
-    {{post.fname}} {{post.lname}}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">By {{post.authorUsername}} <small>{{post.Timestamp}} </small></h5>
-    <h5 class="card-title">email {{post.email}}</h5>
-    <p class="card-text">
 
-    {% autoescape off %}{{post.comment|slice:200}}{% endautoescape %}
-    
-    
-    
-      </p>
-  </div>
+
+
+<div id="outer-thnq my-4">
+  <div class="container-thnq my-4">
+    <div id="inner-thnq">
+  <div class="box-thnq">
+
+  <h2>Name: {{post.fname}} {{post.lname}}</h2>
+  
+  <div class="quote">
+    <h4>Username: {{post.authorUsername}}</h4>  
+    <h4>Time: {{post.Timestamp|slice:"0:16"}}</h4> 
+  <h4> email :{{post.email}}</h4>
 </div>
+<h3>Message:</h3>
+  <h4> {% autoescape off %}{{post.comment|slice:200}}{% endautoescape %}</h4>
+  
+
+  
+ 
+  </div></div>
+  </div></div>
 
 
 

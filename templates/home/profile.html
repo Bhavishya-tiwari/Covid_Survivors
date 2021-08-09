@@ -186,6 +186,51 @@ label {
 }
 
 
+{% comment %}  {% endcomment %}
+   /* #outer-thnq {
+           position: relative;
+           top: 11vh;
+           margin-bottom: 50vh;
+         } */
+       
+         #inner-thnq {
+            max-width: 333px;
+           /* margin: 0 auto; */
+           box-shadow:rgb(0 0 0 / 51%) 0px 2px 15px -4px;
+           background: #fff;
+       
+         }
+         .box-thnq span{
+           text-align: Left;
+           
+           /* border-bottom: 2px solid #5fbae9 ; */
+          
+         }
+         .box-thnq h3{
+           display: flex;
+           justify-content: center;
+           font-weight:bolder;
+           color:rgb(201, 75, 53) ;
+           
+         }
+         .box-thnq {
+           padding: 20px;
+       
+           top: 20%;
+       
+         }
+         .quote img{
+           
+    width: 44px;
+    height: 40px;
+    margin: 2px 12px 2px 2px;
+    
+
+         }
+         .quote{
+             display: flex;
+         }
+       
 
 </style>
 {% endblock css %}
@@ -693,22 +738,59 @@ label {
                
                <!-- {{status}} -->
                {% if "AppSeted" in status %}
-               <div id="status">
+               {% comment %} <div id="status">
  
                  <p>
                    
                    Your Appointment is fixed for <br> <span style="color: rgb(0, 0, 0);"> {{status | slice:"8:18"}} </span>
                    for more details please contact  <span style="color: rgb(0, 0, 0);"> {{hname}} </span>
                  </p>
-                </div>
+                </div> {% endcomment %}
+
+                 <div id="outer-thnq">
+        <div class="container-thnq">
+          <div id="inner-thnq">
+        <div class="box-thnq">
+        
+       
+            
+        <h2><span> Your appointment has been set on {{status | slice:"8:18"}}</span></h2>
+   
+    <div class="quote">
+    <img src="{% static "imgs/cont.png" %}" alt="">
+        <h3>Contact hospital {{hname|upper}} for more information</h3>
+    </div>
+        
+      
+        
+       
+        </div></div>
+        </div></div>
                  {% elif "BloodDonated" in status %}
-                 <div id="status">
+                 {% comment %} <div id="status">
 
                  <h4>
                    {{status | slice:"12:22"}} <br>
                    Thanks for Donating Your Blood! it will help teh needy
                   </h4>
-                </div>                  {% endif %}
+                </div>            {% endcomment %}
+                   <div id="outer-thnq">
+        <div class="container-thnq">
+          <div id="inner-thnq">
+        <div class="box-thnq">
+        
+        <div class="quote">
+            <img src="{% static "imgs/qu.png" %}" alt="">
+        <h3><span> EVERY BLOOD DONOR IS A LIFE SAVER</span></h3>
+    </div>
+        <h2>THANKS FOR DONATING</h2>
+        
+      
+        
+       
+        </div></div>
+        </div></div>
+                       {% endif %}
 
 
                  

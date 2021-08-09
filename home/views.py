@@ -104,7 +104,7 @@ def setappointment(request, HuN):
                 messages.success(request, "Appointment request sent")
                 return redirect('Donors')
             else:
-                messages.error(request, "Your Appointment is already set")
+                messages.error(request, "Your Appointment is already set or in process")
                 return redirect('Donors')
             
 
@@ -130,7 +130,7 @@ def setappointmentpage(request):
     msgs = Message.objects.all()
     Appointments = []
     for Appointment in msgs:
-        if(Appointment.email == "Appointment@hospital" and Appointment.message == "Emp will send msg from here"):
+        if(Appointment.email == "Appointment@hospital" and Appointment.message == "Emp will send msg from here" and Appointment.authorUsername == hospitalusername):
             o={
                 "Appby":Appointment.Timestamp,
                 "Appbyname":Appointment.name,

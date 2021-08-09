@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Patient{% endblock title %}
+{% block title %}Add Patient/Donor{% endblock title %}
 {% block css %}
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@500&display=swap');
@@ -433,28 +433,28 @@ label {
   <div class="container">
     <div id="inner">
       <div class="box">
-      <h1>Add a patient</h1>
+      <h1>Add a patient/Donor</h1>
       <form action="/addpat" method="POST">
 
         {% csrf_token %}
 
         <div class="lv_container">
           <input type="text" name="pusername" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <label for="exampleInputEmail1" class="form-label">Patient's Username</label>
+          <label for="exampleInputEmail1" class="form-label"> Username</label>
           <span class="focus-border"></span>
           {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
 
         <div class="lv_container">
           <input type="text" name="pname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <label for="exampleInputEmail1" class="form-label">Patient's Name</label>
+          <label for="exampleInputEmail1" class="form-label"> Name</label>
           <span class="focus-border"></span>
           {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
 
         <div class="lv_container">
           <input type="email" name="pemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <label for="exampleInputEmail1" class="form-label">Patient's Email ID</label>
+          <label for="exampleInputEmail1" class="form-label"> Email ID</label>
           <span class="focus-border"></span>
         </div>
 
@@ -479,6 +479,7 @@ label {
                      onmousedown="if(this.options.length>5){this.size=5;}" onchange="this.blur()" onblur="this.size=0;"
                      id="state" aria-label="Default select example">
                      <option selected class="opt_selec">Blood Group</option>
+                     <option selected class="opt_selec">Blood Group</option>
                      <option value="1">A +</option>
                      <option value="2">B +</option>
                      <option value="3">AB +</option>
@@ -494,15 +495,15 @@ label {
 
         <div class="lv_container">
          <input type="date" id="birthday" name="pdod" class="form-control">
-        <label class="for_date" for="birthday">Date of discharge</label>
+        <label class="for_date" for="birthday">Date</label>
         </div>
    
 
         <div class="lv_container">
         <div class="mb-3">
-          {% comment %} <label for="exampleInputEmail1" class="form-label">Patient Age</label> {% endcomment %}
+          {% comment %} <label for="exampleInputEmail1" class="form-label"> Age</label> {% endcomment %}
           <input type="text" name="p_age" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <label for="exampleInputEmail1" class="form-label">Patient's Age</label>
+          <label for="exampleInputEmail1" class="form-label"> Age</label>
           <span class="focus-border"></span>
           {% comment %} <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> {% endcomment %}
         </div>
@@ -531,7 +532,7 @@ label {
 <hr class="break">
 
   <div class="nxt_topic">
-  Patients Added
+  Patients/Donors Added
   </div>
 
   <div class="block">

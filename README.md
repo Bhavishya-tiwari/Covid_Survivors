@@ -97,9 +97,18 @@ https://github.com/Monal-Pawar
   <br>
 https://github.com/Monika170303
 
+#### `Mentor`
+
+- Anushka Paul
+ <br>
+ This project is guided under the mentorship of Anushka Paul
+
 
 ### The project was conducted in the framework of `IITISOC 2021`.
   
   You can look around our website by clicking on the following link:
 <br>
 [Covid Survivors website link](https://covid-survivorsiitisoc.herokuapp.com/ "Covid Survivors")
+
+#### `Refrence`
+- Youtube

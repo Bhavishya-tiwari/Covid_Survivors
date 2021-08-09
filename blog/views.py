@@ -205,7 +205,7 @@ def delblog(request, dsno):
 
             from_rep = False
 
-            if(profiledict["G"]=='e'):
+            if(profiledict["G"]=='e' or request.user.username == post.authorUsername):
                 try:
                     for r in rep:
                         r.delete()

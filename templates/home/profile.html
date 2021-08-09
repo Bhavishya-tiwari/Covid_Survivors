@@ -274,9 +274,11 @@ label {
               <div class="mt-3">
           
    {% if gg == "T" %}
-                
+   {% if request.user.is_staff %}
+   {% else %}             
                 <h3>{{fn}} </h3>
-                <p class="text-secondary mb-1">USERkkk</p>
+                <p class="text-secondary mb-1">USER</p>
+   {% endif %}
                 
 {% endif %}
 

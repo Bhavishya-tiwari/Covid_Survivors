@@ -78,14 +78,17 @@ button {
       </div>
       {% endfor %}
       <a href="/blog/{{rep.sno}}">
-        <button type="button" class="btn btn-info">Read more</button>
+        
+        <button class="custom-btn btn-3 my-4"><span>Read More</span></button>
+
         
         
       </a>
       
       <form action="/blog/delB/{{rep.sno}}" method="POST">
         {% csrf_token %}
-        <button type="Submit" class="btn btn-danger my-2">delete Blog</button>
+        <button type="submit" class="custom-btn btn-7 mb-4"><span>delete Blog</span></button>
+
       </form>
       
       

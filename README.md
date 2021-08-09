@@ -79,6 +79,24 @@ A covid survivor, as the name suggests, is any person who got recovered after ge
 He/she is at the fourth level position in our website. He/ she doesn't have any role in maintainance of the website, 
 as only his/her data is needed to add in the database. Though, he/she can login using his/her credentials as added
 
+---
+- Here are some hospitals and website staff usernames, and passwords  those who want to explore the functioning of the above given admistrator and employees please refer them.
+
+Username:admin <br>
+Password:aswqqwsa
+
+Username:chirayu<br>
+Password:chirayu
+
+Username:rohits<br>
+Password:rohits
+
+Username:lakshya<br>
+Password:lakshya
+
+---
+
+
 #### `Team Members`
 
 - Bhavishya Tiwari
@@ -99,7 +117,7 @@ https://github.com/Monika170303
 
 #### `Mentor`
 
-- Anushka Paul
+- Anushka Paul (CSE,3rd year)
  <br>
  This project is guided under the mentorship of Anushka Paul
 
@@ -112,3 +130,4 @@ https://github.com/Monika170303
 
 #### `Refrence`
 - Youtube
+- Bootstrap

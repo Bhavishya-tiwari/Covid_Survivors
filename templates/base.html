@@ -613,7 +613,14 @@ body{
 
           <a href="/profile">
             {% if user.first_name|length < 20 %}
+            {% if "G" in user.first_name %}
+            <button class="custom-btn btn-12"><span>Profile</span><span>Admin &#9881;</span></button>
+            {% elif user.first_name == "" %}
+            <button class="custom-btn btn-12"><span>Profile</span><span>SuperAdmin &#9881;</span></button>
+
+            {% else %}
             <button class="custom-btn btn-12"><span>Profile</span><span>{{user.first_name}}</span></button>
+            {% endif %}
           </a>
 
             {% else %}

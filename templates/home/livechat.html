@@ -185,7 +185,9 @@
         padding: 4px 7px;
         font-size: 15px;
     }
-
+p{
+    text-align: left;
+}
     input[type="text"] {
         border-radius: 2px 0 0 2px;
 
@@ -347,18 +349,21 @@
                 console.log(data);
                 str = ""
                 console.log("fs")
+                var i = 0;
                 data.forEach(e => {
 
 
                     if (e.un == a) {
 
 
-                        str = str +`<div class="sendedmsg">
+
+                        str = str +`<div id="ch${i}" class="sendedmsg">
                             <div class="sendedmsginbox">
                                     <p> <span class="names">${e.name}</span> <br> <span class="msd">${e.msg}</span> </p>
                                     <span class="timesended">${e.time.slice(0,16)}</span>
                                     </div>
                                     </div>`
+                                    i  = i+1
                     }
 
 
@@ -366,7 +371,7 @@
 
 
 
-                        str = str +  `  <div class="receivedmsg">
+                        str = str +  `  <div id="ch${i}" class="receivedmsg">
                                         <div class="receivedmsginbox">
 
                                             <p> <span class="name">${e.name}</span> <br> <span class="msd">${e.msg}</span> 
@@ -374,13 +379,23 @@
                                             <span class="timereceived">${e.time.slice(0,16)}</span>
                                         </div>
                                     </div>`
+                                    i = i+1
                     }
 
                 }
 
                 );
                 document.getElementById('messegesall').innerHTML = str
-                document.getElementById('chats').scrollTop = document.getElementById('chats').scrollHeight
+                
+                var myElement = document.getElementById(`ch${i-1}`);
+
+                var topPos = myElement.offsetTop;
+
+                ocument.getElementById('messegesall').scrollTop = topPos;
+
+
+
+   
 
             })
         }, 1000);

@@ -532,31 +532,44 @@ def AddHadmin(request):
             if(hid2 != hid):
                 messages.error(request,"Password did not match")
                 return redirect('addhospital')
-            myuser = User.objects.create_user(username, hemail, hid)
+            
+            
 
-            profileobj1 = {
-                "N":name,"U":username,"G":"h","E":hemail,
-            }
-            pro2={"A":haddress,"Au":request.user.username,"BA":"Na",
-            "P":PhoneNumber}
+            try:
+                print("sfmo")
+                myuser = User.objects.create_user(username, hemail, hid)
+                print("sdnj")
+                profileobj1 = {
+                    "N":name,"U":username,"G":"h","E":hemail,
+                }
+                pro2={"A":haddress,"Au":request.user.username,"BA":"Na",
+                "P":PhoneNumber}
 
-            myuserjson = json.dumps(profileobj1)
-            myuserjson2 = json.dumps(pro2)
-            if(v(username) and v(hid) and l(name) and l(hemail) and l(haddress) and l(PhoneNumber) ):
-                myuser.first_name = myuserjson
-                myuser.last_name = myuserjson2
-                # myuser.first_name='hospitalh'
-
-                myuser.save()
-                group = Group.objects.get(name='HospitalHeads')
-                myuser.groups.add(group)
-                messages.success(request, "New Hospital Added")
+                myuserjson = json.dumps(profileobj1)
+                myuserjson2 = json.dumps(pro2)
+                if(v(username) and v(hid) and l(name) and l(hemail) and l(haddress) and l(PhoneNumber) ):
+                    myuser.first_name = myuserjson
+                    myuser.last_name = myuserjson2
+                    # myuser.first_name='hospitalh'
+                    myuser.save()
+                    group = Group.objects.get(name='HospitalHeads')
+                    myuser.groups.add(group)
+                    messages.success(request, "New Hospital Added")
+                    return redirect('Add')
+                else:
+                    messages.error(request, "Enter Proper' Data")
+                    return redirect('Add')
+            except:
+                print("fsnk")
+                messages.error(request, "This username is alredy registerd")
                 return redirect('Add')
-            else:
-                messages.error(request, "Enter Proper Data")
-                return redirect('Add')
+
+                
+                
+            
+
         except:
-            messages.error(request, "Enter Proper Data")
+            messages.error(request, "Enter Proper'' Data")
             return redirect('Add')
 
        
@@ -574,35 +587,43 @@ def AddEmployee(request):
             hid2 = request.POST.get('epass2')
             if(hid2 != hid):
                 return HttpResponse('password not match')
-            myuser = User.objects.create_user(username, hemail, hid)
-            profilejson = request.user.first_name
-            profilejson2 = request.user.last_name
-            profiledict = json.loads(profilejson)
-            profiledict2 = json.loads(profilejson2)
-            
+            try:
+                
+                myuser = User.objects.create_user(username, hemail, hid)
+                profilejson = request.user.first_name
+                profilejson2 = request.user.last_name
+                profiledict = json.loads(profilejson)
+                profiledict2 = json.loads(profilejson2)
+                
 
-            profileobj1 = {
-                "N": name,"U":username,"G": "e","E":   hemail,
-            }
-            pro2 = {
-                "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict2["A"],
-                "Au" : request.user.username,}
+                profileobj1 = {
+                    "N": name,"U":username,"G": "e","E":   hemail,
+                }
+                pro2 = {
+                    "X": profiledict["N"],"Y": profiledict["E"],"Z": profiledict2["A"],
+                    "Au" : request.user.username,}
 
-            myuserjson = json.dumps(profileobj1)
-            myuserjson2 = json.dumps(pro2)
-            if(v(username) and v(hid) and l(hemail)):
-            
-                myuser.first_name = myuserjson
-                myuser.last_name = myuserjson2
+                myuserjson = json.dumps(profileobj1)
+                myuserjson2 = json.dumps(pro2)
+                if(v(username) and v(hid) and l(hemail)):
+                
+                    myuser.first_name = myuserjson
+                    myuser.last_name = myuserjson2
 
-                myuser.save()
-                group = Group.objects.get(name='Hospital_Employees')
-                myuser.groups.add(group)
-                messages.success(request, "New Employee Added")
+                    myuser.save()
+                    group = Group.objects.get(name='Hospital_Employees')
+                    myuser.groups.add(group)
+                    messages.success(request, "New Employee Added")
+                    return redirect('AddEmployee')
+                else:
+                    messages.error(request, "Password/Username invalid")
+                    return redirect('AddEmployee')
+            except:
+                messages.error(request, "This username is alredy registerd")
                 return redirect('AddEmployee')
-            else:
-                messages.error(request, "Password/Username invalid")
-                return redirect('AddEmployee')
+
+                
+                
         except:
             messages.error(request, "Enter Proper data")
             return redirect('AddEmployee')
@@ -709,54 +730,64 @@ def addpat(request):
         pid1 = request.POST.get('pid1')
         pid2 = request.POST.get('pid2')
         if(pid2 != pid2):
-            return HttpResponse('password not match')
-        myuser = User.objects.create_user(username, pemail, pid1)
-        profilejson = request.user.first_name
-        profilejson2 = request.user.last_name
-        profiledict = json.loads(profilejson)
-        profiledict2 = json.loads(profilejson2)
-        DoC = 0
-        if(DorCS == "on"):
-            DoC = "CS"
-        else:
-            DoC="BD"
-
-        profileobj1 = {
-            "N": name,
-            "U":username,
-            "G": "c",
-            "B": pbloodgrp,
-            "D": pdod,
-            "n": p_age,
-            "T":DoC,
-
-        }
-        pro2={
-            "A": profiledict2["X"],
-            "Y": profiledict2["Y"],
-            "Ae": profiledict["E"],
-            "Au": request.user.username,"E":pemail,}
-
-
-        myuserjson = json.dumps(profileobj1)
-        myuserjson2 = json.dumps(pro2)
-        if(v(username) and v(pid1) and l(name) and l(pemail) and l(pbloodgrp) and l(pdod) and l(p_age)):
-
-            myuser.first_name = myuserjson
-            myuser.last_name = myuserjson2
-
-            myuser.save()
-            group = Group.objects.get(name='Covid_Survivors')
-            myuser.groups.add(group)
-            if(DoC == "BD"):
-                messages.success(request, "Donor Added")
-                return redirect('addpat')
-            elif(DoC == "CS"):
-                messages.success(request, "Donor Added")
-                return redirect('Covid Survivor Added')
-        else:
-            messages.error(request, "Password/Username invalid")
+            messages.error(request, "Enter Password correctly")
             return redirect('addpat')
+        try:
+        
+            myuser = User.objects.create_user(username, pemail, pid1)
+            profilejson = request.user.first_name
+            profilejson2 = request.user.last_name
+            profiledict = json.loads(profilejson)
+            profiledict2 = json.loads(profilejson2)
+            DoC = 0
+            if(DorCS == "on"):
+                DoC = "CS"
+            else:
+                DoC="BD"
+
+            profileobj1 = {
+                "N": name,
+                "U":username,
+                "G": "c",
+                "B": pbloodgrp,
+                "D": pdod,
+                "n": p_age,
+                "T":DoC,
+
+            }
+            pro2={
+                "A": profiledict2["X"],
+                "Y": profiledict2["Y"],
+                "Ae": profiledict["E"],
+                "Au": request.user.username,"E":pemail,}
+
+
+            myuserjson = json.dumps(profileobj1)
+            myuserjson2 = json.dumps(pro2)
+            if(v(username) and v(pid1) and l(name) and l(pemail) and l(pbloodgrp) and l(pdod) and l(p_age)):
+
+                myuser.first_name = myuserjson
+                myuser.last_name = myuserjson2
+
+                myuser.save()
+                group = Group.objects.get(name='Covid_Survivors')
+                myuser.groups.add(group)
+                if(DoC == "BD"):
+                    messages.success(request, "Donor Added")
+                    return redirect('addpat')
+                elif(DoC == "CS"):
+                    messages.success(request, "Donor Added")
+                    return redirect('Covid Survivor Added')
+            else:
+                messages.error(request, "Password/Username invalid")
+                return redirect('addpat')
+        except:
+                messages.error(request, "This username is alredy registerd")
+                return redirect('addpat')
+
+
+
+
 
     userl =[]    
     group = Group.objects.get(name='Covid_Survivors')

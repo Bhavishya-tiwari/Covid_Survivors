@@ -142,6 +142,8 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                 var xValues = [`Confirmed (${district_full_data.confirmed})`, "Deaths", "Recovered", "Active"];
                 var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
                 var barColors = ["white", "red", "blue", "pink"];
+
+                document.getElementById('flag').innerHTML = `<img class="flagimg" src="https://disease.sh/assets/img/flags/in.png" alt="india"></img>`
                 
                 new Chart("myChartSD", {
                     type: "bar",

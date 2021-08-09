@@ -15,6 +15,23 @@
   outline: none;
   font-size: 15px;
 }
+/* .total-monal{
+    width: 100vw;
+    margin-bottom: 0;
+    
+    
+
+    border: solid 2px black;
+    background: #292929!important;
+    overflow-x: none;
+} */
+#boxx{
+  /* min-height: 35vh;
+  max-height:70vh ; */
+  height: 80vh;
+  margin-bottom: 20vh;
+  overflow-y: scroll;
+}
 
 .active, .collapsible:hover {
   background-color: rgb(21, 5, 70);
@@ -32,6 +49,9 @@
   overflow: hidden;
   background-color: rgb(209, 253, 255);
 }
+button {
+    margin: 0;
+}
 .msg{
     margin:3px;
 }
@@ -40,37 +60,43 @@
 
 {% block body %}
 
-<div class="container">
+<div class="container my-4">
     {% comment %} {{r}} {% endcomment %}
+<div id="boxx">
 
-    {% for rep in r %}
-<div class="mar">
-<button type="button" class="collapsible">{{rep.title}} <b> by</b>  {{rep.author}} <br> reports :- {{rep.reps | length}} </button>
-<div class="content">
-{% for rr in rep.reps %}
-  <div class="msg">
-  <b>{{rr.name}} </b> at <small>{{rr.time | slice:16}} <br> 
-  report : - {{rr.rep}}
-   </small>
+  
+  
+  {% for rep in r %}
+  <div class="mar my-4">
+    <button type="button" class="collapsible">{{rep.title}} <b> by</b>  {{rep.author}} <br> reports :- {{rep.reps | length}} </button>
+    <div class="content">
+      {% for rr in rep.reps %}
+      <div class="msg">
+        <b>{{rr.name}} </b> at <small>{{rr.time | slice:16}} <br> 
+          report : - {{rr.rep}}
+        </small>
+      </div>
+      {% endfor %}
+      <a href="/blog/{{rep.sno}}">
+        <button type="button" class="btn btn-info">Read more</button>
+        
+        
+      </a>
+      
+      <form action="/blog/delB/{{rep.sno}}" method="POST">
+        {% csrf_token %}
+        <button type="Submit" class="btn btn-danger my-2">delete Blog</button>
+      </form>
+      
+      
+      
+      
+    </div>
   </div>
   {% endfor %}
-  <a href="/blog/{{rep.sno}}">
-  <button type="button" class="btn btn-info">Read more</button>
-   
+</div>
   
-  </a>
-
-<form action="/blog/delB/{{rep.sno}}" method="POST">
-    {% csrf_token %}
-  <button type="Submit" class="btn btn-danger my-2">delete Blog</button>
-</form>
-  
-
-
-  
-</div></div>
-
-    {% endfor %}
+</div>
 
 <script>
 var coll = document.getElementsByClassName("collapsible");

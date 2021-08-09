@@ -317,11 +317,8 @@ p{
             .done(function (data) {
                             console.log(data)
                             document.getElementById('msg_send').value = ""
-                            if(data == "Messege sent"){
-                                document.getElementById('c').innerHTML = ` <div class="success">
-        <span class="cc" onclick="this.parentElement.style.display='none';">&times;</span>
-        ${data}
-      </div>`
+                            if(data == "MessegeSent"){
+                              
 
                             }
                             else{

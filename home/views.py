@@ -424,9 +424,11 @@ def livechat(request):
                 if(msg != ""):
                     Query.save()
                     
-                    return HttpResponse("done")
+                    return HttpResponse("MessegeSent")
+                    
                 else:
-                    return HttpResponse("error")
+                    return HttpResponse("Messege not valid")
+                    
             except:
                 now = datetime.datetime.now()
                 name = profilejson + " " + request.user.last_name
@@ -441,7 +443,7 @@ def livechat(request):
                                 #   why email vroo
                 if(msg != ""):
                     Query.save()
-                    return HttpResponse("Messege sent")
+                    return HttpResponse("MessegeSent")
                 else:
                     return HttpResponse("Messege not valid")
 

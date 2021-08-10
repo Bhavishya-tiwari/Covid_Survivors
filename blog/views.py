@@ -70,13 +70,13 @@ def addblog(request):
                 content = request.POST.get('Addblogc')
                 try:
 
-                    img = request.FILES['imgupload']
+                    # img = request.FILES['imgupload']
                     # print(img)
 
                     # saving
                     if(content != "" or title != ""):
                         post = Post(title=title, author=author,authorUsername=authorUsername,
-                                    Timestamp=time,blog_img=img, content=content)
+                                    Timestamp=time,blog_img="img", content=content)
                         post.save()
                         # print(Post)
                         messages.success(request, "Blog Added")

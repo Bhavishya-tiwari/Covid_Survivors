@@ -356,11 +356,11 @@
             onblur="this.size=0;" id="state" aria-label="Default select example">
             <option selected>State</option>
        </select>
-            <select disabled class="form-select selectblood"  onchange="myFunction1()" id="dist"
+            {% comment %} <select disabled class="form-select selectblood"  onchange="myFunction1()" id="dist"
             aria-label="Default select example" 
             onchange="this.blur()" onblur="this.size=0;" id="state" aria-label="Default select example">
             <option>District</option>
-       </select>
+       </select> {% endcomment %}
             
              
    
@@ -405,32 +405,33 @@
        </div>
 
 </div>
+
 <img src="" alt="" class="flg">
 <div class="vacc">
        <div class="hdd" style="font-family: 'Times New Roman', Times, serif; font-weight: bold;">INDIA</div>
 
        <div id="dc" class="box">
-              <b> Daily Confirmed</b>
+              <b> Today Confirmed</b>
               <h3 id="dcc"></h3>
 
        </div>
        <div id="dd" class="box">
-              <b>Daily Deaths</b>
+              <b>Today Deaths</b>
               <h3 id="ddd"></h3>
 
        </div>
        <div id="dr" class="box">
-              <b>Daily Recovered</b>
+              <b>Today Recovered</b>
               <h3 id="drr"></h3>
 
        </div>
        <div id="v" class="box">
-              <b>Fully Vaccinated</b>
+              <b>Total Recovered</b>
               <h3 id="vv"></h3>
 
        </div>
        <div id="tc" class="box">
-              <b>Total Confirmed</b>
+              <b>Total Active</b>
               <h3 id="tcc"></h3>
 
        </div>

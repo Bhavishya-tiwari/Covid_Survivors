@@ -18,31 +18,32 @@ var vaccD
 
 
 
-fetch('https://api.covid19india.org/data.json')
-    .then(response => response.json())
-    .then(data => {
+// fetch('https://api.covid19india.org/data.json', {mode: 'cors'})
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data);
 
-        let latestCases = data.cases_time_series[(data.cases_time_series).length - 1]
-        let V = data.tested[(data.tested).length - 1]
-        if(V.totalindividualsvaccinated != ""){
-            vv = V.totalindividualsvaccinated
-        }
-        else{
-            vv = V.totalindividualsregistered
-        }
+//         let latestCases = data.cases_time_series[(data.cases_time_series).length - 1]
+//         let V = data.tested[(data.tested).length - 1]
+//         if(V.totalindividualsvaccinated != ""){
+//             vv = V.totalindividualsvaccinated
+//         }
+//         else{
+//             vv = V.totalindividualsregistered
+//         }
 
-        vaccD = {
-            "dc": latestCases.dailyconfirmed,
-            "dd": latestCases.dailydeceased,
-            "dr": latestCases.dailyrecovered,
-            "v": vv,
-            "tc": latestCases.totalconfirmed,
-            "td": latestCases.totaldeceased,
-            "tr": latestCases.totalrecovered,
+//         vaccD = {
+//             "dc": latestCases.dailyconfirmed,
+//             "dd": latestCases.dailydeceased,
+//             "dr": latestCases.dailyrecovered,
+//             "v": vv,
+//             "tc": latestCases.totalconfirmed,
+//             "td": latestCases.totaldeceased,
+//             "tr": latestCases.totalrecovered,
 
-        }
-        console.log(V)
-    })
+//         }
+//         console.log(V)
+//     })
 
 
 fetch('https://corona.lmao.ninja/v2/jhucsse')
@@ -61,6 +62,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
         fetch('https://corona.lmao.ninja/v2/countries?yesterday&sort')
             .then(response => response.json())
             .then(data => {
+                
                 let index = 0;
                 var cntry = "<option selected>Country</option>"
                 data.forEach(e => {
@@ -68,6 +70,20 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
                 });
                 document.getElementById("country").innerHTML = cntry
                 data.forEach(e => {
+                    if(e.country == 'India'){
+                    
+                    vaccD = {
+                                    "dc":e.todayCases,
+                                    "dd": e.todayDeaths,
+                                    "dr": e.todayRecovered,
+                                    "v": e.recovered,
+                                    "tc": e.active,
+                                    "td": e.deaths,
+                                    "tr": e.recovered,
+                        
+                                }}
+
+
                     latitude = e.countryInfo.lat;
                     longitude = e.countryInfo.long;
 
@@ -105,64 +121,64 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
             <canvas id="myChartSD" style="width:100%;max-width:600px"></canvas>
      </div>`);
             if (selected_country == "India") {
-
+is_notstate = false
                 
-                var loc = 0;
+        //         var loc = 0;
                 
-                // getting location of that state
-                data_map.forEach(e => {
-                    if (e.province == state_name) {
-                        loc = e.coordinates;
-                        var c = e.stats.confirmed
-                        var xValues = ["Confirmed", "Deaths", "Recovered"];
-                        var yValues = [c, e.stats.deaths, e.stats.recovered];
-                        var barColors = ["white", "red", "blue"];
+        //         // getting location of that state
+        //         data_map.forEach(e => {
+        //             if (e.province == state_name) {
+        //                 loc = e.coordinates;
+        //                 var c = e.stats.confirmed
+        //                 var xValues = ["Confirmed", "Deaths", "Recovered"];
+        //                 var yValues = [c, e.stats.deaths, e.stats.recovered];
+        //                 var barColors = ["white", "red", "blue"];
 
-                        new Chart("myChartCS", {
-                            type: "bar",
-                            data: {
-                                labels: xValues,
-                                datasets: [{
-                                    backgroundColor: barColors,
-                                    data: yValues
-                                }]
-                            },
-                            options: {
-                                indexAxis: 'y',
-                                legend: { display: false },
-                                title: {
-                                    display: true,
-                                    text: e.province
-                                }
-                            }
-                        });
-                    }
-                });
-                let district_full_data = dist_data[state_selected]["districtData"][dist_name]
-                var xValues = [`Confirmed (${district_full_data.confirmed})`, "Deaths", "Recovered", "Active"];
-                var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
-                var barColors = ["white", "red", "blue", "pink"];
+        //                 new Chart("myChartCS", {
+        //                     type: "bar",
+        //                     data: {
+        //                         labels: xValues,
+        //                         datasets: [{
+        //                             backgroundColor: barColors,
+        //                             data: yValues
+        //                         }]
+        //                     },
+        //                     options: {
+        //                         indexAxis: 'y',
+        //                         legend: { display: false },
+        //                         title: {
+        //                             display: true,
+        //                             text: e.province
+        //                         }
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //         // let district_full_data = dist_data[state_selected]["districtData"][dist_name]
+        //         // var xValues = [`Confirmed (${district_full_data.confirmed})`, "Deaths", "Recovered", "Active"];
+        //         // var yValues = [district_full_data.confirmed, district_full_data.deceased, district_full_data.recovered, district_full_data.active];
+        //         // var barColors = ["white", "red", "blue", "pink"];
 
-                document.getElementById('flag').innerHTML = `<img class="flagimg" src="https://disease.sh/assets/img/flags/in.png" alt="india"></img>`
+        //         // document.getElementById('flag').innerHTML = `<img class="flagimg" src="https://disease.sh/assets/img/flags/in.png" alt="india"></img>`
                 
-                new Chart("myChartSD", {
-                    type: "bar",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: dist_name
-                        }
-                    }
-                });
+        //         // new Chart("myChartSD", {
+        //         //     type: "bar",
+        //         //     data: {
+        //         //         labels: xValues,
+        //         //         datasets: [{
+        //         //             backgroundColor: barColors,
+        //         //             data: yValues
+        //         //         }]
+        //         //     },
+        //         //     options: {
+        //         //         indexAxis: 'y',
+        //         //         legend: { display: false },
+        //         //         title: {
+        //         //             display: true,
+        //         //             text: dist_name
+        //         //         }
+        //         //     }
+        //         // });
       
 
 
@@ -173,18 +189,18 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
 
 
 
-        map.flyTo({
+        // map.flyTo({
 
-            center: [loc.longitude, loc.latitude],
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
-        });
+        //     center: [loc.longitude, loc.latitude],
+        //     essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        // });
     }
 
 
 
 
 
-            else if (is_notstate == false) {
+ if (is_notstate == false) {
 
 
 
@@ -260,7 +276,7 @@ fetch('https://corona.lmao.ninja/v2/jhucsse')
     });
 
 
-
+console.log(loc);
 
 
 
@@ -393,11 +409,7 @@ map.on('load', function () {
 });
 data_map = data
     })
-fetch('https://api.covid19india.org/state_district_wise.json')
-    .then(response => response.json())
-    .then(data => {
-        dist_data = data
-    })
+
 
 
 
@@ -428,7 +440,7 @@ function myFunction2(e) {
             }
             else {
                 document.getElementById("state").setAttribute("disabled", false);
-                document.getElementById("dist").setAttribute("disabled", false);
+                // document.getElementById("dist").setAttribute("disabled", false);
 
                 is_notstate = true;
             }
@@ -438,38 +450,38 @@ function myFunction2(e) {
 }
 
 function myFunction(e) {  // on state selection
-    if (selected_country == "India") {
-        var options2 = "<option selected>District</option>"
+    // if (selected_country == "India") {
+    //     var options2 = "<option selected>District</option>"
+    //     var selectedValues = [].filter
+    //         .call(document.getElementById("state").options, option => option.selected)
+    //         .map(option => option.text);
+    //     state_selected = selectedValues[0]
+    //     document.getElementById("dist").removeAttribute("disabled");
+    //     let districts = dist_data[selectedValues[0]].districtData
+    //     let index = 0
+    //     for (district in districts) {
+    //         options2 = options2 + `<option value="${index}">${district}</option>`
+    //         index++;
+    //     }
+    //     document.getElementById("dist").innerHTML = options2;
+    //     state_name = selectedValues[0]
+    // }
+    // else {
         var selectedValues = [].filter
             .call(document.getElementById("state").options, option => option.selected)
             .map(option => option.text);
+        // document.getElementById("dist").setAttribute("disabled", false);
         state_selected = selectedValues[0]
-        document.getElementById("dist").removeAttribute("disabled");
-        let districts = dist_data[selectedValues[0]].districtData
-        let index = 0
-        for (district in districts) {
-            options2 = options2 + `<option value="${index}">${district}</option>`
-            index++;
-        }
-        document.getElementById("dist").innerHTML = options2;
-        state_name = selectedValues[0]
-    }
-    else {
-        var selectedValues = [].filter
-            .call(document.getElementById("state").options, option => option.selected)
-            .map(option => option.text);
-        document.getElementById("dist").setAttribute("disabled", false);
-        state_selected = selectedValues[0]
-    }
+    // }
 };
 
-function myFunction1(e) {
-    selectedValuesd = [].filter
-        .call(document.getElementById("dist").options, option => option.selected)
-        .map(option => option.text);
-    covid_data = dist_data[state_selected]["districtData"][selectedValuesd[0]]
-    dist_name = selectedValuesd[0]
-}
+// function myFunction1(e) {
+//     selectedValuesd = [].filter
+//         .call(document.getElementById("dist").options, option => option.selected)
+//         .map(option => option.text);
+//     covid_data = dist_data[state_selected]["districtData"][selectedValuesd[0]]
+//     dist_name = selectedValuesd[0]
+// }
 
 
 // *******************Vaccinated Data***************************************
